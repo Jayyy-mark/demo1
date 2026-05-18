@@ -1,19 +1,22 @@
 {% extends "frontend/layouts/base.html" %}
 
-{% block title %}{{ activity.title }} - Gallery{% endblock %}
+{% block title %} Activity Gallery{% endblock %}
 
 {% block content %}
 
 <!-- Header -->
 <section class="bg-white pt-32 pb-12 border-b border-gray-100">
+
+    <input type="hidden" name="" id="activity_id" value="{{ activity_id }}">
+
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <a href="/#campus-activities" class="inline-flex items-center text-sm text-gray-500 hover:text-apple-blue mb-6 transition-colors">
+        <a href="" id="btn_backToActivities" class="inline-flex items-center text-sm text-gray-500 hover:text-apple-blue mb-6 transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
             Back to Activities
         </a>
-        <h1 class="text-4xl md:text-5xl font-bold text-apple-dark mb-4">{{ activity.title }}</h1>
+        <h1 class="text-4xl md:text-5xl font-bold text-apple-dark mb-4" id="activity_name"></h1>
         <div class="flex items-center gap-4 text-gray-500 text-sm">
-            <span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg> {{ activity.date }}</span>
+            <span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg><span id="activity_date"></span></span>
             <span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> Campus Grounds</span>
         </div>
     </div>
@@ -25,49 +28,26 @@
         
         <!-- Description -->
         <div class="max-w-3xl mx-auto mb-20 text-center">
-            <p class="text-xl text-gray-600 leading-relaxed">{{ activity.description }}</p>
+            <p class="text-xl text-gray-600 leading-relaxed" id="description"></p>
         </div>
 
         <!-- Image Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {% for img in activity.images %}
-            <div class="group relative aspect-[4/3] rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300">
-                <img src="{{ img }}" alt="{{ activity.title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 cursor-zoom-in" onclick="openModal(this.src)">
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors"></div>
-            </div>
-            {% endfor %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="image-container">
+
         </div>
 
     </div>
 </section>
 
-<!-- Reuse the Lightbox Modal Code from index.html -->
-<div id="imageModal" class="fixed inset-0 z-50 hidden" onclick="closeModal()">
-    <div class="absolute inset-0 bg-black/90 backdrop-blur-sm"></div>
-    <button class="absolute top-6 right-6 text-white hover:text-gray-300 z-50 p-2">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-    </button>
-    <div class="relative z-10 w-full h-full flex items-center justify-center p-8">
-        <img id="modalImage" src="" alt="Full view" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl object-contain">
-    </div>
-</div>
 
 {% endblock %}
 
 {% block scripts %}
 <script>
-    // Lightbox Logic
-    function openModal(src) {
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
-        modalImg.src = src;
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    }
-    function closeModal() {
-        const modal = document.getElementById('imageModal');
-        modal.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-    }
+    const activity_name = "{{ activity_name }}";
+    console.log("this is activity name : ", activity_name);
+
 </script>
+
+<script type="module" src="{{ url_for('static', filename='frontend/js/pages/activity_gallery.js') }}"></script>
 {% endblock %}

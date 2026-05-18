@@ -22,4 +22,12 @@ def lastedResearches():
 @frontend_api.route("/home/activity", methods=['GET'])
 def lastedActivities():
     return FrontendController.lastedActivities()
+
+@frontend_api.route("/activity/search", methods=['GET'])
+def getActivityById():
+    return FrontendController.getActivityById()
+
+@frontend_api.route("/laboratory/search", methods=['GET'])
+def getLaboratoryById():
+    return FrontendController.getLaboratoryById()
     

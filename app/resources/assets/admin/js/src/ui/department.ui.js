@@ -14,8 +14,8 @@ export const departmentUI = {
             const row = `
             <tr>
                 <td class="text-start py-3">${d.id}</td>
-                <td class="text-start py-3">${d.department_name}</td>
-                <td class="py-3 text-start">
+                <td class="text-start py-3  px-2 text-nowrap">${d.department_name}</td>
+                <td class="py-3 text-start px-1">
                     <div class="action-buttons d-flex justify-content-start ps-0">
                         <button class="btn btn-sm btn-info border rounded-5 show-update-modal-department"
                         data-departments='${JSON.stringify(d)}'                     

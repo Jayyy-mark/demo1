@@ -1,101 +1,40 @@
 {% extends "frontend/layouts/base.html" %}
 
-{% block title %}{{ lab_name.replace('-', ' ').upper() }} - Lab Details{% endblock %}
+{% block title %} Lab Details{% endblock %}
 
 {% block content %}
+
+<input type="hidden" name="" id="laboratory_id" value="{{ laboratory_id }}">
+
 <section class="pt-32 pb-20 bg-white">
     <div class="max-w-7xl mx-auto px-6">
 
         <!-- Breadcrumb & Title Area -->
         <div class="max-w-5xl mx-auto mb-12">
             <nav class="flex text-sm font-medium text-slate-400 mb-6">
-                <a href="/research" class="hover:text-blue-600 transition">Research</a>
+                <a href="{{ url_for('frontend.research') }}" class="hover:text-blue-600 transition">Research</a>
                 <span class="mx-2">/</span>
-                <span class="text-slate-900 capitalize">{{ lab_name.replace('-', ' ') }}</span>
+                <span class="text-slate-900 capitalize"></span>
             </nav>
-            <h1 class="text-4xl md:text-6xl font-black text-slate-900 mb-4 capitalize">{{ lab_name.replace('-', ' ') }}</h1>
+            <h1 class="text-4xl md:text-6xl font-black text-slate-900 mb-4 capitalize"></h1>
             <p class="text-xl text-slate-500">Exploring the future of technology through innovation and collaboration.</p>
         </div>
 
         <!-- Main Lab Info -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-20">
-            <div class="lg:col-span-2">
-                <div class="rounded-3xl overflow-hidden shadow-2xl mb-10 group">
-                    <!-- Main Featured Image -->
-                    <img src="/static/image/lab_main.jpg" class="w-full h-[450px] object-cover group-hover:scale-105 transition-transform duration-700" alt="Main Lab Image">
-                </div>
 
-                <div class="prose prose-slate max-w-none">
-                    <h2 class="text-3xl font-bold text-slate-900 mb-6">About the Laboratory</h2>
-                    <p class="text-slate-600 text-lg leading-relaxed mb-6">
-                        {{ lab_name.replace('-', ' ') }} Laboratory သည် UCSTGO ၏ အဓိက သုတေသနမဏ္ဍိုင်တစ်ခုဖြစ်ပြီး ခေတ်မီသော Hardware နှင့် Software အရင်းအမြစ်များစွာ တပ်ဆင်ထားပါသည်။ ကျောင်းသားလူငယ်များ၏ ဖန်တီးနိုင်စွမ်းကို မြှင့်တင်ပေးရန်နှင့် လက်တွေ့နယ်ပယ်တွင် အသုံးချနိုင်သော System များ ဖော်ထုတ်ရန် ရည်ရွယ်ပါသည်။
-                    </p>
-                </div>
-            </div>
-
-            <!-- Sidebar Info -->
-            <div class="space-y-8">
-                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100">
-                    <h3 class="text-xl font-bold mb-6 text-slate-900">Lab Head</h3>
-                    <div class="flex items-center gap-4 mb-8">
-                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center font-bold text-blue-600">DR</div>
-                        <div>
-                            <p class="font-bold text-slate-900 text-lg">Dr. Myint Myint</p>
-                            <p class="text-sm text-blue-600 font-semibold uppercase tracking-wider">Lead Researcher</p>
-                        </div>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="flex justify-between text-sm">
-                            <span class="text-slate-500">Total Projects:</span>
-                            <span class="font-bold text-slate-900">12</span>
-                        </div>
-                        <div class="flex justify-between text-sm">
-                            <span class="text-slate-500">Active Students:</span>
-                            <span class="font-bold text-slate-900">24</span>
-                        </div>
-                    </div>
-                    <button class="w-full mt-8 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-lg">Join this Lab</button>
-                </div>
-            </div>
-        </div>
 
         <!-- IMAGE GALLERY SECTION (ပုံအများကြီးပြမည့်နေရာ) -->
         <div class="mt-20">
             <div class="flex items-end justify-between mb-10">
                 <div>
-                    <h2 class="text-3xl font-bold text-slate-900">Lab Photo Gallery</h2>
-                    <p class="text-slate-500 mt-2">Inside our facilities and research activities.</p>
+                    <h2 class="text-3xl font-bold text-slate-900" id="laboratory_name"></h2>
+                   
                 </div>
                 <div class="hidden md:block h-px flex-grow mx-10 bg-slate-100"></div>
             </div>
 
             <!-- Masonry-like Grid -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <!-- Image 1 (Large) -->
-                <div class="col-span-2 row-span-2 relative group overflow-hidden rounded-3xl cursor-pointer" onclick="openModal('/static/image/gallery1.jpg')">
-                    <img src="/static/image/gallery1.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Lab Pic">
-                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-all"></div>
-                </div>
-
-                <!-- Image 2 -->
-                <div class="relative group overflow-hidden rounded-2xl h-48 cursor-pointer" onclick="openModal('/static/image/gallery2.jpg')">
-                    <img src="/static/image/gallery2.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Lab Pic">
-                </div>
-
-                <!-- Image 3 -->
-                <div class="relative group overflow-hidden rounded-2xl h-48 cursor-pointer" onclick="openModal('/static/image/gallery3.jpg')">
-                    <img src="/static/image/gallery3.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Lab Pic">
-                </div>
-
-                <!-- Image 4 -->
-                <div class="relative group overflow-hidden rounded-2xl h-48 cursor-pointer" onclick="openModal('/static/image/gallery4.jpg')">
-                    <img src="/static/image/gallery4.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Lab Pic">
-                </div>
-
-                <!-- Image 5 -->
-                <div class="relative group overflow-hidden rounded-2xl h-48 cursor-pointer" onclick="openModal('/static/image/gallery5.jpg')">
-                    <img src="/static/image/gallery5.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Lab Pic">
-                </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="image_container">
 
                 <!-- More images can be added here -->
             </div>
@@ -110,15 +49,8 @@
     <img id="modalImg" src="" class="max-w-full max-h-[90vh] rounded-xl shadow-2xl">
 </div>
 
-<script>
-function openModal(src) {
-    document.getElementById('modalImg').src = src;
-    document.getElementById('imageModal').classList.remove('hidden');
-    document.body.style.overflow = 'hidden'; // Stop scrolling
-}
-function closeModal() {
-    document.getElementById('imageModal').classList.add('hidden');
-    document.body.style.overflow = 'auto'; // Enable scrolling
-}
-</script>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{{ url_for('static', filename='frontend/js/pages/lab_details.js') }}"></script>
 {% endblock %}

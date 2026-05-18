@@ -24,6 +24,10 @@ const pubContainer = document.querySelector("#pub-container");
 const viewMoreBtn = document.querySelector("#view-more-btn");
 // const lastedresearchListContainer = document.querySelector("#laseted-research-list-container");
 
+function getLaboratoryUrl(laboratory) {
+    return `/research/laboratory/${encodeURIComponent(laboratory.id)}`;
+}
+
 const researchUI = {
     renderLaboratories(laboratories){
         laboratories.forEach(laboratory => {
@@ -36,7 +40,7 @@ const researchUI = {
                     <div class="p-6 flex-grow">
                         <h3 class="text-xl font-bold text-slate-900 mb-3">${laboratory.laboratory_name}</h3>
                         <p class="text-sm text-slate-500 leading-relaxed mb-6">${laboratory.description}</p>
-                        <a href="" class="inline-flex items-center text-blue-600 font-bold text-sm group/btn">
+                        <a href="${getLaboratoryUrl(laboratory)}" class="inline-flex items-center text-blue-600 font-bold text-sm group/btn">
                             VIEW LAB DETAILS
                             <svg class="ml-2 w-4 h-4 transform group-hover/btn:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                         </a>

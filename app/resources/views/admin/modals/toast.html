@@ -1,0 +1,21 @@
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index:1080">
+    <div id="erpToast" class="toast erp-toast shadow border-0 rounded-3" role="alert" aria-live="assertive"
+        data-bs-delay="3500">
+
+        <div class="toast-body d-flex gap-3 align-items-start">
+
+            <div id="toastIcon" class="toast-icon">
+                <i id="toastIconSymbol" class="ti fs-1"></i>
+            </div>
+
+            <div class="flex-grow-1">
+                <div id="toastTitle" class="fw-semibold"></div>
+                <small id="toastMessage" class="text-muted"></small>
+            </div>
+
+            <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast"></button>
+        </div>
+
+        <div class="toast-progress"></div>
+    </div>
+</div>

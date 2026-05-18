@@ -1,0 +1,86 @@
+{% extends 'layouts/installation/base.html' %}
+
+<!--============================
+    PAGE STYLE
+============================-->
+{% block style %}
+<style>
+    .custom-arrow{
+    position: relative;
+    background: white;
+}
+
+.custom-arrow::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -40px;
+
+    width: 0;
+    height: 0;
+
+    border-top: 40px solid transparent;
+    border-bottom: 40px solid transparent;
+    border-left: 40px solid #dee2e6;
+}
+
+.triangle {
+    width: 100px;
+    height: 100px;
+    background: transparent;
+    
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+</style>
+{% endblock %}
+
+<!--==========================
+    PAGE MAIN CONTENT
+===========================-->
+{% block content %}
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+
+    <div class="card" style="width: 1000px; border: 1px solid gainsboro;">
+
+        <div class="card-body p-2">
+            <div class="row">
+                <svg width="120" height="120" viewBox="0 0 100 100">
+                    <polygon points="0,0 100,50 0,100"
+                            fill="transparent"
+                            stroke="black"
+                            stroke-width="1" />
+                </svg>
+            </div>
+
+            <div class="row border mb-3 text-center rounded-1">
+                <div class="col border-end  py-4">column</div>
+                <div class="col border-end  py-4">                <svg width="120" height="120" viewBox="0 0 100 100">
+                    <polygon points="0,0 100,50 0,100"
+                            fill="transparent"
+                            stroke="black"
+                            stroke-width="1" />
+                </svg></div>
+                <div class="col  py-4">column</div>
+            </div>
+
+            <input type="text" class="form-control mb-3" placeholder="Database Name">
+
+            <input type="text" class="form-control mb-3" placeholder="Username">
+
+            <input type="password" class="form-control mb-4" placeholder="Password">
+
+            <button class="btn btn-primary w-100">
+                Continue
+            </button>
+
+        </div>
+
+        <div class="card-footer bg-gray-200">
+            <button class="btn btn-sm btn-primary float-end">
+                Next
+            </button>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

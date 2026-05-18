@@ -1,0 +1,181 @@
+{% extends "frontend/layouts/base.html" %}
+
+{% block title %}News & Activities - UCSTGO{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<section class="bg-white pt-32 pb-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h1 class="text-5xl md:text-6xl font-black tracking-tight text-apple-dark mb-6">Explore <span class="text-apple-blue">UCSTGO</span></h1>
+        <p class="text-xl text-gray-400 font-light max-w-2xl mx-auto">Latest updates from our campus and the milestones we achieve together.</p>
+    </div>
+</section>
+
+<!-- 1. Modern News Section (Alternating Layout) -->
+<section class="py-24 bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex items-center gap-4 mb-16">
+            <h2 class="text-3xl font-black text-apple-dark italic text-gradient uppercase">Latest News</h2>
+            <div class="h-[2px] flex-grow bg-slate-100"></div>
+        </div>
+
+        <!-- News Container -->
+        <div id="laseted-activity-list-container" class="space-y-32">
+
+        </div>
+
+        <!-- View More News Button -->
+        <div class="mt-24 text-center">
+            <button id="load-more-news" class="group relative px-12 py-4 font-black text-xs tracking-widest text-apple-dark overflow-hidden rounded-full border-2 border-apple-dark transition-all duration-300">
+                <span class="relative z-10 uppercase">View More Stories</span>
+                <div class="absolute inset-0 bg-apple-dark translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- 2. Modern Activities Section (Cards with Glassmorphism Overlay) -->
+<section id="campus-activities" class="py-24 bg-apple-gray scroll-animate">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-apple-dark mb-4">News & Activities</h2>
+            <p class="text-xl text-gray-500">Highlights from our recent events and contests.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="activity-data-section-body">
+
+        </div>
+    </div>
+</section>
+
+<!-- Dynamic Image Modal (Matches news_detail design) -->
+<div id="activityModal" class="fixed inset-0 z-[100] hidden bg-black/95 backdrop-blur-sm flex items-center justify-center p-4" onclick="closeActivityModal()">
+    <button class="absolute top-8 right-8 text-white hover:text-apple-blue transition-colors focus:outline-none">
+        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+    </button>
+    <img id="activityModalImage" src="" class="max-w-full max-h-full rounded-2xl shadow-2xl object-contain animate-scale-up">
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+// ၁။ Campus Vibes အတွက် Gallery Popup Function (news_detail ပုံစံအတိုင်း)
+function openActivityGallery(element) {
+    const imgSrc = element.getAttribute('data-gallery-src');
+    const modal = document.getElementById('activityModal');
+    const modalImg = document.getElementById('activityModalImage');
+
+    if (imgSrc) {
+        modalImg.src = imgSrc;
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Base page scroll ပိတ်ရန်
+    }
+}
+
+function closeActivityModal() {
+    const modal = document.getElementById('activityModal');
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto'; // Base page scroll ပြန်ဖွင့်ရန်
+}
+
+// ၂။ News & Activities "View More" Logic များ
+document.addEventListener('DOMContentLoaded', function() {
+
+    // News Section View More
+    const newsBtn = document.getElementById('load-more-news');
+    const newsItems = document.querySelectorAll('.news-item');
+
+    if (newsItems.length <= 3 && newsBtn) {
+        newsBtn.style.display = 'none';
+    }
+
+    if (newsBtn) {
+        newsBtn.addEventListener('click', function() {
+            let hidden = Array.from(newsItems).filter(item => item.classList.contains('hidden'));
+
+            // တစ်ခါနှိပ်လျှင် ၂ ခုစီ ဖော်ပြမည်
+            hidden.slice(0, 2).forEach(item => {
+                item.classList.remove('hidden');
+                item.classList.add('animate-slide-up');
+            });
+
+            // ကျန်တာမရှိတော့လျှင် ခလုတ်ဖျောက်မည်
+            if (Array.from(newsItems).filter(item => item.classList.contains('hidden')).length === 0) {
+                newsBtn.style.display = 'none';
+            }
+        });
+    }
+
+    // Activities Section View More
+    const actBtn = document.getElementById('load-more-activities');
+    const actItems = document.querySelectorAll('.activity-item');
+
+    if (actItems.length <= 3 && actBtn) {
+        actBtn.style.display = 'none';
+    }
+
+    if (actBtn) {
+        actBtn.addEventListener('click', function() {
+            let hidden = Array.from(actItems).filter(item => item.classList.contains('hidden'));
+
+            // တစ်ခါနှိပ်လျှင် ၃ ခုစီ ဖော်ပြမည်
+            hidden.slice(0, 3).forEach(item => {
+                item.classList.remove('hidden');
+                item.classList.add('animate-slide-up');
+            });
+
+            if (Array.from(actItems).filter(item => item.classList.contains('hidden')).length === 0) {
+                actBtn.style.display = 'none';
+            }
+        });
+    }
+});
+
+
+
+</script>
+
+<script type="module" src="{{ url_for('static', filename='frontend/js/pages/activities.js') }}"></script>
+{% endblock %}
+
+{% block styles %}
+<style>
+/* CSS Animations */
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleUp {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.animate-slide-up {
+    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scale-up {
+    animation: scaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Line Clamp Utilities */
+.line-clamp-2 {
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.line-clamp-3 {
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+</style>
+{% endblock %}

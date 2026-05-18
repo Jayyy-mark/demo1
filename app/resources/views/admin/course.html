@@ -1,0 +1,306 @@
+<!--===================================
+    ADMIN/USERS
+====================================-->
+
+{% extends 'admin/layouts/base.html' %}
+
+<!--===================================
+    PAGE'S STYLE
+====================================-->
+{% block style %}
+<link rel="stylesheet" href="{{ assets.features.dataTable.css }}">
+{% endblock %}
+
+
+<!--===================================
+    PAGE'S CONTENT
+====================================-->
+{% block content %}
+<div class="pc-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="page-header-title">
+                        <h5 class="m-b-10">{{ page }}</h5>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../dashboard/index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0)">Academic</a></li>
+                        <li class="breadcrumb-item" aria-current="page">{{ page }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ breadcrumb ] end -->
+
+    <!-- [ Main Content ] start -->
+    <div class="row">
+        <!-- [ sample-page ] start -->
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Courses List</h5>
+                    <div class="flex gap-2 float-right">
+                        <button class="btn btn-sm    btn-primary" data-bs-toggle="modal" data-bs-target="#courseModal">
+                            <i class="ti ti-plus"></i> Add New
+                        </button>
+                        <a class="" href="#" role="button" id="btn_refresh">
+                            <i class="ti ti-x"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="dataTable" class="table rounded table-hover align-middle">
+                            <thead>
+                                <tr class="bg-primary">
+                                    <th class="text-white rounded-start">ID</th>
+                                    <th class="text-white">Name</th>
+                                    <th class="text-white">Subject</th>
+                                    <th class="text-white">Department</th>
+                                    <th class="text-white text-end ps-0 rounded-end">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ sample-page ] end -->
+    </div>
+    <!-- [ Main Content ] end -->
+
+</div>
+
+<!--============================
+        CUSTOM MODALS
+=============================-->
+<!-- Add New Modal -->
+<div class="modal fade" id="courseModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+
+            <!-- Header -->
+            <div class="modal-header pb-12 bg-primary border-bottom border-info border-0">
+                <h5 class="modal-title text-white">Add New Course:</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body pt-2">
+                <form id="dataForm" enctype="multipart/form-data">
+                    <div class="row g-3">
+                        <div class="mb-3">
+                            <label for="course_name" class="form-label">Semester :</label>
+                            <div class="position-relative w-100" id="course_name">
+
+                                <!-- INPUT -->
+                                <input type="text" class="form-control" placeholder="Select an option..."
+                                    name="course_name">
+
+                                <!-- HIDDEN VALUE -->
+                                <input type="hidden" name="semester_id">
+
+                                <!-- ICONS -->
+                                <div class="select-icons">
+                                    <!-- CLEAR -->
+                                    <i class="ti ti-x  select-clear-btn d-none"></i>
+
+                                    <!-- ARROW -->
+                                    <i class="ti ti-chevron-down arrow-btn"></i>
+                                </div>
+
+                                <!-- DROPDOWN -->
+                                <div class="dropdown-menu w-100 mt-2">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="course_subject" class="form-label">Subject :</label>
+                            <div class="position-relative w-100" id="course_subject">
+
+                                <!-- INPUT -->
+                                <input type="text" class="form-control" placeholder="Select an option..."
+                                    name="course_subject">
+
+                                <!-- HIDDEN VALUE -->
+                                <input type="hidden" name="subject_id">
+
+                                <!-- ICONS -->
+                                <div class="select-icons">
+                                    <!-- CLEAR -->
+                                    <i class="ti ti-x  select-clear-btn d-none"></i>
+
+                                    <!-- ARROW -->
+                                    <i class="ti ti-chevron-down arrow-btn"></i>
+                                </div>
+
+                                <!-- DROPDOWN -->
+                                <div class="dropdown-menu w-100 mt-2">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer border-0 pt-0">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                    Cancel
+                </button>
+                <button type="submit" id="btn_add" class="btn btn-primary">
+                    <i class="ti ti-device-floppy"></i> Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Update Modal -->
+<div class="modal fade" id="courseModal-update" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+
+            <!-- Header -->
+            <div class="modal-header pb-12 bg-primary border-bottom border-info border-0">
+                <h5 class="modal-title text-white">Update Course:</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body pt-2">
+                <form id="dataForm-update" enctype="multipart/form-data">
+                    <div class="row g-3">
+                        <div class="mb-3">
+                            <label for="" class="form-label">Course ID:</label>
+                            <input type="text" name="course_id" id="" class="form-control" disabled>
+                            <input type="hidden" name="id" id="" class="form-control" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="semester" class="form-label">Semester :</label>
+                            <div class="position-relative w-100" id="semester">
+
+                                <!-- INPUT -->
+                                <input type="text" class="form-control" placeholder="Select an option..."
+                                    name="semester_term">
+
+                                <!-- HIDDEN VALUE -->
+                                <input type="hidden" name="semester_id">
+
+                                <!-- ICONS -->
+                                <div class="select-icons">
+                                    <!-- CLEAR -->
+                                    <i class="ti ti-x  select-clear-btn d-none"></i>
+
+                                    <!-- ARROW -->
+                                    <i class="ti ti-chevron-down arrow-btn"></i>
+                                </div>
+
+                                <!-- DROPDOWN -->
+                                <div class="dropdown-menu w-100 mt-2">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subject :</label>
+                            <div class="position-relative w-100" id="subject">
+
+                                <!-- INPUT -->
+                                <input type="text" class="form-control" placeholder="Select an option..."
+                                    name="subject_name">
+
+                                <!-- HIDDEN VALUE -->
+                                <input type="hidden" name="subject_id">
+
+                                <!-- ICONS -->
+                                <div class="select-icons">
+                                    <!-- CLEAR -->
+                                    <i class="ti ti-x  select-clear-btn d-none"></i>
+
+                                    <!-- ARROW -->
+                                    <i class="ti ti-chevron-down arrow-btn"></i>
+                                </div>
+
+                                <!-- DROPDOWN -->
+                                <div class="dropdown-menu w-100 mt-2">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer border-0 pt-0">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                    Cancel
+                </button>
+                <button type="submit" id="update_btn" class="btn btn-primary">
+                    <i class="ti ti-device-floppy"></i> Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade confirm-modal" id="delete-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content border-0 shadow-lg">
+
+            <!-- Header -->
+            <div class="modal-header border-0 justify-content-center">
+                <div class="warning-icon">
+                    <i class="ti ti-alert-triangle fs-1"></i>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body text-center px-4">
+                <h5 class="modal-title mb-2">Delete Course?</h5>
+                <p class="mb-0">
+                    This action cannot be undone.<br>
+                    Are you sure you want to proceed?
+                </p>
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer border-0 justify-content-center gap-2 pb-4">
+                <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-danger px-4" id="btn_delete" data-bs-dismiss="modal">
+                    <i class="ti ti-trash"></i> Confirm
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Odoo-style ERP Toast -->
+{% include 'admin/modals/toast.html'%}
+
+{% endblock %}
+<!--===================================
+    PAGE'S SCRIPTS
+====================================-->
+{% block script %}
+
+{% for script in assets.features.dataTable.scripts %}
+<script src="{{ script }}" defer></script>
+{% endfor %}
+
+<script type="module" src="{{ assets.admin.course.scripts }}" defer></script>
+{% endblock %}

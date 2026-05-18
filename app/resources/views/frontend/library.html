@@ -1,0 +1,136 @@
+{% extends "frontend/layouts/base.html" %}
+
+{% block title %}Library - UCSTGO{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="relative bg-apple-dark text-white pt-32 pb-24 overflow-hidden">
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0">
+        <img src="https://picsum.photos/id/116/1920/1080" alt="Library Interior" class="w-full h-full object-cover opacity-20">
+        <div class="absolute inset-0 bg-gradient-to-b from-apple-dark/80 via-apple-dark/90 to-apple-dark"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+        <span class="text-apple-blue font-bold tracking-widest uppercase text-xs mb-4 block">Resources</span>
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">The University Library</h1>
+        <p class="text-xl text-gray-400 max-w-2xl">
+            A gateway to knowledge, innovation, and academic excellence. 
+            Explore our vast collection of digital and physical resources designed to support your journey.
+        </p>
+    </div>
+</section>
+
+<!-- Description Section -->
+<section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row gap-16 items-center">
+            <!-- Library Image -->
+            <div class="md:w-1/2 relative">
+                <div class="absolute -inset-4 bg-apple-blue/10 rounded-3xl -z-10 transform rotate-2"></div>
+                <img src="https://picsum.photos/id/193/800/600" alt="Library Hall" class="rounded-3xl shadow-2xl w-full object-cover">
+            </div>
+            
+            <!-- Description Text -->
+            <div class="md:w-1/2">
+                <h2 class="text-3xl font-bold text-apple-dark mb-6">About the Library</h2>
+                <div class="w-12 h-1 bg-apple-blue mb-8"></div>
+                <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                    The University of Computer Studies, Taungoo library is the heart of the campus, providing a conducive environment for learning and research. 
+                    We house a comprehensive collection of books, journals, and electronic media covering the fields of Computer Science, Information Technology, and Engineering.
+                </p>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    With comfortable reading rooms, high-speed internet access, and dedicated zones for research, the library serves as a hub for intellectual growth and collaborative learning.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Vision, Mission, Motivation Section -->
+<section class="py-24 bg-apple-gray">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-apple-dark">Our Commitment</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Vision Card -->
+            <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-transparent hover:border-gray-100">
+                <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6">
+                    <svg class="w-7 h-7 text-apple-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold text-apple-dark mb-4">Vision</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    To be the leading academic library in the region, recognized for its extensive digital resources and commitment to supporting research and development in computer studies.
+                </p>
+            </div>
+
+            <!-- Mission Card -->
+            <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-transparent hover:border-gray-100">
+                <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6">
+                    <svg class="w-7 h-7 text-apple-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H5a2 2 0 00-2 2v16m14 0h11a2 2 0 011-2-2h-4a2 2 0 01-2 2v3.5"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.572c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold text-apple-dark mb-4">Mission</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    To provide user-centered access to diverse information resources, ensuring that students and faculty have the tools they need to achieve academic excellence and contribute to the global body of knowledge.
+                </p>
+            </div>
+
+            <!-- Motivation Card -->
+            <div class="bg-white p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-transparent hover:border-gray-100">
+                <div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center mb-6">
+                    <svg class="w-7 h-7 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11-9-11zM4 14v7a2 2 0 002 2h12a2 2 0 002-2v-7h-2l-3 3H4l-3-3H2v7z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold text-apple-dark mb-4">Motivation</h3>
+                <p class="text-gray-600 leading-relaxed italic">
+                    "We believe that books are the quietest and most constant of friends. Our goal is to foster a love for reading and learning that lasts a lifetime, empowering you to turn knowledge into wisdom."
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Services / Resources (Optional - Adds value) -->
+<section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-apple-dark">Resources & Services</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="p-6 border border-gray-100 rounded-2xl hover:border-apple-blue transition-colors text-center">
+                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 19.977 5.754 21.5 7.5 21.5S10.832 19.977 12 19.253V6.253z"></path></svg>
+                </div>
+                <h3 class="font-bold text-gray-900">Digital Library</h3>
+                <p class="text-sm text-gray-500 mt-2">Access 50,000+ e-journals</p>
+            </div>
+            <div class="p-6 border border-gray-100 rounded-2xl hover:border-apple-blue transition-colors text-center">
+                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.983-7 7s6-7 6-7 7c.846 0 1.666-.097 2.446-.276C13.343 20.5 14.95 21.5 16.343 21.5c2.842 0 5.5-1.156 7.314-3.657z"></path></svg>
+                </div>
+                <h3 class="font-bold text-gray-900">Research Support</h3>
+                <p class="text-sm text-gray-500 mt-2">Dedicated research assistance</p>
+            </div>
+            <div class="p-6 border border-gray-100 rounded-2xl hover:border-apple-blue transition-colors text-center">
+                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <h3 class="font-bold text-gray-900">Circulation</h3>
+                <p class="text-sm text-gray-500 mt-2">Borrow books and journals</p>
+            </div>
+            <div class="p-6 border border-gray-100 rounded-2xl hover:border-apple-blue transition-colors text-center">
+                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <h3 class="font-bold text-gray-900">Study Rooms</h3>
+                <p class="text-sm text-gray-500 mt-2">Quiet zones for focus</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

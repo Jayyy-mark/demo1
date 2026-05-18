@@ -1,0 +1,187 @@
+<!--===================================
+    ADMIN/USERS
+====================================-->
+
+{% extends 'admin/layouts/base.html' %}
+
+<!--===================================
+    PAGE'S STYLE
+====================================-->
+{% block style %}
+<link rel="stylesheet" href="{{ assets.features.dataTable.css }}">
+{% endblock %}
+
+<!--===================================
+    PAGE'S CONTENT
+====================================-->
+{% block content %}
+<div class="pc-content">
+    <!-- [ breadcrumb ] start -->
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="page-header-title">
+                        <h5 class="m-b-10">{{ page }}</h5>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../dashboard/index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0)">Admin</a></li>
+                        <li class="breadcrumb-item" aria-current="page">{{ page }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ breadcrumb ] end -->
+
+
+    <!-- [ Main Content ] start -->
+    <div class="row">
+        <!-- [ sample-page ] start -->
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h5 class="mb-0">Users List</h5>
+                    <button class="btn btn-sm btn-primary add-btn" id="add-modal-btn" data-bs-toggle="modal"
+                            data-bs-target="#add-modal">
+                        <i class="ti ti-plus"></i> Add New
+                    </button>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="dataTable" class="table border-top border-left table-hover align-middle w-200">
+                            <thead>
+                                <tr class="bg-primary text-white">
+                                    <th class="rounded-start text-white text-start">ID</th>
+                                    <th class="text-white text-start">Name</th>
+                                    <th class="text-white text-start">Email</th>
+                                    <th class="text-white text-start">role</th>
+                                    <th class="rounded-end text-white ps-0 text-start">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ sample-page ] end -->
+    </div>
+    <!-- [ Main Content ] end -->
+</div>
+
+<!--============================
+        CUSTOM MODALS
+=============================-->
+<!-- Avatar Modal -->
+<!-- Modal -->
+<div class="modal fade" id="avatarModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+
+            <!-- Header -->
+            <div class="modal-header">
+                <h5 class="modal-title">Select Your Avatar</h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body">
+
+                <div class="row g-3">
+
+                    <!-- Avatar 1 -->
+                    <div class="col-4 col-md-3 text-center">
+                        <img src="{{ url_for('static', filename='admin/images/avatar/3d-avatar-1.avif') }}" class="img-fluid rounded-circle avatar-item"
+                        >
+                    </div>
+
+                    <!-- Avatar 2 -->
+                    <div class="col-4 col-md-3 text-center">
+                        <img src="{{ url_for('static', filename='admin/images/avatar/3d-avatar-2.avif') }}" class="img-fluid rounded-circle avatar-item"
+                        >
+                    </div>
+
+                    <!-- Avatar 3 -->
+                    <div class="col-4 col-md-3 text-center">
+                        <img src="{{ url_for('static', filename='admin/images/avatar/3d-avatar-3.avif') }}" class="img-fluid rounded-circle avatar-item"
+                        >
+                    </div>
+
+                    <!-- Avatar 4 -->
+                    <div class="col-4 col-md-3 text-center">
+                        <img src="{{ url_for('static', filename='admin/images/avatar/3d-avatar-4.avif') }}" class="img-fluid rounded-circle avatar-item"
+                        >
+                    </div>
+
+                    <!-- Avatar 5 -->
+                    <div class="col-4 col-md-3 text-center">
+                        <img src="{{ url_for('static', filename='admin/images/avatar/3d-avatar-5.avif') }}" class="img-fluid rounded-circle avatar-item"
+                        >
+                    </div>
+
+                    <!-- Avatar 6 -->
+                    <div class="col-4 col-md-3 text-center">
+                        <img src="{{ url_for('static', filename='admin/images/avatar/3d-avatar-6.avif') }}" class="img-fluid rounded-circle avatar-item"
+                        >
+                    </div>
+
+                    <!-- Avatar 7 -->
+                    <div class="col-4 col-md-3 text-center">
+                        <img src="{{ url_for('static', filename='admin/images/avatar/3d-avatar-7.avif') }}" class="img-fluid rounded-circle avatar-item"
+                        >
+                    </div>
+
+                    <!-- Avatar 8 -->
+                    <div class="col-4 col-md-3 text-center">
+                        <img src="{{ url_for('static', filename='admin/images/avatar/3d-avatar-8.avif') }}" class="img-fluid rounded-circle avatar-item"
+                        >
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Add New Modal -->
+{% include 'admin/modals/add-modal.html'%}
+
+<!-- Update Modal -->
+{% include 'admin/modals/update-modal.html'%}
+
+<!-- Delete Confirmation Modal -->
+{% include 'admin/modals/delete-modal.html'%}
+
+<!-- Toast -->
+{% include 'admin/modals/toast.html'%}
+
+
+{% endblock %}
+<!--===================================
+    PAGE'S SCRIPTS
+====================================-->
+{% block script %}
+
+
+{% for script in assets.features.dataTable.scripts %}
+<script src="{{ script }}" defer></script>
+{% endfor %}
+
+<script type="module" src="{{ assets.admin.user.script }}" defer></script>
+{% endblock %}

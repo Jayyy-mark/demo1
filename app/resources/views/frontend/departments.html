@@ -1,0 +1,189 @@
+{% extends "frontend/layouts/base.html" %}
+
+{% block title %}{{ department.name }}{% endblock %}
+
+{% block content %}
+
+<!-- Modern Gradient Hero -->
+<section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 pt-36 pb-28">
+
+    <!-- Background Glow -->
+    <div class="absolute top-0 left-0 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+
+        <div class="text-center">
+            <span class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-sm tracking-widest uppercase font-semibold backdrop-blur-md mb-6">
+                Department Information
+            </span>
+
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6">
+                {{ department.name }}
+            </h1>
+
+            <p class="max-w-2xl mx-auto text-lg md:text-xl text-gray-300 leading-relaxed">
+                Explore the vision and mission of our department dedicated to academic excellence, innovation, and future technology development.
+            </p>
+
+            <!-- Decorative Button -->
+            <div class="mt-10">
+                <a href="#details"
+                   class="inline-flex items-center px-8 py-4 rounded-full bg-white text-slate-900 font-semibold shadow-xl hover:scale-105 transition duration-300">
+                    Explore Details
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Vision & Mission Cards -->
+<section id="details" class="py-24 bg-slate-50">
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+        <!-- English Section -->
+        <div class="mb-24">
+
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-slate-900 mb-4">
+                    Vision & Mission
+                </h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+                <!-- Vision Card -->
+                <div class="group bg-white rounded-3xl p-10 shadow-lg hover:shadow-2xl transition duration-500 border border-gray-100">
+
+                    <div class="flex items-center mb-8">
+                        <div class="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center group-hover:rotate-6 transition duration-500">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                        </div>
+
+                        <h3 class="ml-5 text-3xl font-bold text-slate-900">
+                            Vision
+                        </h3>
+                    </div>
+
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        {{ department.vision }}
+                    </p>
+
+                </div>
+
+                <!-- Mission Card -->
+                <div class="group bg-white rounded-3xl p-10 shadow-lg hover:shadow-2xl transition duration-500 border border-gray-100">
+
+                    <div class="flex items-center mb-8">
+                        <div class="w-16 h-16 rounded-2xl bg-cyan-100 flex items-center justify-center group-hover:rotate-6 transition duration-500">
+                            <svg class="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M12 6v6l4 2"/>
+                                <circle cx="12" cy="12" r="9" stroke-width="2"></circle>
+                            </svg>
+                        </div>
+
+                        <h3 class="ml-5 text-3xl font-bold text-slate-900">
+                            Mission
+                        </h3>
+                    </div>
+
+                    <p class="text-gray-600 leading-relaxed text-lg">
+                        {{ department.mission }}
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Myanmar Section -->
+        <div>
+
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-slate-900 mb-4">
+                    မြန်မာဘာသာ
+                </h2>
+                <div class="w-24 h-1 bg-cyan-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+                <!-- Myanmar Vision -->
+                <div class="group bg-gradient-to-br from-white to-blue-50 rounded-3xl p-10 shadow-lg hover:shadow-2xl transition duration-500 border border-blue-100">
+
+                    <div class="flex items-center mb-8">
+                        <div class="w-16 h-16 rounded-2xl bg-blue-500 flex items-center justify-center text-white text-2xl font-bold">
+                            မ
+                        </div>
+
+                        <h3 class="ml-5 text-3xl font-bold text-slate-900">
+                            မျှော်မှန်းချက်
+                        </h3>
+                    </div>
+
+                    <p class="text-gray-700 leading-relaxed text-lg">
+                        {{ department.vision_mm }}
+                    </p>
+
+                </div>
+
+                <!-- Myanmar Mission -->
+                <div class="group bg-gradient-to-br from-white to-cyan-50 rounded-3xl p-10 shadow-lg hover:shadow-2xl transition duration-500 border border-cyan-100">
+
+                    <div class="flex items-center mb-8">
+                        <div class="w-16 h-16 rounded-2xl bg-cyan-500 flex items-center justify-center text-white text-2xl font-bold">
+                            ရ
+                        </div>
+
+                        <h3 class="ml-5 text-3xl font-bold text-slate-900">
+                            ရည်မှန်းချက်
+                        </h3>
+                    </div>
+
+                    <p class="text-gray-700 leading-relaxed text-lg">
+                        {{ department.mission_mm }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Bottom CTA -->
+<section class="py-20 bg-slate-900 text-center">
+
+    <h2 class="text-4xl font-bold text-white mb-6">
+        Discover More Departments
+    </h2>
+
+    <p class="text-gray-400 max-w-2xl mx-auto mb-10 text-lg">
+        Learn more about academic programs, research activities, and educational opportunities at our university.
+    </p>
+
+    <a href="/"
+       class="inline-flex items-center px-8 py-4 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition duration-300 shadow-lg">
+        Back to Home
+    </a>
+
+</section>
+
+{% endblock %}

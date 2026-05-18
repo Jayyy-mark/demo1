@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>401 - Unauthorized</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(245, 158, 11, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+            }
+        }
+        
+        .float-animation {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+        
+        .error-code {
+            background: linear-gradient(90deg, #f59e0b, #d97706);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .bg-gradient-full {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.05) 100%);
+            min-height: 100vh;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: rgba(245, 158, 11, 0.3);
+            border-radius: 50%;
+            animation: twinkle 4s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        
+        .btn-amber {
+            background-color: #f59e0b;
+            color: white;
+        }
+        
+        .btn-amber:hover {
+            background-color: #d97706;
+            color: white;
+        }
+        
+        .border-amber {
+            border-color: #f59e0b !important;
+        }
+        
+        .text-amber {
+            color: #f59e0b !important;
+        }
+        
+        .bg-amber-50 {
+            background-color: rgba(245, 158, 11, 0.1) !important;
+        }
+        
+        .border-left-amber-500 {
+            border-left: 4px solid #f59e0b !important;
+        }
+        
+        .text-amber-700 {
+            color: #92400e !important;
+        }
+        
+        .text-amber-600 {
+            color: #f59e0b !important;
+        }
+        
+        .text-amber-800 {
+            color: #78350f !important;
+        }
+        
+        .spinner-border-sm {
+            width: 1rem;
+            height: 1rem;
+        }
+        
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1050;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-amber-50 to-yellow-50">
+    <!-- Stars Background -->
+    <div class="stars" id="stars"></div>
+    
+    <!-- Full Page Content -->
+    <div class="bg-gradient-full d-flex flex-column align-items-center justify-content-center p-4">
+        <!-- Icon with Animation -->
+        <div class="float-animation mb-4">
+            <div class="rounded-circle bg-amber-50 d-flex align-items-center justify-content-center pulse-glow" style="width: 160px; height: 160px;">
+                <i class="fas fa-lock text-amber" style="font-size: 4rem;"></i>
+            </div>
+        </div>
+        
+        <!-- Error Code -->
+        <h1 class="error-code fw-bold text-center mb-3" style="font-size: 5rem;">401</h1>
+        
+        <!-- Title -->
+        <h2 class="fw-bold text-center mb-3" style="font-size: 2rem;">Unauthorized</h2>
+        
+        <!-- Description -->
+        <p class="text-secondary text-center mb-5 mx-auto" style="max-width: 600px; font-size: 1.1rem;">
+            You need to log in to access this resource. Please authenticate and try again.
+        </p>
+        
+        <!-- Details Box -->
+        <div class="bg-amber-50 border-left-amber-500 p-3 mb-5 mx-auto text-start" style="max-width: 400px;">
+            <div class="d-flex">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-shield-alt text-amber"></i>
+                </div>
+                <div class="ms-3">
+                    <p class="small text-amber-700">
+                        <span class="fw-medium">Session ID:</span> 
+                        <span id="error-id" class="font-monospace">SES-401-<span id="random-id"></span></span>
+                    </p>
+                    <p class="small text-amber-700 mt-1">
+                        <span class="fw-medium">Time:</span> 
+                        <span id="error-time"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center mx-auto mb-4" style="max-width: 400px;">
+            <button onclick="login()" class="btn btn-amber d-flex align-items-center justify-content-center">
+                <i class="fas fa-sign-in-alt me-2"></i> Log In
+            </button>
+            <button onclick="goHome()" class="btn btn-outline-secondary d-flex align-items-center justify-content-center">
+                <i class="fas fa-home me-2"></i> Go Home
+            </button>
+        </div>
+        
+        <!-- Additional Options -->
+        <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center small mb-5">
+            <a href="#" onclick="signUp()" class="text-amber-600 text-decoration-none d-flex align-items-center justify-content-center">
+                <i class="fas fa-user-plus me-1"></i> Create Account
+            </a>
+            <a href="#" onclick="resetPassword()" class="text-amber-600 text-decoration-none d-flex align-items-center justify-content-center">
+                <i class="fas fa-key me-1"></i> Reset Password
+            </a>
+        </div>
+        
+        <!-- Character Illustrations -->
+        <div class="d-flex justify-content-between w-100 mx-auto mb-4" style="max-width: 400px;">
+            <div class="text-amber-200">
+                <i class="fas fa-user-shield" style="font-size: 3rem; transform: rotate(12deg);"></i>
+            </div>
+            <div class="text-yellow-200">
+                <i class="fas fa-fingerprint" style="font-size: 2.5rem; transform: rotate(-12deg);"></i>
+            </div>
+            <div class="text-amber-200">
+                <i class="fas fa-id-card" style="font-size: 3rem; transform: rotate(6deg);"></i>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="mt-auto text-center small text-secondary">
+            <p>© 2023 Your Company Name. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container"></div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Generate stars
+        document.addEventListener('DOMContentLoaded', function() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 50;
+            
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Random position
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                // Random size
+                const size = Math.random() * 3 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Random animation delay
+                star.style.animationDelay = `${Math.random() * 4}s`;
+                
+                starsContainer.appendChild(star);
+            }
+            
+            // Generate a random error ID and timestamp
+            const randomId = Math.random().toString(36).substring(2, 10).toUpperCase();
+            document.getElementById('random-id').textContent = randomId;
+            
+            const now = new Date();
+            const timeString = now.toLocaleTimeString() + ' on ' + now.toLocaleDateString();
+            document.getElementById('error-time').textContent = timeString;
+            
+            // Log error details (in a real app, this would be sent to your error tracking service)
+            console.error('Unauthorized 401 occurred', {
+                errorId: `SES-401-${randomId}`,
+                timestamp: now.toISOString(),
+                userAgent: navigator.userAgent,
+                url: window.location.href
+            });
+        });
+        
+        function login() {
+            showToast('Redirecting to login page...', 'info');
+            
+            // Simulate navigation with a loading state
+            setTimeout(() => {
+                // In a real application, replace with your actual login URL
+                window.location.href = '/login';
+            }, 1000);
+        }
+        
+        function goHome() {
+            showToast('Redirecting to homepage...', 'info');
+            
+            // Simulate navigation with a loading state
+            setTimeout(() => {
+                // In a real application, replace with your actual homepage URL
+                window.location.href = '/';
+            }, 1000);
+        }
+        
+        function signUp() {
+            showToast('Redirecting to sign up page...', 'info');
+            
+            // Simulate navigation with a loading state
+            setTimeout(() => {
+                // In a real application, replace with your actual sign up URL
+                window.location.href = '/signup';
+            }, 1000);
+        }
+        
+        function resetPassword() {
+            showToast('Redirecting to password reset page...', 'info');
+            
+            // Simulate navigation with a loading state
+            setTimeout(() => {
+                // In a real application, replace with your actual password reset URL
+                window.location.href = '/reset-password';
+            }, 1000);
+        }
+        
+        function showToast(message, type = 'info') {
+            const toastContainer = document.querySelector('.toast-container');
+            
+            const toastId = 'toast-' + Date.now();
+            const bgClass = type === 'success' ? 'bg-success' : 
+                           type === 'error' ? 'bg-danger' : 
+                           type === 'warning' ? 'bg-warning' : 'bg-info';
+            
+            const toast = document.createElement('div');
+            toast.id = toastId;
+            toast.className = `toast align-items-center text-white ${bgClass} border-0`;
+            toast.setAttribute('role', 'alert');
+            toast.setAttribute('aria-live', 'assertive');
+            toast.setAttribute('aria-atomic', 'true');
+            
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">
+                        ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            `;
+            
+            toastContainer.appendChild(toast);
+            
+            const bsToast = new bootstrap.Toast(toast, {
+                autohide: true,
+                delay: 5000
+            });
+            
+            bsToast.show();
+            
+            // Remove toast element after it's hidden
+            toast.addEventListener('hidden.bs.toast', () => {
+                toast.remove();
+            });
+        }
+    </script>
+</body>
+</html>

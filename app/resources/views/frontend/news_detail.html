@@ -1,0 +1,166 @@
+{% extends "frontend/layouts/base.html" %}
+
+{% block title %}{{ news.title }} - UCSTGO{% endblock %}
+
+{% block content %}
+
+<!-- Cinematic Hero Header -->
+<section class="relative h-[60vh] md:h-[70vh] w-full overflow-hidden">
+    <img src="{{ news.image }}" alt="{{ news.title }}" class="w-full h-full object-cover">
+    <!-- Gradient Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-black/30"></div>
+
+    <!-- Hero Text Content -->
+    <div class="absolute bottom-12 left-0 w-full">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="inline-flex items-center gap-4 bg-white/10 backdrop-blur-xl p-2 pr-6 rounded-full border border-white/20 shadow-2xl">
+                <span class="bg-apple-blue text-white text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-widest">
+                    {{ news.category }}
+                </span>
+                <span class="text-white text-sm font-medium">{{ news.date }}</span>
+            </div>
+            <h1 class="text-4xl md:text-7xl font-black text-apple-dark mt-6 leading-tight drop-shadow-sm max-w-5xl">
+                {{ news.title }}
+            </h1>
+        </div>
+    </div>
+</section>
+
+<!-- Main Article Section -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row gap-16 xl:gap-24">
+
+            <!-- Left Side: Content & Gallery -->
+            <div class="lg:w-2/3">
+                <article class="prose prose-xl prose-slate max-w-none">
+                    <!-- Summary/Lead Text -->
+                    <p class="text-2xl font-light text-slate-400 mb-12 italic leading-relaxed border-l-4 border-apple-blue pl-8">
+                        {{ news.summary }}
+                    </p>
+
+                    <!-- Main Body Content -->
+                    <div class="text-slate-700 leading-loose space-y-8">
+                        {{ news.content | safe }}
+                    </div>
+                </article>
+
+                <!-- Modern Gallery Section -->
+                <div class="mt-24 pt-16 border-t border-slate-100">
+                    <h3 class="text-2xl font-black text-apple-dark mb-10 flex items-center gap-4">
+                        <span class="w-10 h-1.5 bg-apple-blue rounded-full"></span> EVENT GALLERY
+                    </h3>
+                    <div class="columns-1 md:columns-2 gap-8 space-y-8">
+                        <div class="break-inside-avoid group rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500">
+                            <img src="https://picsum.photos/id/102/600/400" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onclick="openModal(this.src)">
+                        </div>
+                        <div class="break-inside-avoid group rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500">
+                            <img src="https://picsum.photos/id/105/600/800" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onclick="openModal(this.src)">
+                        </div>
+                        <div class="break-inside-avoid group rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500">
+                            <img src="https://picsum.photos/id/106/600/400" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onclick="openModal(this.src)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Sticky Navigation Sidebar -->
+            <div class="lg:w-1/3">
+                <div class="sticky top-32 space-y-8">
+
+                    <!-- Back Button Card -->
+                    <a href="/activities" class="group flex items-center gap-5 p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100 hover:bg-apple-dark transition-all duration-500 shadow-sm hover:shadow-xl">
+                        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md group-hover:bg-apple-blue group-hover:text-white transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] group-hover:text-apple-blue transition-colors">Go Back</span>
+                            <span class="block text-lg font-bold text-apple-dark group-hover:text-white transition-colors">News Feed</span>
+                        </div>
+                    </a>
+
+                    <!-- Article Meta Info -->
+                    <div class="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-sm space-y-8">
+                        <div>
+                            <h4 class="text-[10px] font-black tracking-widest text-slate-400 uppercase mb-4">Published Date</h4>
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-apple-blue"></div>
+                                <p class="text-slate-900 font-bold">{{ news.date }}</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-[10px] font-black tracking-widest text-slate-400 uppercase mb-4">Posted In</h4>
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+                                <p class="text-slate-900 font-bold">{{ news.category }}</p>
+                            </div>
+                        </div>
+
+                        <div class="pt-8 border-t border-slate-50">
+                            <a href="/" class="inline-flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-apple-blue transition-colors">
+                                <span>Return to Homepage</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Bottom Navigation: Quick Links -->
+<section class="py-20 border-t border-slate-100 bg-slate-50/30">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="flex gap-12">
+                <a href="#" class="group">
+                    <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2 group-hover:text-apple-blue">Previous</span>
+                    <h5 class="text-lg font-bold text-apple-dark">Tech Fest Winner List</h5>
+                </a>
+                <div class="w-px h-12 bg-slate-200 hidden md:block"></div>
+                <a href="#" class="group">
+                    <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2 group-hover:text-apple-blue text-right">Next</span>
+                    <h5 class="text-lg font-bold text-apple-dark text-right">New Semester Notice</h5>
+                </a>
+            </div>
+
+            <a href="/activities" class="px-8 py-3 bg-white border border-slate-200 rounded-full text-xs font-black tracking-widest hover:bg-slate-900 hover:text-white transition-all shadow-sm">
+                VIEW ALL UPDATES
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Image Modal (For Gallery) -->
+<div id="imageModal" class="fixed inset-0 z-[100] hidden bg-black/95 backdrop-blur-sm flex items-center justify-center p-4" onclick="closeModal()">
+    <button class="absolute top-8 right-8 text-white hover:text-apple-blue transition-colors">
+        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+    <img id="modalImage" src="" class="max-w-full max-h-full rounded-lg shadow-2xl object-contain">
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function openModal(src) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    modalImg.src = src;
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    const modal = document.getElementById('imageModal');
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+</script>
+{% endblock %}

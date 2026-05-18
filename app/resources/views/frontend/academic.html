@@ -1,0 +1,350 @@
+{% extends "frontend/layouts/base.html" %}
+
+{% block title %}Academic Portal - UCSTGO{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="pt-32 pb-16 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-apple-dark mb-6 tracking-tight">Academic <span class="text-apple-blue">Portal</span></h1>
+        <p class="text-lg text-gray-500 max-w-2xl mx-auto italic font-light leading-relaxed">
+            University of Computer Studies (Taungoo) offers comprehensive programs designed to equip students with cutting-edge technology skills.
+        </p>
+    </div>
+</section>
+
+<!-- Admission Requirements Section -->
+<section id="req" class="pb-24 bg-white scroll-mt-32">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+            <!-- Left Side: Requirements & Steps -->
+            <div class="lg:col-span-7">
+                <h2 class="text-2xl font-bold text-apple-dark mb-8 flex items-center">
+                    <span class="w-2 h-8 bg-apple-blue rounded-full mr-3"></span>
+                    ဝင်ခွင့်ဆိုင်ရာ အချက်အလက်များ
+                </h2>
+
+                <div class="space-y-10">
+                    <div class="bg-apple-gray rounded-3xl p-8">
+                        <h3 class="text-lg font-bold mb-4">ဝင်ခွင့်သတ်မှတ်ချက်များ</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-apple-blue mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span class="text-gray-600">တက္ကသိုလ်ဝင်တန်း (Grade 12) အောင်မြင်ပြီးသူ ဖြစ်ရမည်။</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-5 h-5 text-apple-blue mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span class="text-gray-600">အဆင့်မြင့်ပညာဦးစီးဌာနမှ သတ်မှတ်ထားသော ဝင်ခွင့်ရမှတ် (Cut-off Marks) ပြည့်မီသူ ဖြစ်ရမည်။</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-8">
+                        <div class="flex">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-100 text-apple-blue flex items-center justify-center font-bold">၁</div>
+                            <div class="ml-6">
+                                <h4 class="font-bold text-gray-900">လျှောက်လွှာတင်ခြင်း</h4>
+                                <p class="text-gray-500 text-sm mt-1">သတ်မှတ်ထားသော ရက်အတွင်း ကျောင်းသားရေးရာဌာနတွင် လူကိုယ်တိုင်ဖြစ်စေ၊ Online မှဖြစ်စေ လျှောက်ထားနိုင်ပါသည်။</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-100 text-apple-blue flex items-center justify-center font-bold">၂</div>
+                            <div class="ml-6">
+                                <h4 class="font-bold text-gray-900">ဝင်ခွင့်</h4>
+                                <p class="text-gray-500 text-sm mt-1"> ကွန်ပျူတာတက္ကသိုလ်(တောင်ငူ)သို့ တက်ရောက်လိုပါက တက္ကသိုလ်ဝင်ခွင့်လျှော က်ထားရာတွင် အမည်ထည့်သွင်းလျှောက်ထားရပါမည်။</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Admitted List (Sticky Sidebar) -->
+            <div class="lg:col-span-5">
+                <div class="bg-white border border-gray-100 rounded-[2.5rem] p-8 shadow-xl shadow-gray-200/50 top-24">
+                    <h2 class="text-xl font-bold text-apple-dark mb-6 tracking-tight">ရွေးချယ်ခံရသူစာရင်း (Admitted List)</h2>
+
+                    <div class="space-y-4">
+                        <!-- Card 1 -->
+                        <div class="p-5 rounded-2xl bg-apple-gray border border-transparent hover:border-apple-blue/20 hover:bg-white transition-all group">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-apple-blue">Batch 2024-25</span>
+                                <span class="text-[10px] text-gray-400">New Release</span>
+                            </div>
+                            <h4 class="font-bold text-gray-900 text-sm mb-4">ပထမနှစ် သင်တန်းသားသစ် ရွေးချယ်မှုစာရင်း</h4>
+                            <div class="flex gap-2">
+                                <a href="#" class="flex-1 bg-white border border-gray-200 py-2.5 rounded-xl text-xs font-bold text-center hover:bg-apple-blue hover:text-white transition-colors">
+                                    View Online
+                                </a>
+                                <a href="#" class="w-12 bg-white border border-gray-200 flex items-center justify-center rounded-xl hover:bg-gray-50">
+                                    <svg class="w-4 h-4 text-gray-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 (Fixed & Restored) -->
+
+
+                    <div class="mt-8 pt-6 border-t border-gray-100">
+                        <p class="text-xs text-gray-400 text-center">
+                            စာရင်းတွင် အမည်မပါရှိပါက ကျောင်းသားရေးရာဌာနသို့ ဆက်သွယ်စုံစမ်းနိုင်ပါသည်။
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Degree Programmes Section -->
+<section id="degrees" class="pb-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-apple-dark mb-12 flex items-center">
+            <span class="w-2 h-8 bg-apple-blue rounded-full mr-4"></span>
+            Degree Programmes
+        </h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <!-- Bachelor Degree Card -->
+            <div class="bg-apple-gray rounded-[2.5rem] p-10 flex flex-col border border-transparent hover:border-blue-100 transition-all duration-500">
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-apple-dark mb-2">Bachelor Degree</h3>
+                    <p class="text-apple-blue font-medium text-sm italic">"The graduate program is a basic and full-time course."</p>
+                </div>
+
+                <div class="space-y-8 flex-grow">
+                    <div>
+                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Admission Criteria</h4>
+                        <ul class="space-y-3 text-sm text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-apple-blue mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Applicants must pass the Matriculation Examination.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 text-apple-blue mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span>Follow the rules of University Entrance Guide Book.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Programme Structures</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm">
+                                <p class="font-bold text-apple-dark text-sm">B.C.Sc</p>
+                                <p class="text-[10px] text-gray-400">Bachelor of Computer Science</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm">
+                                <p class="font-bold text-apple-dark text-sm">B.C.Tech</p>
+                                <p class="text-[10px] text-gray-400">Bachelor of Computer Technology</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Points to Follow Accordion -->
+                    <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm">
+                        <button onclick="toggleAccordion('bachelor-points')" class="w-full flex items-center justify-between p-6 hover:bg-blue-50/30 transition-colors">
+                            <h4 class="text-xs font-bold text-apple-blue uppercase tracking-widest">Points to Follow</h4>
+                            <svg id="bachelor-points-icon" class="w-5 h-5 text-apple-blue transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="bachelor-points" class="hidden px-6 pb-6 animate-fade-in">
+                            <ul class="space-y-3 text-xs text-gray-600 leading-relaxed border-t border-gray-50 pt-4">
+                                <li>• Students have to take ten semesters including internship program.</li>
+                                <li>• Must complete specified total credit and follow criteria of credit system (attendance, quizzes, assignments, test, and exam).</li>
+                                <li>• Qualified students can join the Master Degree program upon completion.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Master Degree Card -->
+            <div class="bg-white rounded-[2.5rem] p-10 flex flex-col border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-500">
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-apple-dark mb-2">Master Degree</h3>
+                    <p class="text-gray-400 font-medium text-sm italic">Advanced Research & Thesis</p>
+                </div>
+
+                <div class="space-y-8 flex-grow">
+                    <div>
+                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Programme Structures</h4>
+                        <ul class="space-y-4">
+                            <li class="flex items-center p-4 bg-apple-gray rounded-xl">
+                                <div class="w-2 h-2 bg-apple-dark rounded-full mr-4"></div>
+                                <span class="text-sm font-bold">M.C.Sc (Master of Computer Science)</span>
+                            </li>
+                            <li class="flex items-center p-4 bg-apple-gray rounded-xl">
+                                <div class="w-2 h-2 bg-apple-dark rounded-full mr-4"></div>
+                                <span class="text-sm font-bold">M.C.Tech (Master of Computer Technology)</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Master Points Accordion -->
+                    <div class="bg-apple-dark rounded-3xl overflow-hidden border border-transparent">
+                        <button onclick="toggleAccordion('master-points')" class="w-full flex items-center justify-between p-6 hover:bg-white/5 transition-colors">
+                            <h4 class="text-xs font-bold text-apple-blue uppercase tracking-widest">Point to Follow</h4>
+                            <svg id="master-points-icon" class="w-5 h-5 text-apple-blue transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="master-points" class="hidden px-6 pb-6 animate-fade-in">
+                            <p class="text-xs text-blue-100 leading-relaxed border-t border-white/10 pt-4">
+                                Students have to take two-semester course work and complete a master thesis.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Syllabus & Courses Section -->
+<section id="syllabus" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold text-apple-dark mb-4">Syllabus & Courses</h2>
+            <p class="text-gray-500">ရှာဖွေလိုသည့် ကဏ္ဍအလိုက် ဘာသာရပ်များကို ရွေးချယ်ကြည့်ရှုနိုင်ပါသည်။</p>
+
+            <!-- Tab Switcher -->
+            <div class="flex justify-center mt-10">
+                <div class="inline-flex p-1 bg-apple-gray rounded-2xl">
+                    <button onclick="switchTab('faculties')" id="btn-faculties" class="px-6 py-3 rounded-xl font-bold text-sm transition-all bg-white shadow-sm text-apple-blue">
+                        Courses by Faculties
+                    </button>
+                    <button onclick="switchTab('semester')" id="btn-semester" class="px-6 py-3 rounded-xl font-bold text-sm transition-all text-gray-500">
+                        Courses by Semester
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Courses by Faculties -->
+        <div id="tab-faculties" class="block animate-fade-in">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {% set faculties = [
+                    {'id': 'f1', 'name': 'Department of Software Technology', 'subs': ['Software Engineering', 'Mobile Computing', 'Web Technologies']},
+                    {'id': 'f2', 'name': 'Department of Hardware Technology', 'subs': ['Embedded Systems', 'Digital Logic', 'Computer Architecture']},
+                    {'id': 'f3', 'name': 'Department of Information Science', 'subs': ['Data Mining', 'Machine Learning', 'Big Data Analytics']},
+                    {'id': 'f4', 'name': 'Department of Application', 'subs': ['Natural Language Processing', 'Computer Graphics', 'Image Processing']},
+                    {'id': 'f5', 'name': 'Department of Computational Mathematics', 'subs': ['Calculus', 'Discrete Mathematics', 'Linear Algebra']}
+                ] %}
+
+                {% for faculty in faculties %}
+                <div class="bg-apple-gray rounded-3xl overflow-hidden border border-transparent hover:border-blue-100 transition-all">
+                    <button onclick="toggleAccordion('{{ faculty.id }}')" class="w-full p-6 flex items-center justify-between bg-white md:bg-transparent hover:bg-white transition-colors group">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-apple-blue/10 rounded-xl flex items-center justify-center mr-4 group-hover:bg-apple-blue transition-colors">
+                                <svg class="w-5 h-5 text-apple-blue group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z"></path></svg>
+                            </div>
+                            <span class="font-bold text-apple-dark text-left">{{ faculty.name }}</span>
+                        </div>
+                        <svg id="{{ faculty.id }}-icon" class="w-5 h-5 text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="{{ faculty.id }}" class="hidden px-8 pb-6 bg-white md:bg-transparent">
+                        <div class="pt-2 space-y-3 border-t border-gray-100 mt-2">
+                            {% for sub in faculty.subs %}
+                            <div class="flex items-center text-sm text-gray-600 py-1">
+                                <span class="w-1.5 h-1.5 bg-apple-blue rounded-full mr-3"></span> {{ sub }}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Section 2: Courses by Semester -->
+        <div id="tab-semester" class="hidden animate-fade-in">
+            <div class="space-y-8">
+                {% set years = [
+                    {'id': 'y1', 'name': 'First Year (CST)', 's1': ['CST-1011', 'CST-1021', 'CST-1031'], 's2': ['CST-1012', 'CST-1042']},
+                    {'id': 'y2cs', 'name': 'Second Year (CS)', 's1': ['CS-2011', 'CS-2021'], 's2': ['CS-2012', 'CS-2032']},
+                    {'id': 'y2ct', 'name': 'Second Year (CT)', 's1': ['CT-2011', 'CT-2021'], 's2': ['CT-2012', 'CT-2032']}
+                ] %}
+
+                {% for year in years %}
+                <div class="bg-apple-gray rounded-[2.5rem] p-4 md:p-8">
+                    <h3 class="text-xl font-extrabold text-apple-dark mb-6 px-4">{{ year.name }}</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Semester 1 -->
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-sm">
+                            <button onclick="toggleAccordion('{{ year.id }}s1')" class="w-full p-5 flex justify-between items-center group">
+                                <span class="font-bold text-apple-blue">First Semester</span>
+                                <svg id="{{ year.id }}s1-icon" class="w-4 h-4 text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div id="{{ year.id }}s1" class="hidden px-6 pb-5">
+                                {% for sub in year.s1 %}<p class="text-sm text-gray-500 py-1">• {{ sub }}</p>{% endfor %}
+                            </div>
+                        </div>
+                        <!-- Semester 2 -->
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-sm">
+                            <button onclick="toggleAccordion('{{ year.id }}s2')" class="w-full p-5 flex justify-between items-center group">
+                                <span class="font-bold text-apple-blue">Second Semester</span>
+                                <svg id="{{ year.id }}s2-icon" class="w-4 h-4 text-gray-400 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div id="{{ year.id }}s2" class="hidden px-6 pb-5">
+                                {% for sub in year.s2 %}<p class="text-sm text-gray-500 py-1">• {{ sub }}</p>{% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .animate-fade-in {
+        animation: fadeIn 0.4s ease-out;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function switchTab(tab) {
+        const facTab = document.getElementById('tab-faculties');
+        const semTab = document.getElementById('tab-semester');
+        const facBtn = document.getElementById('btn-faculties');
+        const semBtn = document.getElementById('btn-semester');
+
+        if (tab === 'faculties') {
+            facTab.classList.remove('hidden');
+            semTab.classList.add('hidden');
+            facBtn.classList.add('bg-white', 'shadow-sm', 'text-apple-blue');
+            semBtn.classList.remove('bg-white', 'shadow-sm', 'text-apple-blue');
+            semBtn.classList.add('text-gray-500');
+        } else {
+            semTab.classList.remove('hidden');
+            facTab.classList.add('hidden');
+            semBtn.classList.add('bg-white', 'shadow-sm', 'text-apple-blue');
+            facBtn.classList.remove('bg-white', 'shadow-sm', 'text-apple-blue');
+            facBtn.classList.add('text-gray-500');
+        }
+    }
+
+    // Toggle Accordion/Dropdown logic (Fixed: Duplicate function removed)
+    function toggleAccordion(id) {
+        const content = document.getElementById(id);
+        const icon = document.getElementById(id + '-icon');
+
+        if (content.classList.contains('hidden')) {
+            content.classList.remove('hidden');
+            if(icon) icon.classList.add('rotate-180');
+        } else {
+            content.classList.add('hidden');
+            if(icon) icon.classList.remove('rotate-180');
+        }
+    }
+</script>
+{% endblock %}

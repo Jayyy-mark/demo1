@@ -1,0 +1,166 @@
+<nav class="glass-nav fixed w-full z-50 transition-all duration-300 border-b border-gray-200/50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+
+            <!-- ၁။ Logo & University Name (Link ထည့်လိုက်သည်) -->
+            <a href="/" class="flex-shrink-0 flex items-center cursor-pointer group gap-3">
+                <img src="{{ url_for('static',filename='frontend/image/logo.png') }}" alt=""
+                    class="h-8 w-auto rounded-full object-contain transition-transform duration-300 group-hover:scale-110">
+                <span class="font-bold text-xl tracking-tigh text-blue-900">UCSTGO</span>
+            </a>
+
+            <div class="hidden md:flex items-center space-x-1">
+                <!-- ၂။ Home Dropdown (Button ကို နှိပ်ရင် Home ရောက်အောင် လုပ်သည်) -->
+                <div class="relative group py-5 px-2">
+                    <button onclick="window.location.href='/'"
+                        class="flex items-center text-sm font-medium text-gray-900 group-hover:text-apple-blue transition-colors focus:outline-none">
+                        Home <svg
+                            class="ml-1 w-3 h-3 text-gray-500 group-hover:text-apple-blue transition-transform duration-200 group-hover:rotate-180"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute top-full left-0 w-64 bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 border border-gray-100 p-2">
+                        <a href="/about#history"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Background
+                            History</a>
+                        <a href="/about#vision"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Vision
+                            and Missions</a>
+                        <a href="/about#org-chart"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Organizational
+                            Chart</a>
+                    </div>
+                </div>
+
+                <!-- Academic -->
+                <div class="relative group py-5 px-2">
+                    <button
+                        class="flex items-center text-sm font-medium text-gray-900 group-hover:text-apple-blue transition-colors focus:outline-none">
+                        Academic <svg
+                            class="ml-1 w-3 h-3 text-gray-500 group-hover:text-apple-blue transition-transform duration-200 group-hover:rotate-180"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute top-full left-0 w-64 bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 border border-gray-100 p-2">
+                        <a href="/academic#req"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Admission
+                            Requirement</a>
+                        <a href="/academic#degrees"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Degree
+                            Programmes</a>
+                        <a href="/academic#syllabus"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Syllabus
+                            and Courses</a>
+                        <a href="/lms"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Learning
+                            Management System</a>
+                    </div>
+                </div>
+
+                <!-- Find the "Facilities" <a href="#facilities"...> and replace it with this: -->
+
+                <!-- 8. Faculties (Dropdown) -->
+                <!-- Departments (NEW: 9 Department Dropdown) -->
+                <div class="relative group py-5">
+                    <button
+                        class="flex items-center text-sm font-medium text-gray-900 group-hover:text-apple-blue transition-colors focus:outline-none">
+                        Faculties
+                        <svg class="ml-1 w-3 h-3 text-gray-500 group-hover:text-apple-blue transition-transform duration-200 group-hover:rotate-180"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute top-full left-0 w-64 bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 border border-gray-100 p-2 z-50">
+                        <!-- The 9 Departments -->
+                        <a href="/faculties/cs"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Computer
+                            Science (CS)</a>
+                        <a href="/faculties/is"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Information
+                            Systems (IS)</a>
+                        <a href="/faculties/se"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Software
+                            Engineering (SE)</a>
+                        <a href="/faculties/nce"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Network
+                            Engineering (NCE)</a>
+                        <a href="/faculties/csec"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Cyber
+                            Security (CSec)</a>
+                        <a href="/faculties/ai"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Artificial
+                            Intelligence</a>
+                        <a href="/faculties/es"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Embedded
+                            Systems</a>
+                        <a href="/faculties/rnd"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Research
+                            & Development</a>
+                        <a href="/faculties/math"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Mathematics
+                            & Physics</a>
+                    </div>
+                </div>
+
+                <a href="/activities"
+                    class="px-3 py-5 text-sm font-medium text-gray-900 hover:text-apple-blue transition-colors">News and
+                    Activities</a>
+                <!-- Research & Publications (Dropdown) -->
+                <div class="relative group py-5">
+                    <button
+                        class="flex items-center text-sm font-medium text-gray-900 group-hover:text-apple-blue transition-colors focus:outline-none">
+                        Research & Publications
+                        <svg class="ml-1 w-3 h-3 text-gray-500 group-hover:text-apple-blue transition-transform duration-200 group-hover:rotate-180"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div
+                        class="absolute top-full left-0 w-64 bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 border border-gray-100 p-2 z-50">
+                        <a href="/research#labs"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue transition-colors">
+                            Research Labs
+                        </a>
+                        <a href="/research#publications"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue transition-colors">
+                            Publications
+                        </a>
+                    </div>
+                </div>
+                <a href="#online-learning"
+                    class="px-3 py-5 text-sm font-medium text-gray-900 hover:text-apple-blue transition-colors">Online
+                    Learning</a>
+                <a href="/library"
+                    class="px-3 py-5 text-sm font-medium text-gray-900 hover:text-apple-blue transition-colors">Library</a>
+            </div>
+
+            <div class="hidden md:flex items-center">
+                <a href="/"
+                    class="text-xs font-medium text-gray-500 border border-gray-300 px-4 py-2 rounded-full hover:border-gray-900 hover:text-gray-900 transition-all">Alumni
+                    Result</a>
+            </div>
+
+            <!-- Mobile Button -->
+            <button id="menu-btn" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false"
+                class="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg border border-gray-300">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+
+                </svg>
+
+            </button>
+        </div>
+    </div>
+</nav>

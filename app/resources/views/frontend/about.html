@@ -1,0 +1,120 @@
+{% extends "frontend/layouts/base.html" %}
+
+{% block title %}About Us - UCSTGO{% endblock %}
+
+{% block content %}
+
+<!-- Page Header / Hero -->
+<section class="bg-white pt-32 pb-16 border-b border-gray-100">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h1 class="text-5xl md:text-6xl font-bold text-apple-dark mb-6">About Us</h1>
+        <p class="text-xl text-gray-500 font-light">A legacy of technological excellence in Taungoo.</p>
+    </div>
+</section>
+
+<!-- Background History Section -->
+<section id="history" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <!-- Image Side -->
+            <div class="relative">
+                <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" alt="University History" class="rounded-3xl shadow-2xl w-full object-cover">
+                <div class="absolute -bottom-6 -right-6 bg-apple-blue text-white p-6 rounded-2xl shadow-lg hidden md:block">
+                    <p class="text-3xl font-bold">2001</p>
+                    <p class="text-sm opacity-80">Established</p>
+                </div>
+            </div>
+            
+            <!-- Text Side -->
+            <div>
+                <h2 class="text-3xl font-bold text-apple-dark mb-6">Background History</h2>
+                <div class="w-12 h-1 bg-gray-200 mb-8"></div>
+                
+                <div class="prose prose-lg text-gray-600">
+                    <p class="mb-6 text-justify">
+                        Computer University(Taung-Ngu)was first opened on 4th September, 2000 as a College in  Katumati Myo Thit, Taung-Ngu. On 20th January 2007, it was promoted into university level and was transferred to the campus of Technology University(Taung-Ngu)in Kanyo village on 20th, April, 2008.
+                    </p>
+                    <h1 class="text-2xl font-bold text-apple-dark mb-6">ကွန်ပျူတာတက္ကသိုလ်(တောင်ငူ)နောက်ခံသမိုင်းအကျဉ်း</h1>
+                    <div class="w-12 h-1 bg-gray-200 mb-8"></div>
+                    <p class="mb-6 text-justify">
+                        ကွန်ပျူတာတက္ကသိုလ် (တောင်ငူ) ကို ၂၀၀၀ ပြည့်နှစ်၊ စက်တင်ဘာလ (၄) ရက်နေ့တွင် အစိုးရ ကွန်ပျူတာကောလိပ်အဖြစ် တောင်ငူမြို့၊ ကေတုမတီမြို့သစ်၌ စတင်ဖွင့်လှစ်ခဲ့ပါသည်။ ၂၀၀၇ ခုနှစ်၊ ဇန်န၀ါရီလ (၂၀) ရက်နေ့တွင် တက္ကသိုလ်အဆင့်သို့ တိုးမြှင့်ခဲ့ပြီး ၂၀၀၈ ခုနှစ်၊ ဧပြီလ (၂၀) ရက်နေ့တွင် တောင်ငူမြို့၊ ကန်ရိုးကျေးရွာရှိ နည်းပညာတက္ကသိုလ် (တောင်ငူ) ကျောင်းနယ်မြေအား ကွန်ပျူတာတက္ကသိုလ် (တောင်ငူ) အဖြစ် လွှဲပြောင်းလက်ခံ ဖွင့်လှစ်ခဲ့ပါသည်။
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Vision and Mission Section -->
+<section id="vision" class="py-24 bg-apple-gray">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-apple-dark mb-4">Our Direction</h2>
+            <p class="text-gray-500">Guiding principles for the future.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Vision Card -->
+            <div class="bg-white p-10 md:p-12 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6">
+                    <svg class="w-8 h-8 text-apple-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold text-apple-blue mb-4">Vision</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    To become a university that performs teaching and research harmoniously and produces qualified professionals who develop human society with information  technology.
+                </p>
+                <br>
+                <h3 class="text-2xl font-bold text-apple-blue mb-4">ပညာရေးရည်မှန်းချက် (Vision)</h3>
+                <p class="text-gray-600 leading-relaxed">
+                    သင်ကြားရေးနှင့် သုတေသနကို ဟန်ချက်ညီစွာဆောင်ရွက်၍၊ သတင်းအချက်အလက်နည်းပညာဖြင့် လူမှုအဖွဲ့အစည်းကိုဖွံ့ဖြိုးတိုးတက်စေသော၊အရည်အချင်းပြည့်ဝသည့်ပညာရှင်များမွေးထုတ်ပေးမည့် တက္ကသိုလ် တစ်ခု ဖြစ်လာစေရန်။
+                </p>
+            </div>
+
+            <!-- Mission Card -->
+            <div class="bg-apple-blue text-white p-10 md:p-12 rounded-3xl shadow-sm border border-transparent hover:shadow-xl transition-shadow duration-300">
+                <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-6">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-4">Mission</h3>
+                <p class="text-white leading-relaxed">
+                    To develop the institution rapidly by producing IT technicians as the vital role for the social and economic development in the local region and nation through qualified teaching, research, innovation and industry collaboration.
+                </p>
+                <br>
+                <h3 class="text-2xl font-bold text-white mb-4">တက္ကသိုလ်၏ ပညာရေးမူဝါဒများ (Mission)</h3>
+                <p class="text-white leading-relaxed">
+                    အရည်အသွေးမြင့်မားသော ပညာရေးနှင့် သုတေသနများ ဆောင်ရွက်၍ ဆန်းသစ်တီထွင်နိုင်မှု၊ လုပ်ငန်းခွင်နှင့် လက်တွေ့ချိတ်ဆက်နိုင်မှု တို့ဖြင့် ဒေသတွင်းနှင့် နိုင်ငံတော်၏ စီးပွားရေး၊ လူမှုရေး ဖွံ့ဖြိုးတိုးတက်မှုအတွက် အဓိကအခန်းကဏ္ဍမှ ပါဝင်နိုင်သည့် ပညာရှင်များမွေးထုတ်ပေးမည့် တက္ကသိုလ်တစ်ခုအဖြစ် လျင်မြန်စွာ ဖွံ့ဖြိုး တိုးတက်လာစေရန်။
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Organizational Chart Section -->
+<section id="org-chart" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+            <div>
+                <h2 class="text-3xl font-bold text-apple-dark mb-4">Organizational Chart</h2>
+                <p class="text-gray-500">Understanding our administrative structure.</p>
+            </div>
+            <div>
+                <!-- Optional Download Button -->
+                <a href="#" class="inline-flex items-center text-apple-blue font-medium hover:underline mt-4 md:mt-0">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Download Full Chart
+                </a>
+            </div>
+        </div>
+
+        <!-- Chart Container -->
+        <div class="bg-gray-50 p-4 md:p-8 rounded-3xl border border-gray-200 overflow-x-auto">
+            <!-- Using a generic wide seed for the chart image -->
+            <img src="{{ url_for('static', filename='frontend/image/org.jpg') }}" alt="Organizational Chart" class="w-full h-auto rounded-2xl shadow-sm mx-auto">
+        </div>
+        
+        <p class="text-center text-sm text-gray-400 mt-4">*For the most up-to-date detailed breakdown, please refer to the administrative office.</p>
+    </div>
+</section>
+
+{% endblock %}

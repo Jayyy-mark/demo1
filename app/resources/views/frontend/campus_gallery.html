@@ -1,0 +1,125 @@
+{% extends "frontend/layouts/base.html" %}
+
+{% block title %}Campus Gallery - UCSTGO{% endblock %}
+
+{% block content %}
+
+<!-- Header -->
+<section class="bg-white pt-32 pb-12 border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <a href="/#campus-gallery" class="inline-flex items-center text-sm text-gray-500 hover:text-apple-blue mb-6 transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            Back to Home
+        </a>
+        <h1 class="text-4xl md:text-6xl font-bold text-apple-dark mb-4">Campus Gallery</h1>
+        <p class="text-xl text-gray-500">A visual journey through the University of Computer Studies, Taungoo.</p>
+    </div>
+</section>
+
+<!-- Filter Bar -->
+<section class="sticky top-20 z-40 bg-white/95 backdrop-blur border-b border-gray-100 py-4">
+    <div class="max-w-7xl mx-auto px-6 lg:8">
+        <div class="flex overflow-x-auto space-x-6 no-scrollbar" id="gallery-filters">
+            <button class="text-sm font-bold text-apple-dark border-b-2 border-apple-blue pb-1">All</button>
+            <button class="text-sm font-medium text-gray-500 hover:text-apple-dark transition-colors pb-1">Architecture</button>
+            <button class="text-sm font-medium text-gray-500 hover:text-apple-dark transition-colors pb-1">Life</button>
+            <button class="text-sm font-medium text-gray-500 hover:text-apple-dark transition-colors pb-1">Research</button>
+            <button class="text-sm font-medium text-gray-500 hover:text-apple-dark transition-colors pb-1">Events</button>
+        </div>
+    </div>
+</section>
+
+<!-- Masonry Grid -->
+<section class="py-16 bg-apple-gray min-h-screen">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+
+            <!-- Image Item 1 -->
+            <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-white p-2 shadow-sm hover:shadow-xl transition-shadow">
+                <img src="https://picsum.photos/seed/g1/600/400" class="w-full rounded-xl object-cover hover:scale-[1.02] transition-transform">
+                <div class="p-4">
+                    <h3 class="font-bold text-gray-900 text-sm">Main Entrance</h3>
+                    <p class="text-xs text-gray-500">Architecture</p>
+                </div>
+            </div>
+
+            <!-- Image Item 2 -->
+            <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-white p-2 shadow-sm hover:shadow-xl transition-shadow">
+                <img src="https://picsum.photos/seed/g2/600/800" class="w-full rounded-xl object-cover hover:scale-[1.02] transition-transform">
+                <div class="p-4">
+                    <h3 class="font-bold text-gray-900 text-sm">Library Study Hall</h3>
+                    <p class="text-xs text-gray-500">Life</p>
+                </div>
+            </div>
+
+            <!-- Image Item 3 -->
+            <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-white p-2 shadow-sm hover:shadow-xl transition-shadow">
+                <img src="https://picsum.photos/seed/g3/600/500" class="w-full rounded-xl object-cover hover:scale-[1.02] transition-transform">
+                <div class="p-4">
+                    <h3 class="font-bold text-gray-900 text-sm">Data Science Lab</h3>
+                    <p class="text-xs text-gray-500">Research</p>
+                </div>
+            </div>
+
+            <!-- Image Item 4 -->
+            <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-white p-2 shadow-sm hover:shadow-xl transition-shadow">
+                <img src="https://picsum.photos/seed/g4/600/600" class="w-full rounded-xl object-cover hover:scale-[1.02] transition-transform">
+                <div class="p-4">
+                    <h3 class="font-bold text-gray-900 text-sm">Graduation 2024</h3>
+                    <p class="text-xs text-gray-500">Events</p>
+                </div>
+            </div>
+
+            <!-- Image Item 5 -->
+            <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-white p-2 shadow-sm hover:shadow-xl transition-shadow">
+                <img src="https://picsum.photos/seed/g5/600/700" class="w-full rounded-xl object-cover hover:scale-[1.02] transition-transform">
+                <div class="p-4">
+                    <h3 class="font-bold text-gray-900 text-sm">Campus Pathways</h3>
+                    <p class="text-xs text-gray-500">Life</p>
+                </div>
+            </div>
+
+            <!-- Image Item 6 -->
+            <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-white p-2 shadow-sm hover:shadow-xl transition-shadow">
+                <img src="https://picsum.photos/seed/g6/600/450" class="w-full rounded-xl object-cover hover:scale-[1.02] transition-transform">
+                <div class="p-4">
+                    <h3 class="font-bold text-gray-900 text-sm">Lecture Hall A</h3>
+                    <p class="text-xs text-gray-500">Architecture</p>
+                </div>
+            </div>
+
+             <!-- Image Item 7 -->
+             <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-white p-2 shadow-sm hover:shadow-xl transition-shadow">
+                <img src="https://picsum.photos/seed/g7/600/800" class="w-full rounded-xl object-cover hover:scale-[1.02] transition-transform">
+                <div class="p-4">
+                    <h3 class="font-bold text-gray-900 text-sm">Night Study</h3>
+                    <p class="text-xs text-gray-500">Life</p>
+                </div>
+            </div>
+
+             <!-- Image Item 8 -->
+             <div class="break-inside-avoid relative group rounded-2xl overflow-hidden bg-white p-2 shadow-sm hover:shadow-xl transition-shadow">
+                <img src="https://picsum.photos/seed/g8/600/600" class="w-full rounded-xl object-cover hover:scale-[1.02] transition-transform">
+                <div class="p-4">
+                    <h3 class="font-bold text-gray-900 text-sm">Hackathon 2023</h3>
+                    <p class="text-xs text-gray-500">Events</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Load More -->
+        <div class="mt-20 text-center">
+            <button class="px-8 py-3 bg-apple-blue text-white rounded-full font-medium hover:bg-blue-600 transition-colors shadow-lg">Load More Photos</button>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block styles %}
+<style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+{% endblock %}

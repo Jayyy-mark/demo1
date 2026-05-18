@@ -1,0 +1,188 @@
+<!-- Mobile Menu Overlay -->
+<div id="overlay" class="hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-40" onclick="closeDrawer()">
+</div>
+
+<!-- DRAWER -->
+<div id="mobile-menu" class="fixed top-0 right-0 h-full w-[340px] max-w-full z-50
+           bg-white/95 backdrop-blur-2xl
+           translate-x-full transition-transform duration-300 overflow-hidden">
+
+    <!-- HEADER -->
+    <div class="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+
+        <!-- BACK BUTTON (hidden on main screen) -->
+        <button id="backBtn" type="button" onclick="showMain()"
+            class="hidden text-sm text-black active:opacity-60 transition">
+            Back
+        </button>
+
+        <h2 class="text-lg font-semibold text-black">
+            Menu
+        </h2>
+
+        <button type="button" onclick="closeDrawer()" aria-label="Close menu"
+            class="w-10 h-10 flex items-center justify-center rounded-full active:scale-95 transition">
+
+            <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- MAIN VIEW -->
+    <div id="mainView" class="mobile-drawer-view is-active py-4">
+
+        <p class="px-6 text-xs text-gray-400 uppercase tracking-wider mb-2">
+            Main Menu
+        </p>
+
+        <button type="button" onclick="openSub('home')"
+            class="w-full text-left px-6 py-4 text-[15px] text-black active:bg-gray-100">
+            Home
+        </button>
+
+        <button type="button" onclick="openSub('academic')"
+            class="w-full text-left px-6 py-4 text-[15px] text-black active:bg-gray-100">
+            Academic
+        </button>
+
+        <button type="button" onclick="openSub('faculties')"
+            class="w-full text-left px-6 py-4 text-[15px] text-black active:bg-gray-100">
+            Faculties
+        </button>
+
+        <button type="button" onclick="openSub('admission')"
+            class="w-full text-left px-6 py-4 text-[15px] text-black active:bg-gray-100">
+            Admission
+        </button>
+
+        <a href="/activities" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
+            News & Activities
+        </a>
+
+        <a href="/research" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
+            Research Publications
+        </a>
+
+        <a href="#online-learning" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
+            Online Learning
+        </a>
+
+        <a href="/library" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
+            Library
+        </a>
+
+        <a href="/" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
+            Alumni Result
+        </a>
+    </div>
+
+    <!-- HOME SUB VIEW -->
+    <div id="homeView" class="mobile-drawer-view py-4" aria-hidden="true">
+
+        <p class="px-6 text-xs text-gray-400 uppercase tracking-wider mb-2">
+            Home
+        </p>
+
+        <a href="/" class="block px-6 py-4 text-black active:bg-gray-100">
+            Main Home
+        </a>
+
+        <a href="/about#history" class="block px-6 py-4 text-black active:bg-gray-100">
+            Background History
+        </a>
+
+        <a href="/about#vision" class="block px-6 py-4 text-black active:bg-gray-100">
+            Vision & Mission
+        </a>
+
+        <a href="/about#org-chart" class="block px-6 py-4 text-black active:bg-gray-100">
+            Organizational Chart
+        </a>
+    </div>
+
+    <!-- ACADEMIC SUB VIEW -->
+    <div id="academicView" class="mobile-drawer-view py-4" aria-hidden="true">
+
+        <p class="px-6 text-xs text-gray-400 uppercase tracking-wider mb-2">
+            Academic
+        </p>
+
+        <a href="/academic#req" class="block px-6 py-4 text-black active:bg-gray-100">
+            Admission Requirement
+        </a>
+
+        <a href="/academic#syllabus" class="block px-6 py-4 text-black active:bg-gray-100">
+            Syllabus & Courses
+        </a>
+
+        <a href="/academic#degrees" class="block px-6 py-4 text-black active:bg-gray-100">
+            Degree Programmes
+        </a>
+
+        <a href="/lms" class="block px-6 py-4 text-black active:bg-gray-100">
+            LMS Portal
+        </a>
+    </div>
+
+    <!-- FACULTIES SUB VIEW -->
+    <div id="facultiesView" class="mobile-drawer-view py-4" aria-hidden="true">
+
+        <p class="px-6 text-xs text-gray-400 uppercase tracking-wider mb-2">
+            Faculties
+        </p>
+
+        <a href="/departments/cs" class="block px-6 py-4 text-black active:bg-gray-100">
+            Computer Science (CS)
+        </a>
+
+        <a href="/departments/is" class="block px-6 py-4 text-black active:bg-gray-100">
+            Information Systems (IS)
+        </a>
+
+        <a href="/departments/se" class="block px-6 py-4 text-black active:bg-gray-100">
+            Software Engineering (SE)
+        </a>
+
+        <a href="/departments/nce" class="block px-6 py-4 text-black active:bg-gray-100">
+            Network Engineering (NCE)
+        </a>
+
+        <a href="/departments/csec" class="block px-6 py-4 text-black active:bg-gray-100">
+            Cyber Security (CSec)
+        </a>
+
+        <a href="/departments/ai" class="block px-6 py-4 text-black active:bg-gray-100">
+            Artificial Intelligence
+        </a>
+
+        <a href="/departments/es" class="block px-6 py-4 text-black active:bg-gray-100">
+            Embedded Systems
+        </a>
+
+        <a href="/departments/rnd" class="block px-6 py-4 text-black active:bg-gray-100">
+            Research & Development
+        </a>
+
+        <a href="/departments/math" class="block px-6 py-4 text-black active:bg-gray-100">
+            Mathematics & Physics
+        </a>
+    </div>
+
+    <!-- ADMISSION SUB VIEW -->
+    <div id="admissionView" class="mobile-drawer-view py-4" aria-hidden="true">
+
+        <p class="px-6 text-xs text-gray-400 uppercase tracking-wider mb-2">
+            Admission
+        </p>
+
+        <a href="/admission#entrance" class="block px-6 py-4 text-black active:bg-gray-100">
+            Entrance Info
+        </a>
+
+        <a href="/admission#list" class="block px-6 py-4 text-black active:bg-gray-100">
+            Admitted List
+        </a>
+    </div>
+</div>

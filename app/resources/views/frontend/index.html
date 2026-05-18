@@ -1,0 +1,540 @@
+{% extends "frontend/layouts/base.html" %}
+
+{% block title %}Home - UCSTGO{% endblock %}
+
+{% block content %}
+
+<!-- 3D Background Canvas -->
+<div id="canvas-container"></div>
+
+<!-- Split Hero Section -->
+<section id="hero" class="relative h-screen overflow-hidden scroll-animate">
+
+    <div class="absolute inset-0 z-0" id="hero-slider">
+        <div class="slide absolute inset-0 opacity-100 transition-opacity duration-1000 ease-in-out">
+            <img src="{{ url_for('static', filename='frontend/image/s3.jpg') }}" class="h-full w-full object-cover brightness-[0.65]" alt="Slide 1">
+        </div>
+        <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
+            <img src="{{ url_for('static', filename='frontend/image/s2.jpg') }}" class="h-full w-full object-cover brightness-[0.65]" alt="Slide 2">
+        </div>
+        <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
+            <img src="{{ url_for('static', filename='frontend/image/s1.jpg') }}" class="h-full w-full object-cover brightness-[0.65]" alt="Slide 3">
+        </div>
+        <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
+            <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" class="h-full w-full object-cover brightness-[0.65]" alt="Slide 4">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 h-full">
+        <div class="grid grid-cols-1 lg:grid-cols-2 h-full items-center">
+            <div class="text-left lg:pr-12">
+                <div class="mb-8 animate-fade-in-up">
+                    <span class="text-blue-400 font-bold tracking-widest uppercase text-xs mb-2 block">University of Computer Studies</span>
+                    <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight drop-shadow-2xl">
+                        UCSTGO
+                    </h1>
+                </div>
+
+                <div class="mb-10 max-w-xl">
+                    <h2 class="text-3xl md:text-4xl font-light text-gray-100 mb-4 animate-fade-in-up delay-100">
+                        Welcome to the Future <br>
+                        <span class="font-bold text-white">of Technology.</span>
+                    </h2>
+                    <p class="text-lg text-gray-200 leading-relaxed animate-fade-in-up delay-200">
+                        We empower the next generation of innovators through cutting-edge research, world-class faculty, and a vibrant tech ecosystem.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-300">
+                    <a href="/admission" class="px-8 py-4 bg-apple-blue text-white rounded-full font-semibold hover:bg-blue-600 transition-all shadow-xl text-center">
+                        Apply Now
+                    </a>
+                    <a href="#campus-activities" class="px-8 py-4 bg-white/10 backdrop-blur-md text-white border border-white/30 rounded-full font-semibold hover:bg-white/20 transition-all text-center">
+                        Explore Campus
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-3">
+        <button onclick="goToSlide(0)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/20"></button>
+        <button onclick="goToSlide(1)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/20"></button>
+        <button onclick="goToSlide(2)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/20"></button>
+        <button onclick="goToSlide(3)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/20"></button>
+    </div>
+</section>
+
+<!-- Welcome to Our University Section -->
+<section class="py-24 bg-apple-gray scroll-animate">
+    <div class="max-w-5xl mx-auto px-6 lg:px-8 space-y-6">
+
+        <!-- Top Main Card: Big Text -->
+        <div class="bg-white border border-gray-100 rounded-[2.5rem] p-8 md:p-14 shadow-xl shadow-gray-200/30 text-center">
+            <span class="text-apple-blue font-bold tracking-widest uppercase text-xs mb-4 block">About Us</span>
+            <h2 class="text-3xl md:text-5xl font-extrabold text-apple-dark mb-8 tracking-tight">
+                Welcome to Our University
+            </h2>
+            <p class="text-base md:text-lg text-gray-500 leading-relaxed max-w-4xl mx-auto text-justify md:text-center font-light">
+                For the purpose of developing IT industry, human resource is the essential one to support our country’s socio-economic quickly. To fulfill this aim, University of Computer Studies(Taungoo) conducted Bachelor of Computer Science (B.C.Sc), Bachelor of Computer Technology (B.C.Tech), Master of Computer Science (M.C.Sc) and Master of Computer Technology (M.C.Tech) degrees programs. Our university is aimed to support the economics of regional people and requirements of government departments in Bago Region, Republic of the Union of Myanmar. To encourage the sophisticated and advanced innovative developments of economy and society of our country...
+            </p>
+        </div>
+
+        <!-- Bottom Row: 3 Connected Columns (Bento Grid) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Pillar 1: Innovation -->
+            <div class="bg-white border border-gray-100 rounded-[2rem] p-8 shadow-lg shadow-gray-200/20 text-center hover:border-apple-blue/20 transition-all group">
+                <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-apple-blue transition-colors duration-300">
+                    <i class="ti ti-bulb text-2xl text-apple-blue transition-all duration-300 ease-in-out group-hover:scale-125 group-hover:text-white"></i>
+                </div>
+                <h4 class="font-bold text-apple-dark text-lg mb-2">Community</h4>
+                <p class="text-sm text-gray-400 font-light leading-relaxed">Supporting regional socio-economic growth.</p>
+            </div>
+
+            <!-- Pillar 2: Community -->
+            <div class="bg-white border border-gray-100 rounded-[2rem] p-8 shadow-lg shadow-gray-200/20 text-center hover:border-apple-blue/20 transition-all group">
+                <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-apple-blue transition-colors duration-300">
+                    <i class="ti ti-users text-2xl text-apple-blue transition-all duration-300 ease-in-out group-hover:scale-125 group-hover:text-white"></i>
+                </div>
+                <h4 class="font-bold text-apple-dark text-lg mb-2">Community</h4>
+                <p class="text-sm text-gray-400 font-light leading-relaxed">Supporting regional socio-economic growth.</p>
+            </div>
+
+            <!-- Pillar 3: Excellence -->
+            <div class="bg-white border border-gray-100 rounded-[2rem] p-8 shadow-lg shadow-gray-200/20 text-center hover:border-apple-blue/20 transition-all group">
+                <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-apple-blue transition-colors duration-300">
+                    <i class="ti ti-medal text-2xl text-apple-blue transition-all duration-300 ease-in-out group-hover:scale-125 group-hover:text-white"></i>
+                </div>
+                <h4 class="font-bold text-apple-dark text-lg mb-2">Excellence</h4>
+                <p class="text-sm text-gray-400 font-light leading-relaxed">Fulfilling requirements of human resources.</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Statistics Section -->
+<section class="py-20 bg-white border-b border-gray-100 scroll-animate">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div class="p-4 group">
+                <p class="text-4xl md:text-5xl font-bold text-blue-500 count-up" data-target="2001">0</p>
+                <p class="text-sm text-blue-500 mt-2 uppercase tracking-wider font-semibold group-hover:text-apple-blue transition-colors">Established</p>
+            </div>
+            <div class="p-4 group">
+                <p class="text-4xl md:text-5xl font-bold text-blue-500 count-up" data-target="120">0</p>
+                <p class="text-sm text-blue-500 mt-2 uppercase tracking-wider font-semibold group-hover:text-apple-blue transition-colors">Staff Members</p>
+            </div>
+            <div class="p-4 group">
+                <p class="text-4xl md:text-5xl font-bold text-blue-500 count-up" data-target="3500">0</p>
+                <p class="text-sm text-blue-500 mt-2 uppercase tracking-wider font-semibold group-hover:text-apple-blue transition-colors">Graduated</p>
+            </div>
+            <div class="p-4 group">
+                <p class="text-4xl md:text-5xl font-bold text-blue-500 count-up" data-target="1200">0</p>
+                <p class="text-sm text-blue-500 mt-2 uppercase tracking-wider font-semibold group-hover:text-apple-blue transition-colors">Current Students</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Rector's Message Section -->
+<section class="py-24 bg-apple-gray scroll-animate">
+    <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <div class="bg-white rounded-3xl p-8 md:p-16 shadow-xl flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/3 flex-shrink-0">
+                <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" alt="Rector" class="w-64 h-80 object-cover rounded-2xl shadow-lg mx-auto md:mx-0  transition-all duration-500">
+            </div>
+            <div class="md:w-2/3">
+                <h2 class="text-3xl font-bold text-apple-dark mb-6">Rector's Message</h2>
+                <div class="w-12 h-1 bg-apple-blue mb-6"></div>
+                <blockquote class="text-lg text-gray-600 leading-relaxed mb-6 italic">
+                    "ယနေ့ခေတ်သည် စတုတ္ထအကြိမ်မြောက် စက်မှုတော်လှန်ရေး (Industry 4.0) ကာလဖြစ်သည်နှင့်အညီ နည်းပညာသည် ကမ္ဘာကြီးကို မောင်းနှင်နေသော အဓိကအင်အားစု ဖြစ်ပါသည်။ ကျွန်ုပ်တို့ ကွန်ပျူတာတက္ကသိုလ်(တောင်ငူ) အနေဖြင့် ကျောင်းသား၊ ကျောင်းသူများကို စာတွေ့သာမက လက်တွေ့နယ်ပယ်တွင်ပါ ထူးချွန်ထက်မြက်ပြီး ဆန်းသစ်တီထွင်နိုင်စွမ်းရှိသော (Innovators) များ ဖြစ်လာစေရန် ပြုစုပျိုးထောင်ပေးလျက်ရှိပါသည်။ ဤ Website မှတစ်ဆင့် ကျွန်ုပ်တို့တက္ကသိုလ်၏ ပညာရေးလှုပ်ရှားမှုများ၊ သုတေသနလုပ်ငန်းများနှင့် အောင်မြင်မှုများကို ပွင့်လင်းမြင်သာစွာ ချိတ်ဆက်ကြည့်ရှုနိုင်မည်ဟု ယုံကြည်ပါသည်။"
+                </blockquote>
+                <div>
+                    <p class="font-bold text-apple-dark text-lg">Dr. Ei Ei Hlaing</p>
+                    <p class="text-sm text-gray-500">Rector, UCSTaungoo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Campus Activities -->
+<section id="campus-activities" class="py-24 bg-apple-gray scroll-animate">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-apple-dark mb-4">News & Activities</h2>
+            <p class="text-xl text-gray-500">Highlights from our recent events and contests.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="activity-card-container">
+
+        </div>
+    </div>
+</section>
+
+<!-- Announcements -->
+<section class="bg-white py-12 border-t border-gray-200 scroll-animate">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex justify-between items-end mb-6">
+            <h3 class="text-2xl font-semibold text-apple-dark">Research Publications</h3>
+            <a href="/research" class="text-sm text-apple-blue hover:underline">View All</a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="pub-container">
+
+            <!-- Card 1 -->
+
+        </div>
+    </div>
+</section>
+
+<!-- Campus Life Grid -->
+<section id="activities" class="py-24 bg-white scroll-animate">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-apple-dark mb-4">Campus Facilities</h2>
+            <p class="text-xl text-gray-500">A vibrant community focused on growth and discovery.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="group relative rounded-3xl overflow-hidden h-80 shadow-lg cursor-pointer">
+                <img src="https://picsum.photos/id/60/800/600" alt="Lab" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
+                    <div>
+                        <h3 class="text-white text-2xl font-bold">Advanced Research Labs</h3>
+                        <p class="text-gray-200 mt-2">State-of-the-art facilities for AI and Data Science research.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="group relative rounded-3xl overflow-hidden h-80 shadow-lg cursor-pointer">
+                <img src="https://picsum.photos/id/76/800/600" alt="Seminar" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
+                    <div>
+                        <h3 class="text-white text-2xl font-bold">Global Seminars</h3>
+                        <p class="text-gray-200 mt-2">Hosting experts from top tech companies worldwide.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="group relative rounded-3xl overflow-hidden h-80 shadow-lg cursor-pointer">
+                <img src="https://picsum.photos/id/112/800/600" alt="Sports" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
+                    <div>
+                        <h3 class="text-white text-2xl font-bold">Student Athletics</h3>
+                        <p class="text-gray-200 mt-2">Balancing mind and body through comprehensive sports programs.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="group relative rounded-3xl overflow-hidden h-80 shadow-lg cursor-pointer">
+                <img src="https://picsum.photos/id/150/800/600" alt="Library" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
+                    <div>
+                        <h3 class="text-white text-2xl font-bold">Digital Archive</h3>
+                        <p class="text-gray-200 mt-2">Access thousands of journals and papers from our cloud library.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- University Location -->
+<section class="py-24 bg-apple-gray scroll-animate">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-apple-dark">University Location</h2>
+            <p class="text-gray-500 mt-2">Visit us in Taungoo, Bago Region.</p>
+        </div>
+        <div class="rounded-3xl overflow-hidden shadow-xl border border-gray-200 h-[500px]">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3749.191428073539!2d96.42557437502476!3d18.967169955038475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c3db474813589b%3A0x7d2f9547d73010b!2sUniversity%20of%20Computer%20Studies%2C%20Taungoo!5e0!3m2!1sen!2smm!4v1715535000000!5m2!1sen!2smm"
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">>
+            </iframe>
+        </div>
+    </div>
+</section>
+
+<!-- Global Lightbox Modal -->
+<div id="imageModal" class="fixed inset-0 z-50 hidden" onclick="closeModal()">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-sm"></div>
+    <button class="absolute top-6 right-6 text-white hover:text-gray-300 z-50 p-2">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+    <div class="relative z-10 w-full h-full flex items-center justify-center p-8">
+        <img id="modalImage" src="" alt="Full view" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl object-contain">
+    </div>
+</div>
+
+{% endblock %}
+
+{% block styles %}
+<style>
+    /* Scroll Animation Classes */
+    .scroll-animate {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+    }
+    .scroll-animate.active {
+        opacity: 1;
+        transform: none;
+    }
+
+    /* Hero Entry Animation */
+    @keyframes fade-in-up {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fade-in-up {
+        animation: fade-in-up 1s ease-out forwards;
+        opacity: 0;
+    }
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+
+    /* 3D Perspective Container */
+    .perspective-container {
+        perspective: 1500px;
+    }
+
+    /* Horizontal Marquee Animation (For Hero Right Side) */
+    @keyframes marquee-horizontal {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+
+    .animate-marquee-horizontal {
+        animation: marquee-horizontal 50s linear infinite;
+        width: max-content;
+    }
+
+    /* Horizontal Scroll Animation (For Gallery Section) */
+    @keyframes scroll-slow {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+    @keyframes scroll-fast {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+
+    .animate-scroll-slow {
+        animation: scroll-slow 60s linear infinite;
+        width: max-content;
+    }
+    .animate-scroll-fast {
+        animation: scroll-fast 40s linear infinite;
+        width: max-content;
+    }
+</style>
+
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.slider-dot');
+    let slideTimer;
+
+    function showSlide(n) {
+        // အကုန်လုံးကို ဖျောက်ထားမယ်
+        slides.forEach(s => s.classList.replace('opacity-100', 'opacity-0'));
+        dots.forEach(d => {
+            d.classList.replace('bg-white', 'bg-white/40');
+            d.style.width = '12px'; // Normal size
+        });
+
+        // Current index ကို တွက်ချက်မယ်
+        currentSlide = (n + slides.length) % slides.length;
+
+        // Slide ကို ပြမယ်
+        slides[currentSlide].classList.replace('opacity-0', 'opacity-100');
+
+        // Dot ကို highlight လုပ်မယ် (Active ဖြစ်ရင် ပိုရှည်သွားအောင် လုပ်ပေးထားပါတယ်)
+        dots[currentSlide].classList.replace('bg-white/40', 'bg-white');
+        dots[currentSlide].style.width = '30px';
+    }
+
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
+
+    function goToSlide(n) {
+        showSlide(n);
+        startAutoSlide(); // Manual နှိပ်ရင် timer ကို reset လုပ်မယ်
+    }
+
+    function startAutoSlide() {
+        clearInterval(slideTimer);
+        slideTimer = setInterval(nextSlide, 5000); // ၅ စက္ကန့်တစ်ခါပြောင်းမယ်
+    }
+
+    // စတင်အလုပ်လုပ်စေဖို့
+    document.addEventListener('DOMContentLoaded', () => {
+        showSlide(0);
+        startAutoSlide();
+    });
+
+    // --- 1. Scroll Animation ---
+    const initScrollAnimations = () => {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+
+                }else {
+                    // အပေါ်ပြန်ဆွဲရင် ပြန်ပျောက်စေချင်ရင် ဒါကို သုံးပါ
+                    entry.target.classList.remove('active');
+                }
+
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach(section => {
+            observer.observe(section);
+        });
+    };
+
+    // --- 2. Three.js (Tech Grid & Particles ONLY) ---
+    const initThreeJS = () => {
+        const container = document.getElementById('canvas-container');
+        if(!container) return;
+
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0xffffff, 0.02);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 35;
+        camera.position.y = 10; // Tilted view
+        camera.lookAt(0,0,0);
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        // --- Tech Grid Floor ---
+        const gridHelper = new THREE.GridHelper(150, 50, 0x0071e3, 0x0071e3);
+        gridHelper.position.y = -20;
+        gridHelper.material.opacity = 0.2;
+        gridHelper.material.transparent = true;
+        scene.add(gridHelper);
+
+        // --- Floating Particles (Digital Dust) ---
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 1500;
+        const posArray = new Float32Array(particlesCount * 3);
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 150;
+        }
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.15,
+            color: 0x1d1d1f,
+            transparent: true,
+            opacity: 0.4
+        });
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        // --- Lighting ---
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+
+        const pointLight = new THREE.PointLight(0x0071e3, 1, 100);
+        pointLight.position.set(20, 50, 20);
+        scene.add(pointLight);
+
+        const pointLight2 = new THREE.PointLight(0x00d2ff, 0.5, 100);
+        pointLight2.position.set(-20, -10, 20);
+        scene.add(pointLight2);
+
+        // --- Interaction & Animation ---
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - window.innerWidth / 2);
+            mouseY = (event.clientY - window.innerHeight / 2);
+        });
+
+        const clock = new THREE.Clock();
+
+        const animate = () => {
+            requestAnimationFrame(animate);
+            const elapsedTime = clock.getElapsedTime();
+
+            // Rotate Grid slowly
+            gridHelper.rotation.y = elapsedTime * 0.02;
+
+            // Particle flow
+            particlesMesh.rotation.y = elapsedTime * 0.1;
+            particlesMesh.rotation.x = elapsedTime * 0.05;
+
+            renderer.render(scene, camera);
+        };
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    };
+
+    // --- 3. Counter Animation ---
+    const initCounters = () => {
+        const counters = document.querySelectorAll('.count-up');
+        const speed = 200;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    const counter = entry.target;
+                    const updateCount = () => {
+                        const target = +counter.getAttribute('data-target');
+                        const count = +counter.innerText;
+                        const inc = target / speed;
+
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc);
+                            setTimeout(updateCount, 20);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                    observer.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(counter => observer.observe(counter));
+    };
+
+    // --- Initialize All ---
+    document.addEventListener('DOMContentLoaded', () => {
+        initThreeJS();
+        initCounters();
+        initScrollAnimations();
+    });
+</script>
+
+<script type="module" src="{{ url_for('static', filename='frontend/js/pages/home.js') }}"></script>
+{% endblock %}

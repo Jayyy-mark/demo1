@@ -12,11 +12,11 @@ def _build_database_uri():
         return database_url
 
     db_username = os.getenv("DB_USERNAME", "root")
-    db_password = quote_plus(os.getenv("DB_PASSWORD", ""))
-    db_name = os.getenv("DB_NAME", "sms")
-    db_host = os.getenv("DB_HOST", "localhost")
-    db_port = os.getenv("DB_PORT", "3306")
-
+    db_password = quote_plus(os.getenv("DB_PASSWORD"))
+    db_name = os.getenv("DB_NAME")
+    db_host = os.getenv("DB_HOST")
+    db_port = os.getenv("DB_PORT")
+    print("this is db_name and host", db_host, db_name)
     if not str(db_port).isdigit():
         db_port = "3306"
 

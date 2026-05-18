@@ -11,3 +11,4 @@ flask_cors
 pymysql
 PyJWT
 flask-jwt-extended
+psycopg2-binary

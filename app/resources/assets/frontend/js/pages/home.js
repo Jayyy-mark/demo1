@@ -5,7 +5,7 @@ import { getMonthName, getDay, getYear } from "../utils/helper.js";
     GET ACTIVITES
 =============================-->*/
 
-const researchApi = {
+const homeApi = {
     async fetchLastedActivities(){
         const res = await api.get("/frontend/home/activity");
         return res.data.activities;
@@ -22,11 +22,15 @@ const researchApi = {
 const activityContainer = document.querySelector("#activity-card-container");
 const pubContainer = document.querySelector("#pub-container");
 
+function getActivityUrl(activity) {
+    return `/activity/${encodeURIComponent(activity.id)}`;
+}
+
 const researchUI = {
     renderActivities(activities){
         activities.forEach(activity => {
             const activityCard = `
-                <a href="" class="group block bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                <a href="${getActivityUrl(activity)}" class="group block bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
                     <div class="relative h-64 overflow-hidden">
                         <img src="assets/${activity.images[0].filepath}" alt="Race" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
@@ -74,10 +78,10 @@ const researchEvent = {
         this.load();
     },
     async load(){
-        const activities = await researchApi.fetchLastedActivities();
+        const activities = await homeApi.fetchLastedActivities();
         researchUI.renderActivities(activities);
 
-        const researches = await researchApi.fetchLastedPublications();
+        const researches = await homeApi.fetchLastedPublications();
         researchUI.renderPublications(researches);
 
     }

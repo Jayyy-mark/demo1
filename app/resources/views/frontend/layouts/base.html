@@ -8,10 +8,12 @@
     
     <link rel="shortcut icon" href="{{ url_for('static', filename='admin/favicon/favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/main.css') }}">
+
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
     <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -41,7 +43,6 @@
         }
 
         .glass-nav {
-            background: rgba(255, 255, 255, 0.9);
             /* Increased opacity for logo contrast */
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -107,7 +108,7 @@
         }
     </style>
 </head>
-<body class="antialiased flex flex-col min-h-screen">
+<body class="antialiased flex flex-col min-h-screen font-sans">
 
 
     <!--=============================
@@ -141,6 +142,7 @@
     {% for script in assets.vendor.scripts %}
     <script src="{{ script }}"></script>
     {% endfor %}
+    
     <script>
 
         //<!-- Mobile Menu Script -->
@@ -218,22 +220,23 @@
                 closeDrawer();
             }
         });
-        // Placeholder for global functions
+ 
+
         function openModal(src) {
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
-            modalImg.src = src;
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
+            console.log("this is src : ",src);
+            document.getElementById('modalImg').src = src;
+            document.getElementById('imageModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Stop scrolling
         }
         function closeModal() {
-            const modal = document.getElementById('imageModal');
-            modal.classList.add('hidden');
-            document.body.style.overflow = 'auto';
+            document.getElementById('imageModal').classList.add('hidden');
+            document.body.style.overflow = 'auto'; // Enable scrolling
         }
     </script>
 
     {% block styles %}{% endblock %}
-    {% block scripts %}{% endblock %}
+    {% block scripts %}
+        
+    {% endblock %}
 </body>
 </html>

@@ -1,5 +1,4 @@
 from app.core.database import db
-from sqlalchemy.exc import SQLAlchemyError
 import os
 from werkzeug.utils import secure_filename
 from flask import jsonify

@@ -1,4 +1,4 @@
-<nav class="glass-nav fixed w-full z-50 transition-all duration-300 border-b border-gray-200/50">
+<nav class="glass-nav fixed w-full z-50 transition-all duration-300 border-b border-gray-200/50 shadow-xl shadow-black">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="flex justify-between items-center h-20">
 
@@ -6,16 +6,16 @@
             <a href="/" class="flex-shrink-0 flex items-center cursor-pointer group gap-3">
                 <img src="{{ url_for('static',filename='frontend/image/logo.png') }}" alt=""
                     class="h-20 w-auto pt-2 object-contain transition-transform duration-300 group-hover:scale-110">
-                <span class="font-bold text-xl tracking-tigh text-blue-900">UCSTGO</span>
+
             </a>
 
             <div class="hidden md:flex items-center space-x-1">
                 <!-- ၂။ Home Dropdown (Button ကို နှိပ်ရင် Home ရောက်အောင် လုပ်သည်) -->
                 <div class="relative group py-5 px-2">
                     <button onclick="window.location.href='/'"
-                        class="flex items-center text-sm font-medium text-gray-900 group-hover:text-apple-blue transition-colors focus:outline-none">
+                        class="flex items-center text-sm font-medium text-white group-hover:text-apple-dark transition-colors focus:outline-none">
                         Home <svg
-                            class="ml-1 w-3 h-3 text-gray-500 group-hover:text-apple-blue transition-transform duration-200 group-hover:rotate-180"
+                            class="ml-1 w-3 h-3 text-white group-hover:text-apple-dark transition-transform duration-200 group-hover:rotate-180"
                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
@@ -38,9 +38,9 @@
                 <!-- Academic -->
                 <div class="relative group py-5 px-2">
                     <button
-                        class="flex items-center text-sm font-medium text-gray-900 group-hover:text-apple-blue transition-colors focus:outline-none">
+                        class="flex items-center text-sm font-medium text-white group-hover:text-apple-dark transition-colors focus:outline-none">
                         Academic <svg
-                            class="ml-1 w-3 h-3 text-gray-500 group-hover:text-apple-blue transition-transform duration-200 group-hover:rotate-180"
+                            class="ml-1 w-3 h-3 text-white group-hover:text-apple-dark transition-transform duration-200 group-hover:rotate-180"
                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
@@ -54,9 +54,12 @@
                         <a href="/academic#degrees"
                             class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Degree
                             Programmes</a>
-                        <a href="/academic#syllabus"
+                        <a href="/syllabus_courses"
                             class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Syllabus
                             and Courses</a>
+                        <a href="/reg"
+                            class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Student
+                            Registration</a>
                         <a href="/lms"
                             class="block px-4 py-3 text-sm text-gray-700 rounded-xl hover:bg-gray-50 hover:text-apple-blue">Learning
                             Management System</a>
@@ -69,9 +72,9 @@
                 <!-- Departments (NEW: 9 Department Dropdown) -->
                 <div class="relative group py-5">
                     <button
-                        class="flex items-center text-sm font-medium text-gray-900 group-hover:text-apple-blue transition-colors focus:outline-none">
+                        class="flex items-center text-sm font-medium text-white group-hover:text-apple-dark transition-colors focus:outline-none">
                         Faculties
-                        <svg class="ml-1 w-3 h-3 text-gray-500 group-hover:text-apple-blue transition-transform duration-200 group-hover:rotate-180"
+                        <svg class="ml-1 w-3 h-3 text-white group-hover:text-apple-dark transition-transform duration-200 group-hover:rotate-180"
                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
@@ -112,15 +115,15 @@
                     </div>
                 </div>
 
-                <a href="/activities"
-                    class="px-3 py-5 text-sm font-medium text-gray-900 hover:text-apple-blue transition-colors">News and
+                <a href="/activity"
+                    class="px-3 py-5 text-sm font-medium text-white hover:text-apple-dark transition-colors">News and
                     Activities</a>
                 <!-- Research & Publications (Dropdown) -->
                 <div class="relative group py-5">
                     <button
-                        class="flex items-center text-sm font-medium text-gray-900 group-hover:text-apple-blue transition-colors focus:outline-none">
+                        class="flex items-center text-sm font-medium text-white group-hover:text-apple-dark transition-colors focus:outline-none">
                         Research & Publications
-                        <svg class="ml-1 w-3 h-3 text-gray-500 group-hover:text-apple-blue transition-transform duration-200 group-hover:rotate-180"
+                        <svg class="ml-1 w-3 h-3 text-white group-hover:text-apple-dark transition-transform duration-200 group-hover:rotate-180"
                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
@@ -139,10 +142,10 @@
                     </div>
                 </div>
                 <a href="#online-learning"
-                    class="px-3 py-5 text-sm font-medium text-gray-900 hover:text-apple-blue transition-colors">Online
+                    class="px-3 py-5 text-sm font-medium text-white hover:text-apple-dark transition-colors">Online
                     Learning</a>
                 <a href="/library"
-                    class="px-3 py-5 text-sm font-medium text-gray-900 hover:text-apple-blue transition-colors">Library</a>
+                    class="px-3 py-5 text-sm font-medium text-white hover:text-apple-dark transition-colors">Library</a>
             </div>
 
             <div class="hidden md:flex items-center">

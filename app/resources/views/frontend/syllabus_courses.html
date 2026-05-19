@@ -1,0 +1,220 @@
+{% extends "frontend/layouts/base.html" %}
+
+{% block title %}Syllabus & Courses - UCSTGO{% endblock %}
+
+{% block styles %}
+<!-- Google Fonts: Plus Jakarta Sans for clean, modern geometry -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+    /* Premium font pairing targeting modern sans-serif & optimal Myanmar font rendering */
+    body, h1, h2, h3, h4, h5, h6, p, span, li, button, a {
+        font-family: 'Plus Jakarta Sans', 'Pyidaungsu', 'Noto Sans Myanmar', 'Myanmar3', sans-serif !important;
+    }
+
+    /* Standardized Smooth Accordion Transitions Like Google Search FAQ */
+    .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+        opacity: 0;
+    }
+    .accordion-content.open {
+        max-height: 1200px;
+        opacity: 1;
+    }
+
+    .animate-fade-in {
+        animation: fadeIn 0.3s ease-out;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(4px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section (Minimal Google Style) -->
+<section class="pt-36 pb-12 bg-white">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
+            Syllabus & Courses
+        </h1>
+        <p class="text-gray-500 max-w-2xl mx-auto text-base md:text-lg">
+            ရှာဖွေလိုသည့် ကဏ္ဍအလိုက် သင်ကြားပေးလျက်ရှိသော ဘာသာရပ်များနှင့် သင်ရိုးညွှန်းတမ်းများကို ရွေးချယ်ကြည့်ရှုနိုင်ပါသည်။
+        </p>
+
+        <!-- Google Styled Segmented Control Tab Switcher -->
+        <div class="flex justify-center mt-10">
+            <div class="inline-flex p-1 bg-gray-100 rounded-full border border-gray-200/60">
+                <button onclick="switchTab('faculties')" id="btn-faculties" class="px-6 py-2.5 rounded-full font-bold text-sm md:text-base transition-all bg-white text-gray-900 shadow-sm border border-gray-200/20">
+                    Courses by Faculties
+                </button>
+                <button onclick="switchTab('semester')" id="btn-semester" class="px-6 py-2.5 rounded-full font-bold text-sm md:text-base transition-all text-gray-500 hover:text-gray-900">
+                    Courses by Semester
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Course Syllabus Section -->
+<section id="syllabus-content" class="pb-28 bg-white">
+    <div class="max-w-4xl mx-auto px-6">
+
+        <!-- Section 1: Courses by Faculties -->
+        <div id="tab-faculties" class="block animate-fade-in border-t border-gray-200">
+            {% set faculties = [
+                {'id': 'f1', 'name': 'Department of Software Technology', 'subs': ['Software Engineering', 'Mobile Computing', 'Web Technologies']},
+                {'id': 'f2', 'name': 'Department of Hardware Technology', 'subs': ['Embedded Systems', 'Digital Logic', 'Computer Architecture']},
+                {'id': 'f3', 'name': 'Department of Information Science', 'subs': ['Data Mining', 'Machine Learning', 'Big Data Analytics']},
+                {'id': 'f4', 'name': 'Department of Application', 'subs': ['Natural Language Processing', 'Computer Graphics', 'Image Processing']},
+                {'id': 'f5', 'name': 'Department of Computational Mathematics', 'subs': ['Calculus', 'Discrete Mathematics', 'Linear Algebra']}
+            ] %}
+
+            {% for faculty in faculties %}
+            <div class="border-b border-gray-200">
+                <button onclick="toggleAccordion('{{ faculty.id }}')" class="w-full py-5 md:py-6 flex items-center justify-between bg-white hover:bg-gray-50/80 transition-colors text-left group">
+                    <span class="font-semibold text-gray-900 text-lg md:text-xl group-hover:text-blue-600 transition-colors pr-4">{{ faculty.name }}</span>
+                    <div class="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center bg-white text-gray-500 group-hover:text-blue-600 group-hover:border-blue-200 transition-all flex-shrink-0">
+                        <svg id="{{ faculty.id }}-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </button>
+
+                <div id="{{ faculty.id }}" class="accordion-content">
+                    <div class="pb-6 pt-2 space-y-3.5 pl-2">
+                        {% for sub in faculty.subs %}
+                        <div class="flex items-center text-base font-medium text-gray-600">
+                            <span class="w-1.5 h-1.5 bg-blue-600 rounded-full mr-3.5 flex-shrink-0"></span>
+                            <span>{{ sub }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Section 2: Courses by Semester (Combined Single Accordion Structure) -->
+        <div id="tab-semester" class="hidden animate-fade-in border-t border-gray-200">
+            {% set years = [
+                {'id': 'y1', 'name': 'First Year (CST)', 'hover_bg': 'hover:bg-blue-50/20', 'text_color': 'group-hover:text-blue-600', 'border_color': 'group-hover:border-blue-200', 's1': ['CST-1011 (Myanmar)', 'CST-1021 (English)', 'CST-1031 (Physics)', 'CST-1041 (Calculus I)'], 's2': ['CST-1012', 'CST-1042']},
+                {'id': 'y2cs', 'name': 'Second Year (CS)', 'hover_bg': 'hover:bg-emerald-50/20', 'text_color': 'group-hover:text-emerald-600', 'border_color': 'group-hover:border-emerald-200', 's1': ['CS-2011 (Java Programming)', 'CS-2021 (Database Systems)'], 's2': ['CS-2012', 'CS-2032']},
+                {'id': 'y2ct', 'name': 'Second Year (CT)', 'hover_bg': 'hover:bg-purple-50/20', 'text_color': 'group-hover:text-purple-600', 'border_color': 'group-hover:border-purple-200', 's1': ['CT-2011 (Electronic Circuits)', 'CT-2021 (Computer Logic & Organization)'], 's2': ['CT-2012', 'CT-2032']}
+            ] %}
+
+            {% for year in years %}
+            <!-- Single Year Accordion Row -->
+            <div class="border-b border-gray-200">
+                <button onclick="toggleAccordion('{{ year.id }}')" class="w-full py-5 md:py-6 flex items-center justify-between bg-white {{ year.hover_bg }} transition-colors text-left group">
+                    <span class="font-semibold text-gray-900 text-lg md:text-xl {{ year.text_color }} transition-colors pr-4">{{ year.name }}</span>
+                    <div class="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center bg-white text-gray-500 {{ year.text_color }} {{ year.border_color }} transition-all flex-shrink-0">
+                        <svg id="{{ year.id }}-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </button>
+
+                <!-- Inner Dashboard Layout displaying both Semesters inside one Accordion wrapper -->
+                <div id="{{ year.id }}" class="accordion-content">
+                    <div class="pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-8 px-2">
+
+                        <!-- First Semester Column Container -->
+                        <div class="space-y-4">
+                            <div class="inline-flex items-center px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold tracking-wide uppercase">
+                                First Semester
+                            </div>
+                            <div class="space-y-3 pt-1">
+                                {% for sub in year.s1 %}
+                                <div class="text-base font-medium text-gray-600 flex items-center">
+                                    <svg class="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                                    <span>{{ sub }}</span>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Second Semester Column Container -->
+                        <div class="space-y-4">
+                            <div class="inline-flex items-center px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-bold tracking-wide uppercase">
+                                Second Semester
+                            </div>
+                            <div class="space-y-3 pt-1">
+                                {% for sub in year.s2 %}
+                                <div class="text-base font-medium text-gray-600 flex items-center">
+                                    <svg class="w-4 h-4 text-indigo-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                                    <span>{{ sub }}</span>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+<!-- Back to Academic Portal Footer Section -->
+<section class="py-16 bg-gray-50 text-center border-t border-gray-200">
+    <a href="/academic" class="inline-flex items-center text-base font-bold text-gray-600 hover:text-blue-600 transition-colors group">
+        <svg class="w-5 h-5 mr-2.5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        Academic Portal သို့ ပြန်သွားရန်
+    </a>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Tab switching logic (Faculties vs Semesters)
+    function switchTab(tab) {
+        const facTab = document.getElementById('tab-faculties');
+        const semTab = document.getElementById('tab-semester');
+        const facBtn = document.getElementById('btn-faculties');
+        const semBtn = document.getElementById('btn-semester');
+
+        const activeClasses = ["bg-white", "text-gray-900", "shadow-sm", "border", "border-gray-200/20"];
+        const inactiveClasses = ["text-gray-500", "hover:text-gray-900"];
+
+        if (tab === 'faculties') {
+            facTab.classList.remove('hidden');
+            semTab.classList.add('hidden');
+
+            facBtn.classList.add(...activeClasses);
+            facBtn.classList.remove(...inactiveClasses);
+
+            semBtn.classList.remove(...activeClasses);
+            semBtn.classList.add(...inactiveClasses);
+        } else {
+            semTab.classList.remove('hidden');
+            facTab.classList.add('hidden');
+
+            semBtn.classList.add(...activeClasses);
+            semBtn.classList.remove(...inactiveClasses);
+
+            facBtn.classList.remove(...activeClasses);
+            facBtn.classList.add(...inactiveClasses);
+        }
+    }
+
+    // Dynamic Accordion Toggle
+    function toggleAccordion(id) {
+        const content = document.getElementById(id);
+        const icon = document.getElementById(id + '-icon');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            if(icon) icon.classList.remove('rotate-180');
+        } else {
+            content.classList.add('open');
+            if(icon) icon.classList.add('rotate-180');
+        }
+    }
+</script>
+{% endblock %}

@@ -10,6 +10,7 @@
 <!-- Split Hero Section -->
 <section id="hero" class="relative h-screen overflow-hidden scroll-animate">
 
+    <!-- Background Slider -->
     <div class="absolute inset-0 z-0" id="hero-slider">
         <div class="slide absolute inset-0 opacity-100 transition-opacity duration-1000 ease-in-out">
             <img src="{{ url_for('static', filename='frontend/image/s3.jpg') }}" class="h-full w-full object-cover brightness-[0.65]" alt="Slide 1">
@@ -23,41 +24,45 @@
         <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
             <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" class="h-full w-full object-cover brightness-[0.65]" alt="Slide 4">
         </div>
-        <div class="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent"></div>
+        <!-- Gradient overlay ကို ပိုပြီး balance ဖြစ်အောင် black/50 overlay ပြောင်းထားပါတယ် -->
+        <div class="absolute inset-0 bg-black/50"></div>
     </div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 h-full">
-        <div class="grid grid-cols-1 lg:grid-cols-2 h-full items-center">
-            <div class="text-left lg:pr-12">
-                <div class="mb-8 animate-fade-in-up">
-                    <span class="text-blue-400 font-bold tracking-widest uppercase text-xs mb-2 block">University of Computer Studies</span>
-                    <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight drop-shadow-2xl">
-                        UCSTGO
-                    </h1>
-                </div>
+    <!-- Content (Centered) -->
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 h-full flex items-center justify-center">
+        <div class="flex flex-col items-center text-center max-w-3xl">
 
-                <div class="mb-10 max-w-xl">
-                    <h2 class="text-3xl md:text-4xl font-light text-gray-100 mb-4 animate-fade-in-up delay-100">
-                        Welcome to the Future <br>
-                        <span class="font-bold text-white">of Technology.</span>
-                    </h2>
-                    <p class="text-lg text-gray-200 leading-relaxed animate-fade-in-up delay-200">
-                        We empower the next generation of innovators through cutting-edge research, world-class faculty, and a vibrant tech ecosystem.
-                    </p>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-300">
-                    <a href="/admission" class="px-8 py-4 bg-apple-blue text-white rounded-full font-semibold hover:bg-blue-600 transition-all shadow-xl text-center">
-                        Apply Now
-                    </a>
-                    <a href="#campus-activities" class="px-8 py-4 bg-white/10 backdrop-blur-md text-white border border-white/30 rounded-full font-semibold hover:bg-white/20 transition-all text-center">
-                        Explore Campus
-                    </a>
-                </div>
+            <!-- School Name Section -->
+            <div class="mb-6 animate-fade-in-up">
+                <span class="text-blue-400  font-bold tracking-widest uppercase text-3xl mb-3 block drop-shadow-md">
+                    University of Computer Studies
+                </span>
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight tracking-tight drop-shadow-2xl">
+                    UCSTGO
+                </h1>
             </div>
+
+            <!-- Welcome Message Section -->
+            <div class="mb-10">
+                <h2 class="text-3xl md:text-5xl font-light text-gray-100 mb-4 animate-fade-in-up delay-100 drop-shadow">
+                    Welcome to the Future <br>
+                    <span class="font-bold text-blue-400">of Technology.</span>
+                </h2>
+
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-center w-full animate-fade-in-up delay-300">
+
+                <a href="#campus-activities" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-semibold transition-all shadow-lg hover:shadow-blue-500/30 hover:-translate-y-0.5 text-center min-w-[180px]">
+                    Explore Campus
+                </a>
+            </div>
+
         </div>
     </div>
 
+    <!-- Slider Dots -->
     <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-3">
         <button onclick="goToSlide(0)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/20"></button>
         <button onclick="goToSlide(1)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/20"></button>
@@ -67,82 +72,127 @@
 </section>
 
 <!-- Welcome to Our University Section -->
-<section class="py-24 bg-apple-gray scroll-animate">
-    <div class="max-w-5xl mx-auto px-6 lg:px-8 space-y-6">
+<section class="py-20 pb-10 bg-slate-100 relative overflow-hidden">
+    <!-- Decorative Ambient Glows -->
+    <div class="absolute top-0 right-0 w-[30rem] h-[30rem] bg-blue-900/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
+    <div class="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-amber-500/5 rounded-full blur-3xl -ml-32 -mb-32"></div>
 
-        <!-- Top Main Card: Big Text -->
-        <div class="bg-white border border-gray-100 rounded-[2.5rem] p-8 md:p-14 shadow-xl shadow-gray-200/30 text-center card">
-            <span class="text-apple-blue font-bold tracking-widest uppercase text-xs mb-4 block">About Us</span>
-            <h2 class="text-3xl md:text-5xl font-extrabold text-apple-dark mb-8 tracking-tight">
-                Welcome to Our University
-            </h2>
-            <p class="text-base md:text-lg text-gray-500 leading-relaxed max-w-4xl mx-auto text-justify md:text-center font-light">
-                For the purpose of developing IT industry, human resource is the essential one to support our country’s socio-economic quickly. To fulfill this aim, University of Computer Studies(Taungoo) conducted Bachelor of Computer Science (B.C.Sc), Bachelor of Computer Technology (B.C.Tech), Master of Computer Science (M.C.Sc) and Master of Computer Technology (M.C.Tech) degrees programs. Our university is aimed to support the economics of regional people and requirements of government departments in Bago Region, Republic of the Union of Myanmar. To encourage the sophisticated and advanced innovative developments of economy and society of our country...
-            </p>
+    <!-- Container widened to max-w-7xl for maximum horizontal elegance -->
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+
+        <!-- Premium Ultra-Wide Card -->
+        <div class="bg-white border border-slate-100 rounded-[2.5rem] p-10 md:p-16 shadow-2xl shadow-slate-200/50 transition-all duration-300 hover:shadow-slate-300/70">
+
+            <!-- 1. Centered Title & Brand Badging -->
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <h2 class="text-3xl md:text-5xl font-black text-blue-600 leading-tight tracking-tight">
+                    Welcome to University of Computer Studies, Taungoo
+                </h2>
+                <div class="h-1.5 w-24 bg-amber-400 mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <!-- 2. Balanced Grid Content Split -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+
+                <!-- Left Hand Image Section (5 Columns Wide) -->
+                <div class="lg:col-span-5 w-full h-[350px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg border border-slate-100 relative group">
+                    <img src="{{ url_for('static', filename='frontend/image/s3.jpg') }}"
+                         alt="UCSTGO Campus"
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <!-- Image content ကို ပိုပြီး ပေါ်လွင်စေဖို့ subtle overlay လေး ခံထားပါတယ် -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
+                </div>
+
+                <!-- Right Hand In-Depth Overview (7 Columns Wide) -->
+                <div class="lg:col-span-7 flex flex-col h-full justify-between space-y-6">
+                    <div class="space-y-4">
+                        <p class="text-base md:text-lg text-slate-600 leading-relaxed text-justify font-normal first-letter:text-5xl first-letter:font-black first-letter:text-blue-900 first-letter:float-left first-letter:mr-3 first-letter:leading-none">
+                            For the purpose of developing IT industry, human resource is the essential one to support our country’s socio-economic quickly. To fulfill this aim, University of Computer Studies (Taungoo) conducted Bachelor of Computer Science (B.C.Sc), Bachelor of Computer Technology (B.C.Tech), Master of Computer Science (M.C.Sc) and Master of Computer Technology (M.C.Tech) degrees programs.
+                        </p>
+                        <p class="text-base md:text-lg text-slate-600 leading-relaxed text-justify font-normal">
+                            Our university is aimed to support the economics of regional people and requirements of government departments in Bago Region, Republic of the Union of Myanmar. To encourage the sophisticated and advanced innovative developments of economy and society of our country...
+                        </p>
+                    </div>
+
+                    <!-- CTA Action Row -->
+                    <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100 mt-auto">
+                        <span class="text-xs text-slate-400 font-medium">Empowering local tech since inception.</span>
+                        <a href="/about" class="inline-flex items-center gap-2 text-sm font-bold text-blue-900 hover:text-amber-500 transition-colors group">
+                            Read More About Us
+                            <span class="transform group-hover:translate-x-1.5 transition-transform duration-200">→</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
-
-        <!-- Bottom Row: 3 Connected Columns (Bento Grid) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-            <!-- Pillar 1: Innovation -->
-            <div class="bg-white border border-gray-100 rounded-[2rem] p-8 shadow-lg shadow-gray-200/20 text-center hover:border-apple-blue/20 transition-all group card card--pillar">
-                <div class="icon-circle group-hover:bg-apple-blue transition-colors duration-300">
-                    <i class="ti ti-bulb text-2xl text-apple-blue transition-all duration-300 ease-in-out group-hover:scale-125 group-hover:text-white"></i>
-                </div>
-                <h4 class="font-bold text-apple-dark text-lg mb-2">Community</h4>
-                <p class="text-sm text-gray-400 font-light leading-relaxed">Supporting regional socio-economic growth.</p>
-            </div>
-
-            <!-- Pillar 2: Community -->
-            <div class="bg-white border border-gray-100 rounded-[2rem] p-8 shadow-lg shadow-gray-200/20 text-center hover:border-apple-blue/20 transition-all group card card--pillar">
-                <div class="icon-circle group-hover:bg-apple-blue transition-colors duration-300">
-                    <i class="ti ti-users text-2xl text-apple-blue transition-all duration-300 ease-in-out group-hover:scale-125 group-hover:text-white"></i>
-                </div>
-                <h4 class="font-bold text-apple-dark text-lg mb-2">Community</h4>
-                <p class="text-sm text-gray-400 font-light leading-relaxed">Supporting regional socio-economic growth.</p>
-            </div>
-
-            <!-- Pillar 3: Excellence -->
-            <div class="bg-white border border-gray-100 rounded-[2rem] p-8 shadow-lg shadow-gray-200/20 text-center hover:border-apple-blue/20 transition-all group card card--pillar">
-                <div class="icon-circle group-hover:bg-apple-blue transition-colors duration-300">
-                    <i class="ti ti-medal text-2xl text-apple-blue transition-all duration-300 ease-in-out group-hover:scale-125 group-hover:text-white"></i>
-                </div>
-                <h4 class="font-bold text-apple-dark text-lg mb-2">Excellence</h4>
-                <p class="text-sm text-gray-400 font-light leading-relaxed">Fulfilling requirements of human resources.</p>
-            </div>
-
-        </div>
-
     </div>
 </section>
 
 <!-- Statistics Section -->
-<section class="py-20 bg-white border-b border-gray-100 scroll-animate">
+<section class="pt-10 pb-16 -mt-10 bg-blue-50 font-['Roboto']">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div class="p-4 group">
-                <p class="text-4xl md:text-5xl font-bold text-blue-500 count-up stats-number" data-target="2001">0</p>
-                <p class="text-sm text-blue-500 mt-2 uppercase tracking-wider font-semibold group-hover:text-apple-blue transition-colors stats-label">Established</p>
+
+            <!-- Card Item -->
+            <div class="p-6 rounded-3xl bg-white shadow-lg border border-blue-100 hover:shadow-2xl transition-all duration-300 group">
+                <div class="flex justify-center mb-4">
+                    <div class="p-4 rounded-2xl bg-blue-100 text-blue-600 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm1 9h-2v-2h2v2zm0-3h-2V7h2v2z"/>
+                        </svg>
+                    </div>
+                </div>
+                <p class="text-4xl md:text-5xl font-extrabold text-blue-900 count-up stats-number" data-target="2001">0</p>
+                <p class="text-sm text-blue-500 mt-2 uppercase tracking-widest font-bold">Established</p>
             </div>
-            <div class="p-4 group">
-                <p class="text-4xl md:text-5xl font-bold text-blue-500 count-up stats-number" data-target="120">0</p>
-                <p class="text-sm text-blue-500 mt-2 uppercase tracking-wider font-semibold group-hover:text-apple-blue transition-colors stats-label">Staff Members</p>
+
+            <!-- Card Item -->
+            <div class="p-6 rounded-3xl bg-white shadow-lg border border-blue-100 hover:shadow-2xl transition-all duration-300 group">
+                <div class="flex justify-center mb-4">
+                    <div class="p-4 rounded-2xl bg-blue-100 text-blue-600 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+                        </svg>
+                    </div>
+                </div>
+                <p class="text-4xl md:text-5xl font-extrabold text-blue-900 count-up stats-number" data-target="120">0</p>
+                <p class="text-sm text-blue-500 mt-2 uppercase tracking-widest font-bold">Staff Members</p>
             </div>
-            <div class="p-4 group">
-                <p class="text-4xl md:text-5xl font-bold text-blue-500 count-up stats-number" data-target="3500">0</p>
-                <p class="text-sm text-blue-500 mt-2 uppercase tracking-wider font-semibold group-hover:text-apple-blue transition-colors stats-label">Graduated</p>
+
+            <!-- Card Item -->
+            <div class="p-6 rounded-3xl bg-white shadow-lg border border-blue-100 hover:shadow-2xl transition-all duration-300 group">
+                <div class="flex justify-center mb-4">
+                    <div class="p-4 rounded-2xl bg-blue-100 text-blue-600 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                        </svg>
+                    </div>
+                </div>
+                <p class="text-4xl md:text-5xl font-extrabold text-blue-900 count-up stats-number" data-target="3500">0</p>
+                <p class="text-sm text-blue-500 mt-2 uppercase tracking-widest font-bold">Graduated</p>
             </div>
-            <div class="p-4 group">
-                <p class="text-4xl md:text-5xl font-bold text-blue-500 count-up stats-number" data-target="1200">0</p>
-                <p class="text-sm text-blue-500 mt-2 uppercase tracking-wider font-semibold group-hover:text-apple-blue transition-colors stats-label">Current Students</p>
+
+            <!-- Card Item -->
+            <div class="p-6 rounded-3xl bg-white shadow-lg border border-blue-100 hover:shadow-2xl transition-all duration-300 group">
+                <div class="flex justify-center mb-4">
+                    <div class="p-4 rounded-2xl bg-blue-100 text-blue-600 group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 1.34 5 8s1.34 3 8 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                        </svg>
+                    </div>
+                </div>
+                <p class="text-4xl md:text-5xl font-extrabold text-blue-900 count-up stats-number" data-target="1200">0</p>
+                <p class="text-sm text-blue-500 mt-2 uppercase tracking-widest font-bold">Current Students</p>
             </div>
+
         </div>
     </div>
 </section>
-
 <!-- Rector's Message Section -->
-<section class="py-24 bg-apple-gray scroll-animate">
-    <div class="max-w-6xl mx-auto px-6 lg:px-8">
+<section class="py-24 bg-apple-gray scroll-animate font-['Roboto'] bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="bg-white rounded-3xl p-8 md:p-16 shadow-xl flex flex-col md:flex-row items-center gap-12 card">
             <div class="md:w-1/3 flex-shrink-0">
                 <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" alt="Rector" class="w-64 h-80 object-cover rounded-2xl shadow-lg mx-auto md:mx-0  transition-all duration-500">
@@ -163,20 +213,21 @@
 </section>
 
 <!-- Campus Activities -->
-<section id="campus-activities" class="py-24 bg-apple-gray scroll-animate">
+<section id="campus-activities" class="py-24 bg-slate-100 scroll-animate">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl md:text-5xl font-bold text-apple-dark mb-4">News & Activities</h2>
-            <p class="text-xl text-gray-500">Highlights from our recent events and contests.</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="activity-card-container">
 
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">News & Activities</h2>
+            <div class="h-1.5 w-24 bg-blue-600 mx-auto mt-4 rounded-full shadow-sm"></div>
         </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="activity-card-container">
+            </div>
+
     </div>
 </section>
-
-<!-- Announcements -->
-<section class="bg-white py-12 border-t border-gray-200 scroll-animate">
+<!-- Republications -->
+<section class="bg-slate-50 py-12 border-t border-gray-200 scroll-animate">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="flex justify-between items-end mb-6">
             <h3 class="text-2xl font-semibold text-apple-dark">Research Publications</h3>
@@ -191,16 +242,16 @@
 </section>
 
 <!-- Campus Life Grid -->
-<section id="activities" class="py-24 bg-white scroll-animate">
+<section id="activities" class="py-24 bg-slate-100 scroll-animate">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="text-center mb-16">
             <h2 class="text-4xl md:text-5xl font-bold text-apple-dark mb-4">Campus Facilities</h2>
-            <p class="text-xl text-gray-500">A vibrant community focused on growth and discovery.</p>
+            <div class="h-1.5 w-24 bg-blue-600 mx-auto mt-4 rounded-full shadow-sm"></div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="group relative rounded-3xl overflow-hidden h-80 shadow-lg cursor-pointer">
-                <img src="https://picsum.photos/id/60/800/600" alt="Lab" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" alt="Lab" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
                     <div>
                         <h3 class="text-white text-2xl font-bold">Advanced Research Labs</h3>
@@ -209,7 +260,7 @@
                 </div>
             </div>
             <div class="group relative rounded-3xl overflow-hidden h-80 shadow-lg cursor-pointer">
-                <img src="https://picsum.photos/id/76/800/600" alt="Seminar" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <img src="{{ url_for('static', filename='frontend/image/s1.jpg') }}" alt="Seminar" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
                     <div>
                         <h3 class="text-white text-2xl font-bold">Global Seminars</h3>
@@ -218,7 +269,7 @@
                 </div>
             </div>
             <div class="group relative rounded-3xl overflow-hidden h-80 shadow-lg cursor-pointer">
-                <img src="https://picsum.photos/id/112/800/600" alt="Sports" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <img src="{{ url_for('static', filename='frontend/image/s2.jpg') }}" alt="Sports" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
                     <div>
                         <h3 class="text-white text-2xl font-bold">Student Athletics</h3>
@@ -227,7 +278,7 @@
                 </div>
             </div>
             <div class="group relative rounded-3xl overflow-hidden h-80 shadow-lg cursor-pointer">
-                <img src="https://picsum.photos/id/150/800/600" alt="Library" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <img src="{{ url_for('static', filename='frontend/image/s3.jpg') }}" alt="Library" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
                     <div>
                         <h3 class="text-white text-2xl font-bold">Digital Archive</h3>
@@ -240,22 +291,85 @@
 </section>
 
 <!-- University Location -->
-<section class="py-24 bg-apple-gray scroll-animate">
+    <section class="py-24 bg-apple-gray scroll-animate">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-apple-dark">University Location</h2>
-            <p class="text-gray-500 mt-2">Visit us in Taungoo, Bago Region.</p>
+
+        <!-- Section Title -->
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-apple-dark tracking-tight">Contact Us & Location</h2>
+            <div class="h-1.5 w-24 bg-blue-600 mx-auto mt-4 rounded-full shadow-sm"></div>
         </div>
-        <div class="rounded-3xl overflow-hidden shadow-xl border border-gray-200 h-[500px]">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3749.191428073539!2d96.42557437502476!3d18.967169955038475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c3db474813589b%3A0x7d2f9547d73010b!2sUniversity%20of%20Computer%20Studies%2C%20Taungoo!5e0!3m2!1sen!2smm!4v1715535000000!5m2!1sen!2smm"
-                width="100%"
-                height="100%"
-                style="border:0;"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">>
-            </iframe>
+
+        <!-- 2-Column Grid Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+
+            <!-- Left Side: Contact Information (5 Columns Wide) -->
+            <div class="lg:col-span-5 flex flex-col justify-between bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-gray-100">
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-2">University Information</h3>
+                    <p class="text-gray-500 text-sm mb-8">Feel free to contact us during office hours (9:00 AM - 4:00 PM).</p>
+
+                    <!-- Contact List -->
+                    <div class="space-y-6">
+                        <!-- Address -->
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-slate-900">Our Location</h4>
+                                <p class="text-sm text-gray-600 mt-1">University of Computer Studies, Taungoo, Bago Region, Myanmar.</p>
+                            </div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-slate-900">Phone Numbers</h4>
+                                <p class="text-sm text-gray-600 mt-1">
+                                    <a href="tel:+955424933" class="hover:text-blue-600 transition-colors">+95 54 24933</a>,
+                                    <a href="tel:+955424934" class="hover:text-blue-600 transition-colors"> +95 54 24934</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-slate-900">Email Address</h4>
+                                <p class="text-sm text-gray-600 mt-1">
+                                    <a href="mailto:info@ucstgo.edu.mm" class="hover:text-blue-600 transition-colors">info@ucstgo.edu.mm</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subtle Footer Text Inside Card -->
+                <div class="pt-6 border-t border-gray-100 mt-8 lg:mt-0">
+                    <p class="text-xs text-gray-400">University of Computer Studies, Taungoo (UCSTGO)</p>
+                </div>
+            </div>
+
+            <!-- Right Side: Google Map (7 Columns Wide) -->
+            <div class="lg:col-span-7 rounded-3xl overflow-hidden shadow-xl border border-gray-200 h-[450px] lg:h-auto min-h-[450px]">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3749.191428073539!2d96.42557437502476!3d18.967169955038475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c3db474813589b%3A0x7d2f9547d73010b!2sUniversity%20of%20Computer%20Studies%2C%20Taungoo!5e0!3m2!1sen!2smm!4v1715535000000!5m2!1sen!2smm"
+                    width="100%"
+                    height="100%"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
         </div>
     </div>
 </section>

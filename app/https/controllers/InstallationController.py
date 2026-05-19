@@ -69,7 +69,7 @@ class InstallationController:
     def setupApplication():
 
         data = request.get_json()
-
+        print("this is data : ",data)
         if os.getenv("APP_INSTALLED", "false") == "true":
             return jsonify({ "message" : "Application is already installed!" }), 403
 
@@ -81,7 +81,8 @@ class InstallationController:
             data["DB_PORT"],
             data["DB_NAME"],
             data["DB_USERNAME"],
-            data["DB_PASSWORD"]
+            data["DB_PASSWORD"],
+            data['DB_TYPE']
         ):
             return jsonify({"error": "Database connection failed"}), 500 
 

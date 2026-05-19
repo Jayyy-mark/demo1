@@ -269,15 +269,28 @@
 
                     </div>
 
-                    <div>
+                    <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
 
-                        <label class="mb-2 block text-sm font-semibold text-gray-700">
-                            Database Password
-                        </label>
+                        <div>
+                                <label class="mb-2 block text-sm font-semibold text-gray-700">
+                                Database Password
+                            </label>
 
-                        <input type="password" placeholder="********" name="DB_PASSWORD"
-                            class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-indigo-100">
+                            <input type="password" placeholder="********" name="DB_PASSWORD"
+                                class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-indigo-100">
 
+                        </div>
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold text-gray-700">
+                                Database Type
+                            </label>
+
+                            <select name="DB_TYPE" id=""  class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition 
+                                focus:border-primary focus:ring-4 focus:ring-indigo-100">
+                                <option value="mysql">Mysql</option>
+                                <option value="postgres">Postgres</option>
+                            </select>
+                        </div>                        
                     </div>
 
                     <div class="border-t border-gray-200 pt-6">
@@ -691,6 +704,7 @@
     }
 
     createBtn.addEventListener("click", async function () {
+        console.log("this is value : ", document.querySelector("select[name='DB_TYPE']").value);
         const data = await fetcher();
 
         console.log("data : ", data);
@@ -710,6 +724,7 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
+                DB_TYPE:document.querySelector("select[name='DB_TYPE']").value,
                 DB_HOST: document.querySelector("input[name='DB_HOST']").value.trim() || "localhost",
                 DB_PORT: document.querySelector("input[name='DB_PORT']").value.trim() || "3306",
                 DB_NAME: document.querySelector("input[name='DB_NAME']").value.trim(),

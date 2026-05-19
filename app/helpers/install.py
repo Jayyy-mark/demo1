@@ -47,29 +47,36 @@ def checkPythonVersion():
 
 
 def get_uri(data):
-    url = (
-        f"mysql+pymysql://{data['DB_USERNAME']}:{data['DB_PASSWORD']}"
-        f"@{data['DB_HOST']}:{data['DB_PORT']}/{data['DB_NAME']}"
-    )
+    print(data)
+    if data['DB_TYPE'].lower() == "mysql":
+        url = (
+            f"mysql+pymysql://{data['DB_USERNAME']}:{data['DB_PASSWORD']}"
+            f"@{data['DB_HOST']}:{data['DB_PORT']}/{data['DB_NAME']}"
+        )
+    else:
+        url = (
+            f"postgresql+psycopg2://{data['DB_USERNAME']}:{data['DB_PASSWORD']}"
+            f"@{data['DB_HOST']}:{data['DB_PORT']}/{data['DB_NAME']}"
+        )        
     return url
 
 
 def build_engine(data):
-    url = (
-        f"mysql+pymysql://{data['DB_USERNAME']}:{data['DB_PASSWORD']}"
-        f"@{data['DB_HOST']}:{data['DB_PORT']}/{data['DB_NAME']}"
-    )
+
+    url = get_uri(data)
+
     return create_engine(url)
 
 
-def test_db_connection(host, port, db_name, user, password):
+def test_db_connection(host, port, db_name, user, password, db_type):
     try:
         engine = build_engine({
             "DB_HOST": host,
             "DB_PORT": port,
             "DB_NAME": db_name,
             "DB_USERNAME": user,
-            "DB_PASSWORD": password
+            "DB_PASSWORD": password,
+            "DB_TYPE" : db_type
         })
         conn = engine.connect()
         conn.close()
@@ -106,19 +113,19 @@ def update_env(key, value, file_path=".env"):
 
 
 def restart_server():
-    # if hasattr(signal, "SIGHUP") and ("GUNICORN_CMD_ARGS" in os.environ or os.getppid() > 1):
-    #     master_pid = os.getppid()
-    #     os.kill(master_pid, signal.SIGHUP)
-    # else:
-    #     print("enter on else route!")
-    #     for entry_file in ['main.py', 'run.py', 'app.py', 'app/main.py', 'app/run.py', 'app/app.py']:
-    #         file_path = os.path.join(os.getcwd(), entry_file)
-    #         if os.path.exists(file_path):
-    #             os.utime(file_path, None)
-    #             break
+
     if "gunicorn" in os.environ.get("SERVER_SOFTWARE", "").lower():
         os.kill(os.getppid(), signal.SIGHUP)
         return
 
-    # Dev fallback
-    os.execv(sys.executable, [sys.executable] + sys.argv)
+    if hasattr(signal, "SIGHUP") and ("GUNICORN_CMD_ARGS" in os.environ or os.getppid() > 1):
+        master_pid = os.getppid()
+        os.kill(master_pid, signal.SIGHUP)
+    else:
+        print("enter on else route!")
+        for entry_file in ['main.py', 'run.py', 'app.py', 'app/main.py', 'app/run.py', 'app/app.py']:
+            file_path = os.path.join(os.getcwd(), entry_file)
+            if os.path.exists(file_path):
+                os.utime(file_path, None)
+                break
+

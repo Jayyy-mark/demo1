@@ -10,7 +10,7 @@ class User(db.Model):
     user_id = db.Column(db.String(50), unique=True, nullable=False)
     user_name = db.Column(db.String(50), unique=True, nullable=False)
     user_email = db.Column(db.String(150), unique=True, nullable=False)
-    user_password = db.Column(db.String(255), nullable=False)
+    user_password = db.Column(db.Text, nullable=False)
     user_role = db.Column(db.String(50), nullable=False)
     user_avatar = db.Column(db.String(255), nullable=False, server_default='3d-avatar-1.avif')
     
@@ -35,3 +35,28 @@ class User(db.Model):
             return user
 
         return None
+    
+    @staticmethod
+    def create_admin(email, password, username, role="super admin"):
+        # 1. Check if any user already exists
+        existing_users = User.query.first()
+
+        if existing_users:
+            return None  # or raise Exception("Users already exist")
+
+        # 2. Create first user
+        user = User(
+            user_id="USR-001",
+            user_name=username,
+            user_email=email,
+            user_role=role
+        )
+
+        user.set_password(password)
+
+        # 3. Save to DB
+        db.session.add(user)
+        db.session.commit()
+
+        return user
+

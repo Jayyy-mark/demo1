@@ -14,10 +14,10 @@ export const subjectUI = {
             const row = `
             <tr>
                 <td class="text-start py-3">${s.id}</td>
-                <td class="text-start py-3">${s.subject_code || 'N/A'}</td>
+                <td class="text-start py-3" style="width: 150px; white-space: nowrap;">${s.subject_code || 'N/A'}</td>
                 <td class="text-start py-3">${s.subject_name || 'N/A'}</td>
                 <td class="text-start py-3">${s.department?.department_name || 'N/A'}</td>
-                <td class="py-3 text-start">
+                <td class="py-3 text-start" style="width: 150px; white-space: nowrap;">
                     <div class="action-buttons s-flex justify-content-start ps-0">
                         <button class="btn btn-sm btn-info border rounded-5 show-update-modal-subject"
                         data-subjects='${JSON.stringify(s)}'                     
@@ -39,23 +39,23 @@ export const subjectUI = {
         dataTable.init("#dataTable-subject");
 
     },
-    fillUpdateForm(data){
+    fillUpdateForm(data) {
         const form = $("#dataForm-subject-update");
-        $.each(data, function(key, value){
+        $.each(data, function (key, value) {
             form.find(`[name=${key}]`).val(value);
         });
     },
     setDepartments(data, name, element) {
 
-        const options = data.map(item=>({
-            value:item.id,
-            label:item[name],
+        const options = data.map(item => ({
+            value: item.id,
+            label: item[name],
         }));
 
         new SearchableSelect(
             element,
             options
         );
-        
+
     },
 };

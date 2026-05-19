@@ -5,26 +5,26 @@ const tbody = $('#tbody');
 
 
 export const laboratoryUI = {
-    render(laboratories){
+    render(laboratories) {
         tbody.empty();
         if ($.fn.DataTable.isDataTable('#dataTable')) {
             $('#dataTable').DataTable().clear().destroy();
         }
 
-        if(laboratories.length == null){
+        if (laboratories.length == null) {
             tbody.append("<tr><td colspan='4'> No data avaliable </td></tr>");
         }
 
-        $(laboratories).each(function(index, l){
+        $(laboratories).each(function (index, l) {
             let year = l.date.split("-")[0];
 
 
-            const row =`
+            const row = `
             <tr>
                 <td class="py-3 text-start">${l.id}</td>
                 <td class="py-3 text-start">${l.laboratory_name}</td>
-                <td class="py-3 text-start">${l.category}</td>
-                <td class="py-3 text-start">${l.description}</td>
+                <td class="py-3 text-start">${l.category || "N/A"}</td>
+                <td class="py-3 text-start">${l.description || "N/A"}</td>
                 <td class="py-3 text-start"><a href="/assets/${l.filepath}">${l.filename}</a></td>
                 <td class="py-3 text-start">${year}</td>
                 <td class="py-3 text-start">
@@ -44,16 +44,16 @@ export const laboratoryUI = {
             </tr>            
             `;
             tbody.append(row);
-        }); 
-        
-        dataTable.init("#dataTable",{
+        });
+
+        dataTable.init("#dataTable", {
             pageLength: 10
         });
 
     },
-    fillUpdateForm(data){
+    fillUpdateForm(data) {
         const form = $("#dataForm-update");
-        $.each(data, function(key, value){
+        $.each(data, function (key, value) {
             form.find(`[name=${key}]`).val(value);
         });
     },

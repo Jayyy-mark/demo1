@@ -13,10 +13,6 @@ export const courseUI = {
         if ($.fn.DataTable.isDataTable('#dataTable')) {
             $('#dataTable').DataTable().clear().destroy();
         }
-        if(courses.length == 0 ){
-            tbody.append(`<tr><td colspan='7' class='text-center'> No data available </td></tr>`);
-            return;
-        }
 
         $.each(courses, function (index, c) {
             var row = `

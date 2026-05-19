@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!--=====================================
+    META & TITLE
+  ======================================-->
+    <title>{% block title %} {{ title }} {% endblock %}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="{{ description }}" />
+    <meta name="keywords" content="{{ keywords }}" />
+    <meta name="author" content="{{ author }}" />
+
+    <!--=====================================
+        FAVICON & BRAND
+    ======================================-->
+    <link rel="icon" href="{{ assets.favicon }}" type="image/x-icon" />
+
+    <!--=====================================
+        FONTS & ICONS
+    ======================================-->
+    {% for font in assets.vendor.fonts %}
+    <link rel="stylesheet" href="{{ font }}" />
+    {% endfor %}
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@1.74.0/icons-webfont/tabler-icons.min.css">
+
+    <!--=====================================
+        PAGE SEPCIFIC STYLE
+    ======================================-->
+    {% block style %}{% endblock %}
+
+</head>
+
+<body>
+
+
+
+    <!--==========================================
+    PRE-LOADER
+  ===========================================-->
+    {% include 'admin/layouts/others/loader.html' %}
+
+    <!--==========================================
+    MAIN-CONTENT BLOCK
+  ===========================================-->
+
+    {% block content %}
+
+    {% endblock %}
+
+
+    <!--==========================================
+    PAGE SPECIFIC SCRIPTS
+  ===========================================-->
+    {% block scripts %}{% endblock %}
+
+</body>
+
+</html>

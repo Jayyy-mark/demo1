@@ -19,47 +19,51 @@ from app.helpers.install import check_installation
 
 
 def create_app():
+    try:
+        installed = os.getenv("APP_INSTALLED", "false").lower() == "true"
 
-    installed = os.getenv("APP_INSTALLED", "false").lower() == "true"
+        app = Flask(__name__,template_folder="resources/views",static_folder="resources/assets")
+        CORS(app, supports_credentials=True)
+    
+        # =========================
+        # INSTALLATION GUARD
+        # =========================
 
-    app = Flask(__name__,template_folder="resources/views",static_folder="resources/assets")
-    CORS(app, supports_credentials=True)
-  
-    # =========================
-    # INSTALLATION GUARD
-    # =========================
-    app.before_request(check_installation)
+        app.before_request(check_installation)
 
-    # =========================
-    # USER AUTH MIDDLEWARE
-    # =========================
-    app.before_request(attach_user)
+        # =========================
+        # USER AUTH MIDDLEWARE
+        # =========================
+        app.before_request(attach_user)
 
-    #<!-- =================================================
-    #  APPLICATION CONFIGURATION (SECURITY+DATABASE) SETUP
-    #====================================================== -->
-    app.config.from_object(Config)
-    if not installed:
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:' 
-        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+        #<!-- =================================================
+        #  APPLICATION CONFIGURATION (SECURITY+DATABASE) SETUP
+        #====================================================== -->
+        app.config.from_object(Config)
+        if not installed:
+            app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:' 
+            app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    init_db(app)
+        init_db(app)
 
-    #<!-- =========================
-    #  JWT (JASON WEB TOKEN) SETUP
-    #========================== -->
-    jwt = JWTManager(app)
+        #<!-- =========================
+        #  JWT (JASON WEB TOKEN) SETUP
+        #========================== -->
+        jwt = JWTManager(app)
 
-    #<!-- =========================
-    #  APPLICATION INSFASTRUCTURE
-    #========================== -->
-    register_models()
-    setup_contexts(app)
-    register_api(app)
-    register_routes(app)
-    register_error_handlers(app)
+        #<!-- =========================
+        #  APPLICATION INSFASTRUCTURE
+        #========================== -->
+        register_models()
+        setup_contexts(app)
+        register_api(app)
+        register_routes(app)
+        register_error_handlers(app)
 
-    return app
+        return app
+    except Exception as e:
+        print("this is error : ", str(e))
+        raise(e)
 
 
 #<!-- ========================================

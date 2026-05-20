@@ -3,28 +3,6 @@ from datetime import timedelta
 from urllib.parse import quote_plus  # for db credentials which might include @, :, /, etc.
 
 
-def _build_database_uri():
-    database_url = os.getenv("DATABASE_URL")
-
-    # Ignore common placeholder URLs such as mysql://user:pass@host:port/db.
-    if database_url and ":port" not in database_url:
-        return database_url
-
-    db_username = os.getenv("DB_USERNAME")
-    db_password = quote_plus(os.getenv("DB_PASSWORD"))
-    db_name = os.getenv("DB_NAME")
-    db_host = os.getenv("DB_HOST")
-    db_port = os.getenv("DB_PORT")
-
-    return (
-        "mysql+pymysql://"
-        f"{quote_plus(db_username)}"
-        f":{db_password}"
-        f"@{db_host}:"
-        f"{db_port}/"
-        f"{db_name}"
-    )
-
 class Config:
 
     #<!--==================================
@@ -67,7 +45,7 @@ class Config:
     DB_HOST = os.getenv("DB_HOST")
     DB_PORT = os.getenv("DB_PORT")
 
-    SQLALCHEMY_DATABASE_URI = _build_database_uri()
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     

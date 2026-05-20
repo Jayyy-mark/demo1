@@ -1,4 +1,4 @@
-from flask import jsonify, render_template, session, request, current_app
+from flask import jsonify, render_template, session, request, current_app, redirect, url_for
 import platform, os
 from app.core.database import db
 from sqlalchemy import create_engine
@@ -69,7 +69,7 @@ class InstallationController:
     def setupApplication():
 
         data = request.get_json()
-        print("this is data : ",data)
+
         if os.getenv("APP_INSTALLED", "false") == "true":
             return jsonify({ "message" : "Application is already installed!" }), 403
 
@@ -105,6 +105,7 @@ class InstallationController:
                 upgrade()#flask db upgrade
 
 
+
             except Exception as e:
 
                 print("CRITICAL ERROR IN SETUP: ", str(e))
@@ -137,6 +138,9 @@ class InstallationController:
         update_env("DB_PASSWORD", data["DB_PASSWORD"])
         update_env("APP_INSTALLED", "true")
 
+        with open("app/logs/log.py", "a") as f:
+            f.write("\nprint('DB migrated')\n")
+
         return jsonify({
             "message": "Installation successful",
             "username" : user.user_name,
@@ -168,9 +172,7 @@ class InstallationController:
         if isInstalled:
             restart_server()
 
-        return jsonify({
-            "message" : "Application setup is complete and server is attempting to restart!"
-        })
+        return redirect(url_for('admin.login'))
     
 
     @staticmethod

@@ -21,7 +21,7 @@ from app.helpers.install import check_installation
 def create_app():
     try:
         installed = os.getenv("APP_INSTALLED", "false").lower() == "true"
-
+        print("app status : ", installed)
         app = Flask(__name__,template_folder="resources/views",static_folder="resources/assets")
         CORS(app, supports_credentials=True)
     
@@ -40,6 +40,7 @@ def create_app():
         #  APPLICATION CONFIGURATION (SECURITY+DATABASE) SETUP
         #====================================================== -->
         app.config.from_object(Config)
+        
         if not installed:
             app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:' 
             app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

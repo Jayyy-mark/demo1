@@ -28,13 +28,6 @@ class Config:
     JWT_COOKIE_SAMESITE = "Lax"
     JWT_COOKIE_CSRF_PROTECT = True
 
-
-    #<!--==================================
-    #   APPLICATION SESSION SETUP
-    #===================================-->
-    PERMANENT_SESSION_LIFETIME = timedelta(minutes=1)
-    SESSION_PERMANENT = True
-
     #<!--==================================
     #   APPLICATION DB SETUP
     #===================================-->

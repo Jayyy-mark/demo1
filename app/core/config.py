@@ -61,11 +61,11 @@ class Config:
     #   APPLICATION DB SETUP
     #===================================-->
     
-    DB_USERNAME = os.getenv("DB_USERNAME", "root")
-    DB_PASSWORD = os.getenv("DB_PASSWORD", "")
-    DB_NAME = os.getenv("DB_NAME", "sms")
-    DB_HOST = os.getenv("DB_HOST", "localhost")
-    DB_PORT = os.getenv("DB_PORT", "3306")
+    DB_USERNAME = os.getenv("DB_USERNAME")
+    DB_PASSWORD = os.getenv("DB_PASSWORD")
+    DB_NAME = os.getenv("DB_NAME")
+    DB_HOST = os.getenv("DB_HOST")
+    DB_PORT = os.getenv("DB_PORT")
 
     SQLALCHEMY_DATABASE_URI = _build_database_uri()
 

@@ -21,8 +21,9 @@ from app.helpers.install import check_installation
 def create_app():
     try:
         # installed = os.getenv("APP_INSTALLED", "false").lower() == "true"
-        # print("app status : ", installed)
+
         app = Flask(__name__,template_folder="resources/views",static_folder="resources/assets")
+
         CORS(app, supports_credentials=True)
     
         # =========================

@@ -1,6 +1,5 @@
 import os
 from datetime import timedelta
-from redis import Redis
 from urllib.parse import quote_plus  # for db credentials which might include @, :, /, etc.
 
 

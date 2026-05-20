@@ -29,7 +29,7 @@ def create_app():
         # INSTALLATION GUARD
         # =========================
 
-        app.before_request(check_installation)
+        # app.before_request(check_installation)
 
         # =========================
         # USER AUTH MIDDLEWARE

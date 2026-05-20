@@ -10,14 +10,11 @@ def _build_database_uri():
     if database_url and ":port" not in database_url:
         return database_url
 
-    db_username = os.getenv("DB_USERNAME", "root")
-    db_password = quote_plus(os.getenv("DB_PASSWORD", ""))
-    db_name = os.getenv("DB_NAME", "sms")
-    db_host = os.getenv("DB_HOST", "localhost")
-    db_port = os.getenv("DB_PORT", "3306")
-
-    if not str(db_port).isdigit():
-        db_port = "3306"
+    db_username = os.getenv("DB_USERNAME")
+    db_password = quote_plus(os.getenv("DB_PASSWORD"))
+    db_name = os.getenv("DB_NAME")
+    db_host = os.getenv("DB_HOST")
+    db_port = os.getenv("DB_PORT")
 
     return (
         "mysql+pymysql://"

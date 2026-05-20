@@ -1,7 +1,8 @@
-import sys, os, signal
+import sys, os, signal, platform
 from flask import request, redirect, url_for
 from sqlalchemy import create_engine
 from sqlalchemy.exc import OperationalError
+
 
 def check_installation():
 
@@ -23,14 +24,20 @@ def check_installation():
 
 
 
-def checkOsVersion(info):
-    
-    os_version = info.version
+def checkOsVersion():
+    os_name = platform.system()      # 'Windows', 'Linux'
+    os_version = platform.version()  # detailed version
+
     status = False
 
-    if int(info.version.split(".")[2]) >= 10:
-        status = True
-    
+    if os_name == "Windows":
+        parts = os_version.split(".")
+        if len(parts) >= 3:
+            try:
+                status = int(parts[2]) >= 10
+            except:
+                status = False
+
     return os_version, status
 
 

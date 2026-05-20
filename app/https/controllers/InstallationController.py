@@ -20,13 +20,11 @@ class InstallationController:
     @staticmethod
     def checkSystemRequirements():
 
-        info = platform.uname()
-
         #<!--=============================================
         #   GET OS & PYTHON VERSIONS
         #=============================================-->
 
-        os_version, isOsVersionPassed = checkOsVersion(info)
+        os_version, isOsVersionPassed = checkOsVersion()
         python_version, isPythonVersionPassed = checkPythonVersion()
 
 

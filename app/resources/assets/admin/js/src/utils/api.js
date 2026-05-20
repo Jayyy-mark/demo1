@@ -1,7 +1,7 @@
 import { errorUtils } from "../error/error.utils.js";
 
 const api = axios.create({
-    baseURL: "https://ucstaungoo.onrender.com/api",
+    baseURL: "https://ucstgo.up.railway.app/api",
     withCredentials: true
 });
 

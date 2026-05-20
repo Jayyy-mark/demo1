@@ -1,3 +1,3 @@
 export const api = axios.create({
-    baseURL: "https://ucstaungoo.onrender.com/api",
+    baseURL: "https://ucstgo.up.railway.app/api",
 });

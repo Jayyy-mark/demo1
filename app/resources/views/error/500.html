@@ -258,13 +258,14 @@
             // Generate a random error ID and timestamp
             const randomId = Math.random().toString(36).substring(2, 10).toUpperCase();
             document.getElementById('random-id').textContent = randomId;
-            
+            const error = "{{ error }}";
             const now = new Date();
             const timeString = now.toLocaleTimeString() + ' on ' + now.toLocaleDateString();
             document.getElementById('error-time').textContent = timeString;
             
             // Log error details (in a real app, this would be sent to your error tracking service)
             console.error('Server Error 500 occurred', {
+                "Error" : error,
                 errorId: `ERR-500-${randomId}`,
                 timestamp: now.toISOString(),
                 userAgent: navigator.userAgent,

@@ -1,7 +1,7 @@
 from . import install_bp
+from app.https.controllers.InstallationController import InstallationController
 
-from flask import render_template
-
+@install_bp.route("/", methods=['GET'], endpoint="setup")
 @install_bp.route("/check", methods=['GET'])
 def check_system_requirement():
-    return render_template("installation/system_requirements.html")
+    return InstallationController.checkSystemRequirements()

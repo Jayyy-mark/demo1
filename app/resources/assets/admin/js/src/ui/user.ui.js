@@ -11,7 +11,7 @@ const tbody = $('#tbody');
 export const userUI = {
     render(users) {
         tbody.empty();
-        
+
         $(users).each(function (index, d) {
             const row = `
             <tr>
@@ -38,25 +38,25 @@ export const userUI = {
         });
         dataTable.init("#dataTable");
     },
-    fillUpdateForm(data){
+    fillUpdateForm(data) {
         console.log("Filling update form with data: ", data);
         const form = $("#dataForm-update");
-        $.each(data, function(key, value){
+        $.each(data, function (key, value) {
 
-            if(key === "user_password"){
+            if (key === "user_password") {
                 form.find(`[name=${key}]`).val("");
                 return;
             }
 
-            if(key === "user_avatar"){
+            if (key === "user_avatar") {
                 console.log("avatar: %s", value);
-                form.find('#currentAvatar').attr("src", `/assets/images/avatar/${value}`);
+                form.find('#currentAvatar').attr("src", `/assets/admin/images/avatar/${value}`);
             }
 
             form.find(`[name=${key}]`).val(value);
         });
     },
-    setAvatar(element, modalId){
+    setAvatar(element, modalId) {
         console.log("Setting avatar with element: ", element);
         const avatarSrc = $(element).attr("src");
         $(`#${modalId}`).find("#currentAvatar").attr("src", avatarSrc);

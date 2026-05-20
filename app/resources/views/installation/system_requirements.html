@@ -1,86 +1,743 @@
-{% extends 'layouts/installation/base.html' %}
+{% extends 'installation/base.html' %}
 
-<!--============================
-    PAGE STYLE
-============================-->
+
 {% block style %}
+<!--===========================================
+    GOOGLE FONT - POPPINS (TEMPLATE FONT BASE)
+============================================-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+
+<!--=========================================================================
+   TAILWIND CSS CONFIGURATION (FONTS AND CSS) - NOT RECOMMENDED! , I USED
+
+   THIS STYLE ONLY FOR APPLICATION INSTALLION, 
+==========================================================================-->
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Poppins', 'sans-serif']
+                },
+                colors: {
+                    primary: {
+                        DEFAULT: '#4f46e5',
+                        hover: '#4338ca'
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+
+
 <style>
-    .custom-arrow{
-    position: relative;
-    background: white;
-}
-
-.custom-arrow::after{
-    content: "";
-    position: absolute;
-    top: 0;
-    right: -40px;
-
-    width: 0;
-    height: 0;
-
-    border-top: 40px solid transparent;
-    border-bottom: 40px solid transparent;
-    border-left: 40px solid #dee2e6;
-}
-
-.triangle {
-    width: 100px;
-    height: 100px;
-    background: transparent;
-    
-    clip-path: polygon(0 0, 100% 50%, 0 100%);
-}
+    /*SINCE I USE POPPINS FROM GOOGLE FONTS I ADDED POPPINS FOR FONT-FAMILY*/
+    body {
+        font-family: 'Poppins', sans-serif !important;
+    }
 </style>
 {% endblock %}
 
-<!--==========================
-    PAGE MAIN CONTENT
-===========================-->
 {% block content %}
-<div class="container vh-100 d-flex justify-content-center align-items-center">
+<div class="min-h-screen bg-gray-50 py-10 px-4 font-sans ">
 
-    <div class="card" style="width: 1000px; border: 1px solid gainsboro;">
+    <div class="mx-auto max-w-6xl border border-gray-300 rounded-2xl shadow-sm overflow-hidden">
 
-        <div class="card-body p-2">
-            <div class="row">
-                <svg width="120" height="120" viewBox="0 0 100 100">
-                    <polygon points="0,0 100,50 0,100"
-                            fill="transparent"
-                            stroke="black"
-                            stroke-width="1" />
-                </svg>
+        <!--==================================
+            STEPPER
+        ===================================-->
+        <nav aria-label="Progress" class="">
+
+            <ol id="stepper" class="overflow-hidden border-b  bg-white shadow-sm md:flex">
+
+            </ol>
+
+        </nav>
+
+        <!--==================================
+            CONTENT CARD
+        ===================================-->
+        <div class=" bg-white shadow-sm p-6">
+
+            <!--==================================
+                STEP 1
+            ===================================-->
+            <div id="step-1" class="step-content">
+
+                <div class="mb-8">
+
+                    <h1 class="text-2xl font-semibold text-gray-900 mb-3">
+                        System Requirements
+                    </h1>
+
+                </div>
+
+                <div class="overflow-hidden rounded-2xl border border-gray-200">
+
+                    <table class="min-w-full divide-y divide-gray-200">
+
+                        <thead class="bg-gray-50">
+
+                            <tr>
+
+                                <th
+                                    class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                                    Requirement
+                                </th>
+
+                                <th
+                                    class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                                    Required
+                                </th>
+
+                                <th
+                                    class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                                    Current
+                                </th>
+
+                                <th
+                                    class="px-6 py-4 text-center text-xs font-semibold uppercase tracking-wider text-gray-500">
+                                    Status
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody class="divide-y divide-gray-200 bg-white">
+
+                            <tr>
+
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900">
+                                    OS version (Window)
+                                </td>
+
+                                <td class="px-6 py-4 text-sm text-gray-500">
+                                    >= 10
+                                </td>
+
+                                <td class="px-6 py-4 text-sm text-gray-500">
+                                    {{ data.os_version }}
+                                </td>
+
+                                <td class="px-6 py-4 text-center">
+                                    {% if data.isOsVersionPassed %}
+                                    <!-- SUCCESS (check) -->
+                                    <span
+                                        class="inline-flex h-7 w-7 items-center justify-center rounded-full border border-green-600/30 bg-green-50 text-green-700">
+                                        <i class="ti ti-check text-lg font-bold"></i>
+                                    </span>
+                                    {% else %}
+                                    <!-- FAILED (x) -->
+                                    <span
+                                        class="inline-flex h-7 w-7 items-center justify-center rounded-full border border-red-600/30 bg-red-50 text-red-700">
+                                        <i class="ti ti-x text-lg font-bold"></i>
+                                    </span>
+                                    {% endif %}
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td class="px-6 py-4 text-sm font-medium text-gray-900">
+                                    Python version
+                                </td>
+
+                                <td class="px-6 py-4 text-sm text-gray-500">
+                                    >= 3.10
+                                </td>
+
+                                <td class="px-6 py-4 text-sm text-gray-500">
+                                    {{ data.python_version }}
+                                </td>
+
+                                <td class="px-6 py-4 text-center">
+
+                                    {% if data.isPythonVersionPassed %}
+                                    <!-- SUCCESS (check) -->
+                                    <span
+                                        class="inline-flex h-7 w-7 items-center justify-center rounded-full border border-green-600/30 bg-green-50 text-green-700">
+                                        <i class="ti ti-check text-lg font-bold"></i>
+                                    </span>
+                                    {% else %}
+                                    <!-- FAILED (x) -->
+                                    <span
+                                        class="inline-flex h-7 w-7 items-center justify-center rounded-full border border-red-600/30 bg-red-50 text-red-700">
+                                        <i class="ti ti-x text-lg font-bold"></i>
+                                    </span>
+                                    {% endif %}
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="mt-8 flex justify-end">
+
+                    <button onclick="nextStep()"
+                        class="rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-hover">
+
+                        Accept & Continue
+
+                    </button>
+
+                </div>
+
             </div>
 
-            <div class="row border mb-3 text-center rounded-1">
-                <div class="col border-end  py-4">column</div>
-                <div class="col border-end  py-4">                <svg width="120" height="120" viewBox="0 0 100 100">
-                    <polygon points="0,0 100,50 0,100"
-                            fill="transparent"
-                            stroke="black"
-                            stroke-width="1" />
-                </svg></div>
-                <div class="col  py-4">column</div>
+            <!--==================================
+                STEP 2
+            ===================================-->
+            <div id="step-2" class="step-content hidden">
+
+                <div class="mb-4">
+
+                    <h1 class="text-2xl text-gray-900">
+                        Database Setup
+                    </h1>
+
+
+                </div>
+
+                <div class="space-y-6" id="form_container">
+
+                    <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+
+                        <div>
+
+                            <label class="mb-2 block text-sm font-semibold text-gray-700">
+                                Database Host
+                            </label>
+
+                            <input type="text" placeholder="localhost" name="DB_HOST"
+                                class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-indigo-100">
+
+                        </div>
+
+                        <div>
+
+                            <label class="mb-2 block text-sm font-semibold text-gray-700">
+                                Database Port
+                            </label>
+
+                            <input type="text" placeholder="3306" name="DB_PORT"
+                                class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-indigo-100">
+
+                        </div>
+
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+
+                        <div>
+
+                            <label class="mb-2 block text-sm font-semibold text-gray-700">
+                                Database Name
+                            </label>
+
+                            <input type="text" placeholder="my_database" name="DB_NAME"
+                                class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-indigo-100">
+
+                        </div>
+
+                        <div>
+
+                            <label class="mb-2 block text-sm font-semibold text-gray-700">
+                                Database Username
+                            </label>
+
+                            <input type="text" placeholder="root" name="DB_USERNAME"
+                                class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-indigo-100">
+
+                        </div>
+
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+
+                        <div>
+                                <label class="mb-2 block text-sm font-semibold text-gray-700">
+                                Database Password
+                            </label>
+
+                            <input type="password" placeholder="********" name="DB_PASSWORD"
+                                class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-indigo-100">
+
+                        </div>
+                        <div>
+                            <label class="mb-2 block text-sm font-semibold text-gray-700">
+                                Database Type
+                            </label>
+
+                            <select name="DB_TYPE" id=""  class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition 
+                                focus:border-primary focus:ring-4 focus:ring-indigo-100">
+                                <option value="mysql">Mysql</option>
+                                <option value="postgres">Postgres</option>
+                            </select>
+                        </div>                        
+                    </div>
+
+                    <div class="border-t border-gray-200 pt-6">
+
+                        <h2 class="text-lg font-semibold text-gray-900">
+                            Administrator Account
+                        </h2>
+
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+
+                        <div>
+
+                            <label class="mb-2 block text-sm font-semibold text-gray-700">
+                                Username
+                            </label>
+
+                            <input type="text" placeholder="admin" name="username"
+                                class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-indigo-100">
+
+                        </div>
+
+                        <div>
+
+                            <label class="mb-2 block text-sm font-semibold text-gray-700">
+                                Email
+                            </label>
+
+                            <input type="text" placeholder="email..." name="email"
+                                class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-indigo-100">
+
+                        </div>
+
+                        <div>
+
+                            <label class="mb-2 block text-sm font-semibold text-gray-700">
+                                Password
+                            </label>
+
+                            <input type="password" placeholder="********" name="password"
+                                class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-indigo-100">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="mt-8 flex items-center justify-between">
+
+                    <button onclick="prevStep()" class="text-sm font-semibold text-gray-700 hover:text-black">
+
+                        Back
+
+                    </button>
+
+                    <button id="create_account"
+                        class="rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-hover">
+
+                        Create account
+
+                    </button>
+                    <button onclick="nextStep()" id="continue_btn"
+                        class="rounded-xl hidden bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-hover">
+
+                        Continue
+
+                    </button>
+
+                </div>
+
             </div>
 
-            <input type="text" class="form-control mb-3" placeholder="Database Name">
+            <!--==================================
+                STEP 3
+            ===================================-->
+            <div id="step-3" class="step-content hidden">
 
-            <input type="text" class="form-control mb-3" placeholder="Username">
+                <div class="mb-3">
 
-            <input type="password" class="form-control mb-4" placeholder="Password">
+                    <h1 class="text-2xl font-bold text-gray-900">
+                        Installation Status
+                    </h1>
 
-            <button class="btn btn-primary w-100">
-                Continue
-            </button>
+                    <p class="mt-2 text-sm text-gray-600">
+                        Review your installation details.
+                    </p>
+
+                </div>
+
+                <div class="rounded-2xl border border-green-200 bg-green-50 p-3">
+
+                    <div class="flex items-center">
+
+                        <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+
+                        </svg>
+
+                        <span class="ml-3 text-sm font-semibold text-green-800">
+                            Database connected successfully
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="mt-8 overflow-hidden rounded-2xl border border-gray-200">
+
+                    <dl class="divide-y divide-gray-200">
+
+                        <div class="grid grid-cols-3 px-3 py-3">
+
+                            <dt class="text-sm font-semibold text-gray-900">
+                                Connected DB
+                            </dt>
+
+                            <dd class="col-span-2 text-sm text-gray-600" id="created_database">
+
+                            </dd>
+
+                        </div>
+
+                        <div class="grid grid-cols-3 px-3 py-3">
+
+                            <dt class="text-sm font-semibold text-gray-900">
+                                Username
+                            </dt>
+
+                            <dd class="col-span-2 text-sm text-gray-600" id="created_username">
+
+                            </dd>
+
+                        </div>
+
+                        <div class="grid grid-cols-3 px-3 py-3">
+
+                            <dt class="text-sm font-semibold text-gray-900">
+                                Email
+                            </dt>
+
+                            <dd class="col-span-2">
+
+                                <code
+                                    class="rounded-lg border border-yellow-200 bg-yellow-50 px-3 py-2 text-sm font-semibold text-yellow-800"
+                                    id="created_email">
+
+
+                                </code>
+
+                            </dd>
+
+                        </div>
+
+                    </dl>
+
+                </div>
+
+                <div class="mt-8 flex items-center justify-between">
+
+                    <button onclick="prevStep()" class="text-sm font-semibold text-gray-700 hover:text-black">
+
+                        Back
+
+                    </button>
+
+                    <button onclick="nextStep()"
+                        class="rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-hover">
+
+                        Finalize Installation
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!--==================================
+                STEP 4
+            ===================================-->
+            <div id="step-4" class="step-content hidden">
+
+                <div class="py-10 text-center">
+
+                    <div class="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-green-100">
+
+                        <svg class="h-12 w-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+
+                        </svg>
+
+                    </div>
+
+                    <h1 class="mt-8 text-4xl font-bold tracking-tight text-gray-900">
+                        Installation Complete
+                    </h1>
+
+                    <p class="mx-auto mt-4 max-w-2xl text-base text-gray-600">
+                        Your application is now ready to use.
+                    </p>
+
+                </div>
+                <div class="mt-8 flex items-center justify-between">
+
+                    <button onclick="prevStep()" class="text-sm font-semibold text-gray-700 hover:text-black">
+
+                        Back
+
+                    </button>
+
+                    <button
+                        class="rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-hover">
+
+                        <a href="{{ url_for('installation_api.finish') }}">Login</a>
+
+                    </button>
+
+                </div>
+            </div>
 
         </div>
 
-        <div class="card-footer bg-gray-200">
-            <button class="btn btn-sm btn-primary float-end">
-                Next
-            </button>
-        </div>
     </div>
 
 </div>
+{% endblock %}
+
+{% block scripts %}
+<!--==================================
+    JAVASCRIPT
+===================================-->
+<script>
+
+    const steps = [
+        "Requirements",
+        "Database",
+        "Status",
+        "Success"
+    ];
+
+    let currentStep = Number("{{ session.get('current_step', 1) }}");
+
+    function renderStepper() {
+
+        const stepper = document.getElementById("stepper");
+
+        stepper.innerHTML = "";
+
+        steps.forEach((step, index) => {
+
+            const stepNumber = index + 1;
+
+            let content = "";
+
+            // COMPLETED
+            if (currentStep > stepNumber) {
+
+                content = `
+                    <div class="flex h-11 w-11 items-center justify-center rounded-full bg-primary shrink-0">
+
+                        <svg class="h-5 w-5 text-white"
+                             fill="none"
+                             stroke="currentColor"
+                             viewBox="0 0 24 24">
+
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M5 13l4 4L19 7" />
+
+                        </svg>
+
+                    </div>
+
+                    <span class="ml-4 text-sm font-semibold text-gray-900">
+                        ${step}
+                    </span>
+                `;
+            }
+
+            // ACTIVE
+            else if (currentStep === stepNumber) {
+
+                content = `
+                    <div class="flex h-11 w-11 items-center justify-center rounded-full border-2 border-primary shrink-0">
+
+                        <span class="text-sm font-bold text-primary">
+                            0${stepNumber}
+                        </span>
+
+                    </div>
+
+                    <span class="ml-4 text-sm font-semibold text-primary">
+                        ${step}
+                    </span>
+                `;
+            }
+
+            // PENDING
+            else {
+
+                content = `
+                    <div class="flex h-11 w-11 items-center justify-center rounded-full border-2 border-gray-300 shrink-0">
+
+                        <span class="text-sm font-semibold text-gray-400">
+                            0${stepNumber}
+                        </span>
+
+                    </div>
+
+                    <span class="ml-4 text-sm font-medium text-gray-400">
+                        ${step}
+                    </span>
+                `;
+            }
+
+            stepper.innerHTML += `
+                <li class="relative md:flex-1">
+
+                    <div class="flex items-center px-4 py-3">
+                        ${content}
+                    </div>
+
+                    ${stepNumber !== steps.length ? `
+                    <div class="absolute right-0 top-0 hidden h-full w-5 md:block">
+
+                        <svg class="h-full w-full text-gray-200"
+                             viewBox="0 0 22 80"
+                             fill="none"
+                             preserveAspectRatio="none">
+
+                            <path d="M0 -2L20 40L0 82"
+                                  vector-effect="non-scaling-stroke"
+                                  stroke="currentColor"
+                                  stroke-linejoin="round" />
+
+                        </svg>
+
+                    </div>
+                    ` : ''}
+
+                </li>
+            `;
+        });
+    }
+
+    function showStep(step) {
+
+        document.querySelectorAll(".step-content")
+            .forEach(el => el.classList.add("hidden"));
+
+        document.getElementById(`step-${step}`)
+            .classList.remove("hidden");
+
+        renderStepper();
+    }
+
+    async function nextStep() {
+
+        if (currentStep < steps.length) {
+
+            currentStep++;
+            await saveStep(currentStep);
+            showStep(currentStep);
+        }
+    }
+
+    async function prevStep() {
+
+        if (currentStep > 1) {
+
+            currentStep--;
+            await saveStep(currentStep);
+            showStep(currentStep);
+        }
+    }
+
+    async function saveStep(step) {
+
+        await fetch("/api/installation/update-step", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                step: step
+            })
+        });
+    }
+
+    showStep(currentStep);
+
+
+    //<!--========================== 
+    //    CREATE ACCOUNT
+    //============================-->
+    const isInstalled = "{{ isAppinstalled }}" === "true";
+
+    console.log(isInstalled);
+
+    const createBtn = document.querySelector("#create_account");
+    const continueBtn = document.querySelector("#continue_btn");
+
+    if (isInstalled) {
+        console.log("app is installed!");
+        createBtn.classList.add("hidden");
+        continueBtn.classList.remove("hidden");
+    }
+
+    createBtn.addEventListener("click", async function () {
+        console.log("this is value : ", document.querySelector("select[name='DB_TYPE']").value);
+        const data = await fetcher();
+
+        console.log("data : ", data);
+        document.querySelector("#created_database").innerText = data.db_name
+        document.querySelector("#created_username").innerText = data.username
+        document.querySelector("#created_email").innerText = data.email
+
+        createBtn.classList.add("hidden");
+        continueBtn.classList.remove("hidden");
+
+    })
+
+    const fetcher = async () => {
+        const res = await fetch("/api/installation/setup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                DB_TYPE:document.querySelector("select[name='DB_TYPE']").value,
+                DB_HOST: document.querySelector("input[name='DB_HOST']").value.trim() || "localhost",
+                DB_PORT: document.querySelector("input[name='DB_PORT']").value.trim() || "3306",
+                DB_NAME: document.querySelector("input[name='DB_NAME']").value.trim(),
+                DB_USERNAME: document.querySelector("input[name='DB_USERNAME']").value.trim() || "root",
+                DB_PASSWORD: document.querySelector("input[name='DB_PASSWORD']").value.trim() || "root",
+                email: document.querySelector("input[name='email']").value.trim() || "admin@test.com",
+                password: document.querySelector("input[name='password']").value.trim() || "123456",
+                username: document.querySelector("input[name='username']").value.trim() || "admin"
+            })
+        });
+
+        const data = await res.json();
+        return data;
+    };
+</script>
 {% endblock %}

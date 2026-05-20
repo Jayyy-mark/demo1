@@ -34,7 +34,7 @@ class User(db.Model):
         if user and user.check_password(password):
             return user
 
-        return None
+        return user
     
     @staticmethod
     def create_admin(email, password, username, role="super admin"):

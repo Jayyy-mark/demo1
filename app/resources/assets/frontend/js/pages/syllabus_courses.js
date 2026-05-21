@@ -23,7 +23,7 @@ const UI = {
                     <button onclick="toggleAccordion('${element.department?.id}')" class="w-full py-5 md:py-6 flex items-center justify-between bg-white hover:bg-gray-50/80 transition-colors text-left group">
                         <span class="font-semibold text-gray-900 text-lg md:text-xl group-hover:text-blue-600 transition-colors pr-4">${element.department?.department_name}</span>
                         <div class="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center bg-white text-gray-500 group-hover:text-blue-600 group-hover:border-blue-200 transition-all flex-shrink-0">
-                            <svg id="${element.department?.id}-department" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg id="${element.department?.id}-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
                         </div>
                     </button>
 
@@ -78,7 +78,7 @@ const UI = {
                 <button onclick="toggleAccordion('${element.year?.id}')" class="w-full py-5 md:py-6 flex items-center justify-between bg-white transition-colors text-left group">
                     <span class="font-semibold text-gray-900 text-lg md:text-xl transition-colors pr-4">${element.year?.year_name}</span>
                     <div class="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center bg-white text-gray-500 transition-all flex-shrink-0">
-                        <svg id="${element.year?.id}-semester" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                        <svg id="${element.year?.id}-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
                     </div>
                 </button>
 

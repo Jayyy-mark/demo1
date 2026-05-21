@@ -5,182 +5,161 @@
 {% block content %}
 
 <!-- Modern Gradient Hero -->
-<section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 pt-36 pb-28">
 
-    <!-- Background Glow -->
-    <div class="absolute top-0 left-0 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-0 right-0 w-96 h-96 bg-cyan-400/10 rounded-full blur-3xl"></div>
+<section class="relative overflow-hidden pt-36 pb-20 z-0"
+         style="background: linear-gradient(135deg, #042f2e 0%, #0891b2 50%, #0f172a 100%) !important;">
+
+    <!-- Background Glow အလင်းစက်များ -->
+    <div class="absolute top-0 left-0 w-96 h-96 bg-emerald-400/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl"></div>
 
     <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
-
         <div class="text-center">
-            <span class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-sm tracking-widest uppercase font-semibold backdrop-blur-md mb-6">
+
+            <!-- Badge လေးကို အရောင်တွဲဖက်ပေးထားပါသည် -->
+            <span class="inline-flex items-center px-4 py-2 rounded-full border text-sm tracking-widest uppercase font-semibold backdrop-blur-md mb-4"
+                  style="background-color: rgba(20, 184, 166, 0.1) !important; border-color: rgba(20, 184, 166, 0.3) !important; color: #5eead4 !important;">
                 Department Information
             </span>
 
-            <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6">
+            <!-- စာသားအဖြူရောင် ထင်ထင်ရှားရှား ပေါ်စေရန် -->
+            <h1 class="text-3xl md:text-5xl font-extrabold leading-tight max-w-5xl mx-auto drop-shadow-sm"
+                style="color: #ffffff !important;">
                 {{ department.name }}
             </h1>
 
-
-            <!-- Decorative Button -->
-<!--            <div class="mt-10">-->
-<!--                <a href="#details"-->
-<!--                   class="inline-flex items-center px-8 py-4 rounded-full bg-white text-slate-900 font-semibold shadow-xl hover:scale-105 transition duration-300">-->
-<!--                    Explore Details-->
-<!--                </a>-->
-<!--            </div>-->
         </div>
-
     </div>
 </section>
 
 <!-- Vision & Mission Cards -->
 <section id="details" class="py-24 bg-slate-50">
-
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
-        <!-- English Section -->
-        <div class="mb-24">
-
+        <!-- ==================== English Section ==================== -->
+        <div class="mb-28">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-slate-900 mb-4">
-                    Vision & Mission
-                </h2>
-                <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+                <h2 class="text-4xl font-bold text-slate-900 mb-4 tracking-tight">Vision & Mission</h2>
+                <div class="w-10 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <!-- h-full နှင့် items-stretch ကြောင့် Card နှစ်ခု အမြင့် အမြဲတမ်းတူနေမည်ဖြစ်သည် -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch [perspective:1000px]">
 
                 <!-- Vision Card -->
-                <div class="group bg-white rounded-3xl p-10 shadow-lg hover:shadow-2xl transition duration-500 border border-gray-100">
-
-                    <div class="flex items-center mb-8">
-                        <div class="w-16 h-16 rounded-2xl bg-blue-100 flex items-center justify-center group-hover:rotate-6 transition duration-500">
+                <div class="group bg-white rounded-3xl p-10 flex flex-col h-full transform transition-all duration-500 ease-out shadow-[0_10px_30px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12),0_10px_25px_-5px_rgba(59,130,246,0.05)]">
+                    <div class="flex items-center mb-8 flex-shrink-0">
+                        <div class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center group-hover:scale-110 transition duration-500">
                             <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                             </svg>
                         </div>
-
-                        <h3 class="ml-5 text-3xl font-bold text-slate-900">
-                            Vision
-                        </h3>
+                        <h3 class="ml-5 text-2xl font-bold text-slate-900">Vision</h3>
                     </div>
-
-                    <p class="text-gray-600 leading-relaxed text-lg">
-                        {{ department.vision }}
-                    </p>
-
+                    <div class="flex-grow">
+                        <p class="text-gray-600 leading-relaxed text-base md:text-lg text-justify">
+                            {{ department.vision }}
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Mission Card -->
-                <div class="group bg-white rounded-3xl p-10 shadow-lg hover:shadow-2xl transition duration-500 border border-gray-100">
-
-                    <div class="flex items-center mb-8">
-                        <div class="w-16 h-16 rounded-2xl bg-cyan-100 flex items-center justify-center group-hover:rotate-6 transition duration-500">
+                <div class="group bg-white rounded-3xl p-10 flex flex-col h-full transform transition-all duration-500 ease-out shadow-[0_10px_30px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12),0_10px_25px_-5px_rgba(6,182,212,0.05)]">
+                    <div class="flex items-center mb-8 flex-shrink-0">
+                        <div class="w-16 h-16 rounded-2xl bg-cyan-50 flex items-center justify-center group-hover:scale-110 transition duration-500">
                             <svg class="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M12 6v6l4 2"/>
-                                <circle cx="12" cy="12" r="9" stroke-width="2"></circle>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                             </svg>
                         </div>
-
-                        <h3 class="ml-5 text-3xl font-bold text-slate-900">
-                            Mission
-                        </h3>
+                        <h3 class="ml-5 text-2xl font-bold text-slate-900">Mission</h3>
                     </div>
 
-                    <p class="text-gray-600 leading-relaxed text-lg">
-                        {{ department.mission }}
-                    </p>
-
+                    <div class="flex-grow">
+                        {% if department.mission is string %}
+                            <p class="text-gray-600 leading-relaxed text-base md:text-lg text-justify">{{ department.mission }}</p>
+                        {% else %}
+                            <ol class="space-y-4 text-gray-600 list-none">
+                                {% for point in department.mission %}
+                                    <li class="flex items-start text-justify text-base md:text-lg">
+                                        <span class="flex-shrink-0 w-7 h-7 rounded-full bg-cyan-50 text-cyan-600 flex items-center justify-center text-sm font-bold font-mono mr-3.5 mt-0.5">{{ loop.index }}</span>
+                                        <span class="flex-1">{{ point }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ol>
+                        {% endif %}
+                    </div>
                 </div>
-
             </div>
         </div>
-
-        <!-- Myanmar Section -->
+        <br>
+        <!-- ==================== Myanmar Section ==================== -->
         <div>
-
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-slate-900 mb-4">
-                    မြန်မာဘာသာ
-                </h2>
-                <div class="w-24 h-1 bg-cyan-500 mx-auto rounded-full"></div>
+                <h2 class="text-4xl font-bold text-slate-900 mb-4 tracking-tight">မျှော်မှန်းချက်နှင့် ရည်မှန်းချက်</h2>
+                <div class="w-10 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <!-- h-full နှင့် items-stretch ကြောင့် မြန်မာစာ Card နှစ်ခုပါ အမြင့်တူသွားပါမည် -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch [perspective:1000px]">
 
                 <!-- Myanmar Vision -->
-                <div class="group bg-gradient-to-br from-white to-blue-50 rounded-3xl p-10 shadow-lg hover:shadow-2xl transition duration-500 border border-blue-100">
-
-                    <div class="flex items-center mb-8">
-                        <div class="w-16 h-16 rounded-2xl bg-blue-500 flex items-center justify-center text-white text-2xl font-bold">
+                <div class="group bg-white rounded-3xl p-10 flex flex-col h-full transform transition-all duration-500 ease-out shadow-[0_10px_30px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12),0_10px_25px_-5px_rgba(16,185,129,0.05)]">
+                    <div class="flex items-center mb-8 flex-shrink-0">
+                        <div class="w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 text-xl font-bold group-hover:scale-110 transition duration-500">
                             မ
                         </div>
-
-                        <h3 class="ml-5 text-3xl font-bold text-slate-900">
-                            မျှော်မှန်းချက်
-                        </h3>
+                        <h3 class="ml-5 text-2xl font-bold text-slate-900">မျှော်မှန်းချက် (Vision)</h3>
                     </div>
-
-                    <p class="text-gray-700 leading-relaxed text-lg">
-                        {{ department.vision_mm }}
-                    </p>
-
+                    <div class="flex-grow">
+                        <p class="text-gray-600 leading-relaxed text-base md:text-lg text-justify font-padauk">
+                            {{ department.vision_mm }}
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Myanmar Mission -->
-                <div class="group bg-gradient-to-br from-white to-cyan-50 rounded-3xl p-10 shadow-lg hover:shadow-2xl transition duration-500 border border-cyan-100">
-
-                    <div class="flex items-center mb-8">
-                        <div class="w-16 h-16 rounded-2xl bg-cyan-500 flex items-center justify-center text-white text-2xl font-bold">
+                <div class="group bg-white rounded-3xl p-10 flex flex-col h-full transform transition-all duration-500 ease-out shadow-[0_10px_30px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12),0_10px_25px_-5px_rgba(245,158,11,0.05)]">
+                    <div class="flex items-center mb-8 flex-shrink-0">
+                        <div class="w-16 h-16 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-600 text-xl font-bold group-hover:scale-110 transition duration-500">
                             ရ
                         </div>
-
-                        <h3 class="ml-5 text-3xl font-bold text-slate-900">
-                            ရည်မှန်းချက်
-                        </h3>
+                        <h3 class="ml-5 text-2xl font-bold text-slate-900">ရည်မှန်းချက် (Mission)</h3>
                     </div>
 
-                    <p class="text-gray-700 leading-relaxed text-lg">
-                        {{ department.mission_mm }}
-                    </p>
-
+                    <div class="flex-grow">
+                        {% if department.mission_mm is string %}
+                            <p class="text-gray-600 leading-relaxed text-base md:text-lg text-justify font-padauk">{{ department.mission_mm }}</p>
+                        {% else %}
+                            <ol class="space-y-4 text-gray-600 list-none">
+                                {% for point in department.mission_mm %}
+                                    <li class="flex items-start text-justify text-base md:text-lg font-padauk">
+                                        <span class="flex-shrink-0 w-7 h-7 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-sm font-bold mr-3.5 mt-0.5">{{ loop.index }}</span>
+                                        <span class="flex-1 leading-relaxed">{{ point }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ol>
+                        {% endif %}
+                    </div>
                 </div>
-
             </div>
-
         </div>
 
     </div>
 </section>
 
 <!-- Bottom CTA -->
-<section class="py-20 bg-slate-900 text-center">
-
-    <h2 class="text-4xl font-bold text-white mb-6">
-        Discover More Departments
-    </h2>
-
-    <p class="text-gray-400 max-w-2xl mx-auto mb-10 text-lg">
-        Learn more about academic programs, research activities, and educational opportunities at our university.
-    </p>
-
-    <a href="/"
-       class="inline-flex items-center px-8 py-4 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition duration-300 shadow-lg">
-        Back to Home
-    </a>
-
+<section class="py-20 bg-slate-900 text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.08)_0,transparent_70%)]"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Discover More Departments</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto mb-10 text-base md:text-lg">
+            Learn more about academic programs, research activities, and educational opportunities at our university.
+        </p>
+        <a href="/" class="inline-flex items-center px-8 py-4 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition duration-300 shadow-lg shadow-blue-600/20 transform hover:-translate-y-0.5">
+            Back to Home
+        </a>
+    </div>
 </section>
 
 {% endblock %}

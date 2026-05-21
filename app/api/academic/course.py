@@ -37,7 +37,7 @@ def deleteCourse():
 #<-=========================================
 #           HELPER API
 #=========================================-->
-@academic_api.route("/course/subject", methods=['GET'])
+@academic_api.route("/course/subjects", methods=['GET'])
 @jwt_required()
 def allSubjects():
     return CourseController.getSubjects()

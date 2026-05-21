@@ -4,18 +4,12 @@ from app.models.SubjectModel import Subject
 from app.schemas.department import DepartmentSchema
 from app.models.CourseModel import Course
 from app.models.DepartmentModel import Department
-from app.core.database import db
 from app.schemas.academic import SubjectSchema
 class CourseHelper:
 
     def getSubjects():
-        used_subject_ids = db.session.query(Course.subject_id)
-
-        subjects = Subject.query.filter(
-            ~Subject.id.in_(used_subject_ids)
-        ).all()
-
-        return SubjectSchema(many=True).dump(subjects)
+        subjects =  Subject.query.group_by(Subject.subject_name)
+        return SubjectSchema().dump(subjects, many=True)
     
     def getDepartments():
         departments = Department.query.all()
@@ -34,9 +28,8 @@ class CourseHelper:
         return ' '.join(name.split()).replace("( ", "(").replace(" )", ")")
 
     
-    def checkSemester(id):
-        print("this is id")
-        res = Course.query.filter_by(semester_id=id).first()
+    def checkSemester(name):
+        res = Course.query.join(Semester).filter(Semester.semester_term==name).first()
         print(res)
         if res is None:
             print("Result is None")

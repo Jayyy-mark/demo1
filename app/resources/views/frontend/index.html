@@ -10,78 +10,34 @@
 <!-- Split Hero Section -->
 <section id="hero" class="relative h-screen overflow-hidden scroll-animate">
 
-    <!-- Background Slider -->
     <div class="absolute inset-0 z-0" id="hero-slider">
         <div class="slide absolute inset-0 opacity-100 transition-opacity duration-1000 ease-in-out">
-            <img src="{{ url_for('static', filename='frontend/image/s3.jpg') }}" class="h-full w-full object-cover brightness-[0.65]" alt="Slide 1">
+            <img src="{{ url_for('static', filename='frontend/image/s3.jpg') }}" class="h-full w-full object-cover brightness-[0.50]" alt="Slide 1">
         </div>
         <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
-            <img src="{{ url_for('static', filename='frontend/image/s2.jpg') }}" class="h-full w-full object-cover brightness-[0.65]" alt="Slide 2">
+            <img src="{{ url_for('static', filename='frontend/image/s2.jpg') }}" class="h-full w-full object-cover brightness-[0.50]" alt="Slide 2">
         </div>
         <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
-            <img src="{{ url_for('static', filename='frontend/image/s1.jpg') }}" class="h-full w-full object-cover brightness-[0.65]" alt="Slide 3">
+            <img src="{{ url_for('static', filename='frontend/image/s1.jpg') }}" class="h-full w-full object-cover brightness-[0.50]" alt="Slide 3">
         </div>
         <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
-            <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" class="h-full w-full object-cover brightness-[0.65]" alt="Slide 4">
+            <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" class="h-full w-full object-cover brightness-[0.50]" alt="Slide 4">
         </div>
-        <div class="absolute inset-0 bg-black/50"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-transparent to-slate-950/80"></div>
     </div>
 
-    <!-- Content (Centered) -->
-    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 h-full flex items-center justify-center">
-        <div class="flex flex-col items-center text-center max-w-3xl">
 
-            <!-- School Name Section -->
-            <div class="mb-6 animate-fade-in-up">
-
-                <!-- ပြင်ဆင်ထားသောနေရာ: Inline Style ဖြင့် Custom Pulse Effect ထည့်သွင်းထားပါသည် -->
-                <style>
-                    @keyframes custom-pulse {
-                        0%, 100% { opacity: 0.3; }
-                        50% { opacity: 1; }
-                    }
-                    .text-pulse-effect {
-                        animation: custom-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-                    }
-                </style>
-
-                <span class="text-blue-400 font-bold tracking-widest uppercase text-2xl md:text-3xl mb-3 block drop-shadow-md text-pulse-effect">
-                    University of Computer Studies, Taungoo
-                </span>
-
-                <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight tracking-tight drop-shadow-2xl">
-                    UCSTGO
-                </h1>
-            </div>
-
-            <!-- Welcome Message Section -->
-            <div class="mb-10">
-                <h2 class="text-3xl md:text-5xl font-light text-gray-100 mb-4 animate-fade-in-up delay-100 drop-shadow">
-                    Welcome to the Future <br>
-                    <span class="font-bold text-blue-400">of Technology.</span>
-                </h2>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="flex justify-center w-full animate-fade-in-up delay-300">
-                <a href="#campus-activities" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-semibold transition-all shadow-lg hover:shadow-blue-500/30 hover:-translate-y-0.5 text-center min-w-[180px]">
-                    Explore Campus
-                </a>
-            </div>
-
-        </div>
-    </div>
 
     <!-- Slider Dots -->
-    <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-3">
-        <button onclick="goToSlide(0)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/20"></button>
-        <button onclick="goToSlide(1)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/20"></button>
-        <button onclick="goToSlide(2)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/20"></button>
-        <button onclick="goToSlide(3)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/20"></button>
+    <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-3 bg-slate-950/40 backdrop-blur-md px-4 py-2.5 rounded-full">
+        <button onclick="goToSlide(0)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/10 hover:bg-cyan-400"></button>
+        <button onclick="goToSlide(1)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/10 hover:bg-cyan-400"></button>
+        <button onclick="goToSlide(2)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/10 hover:bg-cyan-400"></button>
+        <button onclick="goToSlide(3)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/10 hover:bg-cyan-400"></button>
     </div>
 </section>
 <!-- Welcome to Our University Section -->
-<section class="py-20 pb-10 bg-slate-100 relative overflow-hidden">
+<section class="py-12 pb-10 bg-slate-100 relative overflow-hidden">
     <!-- Decorative Ambient Glows -->
     <div class="absolute top-0 right-0 w-[30rem] h-[30rem] bg-blue-900/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
     <div class="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-amber-500/5 rounded-full blur-3xl -ml-32 -mb-32"></div>
@@ -125,7 +81,7 @@
 
                     <!-- CTA Action Row -->
                     <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100 mt-auto">
-                        <span class="text-xs text-slate-400 font-medium">Empowering local tech since inception.</span>
+
                         <a href="/about" class="inline-flex items-center gap-2 text-sm font-bold text-blue-900 hover:text-amber-500 transition-colors group">
                             Read More About Us
                             <span class="transform group-hover:translate-x-1.5 transition-transform duration-200">→</span>
@@ -140,80 +96,83 @@
 </section>
 
 <!-- Statistics Section -->
-<section class="pt-10 pb-16 -mt-10 bg-blue-50 font-['Roboto']">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+<section class="py-8 bg-slate-50 relative overflow-hidden font-['Roboto']">
+    <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl -translate-y-1/2"></div>
+    <div class="absolute top-1/2 right-1/4 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl -translate-y-1/2"></div>
 
-            <!-- Card Item -->
-            <div class="p-6 rounded-3xl bg-white shadow-lg border border-blue-100 hover:shadow-2xl transition-all duration-300 group">
-                <div class="flex justify-center mb-4">
-                    <div class="p-4 rounded-2xl bg-blue-100 text-blue-600 group-hover:scale-110 transition-transform duration-300">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3zm1 9h-2v-2h2v2zm0-3h-2V7h2v2z"/>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8 text-center">
+
+            <div class="p-8 rounded-[2rem] bg-slate-900/60 backdrop-blur-md transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-2 group relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-teal-400 to-cyan-500 transform translate-y-[-4px] group-hover:translate-y-0 transition-transform duration-300"></div>
+                <div class="flex justify-center mb-5">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-teal-400 group-hover:to-cyan-500 group-hover:text-slate-950 transition-all duration-300 shadow-inner">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                         </svg>
                     </div>
                 </div>
-                <p class="text-4xl md:text-5xl font-extrabold text-blue-900 count-up stats-number" data-target="2001">0</p>
-                <p class="text-sm text-blue-500 mt-2 uppercase tracking-widest font-bold">Established</p>
+                <p class="text-4xl lg:text-5xl font-black text-blue-900 count-up tracking-tight stats-number" data-target="2001">0</p>
+                <p class="text-xs text-slate-300 mt-3 uppercase tracking-widest font-bold group-hover:text-cyan-400 transition-colors">Established</p>
             </div>
 
-            <!-- Card Item -->
-            <div class="p-6 rounded-3xl bg-white shadow-lg border border-blue-100 hover:shadow-2xl transition-all duration-300 group">
-                <div class="flex justify-center mb-4">
-                    <div class="p-4 rounded-2xl bg-blue-100 text-blue-600 group-hover:scale-110 transition-transform duration-300">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+            <div class="p-8 rounded-[2rem] bg-slate-900/60 backdrop-blur-md transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-2 group relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-teal-400 to-cyan-500 transform translate-y-[-4px] group-hover:translate-y-0 transition-transform duration-300"></div>
+                <div class="flex justify-center mb-5">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-teal-400 group-hover:to-cyan-500 group-hover:text-slate-950 transition-all duration-300 shadow-inner">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                         </svg>
                     </div>
                 </div>
-                <p class="text-4xl md:text-5xl font-extrabold text-blue-900 count-up stats-number" data-target="120">0</p>
-                <p class="text-sm text-blue-500 mt-2 uppercase tracking-widest font-bold">Staff Members</p>
+                <p class="text-4xl lg:text-5xl font-black text-blue-900 count-up tracking-tight stats-number" data-target="120">0</p>
+                <p class="text-xs text-slate-300 mt-3 uppercase tracking-widest font-bold group-hover:text-cyan-400 transition-colors">Staff Members</p>
             </div>
 
-            <!-- Card Item -->
-            <div class="p-6 rounded-3xl bg-white shadow-lg border border-blue-100 hover:shadow-2xl transition-all duration-300 group">
-                <div class="flex justify-center mb-4">
-                    <div class="p-4 rounded-2xl bg-blue-100 text-blue-600 group-hover:scale-110 transition-transform duration-300">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+            <div class="p-8 rounded-[2rem] bg-slate-900/60 backdrop-blur-md transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-2 group relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-teal-400 to-cyan-500 transform translate-y-[-4px] group-hover:translate-y-0 transition-transform duration-300"></div>
+                <div class="flex justify-center mb-5">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-teal-400 group-hover:to-cyan-500 group-hover:text-slate-950 transition-all duration-300 shadow-inner">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/>
                         </svg>
                     </div>
                 </div>
-                <p class="text-4xl md:text-5xl font-extrabold text-blue-900 count-up stats-number" data-target="3500">0</p>
-                <p class="text-sm text-blue-500 mt-2 uppercase tracking-widest font-bold">Graduated</p>
+                <p class="text-4xl lg:text-5xl font-black text-blue-900 count-up tracking-tight stats-number" data-target="3500">0</p>
+                <p class="text-xs text-slate-300 mt-3 uppercase tracking-widest font-bold group-hover:text-cyan-400 transition-colors">Graduated</p>
             </div>
 
-            <!-- Card Item -->
-            <div class="p-6 rounded-3xl bg-white shadow-lg border border-blue-100 hover:shadow-2xl transition-all duration-300 group">
-                <div class="flex justify-center mb-4">
-                    <div class="p-4 rounded-2xl bg-blue-100 text-blue-600 group-hover:scale-110 transition-transform duration-300">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 1.34 5 8s1.34 3 8 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+            <div class="p-8 rounded-[2rem] bg-slate-900/60 backdrop-blur-md transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-2 group relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-teal-400 to-cyan-500 transform translate-y-[-4px] group-hover:translate-y-0 transition-transform duration-300"></div>
+                <div class="flex justify-center mb-5">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-teal-400 group-hover:to-cyan-500 group-hover:text-slate-950 transition-all duration-300 shadow-inner">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                         </svg>
                     </div>
                 </div>
-                <p class="text-4xl md:text-5xl font-extrabold text-blue-900 count-up stats-number" data-target="1200">0</p>
-                <p class="text-sm text-blue-500 mt-2 uppercase tracking-widest font-bold">Current Students</p>
+                <p class="text-4xl lg:text-5xl font-black text-blue-900 count-up tracking-tight stats-number" data-target="1200">0</p>
+                <p class="text-xs text-slate-300 mt-3 uppercase tracking-widest font-bold group-hover:text-cyan-400 transition-colors">Current Students</p>
             </div>
 
         </div>
     </div>
 </section>
 <!-- Rector's Message Section -->
-<section class="py-24 bg-apple-gray scroll-animate font-['Roboto'] bg-slate-50">
+<section class="py-12 bg-apple-gray scroll-animate font-['Roboto'] bg-slate-50">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="bg-white rounded-3xl p-8 md:p-16 shadow-xl flex flex-col md:flex-row items-center gap-12 card">
             <div class="md:w-1/3 flex-shrink-0">
-                <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" alt="Rector" class="w-64 h-80 object-cover rounded-2xl shadow-lg mx-auto md:mx-0  transition-all duration-500">
+                <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" alt="Rector" class="w-80 h-80 object-cover rounded-2xl shadow-lg mx-auto md:mx-0  transition-all duration-500">
             </div>
             <div class="md:w-2/3">
                 <h2 class="text-3xl font-bold text-apple-dark mb-6">Rector's Message</h2>
                 <div class="w-12 h-1 bg-apple-blue mb-6"></div>
-                <blockquote class="text-lg text-gray-600 leading-relaxed mb-6 italic">
+                <blockquote class="text-lg text-gray-600 leading-relaxed mb-6  text-justify">
                     "ယနေ့ခေတ်သည် စတုတ္ထအကြိမ်မြောက် စက်မှုတော်လှန်ရေး (Industry 4.0) ကာလဖြစ်သည်နှင့်အညီ နည်းပညာသည် ကမ္ဘာကြီးကို မောင်းနှင်နေသော အဓိကအင်အားစု ဖြစ်ပါသည်။ ကျွန်ုပ်တို့ ကွန်ပျူတာတက္ကသိုလ်(တောင်ငူ) အနေဖြင့် ကျောင်းသား၊ ကျောင်းသူများကို စာတွေ့သာမက လက်တွေ့နယ်ပယ်တွင်ပါ ထူးချွန်ထက်မြက်ပြီး ဆန်းသစ်တီထွင်နိုင်စွမ်းရှိသော (Innovators) များ ဖြစ်လာစေရန် ပြုစုပျိုးထောင်ပေးလျက်ရှိပါသည်။ ဤ Website မှတစ်ဆင့် ကျွန်ုပ်တို့တက္ကသိုလ်၏ ပညာရေးလှုပ်ရှားမှုများ၊ သုတေသနလုပ်ငန်းများနှင့် အောင်မြင်မှုများကို ပွင့်လင်းမြင်သာစွာ ချိတ်ဆက်ကြည့်ရှုနိုင်မည်ဟု ယုံကြည်ပါသည်။"
                 </blockquote>
                 <div>
-                    <p class="font-bold text-apple-dark text-lg">Dr. Ei Ei Hlaing</p>
+                    <p class="font-bold text-apple-blue text-lg">Dr. Ei Ei Hlaing</p>
                     <p class="text-sm text-gray-500">Rector, UCSTaungoo</p>
                 </div>
             </div>
@@ -222,7 +181,7 @@
 </section>
 
 <!-- Campus Activities -->
-<section id="campus-activities" class="py-24 bg-slate-100 scroll-animate">
+<section id="campus-activities" class="py-12 bg-slate-100 scroll-animate">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
         <div class="text-center mb-16">
@@ -251,7 +210,7 @@
 <!--</section>-->
 
 <!-- Campus Life Grid -->
-<section id="activities" class="py-24 bg-slate-100 scroll-animate">
+<section id="activities" class="py-12 bg-slate-100 scroll-animate">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="text-center mb-16">
             <h2 class="text-4xl md:text-5xl font-bold text-apple-dark mb-4">Campus Facilities</h2>
@@ -300,7 +259,7 @@
 </section>
 
 <!-- University Location -->
-    <section class="py-24 bg-apple-gray scroll-animate">
+    <section class="py-2 bg-apple-gray scroll-animate">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
         <!-- Section Title -->
@@ -561,7 +520,7 @@
 
         // --- Floating Particles (Digital Dust) ---
         const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 1500;
+        const particlesCount = 2500;
         const posArray = new Float32Array(particlesCount * 3);
         for(let i = 0; i < particlesCount * 3; i++) {
             posArray[i] = (Math.random() - 0.5) * 150;
@@ -569,7 +528,7 @@
         particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
         const particlesMaterial = new THREE.PointsMaterial({
             size: 0.15,
-            color: 0x1d1d1f,
+            color: 0xbae6fd,
             transparent: true,
             opacity: 0.4
         });

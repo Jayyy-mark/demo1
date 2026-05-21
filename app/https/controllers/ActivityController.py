@@ -2,25 +2,12 @@ from app.models.ActivityModel import Activity
 from app.schemas.activity import ActivitySchema
 from .BaseController import BaseController
 from app.helpers.utils import Utils, ResponseHelper
-from sqlalchemy import func, select
-from app.core.database import db
 from flask import request
 
 class ActivityController(BaseController):
 
     def __init__(self):
         super().__init__(Activity, ActivitySchema())
-
-    def all(self):
-        subquery = (
-            select(func.min(Activity.id))
-            .group_by(Activity.activity_name)
-            .scalar_subquery()
-        )
-
-        data = Activity.query.filter(Activity.id.in_(subquery)).all()
-
-        return ResponseHelper.success("Fetched successfully", self.schema.dump(data, many=True))
 
     def create(self):
 

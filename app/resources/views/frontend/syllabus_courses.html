@@ -68,12 +68,93 @@
 
         <!-- Section 1: Courses by Faculties -->
         <div id="tab-faculties" class="block animate-fade-in border-t border-gray-200">
+            {% set faculties = [
+                {'id': 'f1', 'name': 'Department of Software Technology', 'subs': ['Software Engineering', 'Mobile Computing', 'Web Technologies']},
+                {'id': 'f2', 'name': 'Department of Hardware Technology', 'subs': ['Embedded Systems', 'Digital Logic', 'Computer Architecture']},
+                {'id': 'f3', 'name': 'Department of Information Science', 'subs': ['Data Mining', 'Machine Learning', 'Big Data Analytics']},
+                {'id': 'f4', 'name': 'Department of Application', 'subs': ['Natural Language Processing', 'Computer Graphics', 'Image Processing']},
+                {'id': 'f5', 'name': 'Department of Computational Mathematics', 'subs': ['Calculus', 'Discrete Mathematics', 'Linear Algebra']}
+            ] %}
 
+            {% for faculty in faculties %}
+            <div class="border-b border-gray-200">
+                <button onclick="toggleAccordion('{{ faculty.id }}')" class="w-full py-5 md:py-6 flex items-center justify-between bg-white hover:bg-gray-50/80 transition-colors text-left group">
+                    <span class="font-semibold text-gray-900 text-lg md:text-xl group-hover:text-blue-600 transition-colors pr-4">{{ faculty.name }}</span>
+                    <div class="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center bg-white text-gray-500 group-hover:text-blue-600 group-hover:border-blue-200 transition-all flex-shrink-0">
+                        <svg id="{{ faculty.id }}-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </button>
+
+                <div id="{{ faculty.id }}" class="accordion-content">
+                    <div class="pb-6 pt-2 space-y-3.5 pl-2">
+                        {% for sub in faculty.subs %}
+                        <div class="flex items-center text-base font-medium text-gray-600">
+                            <span class="w-1.5 h-1.5 bg-blue-600 rounded-full mr-3.5 flex-shrink-0"></span>
+                            <span>{{ sub }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
 
         <!-- Section 2: Courses by Semester (Combined Single Accordion Structure) -->
         <div id="tab-semester" class="hidden animate-fade-in border-t border-gray-200">
+            {% set years = [
+                {'id': 'y1', 'name': 'First Year (CST)', 'hover_bg': 'hover:bg-blue-50/20', 'text_color': 'group-hover:text-blue-600', 'border_color': 'group-hover:border-blue-200', 's1': ['CST-1011 (Myanmar)', 'CST-1021 (English)', 'CST-1031 (Physics)', 'CST-1041 (Calculus I)'], 's2': ['CST-1012', 'CST-1042']},
+                {'id': 'y2cs', 'name': 'Second Year (CS)', 'hover_bg': 'hover:bg-emerald-50/20', 'text_color': 'group-hover:text-emerald-600', 'border_color': 'group-hover:border-emerald-200', 's1': ['CS-2011 (Java Programming)', 'CS-2021 (Database Systems)'], 's2': ['CS-2012', 'CS-2032']},
+                {'id': 'y2ct', 'name': 'Second Year (CT)', 'hover_bg': 'hover:bg-purple-50/20', 'text_color': 'group-hover:text-purple-600', 'border_color': 'group-hover:border-purple-200', 's1': ['CT-2011 (Electronic Circuits)', 'CT-2021 (Computer Logic & Organization)'], 's2': ['CT-2012', 'CT-2032']}
+            ] %}
 
+            {% for year in years %}
+            <!-- Single Year Accordion Row -->
+            <div class="border-b border-gray-200">
+                <button onclick="toggleAccordion('{{ year.id }}')" class="w-full py-5 md:py-6 flex items-center justify-between bg-white {{ year.hover_bg }} transition-colors text-left group">
+                    <span class="font-semibold text-gray-900 text-lg md:text-xl {{ year.text_color }} transition-colors pr-4">{{ year.name }}</span>
+                    <div class="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center bg-white text-gray-500 {{ year.text_color }} {{ year.border_color }} transition-all flex-shrink-0">
+                        <svg id="{{ year.id }}-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </button>
+
+                <!-- Inner Dashboard Layout displaying both Semesters inside one Accordion wrapper -->
+                <div id="{{ year.id }}" class="accordion-content">
+                    <div class="pb-8 pt-4 grid grid-cols-1 md:grid-cols-2 gap-8 px-2">
+
+                        <!-- First Semester Column Container -->
+                        <div class="space-y-4">
+                            <div class="inline-flex items-center px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold tracking-wide uppercase">
+                                First Semester
+                            </div>
+                            <div class="space-y-3 pt-1">
+                                {% for sub in year.s1 %}
+                                <div class="text-base font-medium text-gray-600 flex items-center">
+                                    <svg class="w-4 h-4 text-blue-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                                    <span>{{ sub }}</span>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Second Semester Column Container -->
+                        <div class="space-y-4">
+                            <div class="inline-flex items-center px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-bold tracking-wide uppercase">
+                                Second Semester
+                            </div>
+                            <div class="space-y-3 pt-1">
+                                {% for sub in year.s2 %}
+                                <div class="text-base font-medium text-gray-600 flex items-center">
+                                    <svg class="w-4 h-4 text-indigo-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                                    <span>{{ sub }}</span>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
 
     </div>
@@ -136,6 +217,4 @@
         }
     }
 </script>
-
-<script type="module" src="{{ url_for('static', filename='frontend/js/pages/syllabus_courses.js') }}"></script>
 {% endblock %}

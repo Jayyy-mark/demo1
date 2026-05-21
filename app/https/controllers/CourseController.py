@@ -12,7 +12,7 @@ class CourseController(BaseController):
 
     def getSubjects():
         return jsonify({
-            "data" : CourseHelper.getSubjects() 
+            "subjects" : CourseHelper.getSubjects() 
         }),200
 
     def getDepartments():
@@ -29,8 +29,8 @@ class CourseController(BaseController):
     
     def create(self):
         data = request.get_json() or {}
-        print(data.get("semester_id"))
-        course_id = CourseHelper.checkSemester(data.get("semester_id"))
+        print(data)
+        course_id = CourseHelper.checkSemester(data.get("course_name"))
 
         if course_id is None:
             data["course_id"] = CourseController.generateID()

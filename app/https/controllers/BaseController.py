@@ -23,7 +23,7 @@ class BaseController:
 
     def all(self):
         data = Utils.get_all(self.model)
-        
+
         if not data:
             return ResponseHelper.success("Fetched successfully", [])
 

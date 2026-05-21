@@ -24,7 +24,6 @@
         <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
             <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" class="h-full w-full object-cover brightness-[0.65]" alt="Slide 4">
         </div>
-        <!-- Gradient overlay ကို ပိုပြီး balance ဖြစ်အောင် black/50 overlay ပြောင်းထားပါတယ် -->
         <div class="absolute inset-0 bg-black/50"></div>
     </div>
 
@@ -34,9 +33,22 @@
 
             <!-- School Name Section -->
             <div class="mb-6 animate-fade-in-up">
-                <span class="text-blue-400  font-bold tracking-widest uppercase text-3xl mb-3 block drop-shadow-md">
-                    University of Computer Studies
+
+                <!-- ပြင်ဆင်ထားသောနေရာ: Inline Style ဖြင့် Custom Pulse Effect ထည့်သွင်းထားပါသည် -->
+                <style>
+                    @keyframes custom-pulse {
+                        0%, 100% { opacity: 0.3; }
+                        50% { opacity: 1; }
+                    }
+                    .text-pulse-effect {
+                        animation: custom-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+                    }
+                </style>
+
+                <span class="text-blue-400 font-bold tracking-widest uppercase text-2xl md:text-3xl mb-3 block drop-shadow-md text-pulse-effect">
+                    University of Computer Studies, Taungoo
                 </span>
+
                 <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight tracking-tight drop-shadow-2xl">
                     UCSTGO
                 </h1>
@@ -48,12 +60,10 @@
                     Welcome to the Future <br>
                     <span class="font-bold text-blue-400">of Technology.</span>
                 </h2>
-
             </div>
 
             <!-- Action Buttons -->
             <div class="flex justify-center w-full animate-fade-in-up delay-300">
-
                 <a href="#campus-activities" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-semibold transition-all shadow-lg hover:shadow-blue-500/30 hover:-translate-y-0.5 text-center min-w-[180px]">
                     Explore Campus
                 </a>
@@ -70,7 +80,6 @@
         <button onclick="goToSlide(3)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/20"></button>
     </div>
 </section>
-
 <!-- Welcome to Our University Section -->
 <section class="py-20 pb-10 bg-slate-100 relative overflow-hidden">
     <!-- Decorative Ambient Glows -->
@@ -227,19 +236,19 @@
     </div>
 </section>
 <!-- Republications -->
-<section class="bg-slate-50 py-12 border-t border-gray-200 scroll-animate">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="flex justify-between items-end mb-6">
-            <h3 class="text-2xl font-semibold text-apple-dark">Research Publications</h3>
-            <a href="/research" class="text-sm text-apple-blue hover:underline">View All</a>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="pub-container">
+<!--<section class="bg-slate-50 py-12 border-t border-gray-200 scroll-animate">-->
+<!--    <div class="max-w-7xl mx-auto px-6 lg:px-8">-->
+<!--        <div class="flex justify-between items-end mb-6">-->
+<!--            <h3 class="text-2xl font-semibold text-apple-dark">Research Publications</h3>-->
+<!--            <a href="/research" class="text-sm text-apple-blue hover:underline">View All</a>-->
+<!--        </div>-->
+<!--        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="pub-container">-->
 
-            <!-- Card 1 -->
+<!--            &lt;!&ndash; Card 1 &ndash;&gt;-->
 
-        </div>
-    </div>
-</section>
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
 
 <!-- Campus Life Grid -->
 <section id="activities" class="py-24 bg-slate-100 scroll-animate">

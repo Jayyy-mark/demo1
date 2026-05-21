@@ -5,7 +5,6 @@ from flask import Flask
 from flask_cors import CORS
 
 from app.core import init_db, Config, register_error_handlers, setup_contexts
-from app.core.database import db, migrate
 
 from app.routes import register_routes
 from app.api import register_api
@@ -15,14 +14,14 @@ import os
 from app.https.middleware.auth_middleware import attach_user
 from flask_jwt_extended import JWTManager
 
-from app.helpers.install import check_installation
 
 
 def create_app():
     try:
         # installed = os.getenv("APP_INSTALLED", "false").lower() == "true"
-        # print("app status : ", installed)
+
         app = Flask(__name__,template_folder="resources/views",static_folder="resources/assets")
+
         CORS(app, supports_credentials=True)
     
         # =========================

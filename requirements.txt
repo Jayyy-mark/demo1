@@ -1,6 +1,5 @@
 flask
 flask_mysqldb
-xhtml2pdf
 dotenv
 flask_sqlalchemy
 flask_marshmallow

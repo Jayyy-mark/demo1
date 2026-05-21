@@ -1,0 +1,89 @@
+body {
+    background-color: #ffffff;
+    color: #1d1d1f;
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Ensure 3D Canvas is strictly in background */
+#canvas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    /* Behind everything */
+    pointer-events: none;
+    /* Let clicks pass through */
+}
+
+.glass-nav {
+    background-color: rgba(96, 165, 250, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    /* ပိုပြီးထူတဲ့အရိပ် */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+/* Typography Gradient */
+.text-gradient {
+    background: linear-gradient(45deg, #1d1d1f, #434344);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Custom Scrollbar for cleaner look */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
+
+#mobile-menu {
+    transition: transform 0.3s ease;
+}
+
+.mobile-drawer-view {
+    position: absolute;
+    top: 65px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 65px);
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(24px);
+    transition: transform 0.28s ease, opacity 0.22s ease;
+}
+
+.mobile-drawer-view.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+}
+
+#mainView.mobile-drawer-view {
+    transform: translateX(-24px);
+}
+
+#mainView.mobile-drawer-view.is-active {
+    transform: translateX(0);
+}

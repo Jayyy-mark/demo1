@@ -6,110 +6,40 @@
     <title>{% block title %}UCSTGO{% endblock %}</title>
 
     
+    <!--====================================
+        FAVICON
+    ====================================--> 
     <link rel="shortcut icon" href="{{ url_for('static', filename='admin/favicon/favicon.ico') }}" type="image/x-icon">
-    <link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/main.css') }}">
+    
 
-    <!-- Google Fonts: Inter -->
+    <!--====================================
+        GOOGLE FONTS (ROBOTO) & ICONS
+    ====================================--> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
 
-    <style>
-        body {
-            background-color: #ffffff;
-            color: #1d1d1f;
-            overflow-x: hidden;
-        }
+    <!--====================================
+        MAIN STYLES
+    ====================================--> 
 
-        html {
-            scroll-behavior: smooth;
-        }
+    <link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/style.css') }}">
 
-        /* Ensure 3D Canvas is strictly in background */
-        #canvas-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            /* Behind everything */
-            pointer-events: none;
-            /* Let clicks pass through */
-        }
 
-        .glass-nav {
-            background-color: rgba(96, 165, 250, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            /* ပိုပြီးထူတဲ့အရိပ် */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
 
-        /* Typography Gradient */
-        .text-gradient {
-            background: linear-gradient(45deg, #1d1d1f, #434344);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            -webkit-text-fill-color: transparent;
-        }
+    <!--====================================
+        PAGE'S STYLES
+    ====================================-->
+    {% block styles %}
 
-        /* Custom Scrollbar for cleaner look */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #a1a1a1;
-        }
-
-        #mobile-menu {
-            transition: transform 0.3s ease;
-        }
-
-        .mobile-drawer-view {
-            position: absolute;
-            top: 65px;
-            left: 0;
-            width: 100%;
-            height: calc(100% - 65px);
-            overflow-y: auto;
-            opacity: 0;
-            pointer-events: none;
-            transform: translateX(24px);
-            transition: transform 0.28s ease, opacity 0.22s ease;
-        }
-
-        .mobile-drawer-view.is-active {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateX(0);
-        }
-
-        #mainView.mobile-drawer-view {
-            transform: translateX(-24px);
-        }
-
-        #mainView.mobile-drawer-view.is-active {
-            transform: translateX(0);
-        }
-    </style>
+    {% endblock %}
 </head>
+
 <body class="antialiased flex flex-col min-h-screen font-sans">
 
 
@@ -139,104 +69,19 @@
     {% include 'frontend/layouts/footer/footer.html' %}
 
 
-    <!-- Global Scripts -->
-
+    <!--=============================
+        MAIN SCRIPTS
+    ==============================-->
     {% for script in assets.vendor.scripts %}
     <script src="{{ script }}"></script>
     {% endfor %}
-    
-    <script>
 
-        //<!-- Mobile Menu Script -->
-        const menuBtn = document.getElementById("menu-btn");
-        const drawer = document.getElementById("mobile-menu");
-        const overlay = document.getElementById("overlay");
+    <script src="{{ url_for('static', filename='frontend/js/lib/three.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='frontend/js/main.js') }}"></script>
 
-        const mainView = document.getElementById("mainView");
-        const homeView = document.getElementById("homeView");
-        const academicView = document.getElementById("academicView");
-        const facultiesView = document.getElementById("facultiesView");
-        const admissionView = document.getElementById("admissionView");
-        const backBtn = document.getElementById("backBtn");
-        const subViews = {
-            home: homeView,
-            academic: academicView,
-            faculties: facultiesView,
-            admission: admissionView
-        };
-
-        function openDrawer() {
-            drawer.classList.remove("translate-x-full");
-            overlay.classList.remove("hidden");
-            document.body.classList.add("overflow-hidden");
-            menuBtn.setAttribute("aria-expanded", "true");
-            showMain();
-        }
-
-        function closeDrawer() {
-            drawer.classList.add("translate-x-full");
-            overlay.classList.add("hidden");
-            document.body.classList.remove("overflow-hidden");
-            menuBtn.setAttribute("aria-expanded", "false");
-        }
-
-        function showMain() {
-            mainView.classList.add("is-active");
-            mainView.setAttribute("aria-hidden", "false");
-            Object.values(subViews).forEach(function (view) {
-                view.classList.remove("is-active");
-                view.setAttribute("aria-hidden", "true");
-            });
-            backBtn.classList.add("hidden");
-        }
-
-        function openSub(type) {
-            if (!subViews[type]) {
-                return;
-            }
-
-            mainView.classList.remove("is-active");
-            mainView.setAttribute("aria-hidden", "true");
-            Object.keys(subViews).forEach(function (key) {
-                const isActive = key === type;
-                subViews[key].classList.toggle("is-active", isActive);
-                subViews[key].setAttribute("aria-hidden", String(!isActive));
-            });
-            backBtn.classList.remove("hidden");
-        }
-
-        menuBtn.addEventListener("click", openDrawer);
-
-        drawer.querySelectorAll("a").forEach(function (link) {
-            link.addEventListener("click", closeDrawer);
-        });
-
-        document.addEventListener("keydown", function (event) {
-            if (event.key === "Escape") {
-                closeDrawer();
-            }
-        });
-
-        window.addEventListener("resize", function () {
-            if (window.innerWidth >= 1024) {
-                closeDrawer();
-            }
-        });
- 
-
-        function openModal(src) {
-            console.log("this is src : ",src);
-            document.getElementById('modalImg').src = src;
-            document.getElementById('imageModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Stop scrolling
-        }
-        function closeModal() {
-            document.getElementById('imageModal').classList.add('hidden');
-            document.body.style.overflow = 'auto'; // Enable scrolling
-        }
-    </script>
-
-    {% block styles %}{% endblock %}
+    <!--=============================
+        PAGE'S SCRIPTS
+    ==============================-->
     {% block scripts %}
         
     {% endblock %}

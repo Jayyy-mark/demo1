@@ -5,7 +5,7 @@ const api = {
         return data.subjects;
     },
     async getCourseBySemester(){
-        const res = await fetch("api/frontend/course/semester/subject");
+        const res = await fetch("/api/frontend/course/semester/subject");
         const data = await res.json();
         return data.subjects;
     }

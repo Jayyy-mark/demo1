@@ -24,7 +24,7 @@ export const academicHelper = {
         return res.data;
     },
     async getSubjects(){
-        const res = await api.get('/academic/subject/all');
+        const res = await api.get('/academic/course/subject');
         return res.data;
     },
 }

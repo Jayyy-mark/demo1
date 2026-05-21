@@ -1,9 +1,14 @@
+from collections import defaultdict
+
 from app.models.ActivityModel import Activity
+from app.models.CourseModel import Course
 from app.models.ResearchModel import Research
 from app.models.LaboratoryModel import Laboratory
-from app.schemas.activity import ActivitySchema
+from app.models.SubjectModel import Subject
+from app.schemas.academic.course import CourseSchema
+from app.schemas.academic.subject import SubjectSchema
 from app.schemas.research import ResearchSchema
-from app.schemas.laboratory import LaboratorySchema
+from sqlalchemy.orm import selectinload
 from flask import jsonify, request
 
 class FrontendController:
@@ -216,4 +221,69 @@ class FrontendController:
 
         return jsonify({
             "laboratory": list(grouped_laboratories.values())
+        })
+
+    @staticmethod
+    def getCourseByDepartment():
+        subjects = Subject.query.options(
+            selectinload(Subject.department)
+        ).all()        
+        data = SubjectSchema(many=True).dump(subjects)
+
+        grouped = defaultdict(lambda: {
+            "department": None,
+            "subjects": []
+        })
+
+        for item in data:
+            dept_id = item["department_id"]
+
+            if grouped[dept_id]["department"] is None:
+                grouped[dept_id]["department"] = item["department"]
+
+            grouped[dept_id]["subjects"].append(item)
+
+        return jsonify({
+            "subjects": list(grouped.values())
+        })
+    
+    @staticmethod
+    def getCourseBySemester():
+        courses = Course.query.all()
+        data = CourseSchema(many=True).dump(courses)
+
+        grouped = defaultdict(lambda: {
+            "year": None,
+            "semesters": {}
+        })
+
+        for item in data:
+            semester = item["semester"]
+            year = semester["year"]
+
+            year_id = year["id"]
+            semester_id = semester["id"]
+
+            # init year
+            if grouped[year_id]["year"] is None:
+                grouped[year_id]["year"] = year
+
+            # init semester inside year
+            if semester_id not in grouped[year_id]["semesters"]:
+                grouped[year_id]["semesters"][semester_id] = {
+                    "semester": semester,
+                    "courses": []
+                }
+
+            # add course
+            grouped[year_id]["semesters"][semester_id]["courses"].append(item)
+
+        # convert dict → list
+        result = []
+        for year_data in grouped.values():
+            year_data["semesters"] = list(year_data["semesters"].values())
+            result.append(year_data)
+
+        return jsonify({
+            "subjects": result
         })

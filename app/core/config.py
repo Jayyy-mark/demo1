@@ -38,8 +38,8 @@ class Config:
     DB_HOST = os.getenv("DB_HOST")
     DB_PORT = os.getenv("DB_PORT")
 
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:zoWtKREHpYQGyuCSVOhApWkZPZRoKRRJ@mysql-ca3c.railway.internal:3306/railway"
-    # SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    # SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:zoWtKREHpYQGyuCSVOhApWkZPZRoKRRJ@mysql-ca3c.railway.internal:3306/railway"
+    SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
 

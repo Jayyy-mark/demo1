@@ -26,18 +26,10 @@
         <div class="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-transparent to-slate-950/80"></div>
     </div>
 
-    <!-- ပြင်ဆင်ထားသော Welcome Message Block (အလယ် အောက်နားသို့ ရွှေ့ထားသည်) -->
-    <div class="absolute bottom-28 left-1/2 transform -translate-x-1/2 z-10 w-full max-w-xl text-center px-4">
-        <div class="bg-slate-900/60 backdrop-blur-md border border-white/10 p-6 rounded-2xl shadow-2xl">
-            <h2 class="text-2xl sm:text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-cyan-400 to-blue-400 animate-fade-in-up delay-100 tracking-tight uppercase">
-                Welcome to UCSTGO
-            </h2>
-            <div class="h-1 w-16 bg-gradient-to-r from-teal-400 to-cyan-500 mx-auto mt-4 rounded-full shadow-lg opacity-80"></div>
-        </div>
-    </div>
+
 
     <!-- Slider Dots -->
-    <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-3 bg-slate-950/40 backdrop-blur-md px-4 py-2.5 rounded-full border border-white/5">
+    <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-3 bg-slate-950/40 backdrop-blur-md px-4 py-2.5 rounded-full">
         <button onclick="goToSlide(0)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/10 hover:bg-cyan-400"></button>
         <button onclick="goToSlide(1)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/10 hover:bg-cyan-400"></button>
         <button onclick="goToSlide(2)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/10 hover:bg-cyan-400"></button>
@@ -45,7 +37,7 @@
     </div>
 </section>
 <!-- Welcome to Our University Section -->
-<section class="py-20 pb-10 bg-slate-100 relative overflow-hidden">
+<section class="py-12 pb-10 bg-slate-100 relative overflow-hidden">
     <!-- Decorative Ambient Glows -->
     <div class="absolute top-0 right-0 w-[30rem] h-[30rem] bg-blue-900/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
     <div class="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-amber-500/5 rounded-full blur-3xl -ml-32 -mb-32"></div>
@@ -89,7 +81,7 @@
 
                     <!-- CTA Action Row -->
                     <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100 mt-auto">
-                        <span class="text-xs text-slate-400 font-medium">Empowering local tech since inception.</span>
+
                         <a href="/about" class="inline-flex items-center gap-2 text-sm font-bold text-blue-900 hover:text-amber-500 transition-colors group">
                             Read More About Us
                             <span class="transform group-hover:translate-x-1.5 transition-transform duration-200">→</span>
@@ -104,7 +96,7 @@
 </section>
 
 <!-- Statistics Section -->
-<section class="py-2 bg-slate-50 relative overflow-hidden font-['Roboto']">
+<section class="py-8 bg-slate-50 relative overflow-hidden font-['Roboto']">
     <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl -translate-y-1/2"></div>
     <div class="absolute top-1/2 right-1/4 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl -translate-y-1/2"></div>
 
@@ -167,20 +159,20 @@
     </div>
 </section>
 <!-- Rector's Message Section -->
-<section class="py-10 bg-apple-gray scroll-animate font-['Roboto'] bg-slate-50">
+<section class="py-12 bg-apple-gray scroll-animate font-['Roboto'] bg-slate-50">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="bg-white rounded-3xl p-8 md:p-16 shadow-xl flex flex-col md:flex-row items-center gap-12 card">
             <div class="md:w-1/3 flex-shrink-0">
-                <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" alt="Rector" class="w-64 h-80 object-cover rounded-2xl shadow-lg mx-auto md:mx-0  transition-all duration-500">
+                <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" alt="Rector" class="w-80 h-80 object-cover rounded-2xl shadow-lg mx-auto md:mx-0  transition-all duration-500">
             </div>
             <div class="md:w-2/3">
                 <h2 class="text-3xl font-bold text-apple-dark mb-6">Rector's Message</h2>
                 <div class="w-12 h-1 bg-apple-blue mb-6"></div>
-                <blockquote class="text-lg text-gray-600 leading-relaxed mb-6 italic">
+                <blockquote class="text-lg text-gray-600 leading-relaxed mb-6  text-justify">
                     "ယနေ့ခေတ်သည် စတုတ္ထအကြိမ်မြောက် စက်မှုတော်လှန်ရေး (Industry 4.0) ကာလဖြစ်သည်နှင့်အညီ နည်းပညာသည် ကမ္ဘာကြီးကို မောင်းနှင်နေသော အဓိကအင်အားစု ဖြစ်ပါသည်။ ကျွန်ုပ်တို့ ကွန်ပျူတာတက္ကသိုလ်(တောင်ငူ) အနေဖြင့် ကျောင်းသား၊ ကျောင်းသူများကို စာတွေ့သာမက လက်တွေ့နယ်ပယ်တွင်ပါ ထူးချွန်ထက်မြက်ပြီး ဆန်းသစ်တီထွင်နိုင်စွမ်းရှိသော (Innovators) များ ဖြစ်လာစေရန် ပြုစုပျိုးထောင်ပေးလျက်ရှိပါသည်။ ဤ Website မှတစ်ဆင့် ကျွန်ုပ်တို့တက္ကသိုလ်၏ ပညာရေးလှုပ်ရှားမှုများ၊ သုတေသနလုပ်ငန်းများနှင့် အောင်မြင်မှုများကို ပွင့်လင်းမြင်သာစွာ ချိတ်ဆက်ကြည့်ရှုနိုင်မည်ဟု ယုံကြည်ပါသည်။"
                 </blockquote>
                 <div>
-                    <p class="font-bold text-apple-dark text-lg">Dr. Ei Ei Hlaing</p>
+                    <p class="font-bold text-apple-blue text-lg">Dr. Ei Ei Hlaing</p>
                     <p class="text-sm text-gray-500">Rector, UCSTaungoo</p>
                 </div>
             </div>
@@ -189,7 +181,7 @@
 </section>
 
 <!-- Campus Activities -->
-<section id="campus-activities" class="py-24 bg-slate-100 scroll-animate">
+<section id="campus-activities" class="py-12 bg-slate-100 scroll-animate">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
         <div class="text-center mb-16">
@@ -218,7 +210,7 @@
 <!--</section>-->
 
 <!-- Campus Life Grid -->
-<section id="activities" class="py-24 bg-slate-100 scroll-animate">
+<section id="activities" class="py-12 bg-slate-100 scroll-animate">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="text-center mb-16">
             <h2 class="text-4xl md:text-5xl font-bold text-apple-dark mb-4">Campus Facilities</h2>
@@ -267,7 +259,7 @@
 </section>
 
 <!-- University Location -->
-    <section class="py-24 bg-apple-gray scroll-animate">
+    <section class="py-2 bg-apple-gray scroll-animate">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
         <!-- Section Title -->
@@ -528,7 +520,7 @@
 
         // --- Floating Particles (Digital Dust) ---
         const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 1500;
+        const particlesCount = 2500;
         const posArray = new Float32Array(particlesCount * 3);
         for(let i = 0; i < particlesCount * 3; i++) {
             posArray[i] = (Math.random() - 0.5) * 150;
@@ -536,7 +528,7 @@
         particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
         const particlesMaterial = new THREE.PointsMaterial({
             size: 0.15,
-            color: 0x1d1d1f,
+            color: 0xbae6fd,
             transparent: true,
             opacity: 0.4
         });

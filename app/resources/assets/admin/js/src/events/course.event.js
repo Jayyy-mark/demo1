@@ -51,13 +51,13 @@ export const courseEvent = {
 
         const semesters = await academicHelper.getSemesters();
         const subjects = await academicHelper.getSubjects();
-
-        courseUI.fill(semesters.data, "semester_term", document.querySelector("#course_name"));
-        courseUI.fill(subjects.data, "subject_name", document.querySelector("#course_subject"));
+        console.log("this is subject : ", subjects.data);
+        courseUI.fill(semesters.data, "semester_name", document.querySelector("#course_name"));
+        courseUI.fill(subjects.data, "subject_code", document.querySelector("#course_subject"));
         
         const update_form = $('#dataForm-update');
-        courseUI.fill(semesters.data, "semester_term", update_form.find("#semester")[0]);
-        courseUI.fill(subjects.data, "subject_name", update_form.find("#subject")[0]);
+        courseUI.fill(semesters.data, "semester_name", update_form.find("#semester")[0]);
+        courseUI.fill(subjects.data, "subject_code", update_form.find("#subject")[0]);
         
     },
     async create(){

@@ -30,4 +30,12 @@ def getActivityById():
 @frontend_api.route("/laboratory/search", methods=['GET'])
 def getLaboratoryById():
     return FrontendController.getLaboratoryById()
+
+@frontend_api.route("/course/department/subject", methods=['GET'])
+def getCourseByDepartment():
+    return FrontendController.getCourseByDepartment()
+
+@frontend_api.route("/course/semester/subject", methods=['GET'])
+def getCourseBySemester():
+    return FrontendController.getCourseBySemester()
     

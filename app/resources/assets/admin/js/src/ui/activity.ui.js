@@ -20,12 +20,12 @@ export const activityUI = {
 
             const row =`
             <tr>
-                <td class="py-3 text-start">${a.id}</td>
-                <td class="py-3 text-start">${a.activity_name}</td>
+   
+    
+                <td class="py-3 text-start" style="width: 1%; white-space: nowrap;">${a.activity_name}</td>
                 <td class="py-3 text-start">${a.category}</td>
-                <td class="py-3 text-start">${a.description}</td>
-                <td class="py-3 text-start"><a href="/assets/${a.filepath}">${a.filename}</a></td>
-                <td class="py-3 text-start">${year}</td>
+                <td class="py-3 text-start" style="width: 1%; white-space: nowrap;">${activityUI.truncate(a.description)}</td>
+                <td class="py-3 text-start">${a.date}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td class="py-3 text-start">
                     <div class="action-buttons d-flex justify-content-start ps-0">
                         <button class="btn btn-sm btn-info border rounded-5 show-update-modal"
@@ -56,4 +56,29 @@ export const activityUI = {
             form.find(`[name=${key}]`).val(value);
         });
     },
+    truncate(text, maxLength = 60) {
+        if (!text) return "";
+        return text.length > maxLength
+            ? text.substring(0, maxLength) + "..."
+            : text;
+    },
+    smartWrap(text, maxLength = 40) {
+        if (!text) return "";
+
+        let words = text.split(" ");
+        let line = "";
+        let result = "";
+
+        for (let word of words) {
+            if ((line + word).length > maxLength) {
+                result += line + "<br>";
+                line = word + " ";
+            } else {
+                line += word + " ";
+            }
+        }
+
+        result += line;
+        return result;
+    }
 }

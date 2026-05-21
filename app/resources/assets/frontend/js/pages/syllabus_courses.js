@@ -75,7 +75,7 @@ const UI = {
             
             const row = `
             <div class="border-b border-gray-200">
-                <button onclick="toggleAccordion('${element.year?.id}')" class="w-full py-5 md:py-6 flex items-center justify-between bg-white transition-colors text-left group">
+                <button class="semester-subject-btn  w-full py-5 md:py-6 flex items-center justify-between bg-white transition-colors text-left group">
                     <span class="font-semibold text-gray-900 text-lg md:text-xl transition-colors pr-4">${element.year?.year_name}</span>
                     <div class="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center bg-white text-gray-500 transition-all flex-shrink-0">
                         <svg id="${element.year?.id}-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
@@ -141,6 +141,11 @@ const UI = {
 const courseEvent = {
     init(){
         this.load();
+
+        $(document).on('click', '.semester-subject-btn', function(){
+            const content = $(this).parent().find(".accordion-content");
+            content.toggleClass("open");
+        });
     },
     async load(){
         const departmentSubjects = await api.getCourseByFaculty();

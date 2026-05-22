@@ -37,7 +37,7 @@ class CourseHelper:
 
     
     def checkSemester(id):
-        res = Course.query.filter(semester_id=id).first()
+        res = Course.query.filter_by(semester_id=id).first()
         print(res)
         if res is None:
             print("Result is None")

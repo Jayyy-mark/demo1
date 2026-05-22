@@ -1,7 +1,7 @@
 from flask import render_template
 from . import frontend_bp
 
-@frontend_bp.route('/faculties/<string:dept_code>')
+@frontend_bp.route('/faculties/<string:dept_code>', endpoint='department')
 def department_detail(dept_code):
 
     departments_db = {

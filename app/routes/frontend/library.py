@@ -1,7 +1,7 @@
 from . import frontend_bp
 from flask import render_template
 
-@frontend_bp.route('/library')
+@frontend_bp.route('/library', endpoint='library')
 def library():
     
     return render_template('frontend/library.html')

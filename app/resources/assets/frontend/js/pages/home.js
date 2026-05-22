@@ -20,7 +20,6 @@ const homeApi = {
     UI HAHNDLER
 =======================================-->*/
 const activityContainer = document.querySelector("#activity-card-container");
-const pubContainer = document.querySelector("#pub-container");
 
 function getActivityUrl(activity) {
     return `/activity/${encodeURIComponent(activity.id)}`;
@@ -47,29 +46,6 @@ const researchUI = {
             activityContainer.insertAdjacentHTML("beforeend", activityCard);
         });
     },
-    renderPublications(researches){
-        researches.forEach((research, index)=>{
-
-            const card = `
-                <div class="bg-white p-6 rounded-2xl border border-gray-200 hover:-translate-y-1 transition-transform duration-300 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">${research.category}</span>
-                        <h4 class="mt-2 text-lg font-medium text-gray-900">${research.date}</h4>
-                        <p class="mt-2 text-sm text-gray-500 mb-6">${research.research_name}</p>
-                    </div>
-                    <!-- Download Button -->
-                    <a href="assets/${research.filepath}" download class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-50 border border-slate-200 hover:bg-apple-dark hover:text-white rounded-xl text-xs font-bold text-apple-dark transition-all duration-300 group">
-                        <svg class="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"></path>
-                        </svg>
-                        DOWNLOAD PDF
-                    </a>
-                </div>
-            `;
-
-            pubContainer.insertAdjacentHTML("beforeend", card);
-        });
-    },
 }
 
 
@@ -80,9 +56,6 @@ const researchEvent = {
     async load(){
         const activities = await homeApi.fetchLastedActivities();
         researchUI.renderActivities(activities);
-
-        const researches = await homeApi.fetchLastedPublications();
-        researchUI.renderPublications(researches);
 
     }
 }

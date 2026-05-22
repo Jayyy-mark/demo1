@@ -215,19 +215,19 @@
                     <div class="mb-3">
                         <label class="form-label">Code</label>
                         <input type="hidden" name="id">
-                        <input type="text" class="form-control" id="subject_code" name="subject_code">
+                        <input type="text" autocomplete="off" class="form-control" id="subject_code" name="subject_code">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Name</label>
-                        <input type="text" class="form-control" id="subject_name" name="subject_name">
+                        <input type="text" autocomplete="off" class="form-control" id="subject_name" name="subject_name">
                     </div>
                     <div class="mb-3">
                         <label for="department" class="form-label">Department :</label>
                         <div class="position-relative w-100" id="department">
 
                             <!-- INPUT -->
-                            <input type="text" class="form-control" placeholder="Select an option..."
+                            <input type="text" autocomplete="off" class="form-control" placeholder="Select an option..."
                                 name="department_name">
 
                             <!-- HIDDEN VALUE -->
@@ -272,7 +272,7 @@
 
             <div class="modal-body">
                 <form id="dataForm-department">
-                    <input type="text" class="form-control" id="department_name" name="department_name">
+                    <input type="text" autocomplete="off" class="form-control" id="department_name" name="department_name">
                     <input type="hidden" name="id">
                 </form>
             </div>
@@ -298,7 +298,7 @@
 
             <div class="modal-body">
                 <form id="dataForm-year">
-                    <input type="text" class="form-control" id="year_name" name="year_name">
+                    <input type="text" autocomplete="off" class="form-control" id="year_name" name="year_name">
                     <input type="hidden" name="id">
                 </form>
             </div>
@@ -326,19 +326,19 @@
                 <form id="dataForm-semester">
                     <div class="mb-3">
                         <label for="semester_name" class="form-label">Semester Name :</label>
-                        <input type="text" class="form-control mb-2" id="semester_name" name="semester_name">
+                        <input type="text" autocomplete="off" class="form-control mb-2" id="semester_name" name="semester_name">
                         <input type="hidden" name="id">
                     </div>
                     <div class="mb-3">
                         <label for="semester_term" class="form-label">Semester Term :</label>
-                        <input type="text" class="form-control mb-2" id="semester_term" name="semester_term">
+                        <input type="text" autocomplete="off" class="form-control mb-2" id="semester_term" name="semester_term">
                     </div>
                     <div class="mb-3">
                         <label for="year" class="form-label">Year :</label>
                         <div class="position-relative w-100" id="year">
 
                             <!-- INPUT -->
-                            <input type="text" class="form-control" placeholder="Select an option..." name="year_name">
+                            <input type="text" autocomplete="off" class="form-control" placeholder="Select an option..." name="year_name">
 
                             <!-- HIDDEN VALUE -->
                             <input type="hidden" name="year_id">
@@ -383,22 +383,22 @@
                     <div class="mb-3">
 
                         <label for="id" class="form-label">ID : </label>
-                        <input type="text" name="id" id="id" class="form-control" disabled>
+                        <input type="text" autocomplete="off" name="id" id="id" class="form-control" disabled>
                     </div>
                     <div class="mb-3">
                         <label for="subject_code" class="form-label">Code : </label>
-                        <input type="text" class="form-control" id="subject_code" name="subject_code">
+                        <input type="text" autocomplete="off" class="form-control" id="subject_code" name="subject_code">
                     </div>
                     <div class="mb-3">
                         <label for="subject_name" class="form-label">Name : </label>
-                        <input type="text" class="form-control" id="subject_name" name="subject_name">
+                        <input type="text" autocomplete="off" class="form-control" id="subject_name" name="subject_name">
                     </div>
                     <div class="mb-3">
                         <label for="department" class="form-label">Department :</label>
                         <div class="position-relative w-100" id="department">
 
                             <!-- INPUT -->
-                            <input type="text" class="form-control" placeholder="Select an option..."
+                            <input type="text" autocomplete="off" class="form-control" placeholder="Select an option..."
                                 name="department_name">
 
                             <!-- HIDDEN VALUE -->
@@ -441,11 +441,11 @@
                 <form action="" method="post" id="dataForm-department-update">
                     <div class="mb-3">
                         <label for="id" class="form-label">ID : </label>
-                        <input type="text" class="form-control" id="id" name="id" disabled>
+                        <input type="text" autocomplete="off" class="form-control" id="id" name="id" disabled>
                     </div>
                     <div class="mb-3">
                         <label for="department_name" class="form-label">Name : </label>
-                        <input type="text" class="form-control" id="department_name" name="department_name">
+                        <input type="text" autocomplete="off" class="form-control" id="department_name" name="department_name">
                     </div>
                 </form>
             </div>
@@ -468,11 +468,11 @@
                 <form action="" method="post" id="dataForm-year-update">
                     <div class="mb-3">
                         <label for="id" class="form-label">ID : </label>
-                        <input type="text" class="form-control" id="id" name="id" disabled>
+                        <input type="text" autocomplete="off" class="form-control" id="id" name="id" disabled>
                     </div>
                     <div class="mb-3">
                         <label for="year_name" class="form-label">Name : </label>
-                        <input type="text" class="form-control" id="year_name" name="year_name">
+                        <input type="text" autocomplete="off" class="form-control" id="year_name" name="year_name">
                     </div>
                 </form>
             </div>
@@ -495,22 +495,22 @@
                 <form action="" method="post" id="dataForm-semester-update">
                     <div class="mb-3">
                         <label for="semester_id" class="form-label">ID : </label>
-                        <input type="text" class="form-control" id="semester_id" name="id">
+                        <input type="text" autocomplete="off" class="form-control" id="semester_id" name="id">
                     </div>
                     <div class="mb-3">
                         <label for="semester_name" class="form-label">Name : </label>
-                        <input type="text" class="form-control" id="semester_name" name="semester_name">
+                        <input type="text" autocomplete="off" class="form-control" id="semester_name" name="semester_name">
                     </div>
                     <div class="mb-3">
                         <label for="semester_term" class="form-label">Term : </label>
-                        <input type="text" class="form-control" id="semester_term" name="semester_term">
+                        <input type="text" autocomplete="off" class="form-control" id="semester_term" name="semester_term">
                     </div>
                     <div class="mb-3">
                         <label for="year" class="form-label">Year :</label>
                         <div class="position-relative w-100" id="year">
 
                             <!-- INPUT -->
-                            <input type="text" class="form-control" placeholder="Select an option..." name="year_name">
+                            <input type="text" autocomplete="off" class="form-control" placeholder="Select an option..." name="year_name">
 
                             <!-- HIDDEN VALUE -->
                             <input type="hidden" name="year_id">

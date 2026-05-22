@@ -39,7 +39,7 @@
 {% block content %}
 
 <!-- Hero Section (Minimal Google Style) -->
-<section class="pt-36 pb-12 bg-white">
+<section class="pt-36 pb-12 bg-blue-50">
     <div class="max-w-4xl mx-auto px-6 text-center">
         <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
             Syllabus & Courses
@@ -53,29 +53,30 @@
         <div class="flex justify-center mt-10">
             <div class="inline-flex p-1.5 bg-gray-50/80 backdrop-blur-sm rounded-full border border-gray-200/80 shadow-sm">
                 <!-- Active Button -->
-                <button onclick="switchTab('faculties')" id="btn-faculties" class="tab-switcher px-8 py-2.5 rounded-full font-bold text-sm md:text-base transition-all duration-300 bg-blue-600 text-white shadow-[0_2px_10px_rgba(37,99,235,0.25)]" data-tab-name="faculties">
-                    Courses by Faculties
-                </button>
-                <!-- Inactive Button -->
-                <button onclick="switchTab('semester')" id="btn-semester" class="tab-switcher px-8 py-2.5 rounded-full font-semibold text-sm md:text-base transition-all duration-300 text-gray-500 hover:text-blue-600 hover:bg-blue-50/50" data-tab-name="semesters">
-                    Courses by Semester
-                </button>
+<!--                <button onclick="switchTab('faculties')" id="btn-faculties" class="tab-switcher px-8 py-2.5 rounded-full font-bold text-sm md:text-base transition-all duration-300 bg-blue-600 text-white shadow-[0_2px_10px_rgba(37,99,235,0.25)]" data-tab-name="faculties">-->
+<!--                    Courses by Faculties-->
+<!--                </button>-->
+<!--                &lt;!&ndash; Inactive Button &ndash;&gt;-->
+<!--                <button onclick="switchTab('semester')" id="btn-semester" class="tab-switcher px-8 py-2.5 rounded-full font-semibold text-sm md:text-base transition-all duration-300 text-gray-500 hover:text-blue-600 hover:bg-blue-50/50" data-tab-name="semesters">-->
+<!--                    Courses by Semester-->
+<!--                </button>-->
+                <h2>Courses by Semester</h2>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Main Course Syllabus Section -->
-<section id="syllabus-content" class="pb-28 bg-white">
-    <div class="max-w-4xl mx-auto px-6">
+<section id="syllabus-content" class="pb-28 bg-blue-50">
+    <div class="max-w-4xl mx-auto px-6 bg-white shadow-xl rounded-2xl">
 
         <!-- Section 1: Courses by Faculties -->
-        <div id="tab-faculties" class="block animate-fade-in border-t border-gray-200">
+        <div id="tab-faculties" class="block animate-fade-in border-t border-gray-200 hidden">
 
         </div>
 
         <!-- Section 2: Courses by Semester (Combined Single Accordion Structure) -->
-        <div id="tab-semester" class="hidden animate-fade-in border-t border-gray-200">
+        <div id="tab-semester" class=" animate-fade-in border-t border-gray-200">
 
         </div>
 

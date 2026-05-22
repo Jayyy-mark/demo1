@@ -1,8 +1,12 @@
 const api = {
-    async getCourseByFaculty(){
-        const res = await fetch("/api/frontend/course/department/subject");
+    async getCourseByFaculty(department_name){
+        const params = new URLSearchParams({
+            department_name:department_name,
+        });
+        const res = await fetch(`/api/frontend/course/department/subject?${params.toString()}`);
         const data = await res.json();
         return data.subjects;
+
     },
 }
 
@@ -71,10 +75,12 @@ const courseEvent = {
 
     },
     async load(){
-        const departmentSubjects = await api.getCourseByFaculty();
+        const department_name = String(document.querySelector("#department_name").value).split("(")[0];
 
+        const departmentSubjects = await api.getCourseByFaculty(department_name);
+        console.log("this is subjects : ", departmentSubjects);
         UI.renderCourseByFaculty(departmentSubjects);
-        
+
     }
 }
 

@@ -2,6 +2,7 @@ from collections import defaultdict
 
 from app.models.ActivityModel import Activity
 from app.models.CourseModel import Course
+from app.models.DepartmentModel import Department
 from app.models.ResearchModel import Research
 from app.models.LaboratoryModel import Laboratory
 from app.models.SubjectModel import Subject
@@ -225,9 +226,12 @@ class FrontendController:
 
     @staticmethod
     def getCourseByDepartment():
+        department_name = request.args.get("department_name")
         subjects = Subject.query.options(
             selectinload(Subject.department)
-        ).all()        
+        ).join(Subject.department).filter(
+            Department.department_name == department_name
+        ).all()
         data = SubjectSchema(many=True).dump(subjects)
 
         grouped = defaultdict(lambda: {

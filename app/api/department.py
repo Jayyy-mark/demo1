@@ -19,7 +19,4 @@ def createDepartment():
 def updateDepartment():
     return DepartmentController().update()
 
-@department_api.route("/department/delete", methods=['DELETE'])
-@jwt_required()
-def deleteDepartment():
-    return DepartmentController().delete()
+

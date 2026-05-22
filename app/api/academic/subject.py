@@ -34,3 +34,8 @@ def deletesubject():
     return SubjectController().delete()
 
 
+@academic_api.route('/department/subject', methods=['DELETE'])
+@jwt_required()
+def getSubjectByDepartment():
+    return SubjectController().getSubjectByDepartment()
+

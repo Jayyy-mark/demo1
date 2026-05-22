@@ -41,6 +41,6 @@ def activities():
 
 
 
-@frontend_bp.route('/activity/<int:id>')
+@frontend_bp.route('/activity/<int:id>', endpoint='activityGallery')
 def activity_detail(id):
     return render_template('frontend/activity_gallery.html', activity_id=id)

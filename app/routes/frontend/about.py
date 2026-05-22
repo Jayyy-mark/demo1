@@ -1,7 +1,7 @@
 from . import frontend_bp
 from flask import render_template
 
-@frontend_bp.route('/about')
+@frontend_bp.route('/about', endpoint='about')
 def about():
     """About Us / History / Organization Page"""
     return render_template('frontend/about.html')

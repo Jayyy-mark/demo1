@@ -18,7 +18,7 @@ export const courseUI = {
             var row = `
             <tr>
                 <td class="py-3">${c.course_id}</td>
-                <td class="py-3">${c.semester?.semester_term ?? 'N/A'}</td>
+                <td class="py-3">${c.semester?.semester_name ?? 'N/A'}</td>
                 <td class="py-3">${c.subject?.subject_name ?? 'N/A'}</td>
                 <td class="py-3">${c.subject?.department?.department_name ?? 'N/A'}</td>
                 <td class="py-3 text-start">

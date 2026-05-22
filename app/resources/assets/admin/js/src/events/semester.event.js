@@ -15,6 +15,11 @@ export const semesterEvent = {
 
         this.load();
 
+        $("#semesters-tab").on("click", async function(){
+            await academicHelper.setTab("semesters");
+        });
+
+
         $("#save_semester_btn").on("click", ()=> this.create());
 
         $("#update_semester_btn").on("click", ()=> this.update());

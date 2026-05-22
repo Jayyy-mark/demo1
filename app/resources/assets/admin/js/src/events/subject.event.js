@@ -15,6 +15,11 @@ export const subjectEvent = {
 
         this.load();
 
+        $("#subjects-tab").on("click", async function(){
+            await academicHelper.setTab("subjects");
+        });
+        
+
         $("#save_subject_btn").on("click", ()=> this.create());
 
         $("#update_subject_btn").on("click", ()=> this.update());

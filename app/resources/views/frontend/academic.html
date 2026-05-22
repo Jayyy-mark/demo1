@@ -3,16 +3,8 @@
 {% block title %}Academic Portal - UCSTGO{% endblock %}
 
 {% block styles %}
-<!-- Google Fonts: Plus Jakarta Sans for clean, modern geometry -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-    /* Premium font pairing targeting modern sans-serif & optimal Myanmar font rendering */
-    body, h1, h2, h3, h4, h5, h6, p, span, li, button, a {
-        font-family: 'Plus Jakarta Sans', 'Pyidaungsu', 'Noto Sans Myanmar', 'Myanmar3', sans-serif !important;
-    }
 
     /* Standardized Smooth Accordion Transitions */
     .accordion-content {
@@ -108,7 +100,7 @@
 
             <!-- Right Side: Admitted List (Sticky Sidebar) -->
             <div class="lg:col-span-5">
-                <div class="bg-white border border-gray-100 rounded-2xl p-8 shadow-xl shadow-gray-100/70 sticky top-24">
+                <div class="bg-white border border-gray-100 rounded-2xl p-8 shadow-xl shadow-gray-100/70 top-24">
                     <!-- ဘယ်ဘက်က ခေါင်းစဉ်ကြီးနှင့် ညီသွားအောင် text-2xl ကို ဆက်သုံးထားပါသည် -->
                     <h2 class="text-2xl font-bold text-gray-900 mb-6 tracking-tight">ရွေးချယ်ခံရသူစာရင်း (Admitted List)</h2>
 
@@ -145,102 +137,132 @@
 </section>
 
 <!-- Degree Programmes Section -->
-<section id="degrees" class="py-32 bg-blue-50">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-20">
-            <h2 class="text-4xl font-extrabold text-gray-900 tracking-tight mb-4">Degree Programmes</h2>
-            <p class="text-gray-500 text-base md:text-lg">Explore undergraduate and post-graduate pathways offered at UCSTGO.</p>
+<section id="degrees" class="py-24 bg-slate-50 relative">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight mb-4">Degree Programmes</h2>
+            <p class="text-slate-500 text-lg">Comprehensive academic pathways designed for future innovators.</p>
+            <div class="w-16 h-1 bg-blue-600 mx-auto mt-6 rounded-full"></div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start [perspective:1000px]">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
 
-            <div class="bg-white shadow-xl rounded-2xl p-10 md:p-12 flex flex-col transform transition-all duration-500 ease-out shadow-[0_10px_30px_-5px_rgba(0,0,0,0.05),0_5px_15px_-5px_rgba(0,0,0,0.03)] hover:-translate-y-4 hover:rotate-x-1 hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.12),0_15px_30px_-10px_rgba(59,130,246,0.08)]">
-                <div class="mb-8 pb-6 border-b border-gray-100">
-                    <span class="text-xs font-bold tracking-widest text-blue-600 uppercase bg-blue-50 px-3 py-1.5 rounded-md inline-block mb-4">Undergraduate</span>
-                    <h3 class="text-3xl font-bold text-gray-900 mb-3">Bachelor Degree</h3>
-                    <p class="text-gray-500 text-base italic">"The graduate program is a basic and full-time course."</p>
+            <!-- ================= BACHELOR CARD ================= -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden border border-slate-100 flex flex-col h-full group">
+                <div class="bg-gradient-to-r from-blue-50 to-white p-8 border-b border-blue-100 group-hover:bg-blue-50 transition-colors">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs font-bold tracking-widest text-blue-600 uppercase bg-blue-100 px-3 py-1 rounded-full">Undergraduate</span>
+                        <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+                        </div>
+                    </div>
+                    <h3 class="text-3xl font-bold text-slate-900 mb-2">Bachelor Degree</h3>
+                    <p class="text-slate-500 italic text-sm">"The graduate program is a basic and full-time course."</p>
                 </div>
 
-                <div class="space-y-8 flex-grow">
+                <div class="p-8 space-y-8 flex-grow">
+                    <!-- Admission Criteria -->
                     <div>
-                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Admission Criteria</h4>
-                        <ul class="space-y-3.5 text-base text-gray-600">
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-blue-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Admission Criteria
+                        </h4>
+                        <ul class="space-y-3 text-slate-600 text-base">
+                            <li class="flex items-start gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors">
+                                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0"></span>
                                 <span>Applicants must pass the Matriculation Examination.</span>
                             </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-blue-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            <li class="flex items-start gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors">
+                                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0"></span>
                                 <span>Follow the rules of University Entrance Guide Book.</span>
                             </li>
                         </ul>
                     </div>
 
+                    <!-- Programmes -->
                     <div>
-                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Programme Structures</h4>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Programme Structures</h4>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="bg-slate-50 p-5 rounded-xl transition-all duration-300 hover:bg-white hover:shadow-lg hover:-translate-y-1">
-                                <p class="font-bold text-gray-900 text-base">B.C.Sc.</p>
-                                <p class="text-sm text-gray-500 mt-1">Bachelor of Computer Science</p>
+                            <div class="border border-slate-100 bg-white p-4 rounded-xl shadow-sm hover:border-blue-300 hover:shadow-md transition-all cursor-pointer">
+                                <div class="text-2xl font-bold text-blue-600 mb-1">B.C.Sc.</div>
+                                <div class="text-xs text-slate-500 font-medium">Bachelor of Computer Science</div>
                             </div>
-                            <div class="bg-slate-50 p-5 rounded-xl transition-all duration-300 hover:bg-white hover:shadow-lg hover:-translate-y-1">
-                                <p class="font-bold text-gray-900 text-base">B.C.Tech.</p>
-                                <p class="text-sm text-gray-500 mt-1">Bachelor of Computer Technology</p>
+                            <div class="border border-slate-100 bg-white p-4 rounded-xl shadow-sm hover:border-blue-300 hover:shadow-md transition-all cursor-pointer">
+                                <div class="text-2xl font-bold text-blue-600 mb-1">B.C.Tech.</div>
+                                <div class="text-xs text-slate-500 font-medium">Bachelor of Computer Technology</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-slate-50 rounded-xl overflow-hidden shadow-sm">
-                        <button onclick="toggleAccordion('bachelor-points')" class="w-full flex items-center justify-between p-5 hover:bg-slate-100 transition-colors text-left">
-                            <h4 class="text-xs font-bold text-gray-700 uppercase tracking-wider">Points to Follow</h4>
-                            <svg id="bachelor-points-icon" class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <!-- Accordion: Points to Follow -->
+                    <div class="pt-4 border-t border-slate-100">
+                        <button onclick="toggleAccordion('bachelor-points')" class="w-full flex items-center justify-between text-left group/btn">
+                            <span class="text-sm font-bold text-slate-700 group-hover/btn:text-blue-600 transition-colors">Points to Follow</span>
+                            <svg id="bachelor-points-icon" class="w-5 h-5 text-slate-400 transform transition-transform duration-200 group-hover/btn:text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div id="bachelor-points" class="accordion-content">
-                            <ul class="p-5 pt-0 space-y-3.5 text-sm text-gray-500 border-t border-gray-100 mt-2 leading-relaxed">
-                                <li class="flex items-start gap-2"><span>•</span> Students have to take ten semesters including internship program.</li>
-                                <li class="flex items-start gap-2"><span>•</span> Must complete specified total credit and follow criteria of credit system (attendance, quizzes, assignments, test, and exam).</li>
-                                <li class="flex items-start gap-2"><span>•</span> Qualified students can join the Master Degree program upon completion.</li>
-                            </ul>
+                        <!-- hidden နေရာမှာ style="display: none;" ကို အစားထိုးလိုက်ပါတယ် -->
+                        <div id="bachelor-points" style="display: none;" class="mt-3 overflow-hidden transition-all duration-300">
+                            <div class="bg-blue-50/50 rounded-lg p-5 text-sm text-slate-600 space-y-3 leading-relaxed border border-blue-100">
+                                <ul class="space-y-3.5 list-none">
+                                    <li class="flex items-start gap-2"><span>•</span> Students have to take ten semesters including internship program.</li>
+                                    <li class="flex items-start gap-2"><span>•</span> Must complete specified total credit and follow criteria of credit system (attendance, quizzes, assignments, test, and exam).</li>
+                                    <li class="flex items-start gap-2"><span>•</span> Qualified students can join the Master Degree program upon completion.</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white shadow-xl rounded-2xl p-10 md:p-12 flex flex-col transform transition-all duration-500 ease-out shadow-[0_10px_30px_-5px_rgba(0,0,0,0.05),0_5px_15px_-5px_rgba(0,0,0,0.03)] hover:-translate-y-4 hover:rotate-x-1 hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.12),0_15px_30px_-10px_rgba(16,185,129,0.08)]">
-                <div class="mb-8 pb-6 border-b border-gray-100">
-                    <span class="text-xs font-bold tracking-widest text-emerald-600 uppercase bg-emerald-50 px-3 py-1.5 rounded-md inline-block mb-4">Postgraduate</span>
-                    <h3 class="text-3xl font-bold text-gray-900 mb-3">Master Degree</h3>
-                    <p class="text-gray-500 text-base italic">Advanced Research & Thesis work.</p>
+            <!-- ================= MASTER CARD ================= -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden border border-slate-100 flex flex-col h-full group">
+                <div class="bg-gradient-to-r from-emerald-50 to-white p-8 border-b border-emerald-100 group-hover:bg-emerald-50 transition-colors">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs font-bold tracking-widest text-emerald-600 uppercase bg-emerald-100 px-3 py-1 rounded-full">Postgraduate</span>
+                        <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        </div>
+                    </div>
+                    <h3 class="text-3xl font-bold text-slate-900 mb-2">Master Degree</h3>
+                    <p class="text-slate-500 italic text-sm">Advanced Research & Thesis work.</p>
                 </div>
 
-                <div class="space-y-8 flex-grow">
+                <div class="p-8 space-y-8 flex-grow">
+                    <!-- Programmes -->
                     <div>
-                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Programme Structures</h4>
-                        <div class="space-y-4">
-                            <div class="flex items-center p-5 bg-slate-50 rounded-xl transition-all duration-300 hover:bg-white hover:shadow-lg hover:-translate-y-1">
-                                <div class="w-2 h-2 bg-emerald-500 rounded-full mr-4"></div>
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                            Programme Structures
+                        </h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center p-4 rounded-xl border border-slate-100 bg-white shadow-sm hover:border-emerald-300 hover:shadow-md transition-all">
+                                <div class="w-2 h-8 bg-emerald-500 rounded-full mr-4"></div>
                                 <div>
-                                    <p class="text-base font-bold text-gray-900">M.C.Sc.</p>
-                                    <p class="text-sm text-gray-500 mt-0.5">Master of Computer Science</p>
+                                    <p class="font-bold text-slate-900 text-lg">M.C.Sc.</p>
+                                    <p class="text-sm text-slate-500">Master of Computer Science</p>
                                 </div>
                             </div>
-                            <div class="flex items-center p-5 bg-slate-50 rounded-xl transition-all duration-300 hover:bg-white hover:shadow-lg hover:-translate-y-1">
-                                <div class="w-2 h-2 bg-emerald-500 rounded-full mr-4"></div>
+                            <div class="flex items-center p-4 rounded-xl border border-slate-100 bg-white shadow-sm hover:border-emerald-300 hover:shadow-md transition-all">
+                                <div class="w-2 h-8 bg-emerald-500 rounded-full mr-4"></div>
                                 <div>
-                                    <p class="text-base font-bold text-gray-900">M.C.Tech.</p>
-                                    <p class="text-sm text-gray-500 mt-0.5">Master of Computer Technology</p>
+                                    <p class="font-bold text-slate-900 text-lg">M.C.Tech.</p>
+                                    <p class="text-sm text-slate-500">Master of Computer Technology</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-slate-50 rounded-xl overflow-hidden shadow-sm">
-                        <button onclick="toggleAccordion('master-points')" class="w-full flex items-center justify-between p-5 hover:bg-slate-100 transition-colors text-left">
-                            <h4 class="text-xs font-bold text-gray-700 uppercase tracking-wider">Point to Follow</h4>
-                            <svg id="master-points-icon" class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <!-- Accordion: Point to Follow -->
+                    <div class="pt-4 border-t border-slate-100">
+                        <button onclick="toggleAccordion('master-points')" class="w-full flex items-center justify-between text-left group/btn">
+                            <span class="text-sm font-bold text-slate-700 group-hover/btn:text-emerald-600 transition-colors">Point to Follow</span>
+                            <svg id="master-points-icon" class="w-5 h-5 text-slate-400 transform transition-transform duration-200 group-hover/btn:text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
-                        <div id="master-points" class="accordion-content">
-                            <div class="p-5 pt-0 text-sm text-gray-500 border-t border-gray-100 mt-2 leading-relaxed">
+                        <!-- hidden နေရာမှာ style="display: none;" ကို အစားထိုးလိုက်ပါတယ် -->
+                        <div id="master-points" style="display: none;" class="mt-3 overflow-hidden transition-all duration-300">
+                            <div class="bg-emerald-50/50 rounded-lg p-5 text-sm text-slate-600 leading-relaxed border border-emerald-100">
                                 Students have to take a two-semester course work plan and successfully prepare as well as complete a master thesis defense.
                             </div>
                         </div>
@@ -252,22 +274,21 @@
     </div>
 </section>
 
-
-{% endblock %}
-
-{% block scripts %}
+<!-- ပြင်ဆင်ထားတဲ့ စိတ်ချရဆုံး JavaScript ကုဒ်ဖြစ်ပါတယ် -->
 <script>
     function toggleAccordion(id) {
         const content = document.getElementById(id);
         const icon = document.getElementById(id + '-icon');
 
-        if (content.classList.contains('open')) {
-            content.classList.remove('open');
-            if(icon) icon.classList.remove('rotate-180');
+        // display configuration ကို စစ်ဆေးပြီး အလုပ်လုပ်စေပါတယ်
+        if (content.style.display === 'none' || content.style.display === '') {
+            content.style.display = 'block';
+            if (icon) icon.style.transform = 'rotate(180deg)';
         } else {
-            content.classList.add('open');
-            if(icon) icon.classList.add('rotate-180');
+            content.style.display = 'none';
+            if (icon) icon.style.transform = 'rotate(0deg)';
         }
     }
 </script>
+
 {% endblock %}

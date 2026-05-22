@@ -44,17 +44,20 @@
         <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
             Syllabus & Courses
         </h1>
+        <div class="w-24 h-1 bg-blue-600 mx-auto mb-6 rounded"></div>
         <p class="text-gray-500 max-w-2xl mx-auto text-base md:text-lg">
             ရှာဖွေလိုသည့် ကဏ္ဍအလိုက် သင်ကြားပေးလျက်ရှိသော ဘာသာရပ်များနှင့် သင်ရိုးညွှန်းတမ်းများကို ရွေးချယ်ကြည့်ရှုနိုင်ပါသည်။
         </p>
 
         <!-- Google Styled Segmented Control Tab Switcher -->
         <div class="flex justify-center mt-10">
-            <div class="inline-flex p-1 bg-gray-100 rounded-full border border-gray-200/60">
-                <button onclick="switchTab('faculties')" id="btn-faculties" class="px-6 py-2.5 rounded-full font-bold text-sm md:text-base transition-all bg-white text-gray-900 shadow-sm border border-gray-200/20">
+            <div class="inline-flex p-1.5 bg-gray-50/80 backdrop-blur-sm rounded-full border border-gray-200/80 shadow-sm">
+                <!-- Active Button -->
+                <button onclick="switchTab('faculties')" id="btn-faculties" class="px-8 py-2.5 rounded-full font-bold text-sm md:text-base transition-all duration-300 bg-blue-600 text-white shadow-[0_2px_10px_rgba(37,99,235,0.25)]">
                     Courses by Faculties
                 </button>
-                <button onclick="switchTab('semester')" id="btn-semester" class="px-6 py-2.5 rounded-full font-bold text-sm md:text-base transition-all text-gray-500 hover:text-gray-900">
+                <!-- Inactive Button -->
+                <button onclick="switchTab('semester')" id="btn-semester" class="px-8 py-2.5 rounded-full font-semibold text-sm md:text-base transition-all duration-300 text-gray-500 hover:text-blue-600 hover:bg-blue-50/50">
                     Courses by Semester
                 </button>
             </div>
@@ -79,48 +82,42 @@
     </div>
 </section>
 
-<!-- Back to Academic Portal Footer Section -->
-<section class="py-16 bg-gray-50 text-center border-t border-gray-200">
-    <a href="/academic" class="inline-flex items-center text-base font-bold text-gray-600 hover:text-blue-600 transition-colors group">
-        <svg class="w-5 h-5 mr-2.5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-        Academic Portal သို့ ပြန်သွားရန်
-    </a>
-</section>
-
 {% endblock %}
 
 {% block scripts %}
 <script>
-    // Tab switching logic (Faculties vs Semesters)
-    function switchTab(tab) {
-        const facTab = document.getElementById('tab-faculties');
-        const semTab = document.getElementById('tab-semester');
-        const facBtn = document.getElementById('btn-faculties');
-        const semBtn = document.getElementById('btn-semester');
+    function switchTab(tabName) {
+    const btnFaculties = document.getElementById('btn-faculties');
+    const btnSemester = document.getElementById('btn-semester');
 
-        const activeClasses = ["bg-white", "text-gray-900", "shadow-sm", "border", "border-gray-200/20"];
-        const inactiveClasses = ["text-gray-500", "hover:text-gray-900"];
+    // Active ဖြစ်မည့် Class များ
+    const activeClasses = ['bg-blue-600', 'text-white', 'shadow-[0_2px_10px_rgba(37,99,235,0.25)]', 'font-bold'];
+    // Inactive ဖြစ်မည့် Class များ
+    const inactiveClasses = ['text-gray-500', 'hover:text-blue-600', 'hover:bg-blue-50/50', 'font-semibold'];
 
-        if (tab === 'faculties') {
-            facTab.classList.remove('hidden');
-            semTab.classList.add('hidden');
+    if (tabName === 'faculties') {
+        // Faculties ကို Active လုပ်မည်
+        btnFaculties.classList.add(...activeClasses);
+        btnFaculties.classList.remove(...inactiveClasses);
 
-            facBtn.classList.add(...activeClasses);
-            facBtn.classList.remove(...inactiveClasses);
+        // Semester ကို Inactive လုပ်မည်
+        btnSemester.classList.remove(...activeClasses);
+        btnSemester.classList.add(...inactiveClasses);
 
-            semBtn.classList.remove(...activeClasses);
-            semBtn.classList.add(...inactiveClasses);
-        } else {
-            semTab.classList.remove('hidden');
-            facTab.classList.add('hidden');
+        // သင့်ရဲ့ Content ဖော်ပြမည့် logic များကို ဆက်ရေးရန်...
 
-            semBtn.classList.add(...activeClasses);
-            semBtn.classList.remove(...inactiveClasses);
+    } else if (tabName === 'semester') {
+        // Semester ကို Active လုပ်မည်
+        btnSemester.classList.add(...activeClasses);
+        btnSemester.classList.remove(...inactiveClasses);
 
-            facBtn.classList.remove(...activeClasses);
-            facBtn.classList.add(...inactiveClasses);
-        }
+        // Faculties ကို Inactive လုပ်မည်
+        btnFaculties.classList.remove(...activeClasses);
+        btnFaculties.classList.add(...inactiveClasses);
+
+        // သင့်ရဲ့ Content ဖော်ပြမည့် logic များကို ဆက်ရေးရန်...
     }
+}
 
     // Dynamic Accordion Toggle
     function toggleAccordion(id) {

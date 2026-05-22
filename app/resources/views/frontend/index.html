@@ -57,10 +57,10 @@
             </div>
 
             <!-- 2. Balanced Grid Content Split -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
 
                 <!-- Left Hand Image Section (5 Columns Wide) -->
-                <div class="lg:col-span-5 w-full h-[350px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg border border-slate-100 relative group">
+                <div class="lg:col-span-5 w-full h-full min-h-[400px] rounded-2xl overflow-hidden shadow-lg border border-slate-100 relative group">
                     <img src="{{ url_for('static', filename='frontend/image/s3.jpg') }}"
                          alt="UCSTGO Campus"
                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
@@ -112,7 +112,7 @@
                         </svg>
                     </div>
                 </div>
-                <p class="text-4xl lg:text-5xl font-black text-blue-900 count-up tracking-tight stats-number" data-target="2001">0</p>
+                <p class="text-4xl lg:text-5xl font-black text-apple-blue count-up tracking-tight stats-number" data-target="2001">0</p>
                 <p class="text-xs text-slate-300 mt-3 uppercase tracking-widest font-bold group-hover:text-cyan-400 transition-colors">Established</p>
             </div>
 
@@ -125,7 +125,7 @@
                         </svg>
                     </div>
                 </div>
-                <p class="text-4xl lg:text-5xl font-black text-blue-900 count-up tracking-tight stats-number" data-target="120">0</p>
+                <p class="text-4xl lg:text-5xl font-black text-apple-blue count-up tracking-tight stats-number" data-target="120">0</p>
                 <p class="text-xs text-slate-300 mt-3 uppercase tracking-widest font-bold group-hover:text-cyan-400 transition-colors">Staff Members</p>
             </div>
 
@@ -138,7 +138,7 @@
                         </svg>
                     </div>
                 </div>
-                <p class="text-4xl lg:text-5xl font-black text-blue-900 count-up tracking-tight stats-number" data-target="3500">0</p>
+                <p class="text-4xl lg:text-5xl font-black text-apple-blue count-up tracking-tight stats-number" data-target="3500">0</p>
                 <p class="text-xs text-slate-300 mt-3 uppercase tracking-widest font-bold group-hover:text-cyan-400 transition-colors">Graduated</p>
             </div>
 
@@ -151,7 +151,7 @@
                         </svg>
                     </div>
                 </div>
-                <p class="text-4xl lg:text-5xl font-black text-blue-900 count-up tracking-tight stats-number" data-target="1200">0</p>
+                <p class="text-4xl lg:text-5xl font-black text-apple-blue count-up tracking-tight stats-number" data-target="1200">0</p>
                 <p class="text-xs text-slate-300 mt-3 uppercase tracking-widest font-bold group-hover:text-cyan-400 transition-colors">Current Students</p>
             </div>
 
@@ -169,7 +169,7 @@
                 <h2 class="text-3xl font-bold text-apple-dark mb-6">Rector's Message</h2>
                 <div class="w-12 h-1 bg-apple-blue mb-6"></div>
                 <blockquote class="text-lg text-gray-600 leading-relaxed mb-6  text-justify">
-                    "ယနေ့ခေတ်သည် စတုတ္ထအကြိမ်မြောက် စက်မှုတော်လှန်ရေး (Industry 4.0) ကာလဖြစ်သည်နှင့်အညီ နည်းပညာသည် ကမ္ဘာကြီးကို မောင်းနှင်နေသော အဓိကအင်အားစု ဖြစ်ပါသည်။ ကျွန်ုပ်တို့ ကွန်ပျူတာတက္ကသိုလ်(တောင်ငူ) အနေဖြင့် ကျောင်းသား၊ ကျောင်းသူများကို စာတွေ့သာမက လက်တွေ့နယ်ပယ်တွင်ပါ ထူးချွန်ထက်မြက်ပြီး ဆန်းသစ်တီထွင်နိုင်စွမ်းရှိသော (Innovators) များ ဖြစ်လာစေရန် ပြုစုပျိုးထောင်ပေးလျက်ရှိပါသည်။ ဤ Website မှတစ်ဆင့် ကျွန်ုပ်တို့တက္ကသိုလ်၏ ပညာရေးလှုပ်ရှားမှုများ၊ သုတေသနလုပ်ငန်းများနှင့် အောင်မြင်မှုများကို ပွင့်လင်းမြင်သာစွာ ချိတ်ဆက်ကြည့်ရှုနိုင်မည်ဟု ယုံကြည်ပါသည်။"
+                    ယနေ့ခေတ်သည် စတုတ္ထအကြိမ်မြောက် စက်မှုတော်လှန်ရေး (Industry 4.0) ကာလဖြစ်သည်နှင့်အညီ နည်းပညာသည် ကမ္ဘာကြီးကို မောင်းနှင်နေသော အဓိကအင်အားစု ဖြစ်ပါသည်။ ကျွန်ုပ်တို့ ကွန်ပျူတာတက္ကသိုလ်(တောင်ငူ) အနေဖြင့် ကျောင်းသား၊ ကျောင်းသူများကို စာတွေ့သာမက လက်တွေ့နယ်ပယ်တွင်ပါ ထူးချွန်ထက်မြက်ပြီး ဆန်းသစ်တီထွင်နိုင်စွမ်းရှိသော (Innovators) များ ဖြစ်လာစေရန် ပြုစုပျိုးထောင်ပေးလျက်ရှိပါသည်။ ဤ Website မှတစ်ဆင့် ကျွန်ုပ်တို့တက္ကသိုလ်၏ ပညာရေးလှုပ်ရှားမှုများ၊ သုတေသနလုပ်ငန်းများနှင့် အောင်မြင်မှုများကို ပွင့်လင်းမြင်သာစွာ ချိတ်ဆက်ကြည့်ရှုနိုင်မည်ဟု ယုံကြည်ပါသည်။
                 </blockquote>
                 <div>
                     <p class="font-bold text-apple-blue text-lg">Dr. Ei Ei Hlaing</p>

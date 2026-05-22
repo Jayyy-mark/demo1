@@ -5,22 +5,22 @@
 {% block content %}
 
 <!-- Research & Publications Hero Section -->
-<section class="pt-32 pb-16 bg-white">
+<!-- <section class="pt-32 pb-16 bg-white">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-        <!-- Title -->
+        
         <h1 class="text-4xl md:text-6xl font-extrabold text-apple-dark mb-4 tracking-tight">
             Research & Publications
         </h1>
 
-        <!-- အပြာရောင်လိုင်းတိုလေး (အလျား ၂၄၊ အမြင့် ၄ပုံစံ) -->
+        
         <div class="w-24 h-1 bg-blue-600 mx-auto mb-6 rounded"></div>
 
-        <!-- Description -->
+        
         <p class="text-lg text-gray-500 max-w-2xl mx-auto italic font-light leading-relaxed">
             တောင်ငူကွန်ပျူတာတက္ကသိုလ်မှ ဆရာ/ဆရာမများနှင့် ကျောင်းသား/ကျောင်းသူများ၏ သုတေသနပြုတွေ့ရှိချက်များနှင့် ပုံနှိပ်ထုတ်ဝေခဲ့သော စာတမ်းများကို ဤနေရာတွင် လေ့လာနိုင်ပါသည်။
         </p>
     </div>
-</section>
+</section> -->
 
 <!-- Research Labs Section -->
 <section id="labs" class="pt-32 pb-16 bg-slate-50">
@@ -36,79 +36,7 @@
     </div>
 </section>
 
-<!-- Publications Section -->
-<section id="publications" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-6">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-            <div>
-                <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-2">Publications</h2>
-                <p class="text-slate-500">တက္ကသိုလ်မှ ထုတ်ဝေခဲ့သော သုတေသနစာတမ်းများ။</p>
-            </div>
-        </div>
-
-        <!-- Publications Container -->
-        <div id="pub-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-        </div>
-
-        <!-- View More Button Area -->
-        <div class="mt-12 text-center">
-            <button id="view-more-btn" class="px-8 py-3 bg-slate-900 text-white rounded-full font-bold shadow-lg hover:bg-blue-600 transition-all">
-                VIEW MORE
-            </button>
-        </div>
-    </div>
-</section>
-
-<script>
-// အရင်ရှိပြီးသား toggle function (မပြောင်းလဲပါ)
-function togglePub(id, btn) {
-    const el = document.getElementById(id);
-    if (el.classList.contains('max-h-10')) {
-        el.classList.remove('max-h-10');
-        el.classList.add('max-h-96');
-        btn.innerText = 'SHOW LESS';
-    } else {
-        el.classList.remove('max-h-96');
-        el.classList.add('max-h-10');
-        btn.innerText = 'READ MORE';
-    }
-}
-
-/*
-View More logic is initialized after dynamic cards are rendered in research.js.
-This old inline block is intentionally disabled.
-document.addEventListener('research-view-more-disabled', function() {
-    const cards = document.querySelectorAll('.pub-card');
-    const viewMoreBtn = document.getElementById('view-more-btn');
-
-    // Card ၄ ခုထက်ပိုမှ Button ကိုပြမည်
-    if (cards.length <= 4) {
-        viewMoreBtn.style.display = 'none';
-    }
-
-    viewMoreBtn.addEventListener('click', function() {
-        // hidden ဖြစ်နေသော card များကို ရှာမည်
-        let hiddenCards = Array.from(cards).filter(card => card.classList.contains('hidden'));
-
-        // တစ်ခါနှိပ်လျှင် ၂ ခု ဖော်မည်
-        for (let i = 0; i < 2; i++) {
-            if (hiddenCards[i]) {
-                hiddenCards[i].classList.remove('hidden');
-                // ပေါ်လာလျှင် animation လေးဖြစ်အောင်
-                hiddenCards[i].classList.add('animate-fade-in');
-            }
-        }
-
-        // hidden card မကျန်တော့လျှင် button ကိုဖျောက်မည်
-        if (Array.from(cards).filter(card => card.classList.contains('hidden')).length === 0) {
-            viewMoreBtn.style.display = 'none';
-        }
-    });
-});
-*/
-</script>
-
+{% block styles %}
 <style>
 /* ဖြည်းဖြည်းချင်းပေါ်လာစေမည့် Animation */
 @keyframes fadeIn {
@@ -119,6 +47,7 @@ document.addEventListener('research-view-more-disabled', function() {
     animation: fadeIn 0.5s ease forwards;
 }
 </style>
+{% endblock %}
 
 {% endblock %}
 

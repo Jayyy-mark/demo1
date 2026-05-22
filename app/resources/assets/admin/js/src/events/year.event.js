@@ -3,93 +3,97 @@
 =============================-->*/
 import { yearAPI } from "../api/year.api.js";
 import { yearUI } from "../ui/year.ui.js";
-import {toast} from "../utils/toast.js";
+import { toast } from "../utils/toast.js";
 import { Year } from "../interfaces/academic.js";
 import { navigate } from "../utils/navigate.js";
 
 export const yearEvent = {
     delete_id: "",
 
-    init(){
+    init() {
 
         this.load();
 
-        $("#save_year_btn").on("click", ()=> this.create());
+        $("#years-tab").on("click", async function () {
+            await academicHelper.setTab("years");
+        });
 
-        $("#update_year_btn").on("click", ()=> this.update());
+        $("#save_year_btn").on("click", () => this.create());
 
-        $("#btn_delete_year").on("click", ()=> this.delete());
+        $("#update_year_btn").on("click", () => this.update());
+
+        $("#btn_delete_year").on("click", () => this.delete());
 
         $(document).on("click", ".show-update-modal-year", (event) => this.showUpdateModal(event));
-        
+
         $(document).on("click", ".show-delete-modal-year", (event) => this.showDeleteModal(event));
 
     },
-    async load(){
+    async load() {
         try {
             const response = await yearAPI.all();
             yearUI.render(response.data);
-        }catch(error){
+        } catch (error) {
             console.log("error : ", error);
-             toast.error("Failed to load years.");
+            toast.error("Failed to load years.");
         }
     },
-    async create(){
+    async create() {
         const form = $("#dataForm-year");
         const year = new Year();
 
-        form.find("[name]").each(function(){
+        form.find("[name]").each(function () {
             const key = $(this).attr("name");
             const value = $(this).val();
 
             year.set(key, value);
         });
 
-        try{
+        try {
             const response = await yearAPI.create(year);
             await toast.success(response.message);
             navigate.refresh();
 
-        }catch(error){
+        } catch (error) {
             console.log("error : ", error);
             await toast.error(error?.message || "Failed to create year.");
         }
     },
-    async update(){
+    async update() {
         const form = $("#dataForm-year-update");
         const year = new Year();
-        form.find("[name]").each(function(){
+        form.find("[name]").each(function () {
             const key = $(this).attr("name");
             const value = $(this).val();
             year.set(key, value);
         });
 
-        try{
+        try {
             const response = await yearAPI.update(year);
             await toast.success(response.message);
             navigate.refresh();
-        }catch(error){
+        } catch (error) {
             console.log("error : ", error);
             await toast.error(error?.message || "Failed to update year.");
         }
     },
-    async delete(){
-        try{
+    async delete() {
+        try {
             const response = await yearAPI.delete(this.delete_id);
             await toast.success(response.message);
             navigate.refresh();
-        }catch(error){
+        } catch (error) {
             console.log("error : ", error);
             await toast.error(error?.message || "Failed to delete year.");
         }
     },
-    showUpdateModal(event){
+    showUpdateModal(event) {
         const data = $(event.currentTarget).data("years");
         yearUI.fillUpdateForm(data);
         const modal = new bootstrap.Modal($("#yearModal-update"));
         modal.show();
     },
-    showDeleteModal(event){
+    showDeleteModal(event) {
         this.delete_id = $(event.currentTarget).data("id");
         const modal = new bootstrap.Modal($("#delete-modal-year"));
         modal.show();

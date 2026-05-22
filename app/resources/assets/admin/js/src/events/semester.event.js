@@ -15,6 +15,11 @@ export const semesterEvent = {
 
         this.load();
 
+        $("#semesters-tab").on("click", async function(){
+            await academicHelper.setTab("semesters");
+        });
+
+
         $("#save_semester_btn").on("click", ()=> this.create());
 
         $("#update_semester_btn").on("click", ()=> this.update());
@@ -95,11 +100,10 @@ export const semesterEvent = {
         const semester = new Semester();
 
         semester.set("id", data.id);
-        semester.set("semester_id", data.semester_id);
+        semester.set("semester_name", data.semester_name);
         semester.set("year_name", data.year?.year_name);
         semester.set("semester_term", data.semester_term);
-
-        semesterUI.fillUpdateForm(data);
+        semesterUI.fillUpdateForm(semester);
         const modal = new bootstrap.Modal($("#semesterModal-update"));
         modal.show();
     },

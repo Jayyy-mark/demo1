@@ -16,3 +16,4 @@ from . import library
 from . import about
 from . import campus_gallery
 from . import syllabus_courses
+from . import publication

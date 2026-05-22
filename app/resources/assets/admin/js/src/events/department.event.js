@@ -6,6 +6,7 @@ import { departmentUI } from "../ui/department.ui.js";
 import {toast} from "../utils/toast.js";
 import { Department } from "../interfaces/department.js";
 import { navigate } from "../utils/navigate.js";
+import { academicHelper } from "../helpers/academic.helper.js";
 
 export const departmentEvent = {
     delete_id: "",
@@ -13,6 +14,10 @@ export const departmentEvent = {
     init(){
 
         this.load();
+
+        $("#departments-tab").on("click", async function(){
+            await academicHelper.setTab("departments")
+        });
 
         $("#save_department_btn").on("click", ()=> this.create());
 

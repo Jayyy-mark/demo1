@@ -126,8 +126,8 @@
                     </button>
                     <div
                         class="absolute top-full left-0 w-64 bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 border border-gray-100 p-2 z-50">
-                        <a href="/research#labs" onmouseover="this.style.backgroundColor='#e0f2fe'; this.style.color='#0369a1'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#374151'" class="block px-4 py-3 text-sm text-gray-700 rounded-xl transition-colors">Research Labs</a>
-                        <a href="/research#publications" onmouseover="this.style.backgroundColor='#e0f2fe'; this.style.color='#0369a1'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#374151'" class="block px-4 py-3 text-sm text-gray-700 rounded-xl transition-colors">Publications</a>
+                        <a href="{{ url_for('frontend.research') }}" onmouseover="this.style.backgroundColor='#e0f2fe'; this.style.color='#0369a1'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#374151'" class="block px-4 py-3 text-sm text-gray-700 rounded-xl transition-colors">Research Labs</a>
+                        <a href="{{ url_for('frontend.publication') }}" onmouseover="this.style.backgroundColor='#e0f2fe'; this.style.color='#0369a1'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#374151'" class="block px-4 py-3 text-sm text-gray-700 rounded-xl transition-colors">Publications</a>
                     </div>
                 </div>
 

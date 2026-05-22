@@ -34,4 +34,3 @@ def deletesubject():
     return SubjectController().delete()
 
 
-

@@ -1,0 +1,35 @@
+<!--=====================================
+    PREMIUM NAVBAR
+======================================-->
+<header id="navbar"
+    class="sticky top-0 w-full z-50 transition-all duration-300 bg-white border-b border-border shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <!--=======================
+                Logo 
+            ========================-->
+            {% include 'frontend/layouts/navbar/nav-logo.html' %}
+
+            <!--======================
+                Desktop Nav 
+            =======================-->
+            {% include 'frontend/layouts/navbar/nav-desktop.html' %}
+
+            <!--=====================
+                Mobile menu button
+            ======================-->
+            <div class="lg:hidden flex items-center">
+                <button id="mobile-menu-btn" class="text-navy hover:text-royal focus:outline-none p-2">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!--=========================
+        Mobile Nav Drawer
+    ==========================-->
+    {% include 'frontend/layouts/navbar/nav-mobile.html' %}
+
+
+</header>

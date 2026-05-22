@@ -85,7 +85,7 @@ const UI = {
                 <!-- Inner Dashboard Layout displaying both Semesters inside one Accordion wrapper -->
                 <div id="${element.year?.id}" class="accordion-content">
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-5">
 
                         ${element.semesters.map(s=>`
                             

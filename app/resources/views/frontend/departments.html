@@ -2,11 +2,43 @@
 
 {% block title %}{{ department.name }}{% endblock %}
 
+{% block styles %}
+<style>
+    /* Standardized Smooth Accordion Transitions Like Google Search FAQ */
+    .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+        opacity: 0;
+    }
+
+    .accordion-content.open {
+        max-height: 1200px;
+        opacity: 1;
+    }
+
+    .animate-fade-in {
+        animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(4px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+{% endblock %}
 {% block content %}
 
 <!-- Modern Gradient Hero -->
 <section class="relative overflow-hidden pt-36 pb-20 z-0"
-         style="background: linear-gradient(135deg, #042f2e 0%, #0891b2 50%, #0f172a 100%) !important;">
+    style="background: linear-gradient(135deg, #042f2e 0%, #0891b2 50%, #0f172a 100%) !important;">
 
     <!-- Background Glow အလင်းစက်များ -->
     <div class="absolute top-0 left-0 w-96 h-96 bg-emerald-400/10 rounded-full blur-3xl"></div>
@@ -16,8 +48,9 @@
         <div class="text-center">
 
             <!-- Badge လေးကို အရောင်တွဲဖက်ပေးထားပါသည် -->
-            <span class="inline-flex items-center px-4 py-2 rounded-full border text-sm tracking-widest uppercase font-semibold backdrop-blur-md mb-4"
-                  style="background-color: rgba(20, 184, 166, 0.1) !important; border-color: rgba(20, 184, 166, 0.3) !important; color: #5eead4 !important;">
+            <span
+                class="inline-flex items-center px-4 py-2 rounded-full border text-sm tracking-widest uppercase font-semibold backdrop-blur-md mb-4"
+                style="background-color: rgba(20, 184, 166, 0.1) !important; border-color: rgba(20, 184, 166, 0.3) !important; color: #5eead4 !important;">
                 Department Information
             </span>
 
@@ -44,12 +77,16 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch [perspective:1000px]">
                 <!-- English Vision Card -->
-                <div class="group bg-white shadow-xl rounded-3xl p-10 flex flex-col h-full transform transition-all duration-500 ease-out shadow-[0_10px_30px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12),0_10px_25px_-5px_rgba(59,130,246,0.05)]">
+                <div
+                    class="group bg-white shadow-xl rounded-3xl p-10 flex flex-col h-full transform transition-all duration-500 ease-out shadow-[0_10px_30px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12),0_10px_25px_-5px_rgba(59,130,246,0.05)]">
                     <div class="flex items-center mb-8 flex-shrink-0">
-                        <div class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center group-hover:scale-110 transition duration-500">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center group-hover:scale-110 transition duration-500">
                             <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                             </svg>
                         </div>
                         <h3 class="ml-5 text-2xl font-bold text-slate-900">Vision</h3>
@@ -62,14 +99,18 @@
                 </div>
 
                 <!-- Myanmar Vision Card -->
-                <div class="group bg-white shadow-xl rounded-3xl p-10 flex flex-col h-full transform transition-all duration-500 ease-out shadow-[0_10px_30px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12),0_10px_25px_-5px_rgba(16,185,129,0.05)]">
+                <div
+                    class="group bg-white shadow-xl rounded-3xl p-10 flex flex-col h-full transform transition-all duration-500 ease-out shadow-[0_10px_30px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12),0_10px_25px_-5px_rgba(16,185,129,0.05)]">
                     <div class="flex items-center mb-8 flex-shrink-0">
-                        <div class="w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center group-hover:scale-110 transition duration-500">
-                        <svg class="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                        </svg>
-                    </div>
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center group-hover:scale-110 transition duration-500">
+                            <svg class="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                        </div>
                         <h3 class="ml-5 text-2xl font-bold text-slate-900">မျှော်မှန်းချက်</h3>
                     </div>
                     <div class="flex-grow">
@@ -90,11 +131,14 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch [perspective:1000px]">
                 <!-- English Mission Card -->
-                <div class="group bg-white shadow-xl rounded-3xl p-10 flex flex-col h-full transform transition-all duration-500 ease-out shadow-[0_10px_30px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12),0_10px_25px_-5px_rgba(6,182,212,0.05)]">
+                <div
+                    class="group bg-white shadow-xl rounded-3xl p-10 flex flex-col h-full transform transition-all duration-500 ease-out shadow-[0_10px_30px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12),0_10px_25px_-5px_rgba(6,182,212,0.05)]">
                     <div class="flex items-center mb-8 flex-shrink-0">
-                        <div class="w-16 h-16 rounded-2xl bg-cyan-50 flex items-center justify-center group-hover:scale-110 transition duration-500">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-cyan-50 flex items-center justify-center group-hover:scale-110 transition duration-500">
                             <svg class="w-8 h-8 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                         </div>
                         <h3 class="ml-5 text-2xl font-bold text-slate-900">Mission</h3>
@@ -102,43 +146,52 @@
 
                     <div class="flex-grow">
                         {% if department.mission is string %}
-                            <p class="text-gray-600 leading-relaxed text-base md:text-lg text-justify">{{ department.mission }}</p>
+                        <p class="text-gray-600 leading-relaxed text-base md:text-lg text-justify">{{ department.mission
+                            }}</p>
                         {% else %}
-                            <ol class="space-y-4 text-gray-600 list-none">
-                                {% for point in department.mission %}
-                                    <li class="flex items-start text-justify text-base md:text-lg">
-                                        <span class="flex-shrink-0 w-7 h-7 rounded-full bg-cyan-50 text-cyan-600 flex items-center justify-center text-sm font-bold font-mono mr-3.5 mt-0.5">{{ loop.index }}</span>
-                                        <span class="flex-1">{{ point }}</span>
-                                    </li>
-                                {% endfor %}
-                            </ol>
+                        <ol class="space-y-4 text-gray-600 list-none">
+                            {% for point in department.mission %}
+                            <li class="flex items-start text-justify text-base md:text-lg">
+                                <span
+                                    class="flex-shrink-0 w-7 h-7 rounded-full bg-cyan-50 text-cyan-600 flex items-center justify-center text-sm font-bold font-mono mr-3.5 mt-0.5">{{
+                                    loop.index }}</span>
+                                <span class="flex-1">{{ point }}</span>
+                            </li>
+                            {% endfor %}
+                        </ol>
                         {% endif %}
                     </div>
                 </div>
 
                 <!-- Myanmar Mission Card -->
-                <div class="group bg-white shadow-xl rounded-3xl p-10 flex flex-col h-full transform transition-all duration-500 ease-out shadow-[0_10px_30px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12),0_10px_25px_-5px_rgba(245,158,11,0.05)]">
+                <div
+                    class="group bg-white shadow-xl rounded-3xl p-10 flex flex-col h-full transform transition-all duration-500 ease-out shadow-[0_10px_30px_-5px_rgba(0,0,0,0.05)] hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12),0_10px_25px_-5px_rgba(245,158,11,0.05)]">
                     <div class="flex items-center mb-8 flex-shrink-0">
-                        <div class="w-16 h-16 rounded-2xl bg-amber-50 flex items-center justify-center group-hover:scale-110 transition duration-500">
-                        <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                        </svg>
-                    </div>
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-amber-50 flex items-center justify-center group-hover:scale-110 transition duration-500">
+                            <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
                         <h3 class="ml-5 text-2xl font-bold text-slate-900">ရည်မှန်းချက်</h3>
                     </div>
 
                     <div class="flex-grow">
                         {% if department.mission_mm is string %}
-                            <p class="text-gray-600 leading-relaxed text-base md:text-lg text-justify font-padauk">{{ department.mission_mm }}</p>
+                        <p class="text-gray-600 leading-relaxed text-base md:text-lg text-justify font-padauk">{{
+                            department.mission_mm }}</p>
                         {% else %}
-                            <ol class="space-y-4 text-gray-600 list-none">
-                                {% for point in department.mission_mm %}
-                                    <li class="flex items-start text-justify text-base md:text-lg font-padauk">
-                                        <span class="flex-shrink-0 w-7 h-7 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-sm font-bold mr-3.5 mt-0.5">{{ loop.index }}</span>
-                                        <span class="flex-1 leading-relaxed">{{ point }}</span>
-                                    </li>
-                                {% endfor %}
-                            </ol>
+                        <ol class="space-y-4 text-gray-600 list-none">
+                            {% for point in department.mission_mm %}
+                            <li class="flex items-start text-justify text-base md:text-lg font-padauk">
+                                <span
+                                    class="flex-shrink-0 w-7 h-7 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-sm font-bold mr-3.5 mt-0.5">{{
+                                    loop.index }}</span>
+                                <span class="flex-1 leading-relaxed">{{ point }}</span>
+                            </li>
+                            {% endfor %}
+                        </ol>
                         {% endif %}
                     </div>
                 </div>
@@ -148,4 +201,46 @@
     </div>
 </section>
 
+<section class="pb-12 bg-blue-50">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <!-- Google Styled Segmented Control Tab Switcher -->
+        <div class="flex justify-center mt-10">
+            <div
+                class="inline-flex p-5 bg-blue-600 font-bold backdrop-blur-sm rounded-full border border-gray-200/80 shadow-sm text-white">
+                <h2>Courses by {{ department.name }}</h2>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Course Syllabus Section -->
+<section id="syllabus-content" class="pb-28 bg-blue-50">
+    <div class="max-w-4xl mx-auto px-6 bg-white shadow-xl rounded-2xl">
+
+        <!-- Section 1: Courses by Faculties -->
+        <div id="tab-faculties" class="block animate-fade-in border-t border-gray-200">
+
+        </div>
+
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Dynamic Accordion Toggle
+    function toggleAccordion(id) {
+        const content = document.getElementById(id);
+        const icon = document.getElementById(id + '-icon');
+
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            if (icon) icon.classList.remove('rotate-180');
+        } else {
+            content.classList.add('open');
+            if (icon) icon.classList.add('rotate-180');
+        }
+    }
+</script>
+<script type="module" src="{{ url_for('static', filename='frontend/js/pages/departments.js') }}"></script>
 {% endblock %}

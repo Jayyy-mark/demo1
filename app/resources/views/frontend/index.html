@@ -4,172 +4,335 @@
 
 {% block content %}
 
-<!-- 3D Background Canvas -->
-<div id="canvas-container"></div>
-
-<!-- Split Hero Section -->
-<section id="hero" class="relative h-screen overflow-hidden scroll-animate">
-
-    <div class="absolute inset-0 z-0" id="hero-slider">
-        <div class="slide absolute inset-0 opacity-100 transition-opacity duration-1000 ease-in-out">
-            <img src="{{ url_for('static', filename='frontend/image/s3.jpg') }}" class="h-full w-full object-cover brightness-[0.50]" alt="Slide 1">
+<!--=============================
+    Split Hero Section 
+==============================-->
+<section class="relative h-[85vh] min-h-[600px] bg-navy">
+    <!-- Slider Images -->
+    <div id="hero-slider" class="absolute inset-0 w-full h-full">
+        <div class="hero-slide absolute inset-0 w-full h-full opacity-100 z-10">
+            <img src="{{ url_for('static', filename='frontend/image/s3.jpg') }}" alt="Campus"
+                class="w-full h-full object-cover object-center">
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-950/70 via-blue-900/30 to-transparent"></div>
         </div>
-        <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
-            <img src="{{ url_for('static', filename='frontend/image/s2.jpg') }}" class="h-full w-full object-cover brightness-[0.50]" alt="Slide 2">
+        <div class="hero-slide absolute inset-0 w-full h-full opacity-0 z-0">
+            <img src="{{ url_for('static', filename='frontend/image/s2.jpg') }}" alt="Students"
+                class="w-full h-full object-cover object-center">
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-950/70 via-blue-900/30 to-transparent"></div>
         </div>
-        <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
-            <img src="{{ url_for('static', filename='frontend/image/s1.jpg') }}" class="h-full w-full object-cover brightness-[0.50]" alt="Slide 3">
-        </div>
-        <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
-            <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" class="h-full w-full object-cover brightness-[0.50]" alt="Slide 4">
-        </div>
-        <div class="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-transparent to-slate-950/80"></div>
     </div>
 
+    <!-- Content -->
+    <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
+        <div class="max-w-3xl animate-fade-in-up">
+        </div>
+
+        <!-- Floating Stats Card -->
+        <!-- <div
+            class="hidden lg:block absolute right-8 bottom-24 bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-2xl w-72 animate-float">
+            <div class="flex items-center space-x-4 mb-4">
+                <div class="w-12 h-12 bg-sky/20 rounded-full flex items-center justify-center text-sky text-xl">
+                    <i class="fa-solid fa-award"></i>
+                </div>
+                <div>
+                    <h4 class="text-white font-heading font-bold text-xl">Top 10</h4>
+                    <p class="text-gray-300 text-sm">Tech Universities</p>
+                </div>
+            </div>
+            <div class="h-1 w-full bg-white/20 rounded-full overflow-hidden">
+                <div class="h-full bg-sky w-3/4"></div>
+            </div>
+        </div> -->
+    </div>
+
+    <!-- Scroll Indicator -->
+    <!-- <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center animate-bounce cursor-pointer"
+        onclick="document.getElementById('quick-access').scrollIntoView({behavior: 'smooth'})">
+        <span class="text-white/70 text-xs mb-2 tracking-widest uppercase">Scroll</span>
+        <i class="fa-solid fa-arrow-down text-white/70"></i>
+    </div> -->
+
+</section>
 
 
-    <!-- Slider Dots -->
-    <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-3 bg-slate-950/40 backdrop-blur-md px-4 py-2.5 rounded-full">
-        <button onclick="goToSlide(0)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/10 hover:bg-cyan-400"></button>
-        <button onclick="goToSlide(1)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/10 hover:bg-cyan-400"></button>
-        <button onclick="goToSlide(2)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/10 hover:bg-cyan-400"></button>
-        <button onclick="goToSlide(3)" class="slider-dot w-3 h-3 rounded-full bg-white/40 transition-all duration-300 border border-white/10 hover:bg-cyan-400"></button>
+<!--===============================
+    QUICK ACCESS SECTION 
+================================-->
+<section id="quick-access" class="relative z-30 -mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+    <div class="grid grid-cols-1 md:grid-cols-5 sm:grid-cols-5 lg:grid-cols-5 gap-4">
+        <!-- Cards -->
+        <a href="#"
+            class="bg-white p-6 rounded-2xl shadow-xl shadow-slate-200/50 flex flex-col items-center text-center group hover:-translate-y-2 transition duration-300 border border-border">
+            <div
+                class="w-14 h-14 md:w-5 md:h-10 bg-blue-50 text-royal rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:bg-royal group-hover:text-white transition duration-300">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <h3 class="font-heading font-semibold text-navy group-hover:text-royal transition">Admissions</h3>
+        </a>
+        <a href="#faculties"
+            class="bg-white p-6 rounded-2xl shadow-xl shadow-slate-200/50 flex flex-col items-center text-center group hover:-translate-y-2 transition duration-300 border border-border">
+            <div
+                class="w-14 h-14 bg-blue-50 text-royal rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:bg-royal group-hover:text-white transition duration-300">
+                <i class="fa-solid fa-building-columns"></i>
+            </div>
+            <h3 class="font-heading font-semibold text-navy group-hover:text-royal transition">Faculties</h3>
+        </a>
+        <a href="#courses"
+            class="bg-white p-6 rounded-2xl shadow-xl shadow-slate-200/50 flex flex-col items-center text-center group hover:-translate-y-2 transition duration-300 border border-border">
+            <div
+                class="w-14 h-14 bg-blue-50 text-royal rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:bg-royal group-hover:text-white transition duration-300">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
+            <h3 class="font-heading font-semibold text-navy group-hover:text-royal transition">Courses</h3>
+        </a>
+        <a href="#events"
+            class="bg-white p-6 rounded-2xl shadow-xl shadow-slate-200/50 flex flex-col items-center text-center group hover:-translate-y-2 transition duration-300 border border-border">
+            <div
+                class="w-14 h-14 bg-blue-50 text-royal rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:bg-royal group-hover:text-white transition duration-300">
+                <i class="fa-solid fa-calendar-days"></i>
+            </div>
+            <h3 class="font-heading font-semibold text-navy group-hover:text-royal transition">Events</h3>
+        </a>
+        <a href="#"
+            class="bg-white p-6 rounded-2xl shadow-xl shadow-slate-200/50 flex flex-col items-center text-center group hover:-translate-y-2 transition duration-300 border border-border">
+            <div
+                class="w-14 h-14 bg-blue-50 text-royal rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:bg-royal group-hover:text-white transition duration-300">
+                <i class="fa-solid fa-clock"></i>
+            </div>
+            <h3 class="font-heading font-semibold text-navy group-hover:text-royal transition">Calendar</h3>
+        </a>
     </div>
 </section>
+
+<div class="text-center max-w-4xl mx-auto mb-6">
+    <h2 class="text-4xl md:text-3xl font-black text-blue-800 leading-tight tracking-tight">
+        Welcome to University of Computer Studies (Taungoo)
+    </h2>
+    <div class="h-1.5 w-20 bg-amber-400 mx-auto mt-6 rounded-full"></div>
+</div>
+
+<!-- 5. ABOUT UNIVERSITY SECTION -->
+<section id="about" class="py-12 bg-background reveal mb-10">
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <!-- Image Grid -->
+            <div class="relative">
+                <div class="absolute inset-0 bg-royal rounded-3xl transform -translate-x-4 translate-y-4 opacity-10">
+                </div>
+                <img src="{{ url_for('static', filename='frontend/image/s3.jpg') }}" alt="University Campus"
+                    class="rounded-3xl shadow-2xl relative z-10 w-full object-cover h-[500px]">
+
+                <!-- Floating Experience Badge -->
+                <div
+                    class="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-xl z-20 flex items-center space-x-4 border border-border">
+                    <div class="text-4xl font-heading font-bold text-royal">20+</div>
+                    <div class="text-sm font-medium text-navy leading-tight">Years of<br>Academic<br>Excellence</div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div>
+                <p class="text-textSecondary mb-6 text-md leading-loose text-justify">
+                    For the purpose of developing IT industry, human resource is the essential one to support
+                    our country’s socio-economic quickly. To fulfill this aim, University of Computer Studies
+                    (Taungoo) conducted Bachelor of Computer Science (B.C.Sc), Bachelor of Computer Technology
+                    (B.C.Tech), Master of Computer Science (M.C.Sc) and Master of Computer Technology (M.C.Tech)
+                    degrees programs. Our university is aimed -
+                </p>
+
+                <ul class="space-y-4 mb-8">
+                    <li class="flex items-start">
+                        <div
+                            class="flex-shrink-0 w-6 h-6 rounded-full bg-sky/20 flex items-center justify-center text-royal mt-1">
+                            <i class="fa-solid fa-check text-xs"></i>
+                        </div>
+                        <span class="ml-3 text-textSecondary leading-loose  text-justify">To support the economics of regional people and
+                            requirements of government departments in Bago Region, Republic of the Union of
+                            Myanmar.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <div
+                            class="flex-shrink-0 w-6 h-6 rounded-full bg-sky/20 flex items-center justify-center text-royal mt-1">
+                            <i class="fa-solid fa-check text-xs"></i>
+                        </div>
+                        <span class="ml-3 text-textSecondary text-justify leading-loose">
+                            To encourage the sophisticated and advanced innovative developments of
+                            economy and society of our country...
+                        </span>
+                    </li>
+                </ul>
+
+                <a href="{{ url_for('frontend.about') }}"
+                    class="inline-flex items-center text-royal font-semibold hover:text-navy transition group">
+                    Read More About Us
+                    <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-1 transition"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Welcome to Our University Section -->
-<section class="py-12 pb-10 bg-slate-100 relative overflow-hidden">
-    <!-- Decorative Ambient Glows -->
-    <div class="absolute top-0 right-0 w-[30rem] h-[30rem] bg-blue-900/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
-    <div class="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-amber-500/5 rounded-full blur-3xl -ml-32 -mb-32"></div>
 
-    <!-- Container widened to max-w-7xl for maximum horizontal elegance -->
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-
-        <!-- Premium Ultra-Wide Card -->
-        <div class="bg-white border border-slate-100 rounded-[2.5rem] p-10 md:p-16 shadow-2xl shadow-slate-200/50 transition-all duration-300 hover:shadow-slate-300/70">
-
-            <!-- 1. Centered Title & Brand Badging -->
-            <div class="text-center max-w-4xl mx-auto mb-14">
-                <h2 class="text-4xl md:text-2xl font-black text-blue-600 leading-tight tracking-tight">
-                    Welcome to University of Computer Studies (Taungoo)
-                </h2>
-                <div class="h-1.5 w-24 bg-amber-400 mx-auto mt-6 rounded-full"></div>
-            </div>
-
-            <!-- 2. Balanced Grid Content Split -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
-
-                <!-- Left Hand Image Section (5 Columns Wide) -->
-                <div class="lg:col-span-5 w-full h-full min-h-[400px] rounded-2xl overflow-hidden shadow-lg border border-slate-100 relative group">
-                    <img src="{{ url_for('static', filename='frontend/image/s3.jpg') }}"
-                         alt="UCSTGO Campus"
-                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                    <!-- Image content ကို ပိုပြီး ပေါ်လွင်စေဖို့ subtle overlay လေး ခံထားပါတယ် -->
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
-                </div>
-
-                <!-- Right Hand In-Depth Overview (7 Columns Wide) -->
-                <div class="lg:col-span-7 flex flex-col h-full justify-between space-y-6">
-                    <div class="space-y-4">
-                        <p class="text-base md:text-lg text-slate-600 leading-relaxed text-justify font-normal first-letter:text-5xl first-letter:font-black first-letter:text-blue-900 first-letter:float-left first-letter:mr-3 first-letter:leading-none">
-                            For the purpose of developing IT industry, human resource is the essential one to support our country’s socio-economic quickly. To fulfill this aim, University of Computer Studies (Taungoo) conducted Bachelor of Computer Science (B.C.Sc), Bachelor of Computer Technology (B.C.Tech), Master of Computer Science (M.C.Sc) and Master of Computer Technology (M.C.Tech) degrees programs.
-                        </p>
-                        <p class="text-base md:text-lg text-slate-600 leading-relaxed text-justify font-normal">
-                            Our university is aimed to support the economics of regional people and requirements of government departments in Bago Region, Republic of the Union of Myanmar. To encourage the sophisticated and advanced innovative developments of economy and society of our country...
-                        </p>
-                    </div>
-
-                    <!-- CTA Action Row -->
-                    <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100 mt-auto">
-
-                        <a href="/about" class="inline-flex items-center gap-2 text-sm font-bold text-blue-900 hover:text-amber-500 transition-colors group">
-                            Read More About Us
-                            <span class="transform group-hover:translate-x-1.5 transition-transform duration-200">→</span>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-</section>
 
 <!-- Statistics Section -->
-<section class="py-8 bg-blue-50 relative overflow-hidden font-['Roboto']">
+<!-- <section class="py-8 bg-blue-50 relative overflow-hidden font-['Roboto']">
     <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl -translate-y-1/2"></div>
     <div class="absolute top-1/2 right-1/4 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl -translate-y-1/2"></div>
 
     <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8 text-center">
 
-            <div class="p-8 rounded-[2rem] bg-white shadow-xl backdrop-blur-md transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-2 group relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-teal-400 to-cyan-500 transform translate-y-[-4px] group-hover:translate-y-0 transition-transform duration-300"></div>
+            <div
+                class="p-8 rounded-[2rem] bg-white shadow-xl backdrop-blur-md transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-2 group relative overflow-hidden">
+                <div
+                    class="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-teal-400 to-cyan-500 transform translate-y-[-4px] group-hover:translate-y-0 transition-transform duration-300">
+                </div>
                 <div class="flex justify-center mb-5">
-                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-teal-400 group-hover:to-cyan-500 group-hover:text-slate-950 transition-all duration-300 shadow-inner">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-teal-400 group-hover:to-cyan-500 group-hover:text-slate-950 transition-all duration-300 shadow-inner">
                         <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                         </svg>
                     </div>
                 </div>
-                <p class="text-4xl lg:text-5xl font-black text-apple-blue count-up tracking-tight stats-number" data-target="2001">0</p>
-                <p class="text-xs text-slate-300 mt-3 uppercase tracking-widest font-bold group-hover:text-cyan-400 transition-colors">Established</p>
+                <p class="text-4xl lg:text-5xl font-black text-apple-blue count-up tracking-tight stats-number"
+                    data-target="2001">0</p>
+                <p
+                    class="text-xs text-slate-300 mt-3 uppercase tracking-widest font-bold group-hover:text-cyan-400 transition-colors">
+                    Established</p>
             </div>
 
-            <div class="p-8 rounded-[2rem] bg-white shadow-xl backdrop-blur-md transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-2 group relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-teal-400 to-cyan-500 transform translate-y-[-4px] group-hover:translate-y-0 transition-transform duration-300"></div>
+            <div
+                class="p-8 rounded-[2rem] bg-white shadow-xl backdrop-blur-md transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-2 group relative overflow-hidden">
+                <div
+                    class="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-teal-400 to-cyan-500 transform translate-y-[-4px] group-hover:translate-y-0 transition-transform duration-300">
+                </div>
                 <div class="flex justify-center mb-5">
-                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-teal-400 group-hover:to-cyan-500 group-hover:text-slate-950 transition-all duration-300 shadow-inner">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-teal-400 group-hover:to-cyan-500 group-hover:text-slate-950 transition-all duration-300 shadow-inner">
                         <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                     </div>
                 </div>
-                <p class="text-4xl lg:text-5xl font-black text-apple-blue count-up tracking-tight stats-number" data-target="120">0</p>
-                <p class="text-xs text-slate-300 mt-3 uppercase tracking-widest font-bold group-hover:text-cyan-400 transition-colors">Staff Members</p>
+                <p class="text-4xl lg:text-5xl font-black text-apple-blue count-up tracking-tight stats-number"
+                    data-target="120">0</p>
+                <p
+                    class="text-xs text-slate-300 mt-3 uppercase tracking-widest font-bold group-hover:text-cyan-400 transition-colors">
+                    Staff Members</p>
             </div>
 
-            <div class="p-8 rounded-[2rem] bg-white shadow-xl backdrop-blur-md transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-2 group relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-teal-400 to-cyan-500 transform translate-y-[-4px] group-hover:translate-y-0 transition-transform duration-300"></div>
+            <div
+                class="p-8 rounded-[2rem] bg-white shadow-xl backdrop-blur-md transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-2 group relative overflow-hidden">
+                <div
+                    class="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-teal-400 to-cyan-500 transform translate-y-[-4px] group-hover:translate-y-0 transition-transform duration-300">
+                </div>
                 <div class="flex justify-center mb-5">
-                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-teal-400 group-hover:to-cyan-500 group-hover:text-slate-950 transition-all duration-300 shadow-inner">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-teal-400 group-hover:to-cyan-500 group-hover:text-slate-950 transition-all duration-300 shadow-inner">
                         <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/>
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                         </svg>
                     </div>
                 </div>
-                <p class="text-4xl lg:text-5xl font-black text-apple-blue count-up tracking-tight stats-number" data-target="3500">0</p>
-                <p class="text-xs text-slate-300 mt-3 uppercase tracking-widest font-bold group-hover:text-cyan-400 transition-colors">Graduated</p>
+                <p class="text-4xl lg:text-5xl font-black text-apple-blue count-up tracking-tight stats-number"
+                    data-target="3500">0</p>
+                <p
+                    class="text-xs text-slate-300 mt-3 uppercase tracking-widest font-bold group-hover:text-cyan-400 transition-colors">
+                    Graduated</p>
             </div>
 
-            <div class="p-8 rounded-[2rem] bg-white shadow-xl backdrop-blur-md transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-2 group relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-teal-400 to-cyan-500 transform translate-y-[-4px] group-hover:translate-y-0 transition-transform duration-300"></div>
+            <div
+                class="p-8 rounded-[2rem] bg-white shadow-xl backdrop-blur-md transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-2 group relative overflow-hidden">
+                <div
+                    class="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-teal-400 to-cyan-500 transform translate-y-[-4px] group-hover:translate-y-0 transition-transform duration-300">
+                </div>
                 <div class="flex justify-center mb-5">
-                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-teal-400 group-hover:to-cyan-500 group-hover:text-slate-950 transition-all duration-300 shadow-inner">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-teal-400 group-hover:to-cyan-500 group-hover:text-slate-950 transition-all duration-300 shadow-inner">
                         <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
                     </div>
                 </div>
-                <p class="text-4xl lg:text-5xl font-black text-apple-blue count-up tracking-tight stats-number" data-target="1200">0</p>
-                <p class="text-xs text-slate-300 mt-3 uppercase tracking-widest font-bold group-hover:text-cyan-400 transition-colors">Current Students</p>
+                <p class="text-4xl lg:text-5xl font-black text-apple-blue count-up tracking-tight stats-number"
+                    data-target="1200">0</p>
+                <p
+                    class="text-xs text-slate-300 mt-3 uppercase tracking-widest font-bold group-hover:text-cyan-400 transition-colors">
+                    Current Students</p>
             </div>
 
         </div>
     </div>
+</section> -->
+
+<!-- Republications -->
+<section class="py-12 bg-navy relative overflow-hidden reveal mb-10">
+    <!-- Abstract BG Elements -->
+    <div
+        class="absolute top-0 right-0 w-96 h-96 bg-royal rounded-full mix-blend-multiply filter blur-3xl opacity-20 transform translate-x-1/2 -translate-y-1/2">
+    </div>
+    <div
+        class="absolute bottom-0 left-0 w-96 h-96 bg-sky rounded-full mix-blend-multiply filter blur-3xl opacity-20 transform -translate-x-1/2 translate-y-1/2">
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
+            <div class="p-4">
+                <div class="text-sky text-4xl mb-4"><i class="fa-solid fa-building"></i></div>
+                <div class="font-heading text-5xl font-bold text-white mb-2 counter" data-target="2001">2001</div>
+                <div class="text-gray-400 font-medium tracking-wide uppercase text-sm">Establish</div>
+            </div>
+            <div class="p-4">
+                <div class="text-sky text-4xl mb-4"><i class="fa-solid fa-chalkboard-user"></i></div>
+                <div class="font-heading text-5xl font-bold text-white mb-2 counter" data-target="120">0</div>
+                <div class="text-gray-400 font-medium tracking-wide uppercase text-sm">Staff Members</div>
+            </div>
+            <div class="p-4">
+                <div class="text-sky text-4xl mb-4"><i class="fa-solid fa-user-graduate"></i></div>
+                <div class="font-heading text-5xl font-bold text-white mb-2 counter" data-target="3500">0</div>
+                <div class="text-gray-400 font-medium tracking-wide uppercase text-sm">Graduated Students</div>
+            </div>
+            <div class="p-4">
+                <div class="text-sky text-4xl mb-4"><i class="fa-solid fa-users"></i></div>
+                <div class="font-heading text-5xl font-bold text-white mb-2 counter" data-target="1200">0</div>
+                <div class="text-gray-400 font-medium tracking-wide uppercase text-sm">Current Students</div>
+            </div>
+        </div>
+    </div>
 </section>
+
+
 <!-- Rector's Message Section -->
-<section class="py-12 bg-apple-gray scroll-animate font-['Roboto'] bg-slate-50">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+<section class="py-12 bg-apple-gray scroll-animate font-['Roboto'] bg-slate-50 mb-2">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 ">
+        <div class="mb-10 text-center">
+            <h2 class="text-4xl md:text-3xl font-black text-slate-900 leading-tight tracking-tight">
+                Rector's Message
+            </h2>
+            <div class="h-1.5 mx-auto w-20 bg-amber-400 mt-6 rounded-full"></div>
+        </div>
         <div class="bg-white rounded-3xl p-8 md:p-16 shadow-xl flex flex-col md:flex-row items-center gap-12 card">
             <div class="md:w-1/3 flex-shrink-0">
-                <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" alt="Rector" class="w-80 h-80 object-cover rounded-2xl shadow-lg mx-auto md:mx-0  transition-all duration-500">
+                <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" alt="Rector"
+                    class="w-80 h-80 object-cover rounded-2xl shadow-lg mx-auto md:mx-0  transition-all duration-500">
             </div>
             <div class="md:w-2/3">
-                <h2 class="text-3xl font-bold text-apple-dark mb-6">Rector's Message</h2>
                 <div class="w-12 h-1 bg-apple-blue mb-6"></div>
-                <blockquote class="text-lg text-gray-600 leading-relaxed mb-6  text-justify">
-                    ယနေ့ခေတ်သည် စတုတ္ထအကြိမ်မြောက် စက်မှုတော်လှန်ရေး (Industry 4.0) ကာလဖြစ်သည်နှင့်အညီ နည်းပညာသည် ကမ္ဘာကြီးကို မောင်းနှင်နေသော အဓိကအင်အားစု ဖြစ်ပါသည်။ ကျွန်ုပ်တို့ ကွန်ပျူတာတက္ကသိုလ်(တောင်ငူ) အနေဖြင့် ကျောင်းသား၊ ကျောင်းသူများကို စာတွေ့သာမက လက်တွေ့နယ်ပယ်တွင်ပါ ထူးချွန်ထက်မြက်ပြီး ဆန်းသစ်တီထွင်နိုင်စွမ်းရှိသော (Innovators) များ ဖြစ်လာစေရန် ပြုစုပျိုးထောင်ပေးလျက်ရှိပါသည်။ ဤ Website မှတစ်ဆင့် ကျွန်ုပ်တို့တက္ကသိုလ်၏ ပညာရေးလှုပ်ရှားမှုများ၊ သုတေသနလုပ်ငန်းများနှင့် အောင်မြင်မှုများကို ပွင့်လင်းမြင်သာစွာ ချိတ်ဆက်ကြည့်ရှုနိုင်မည်ဟု ယုံကြည်ပါသည်။
+                <blockquote class="text-lg text-gray-600 leading-loose mb-6  text-justify">
+                    ယနေ့ခေတ်သည် စတုတ္ထအကြိမ်မြောက် စက်မှုတော်လှန်ရေး (Industry 4.0) ကာလဖြစ်သည်နှင့်အညီ နည်းပညာသည်
+                    ကမ္ဘာကြီးကို မောင်းနှင်နေသော အဓိကအင်အားစု ဖြစ်ပါသည်။ ကျွန်ုပ်တို့ ကွန်ပျူတာတက္ကသိုလ်(တောင်ငူ)
+                    အနေဖြင့် ကျောင်းသား၊ ကျောင်းသူများကို စာတွေ့သာမက လက်တွေ့နယ်ပယ်တွင်ပါ ထူးချွန်ထက်မြက်ပြီး
+                    ဆန်းသစ်တီထွင်နိုင်စွမ်းရှိသော (Innovators) များ ဖြစ်လာစေရန် ပြုစုပျိုးထောင်ပေးလျက်ရှိပါသည်။ ဤ
+                    Website မှတစ်ဆင့် ကျွန်ုပ်တို့တက္ကသိုလ်၏ ပညာရေးလှုပ်ရှားမှုများ၊ သုတေသနလုပ်ငန်းများနှင့်
+                    အောင်မြင်မှုများကို ပွင့်လင်းမြင်သာစွာ ချိတ်ဆက်ကြည့်ရှုနိုင်မည်ဟု ယုံကြည်ပါသည်။
                 </blockquote>
                 <div>
                     <p class="font-bold text-apple-blue text-lg">Dr. Ei Ei Hlaing</p>
@@ -190,24 +353,12 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="activity-card-container">
-            </div>
+        </div>
 
     </div>
 </section>
-<!-- Republications -->
-<!--<section class="bg-slate-50 py-12 border-t border-gray-200 scroll-animate">-->
-<!--    <div class="max-w-7xl mx-auto px-6 lg:px-8">-->
-<!--        <div class="flex justify-between items-end mb-6">-->
-<!--            <h3 class="text-2xl font-semibold text-apple-dark">Research Publications</h3>-->
-<!--            <a href="/research" class="text-sm text-apple-blue hover:underline">View All</a>-->
-<!--        </div>-->
-<!--        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="pub-container">-->
 
-<!--            &lt;!&ndash; Card 1 &ndash;&gt;-->
 
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
 
 <!-- Campus Life Grid -->
 <section id="activities" class="py-12 bg-slate-100 scroll-animate">
@@ -219,7 +370,8 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="group relative rounded-3xl overflow-hidden h-80 shadow-lg cursor-pointer">
-                <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" alt="Lab" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" alt="Lab"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
                     <div>
                         <h3 class="text-white text-2xl font-bold">Advanced Research Labs</h3>
@@ -228,7 +380,8 @@
                 </div>
             </div>
             <div class="group relative rounded-3xl overflow-hidden h-80 shadow-lg cursor-pointer">
-                <img src="{{ url_for('static', filename='frontend/image/s1.jpg') }}" alt="Seminar" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <img src="{{ url_for('static', filename='frontend/image/s1.jpg') }}" alt="Seminar"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
                     <div>
                         <h3 class="text-white text-2xl font-bold">Global Seminars</h3>
@@ -237,7 +390,8 @@
                 </div>
             </div>
             <div class="group relative rounded-3xl overflow-hidden h-80 shadow-lg cursor-pointer">
-                <img src="{{ url_for('static', filename='frontend/image/s2.jpg') }}" alt="Sports" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <img src="{{ url_for('static', filename='frontend/image/s2.jpg') }}" alt="Sports"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
                     <div>
                         <h3 class="text-white text-2xl font-bold">Student Athletics</h3>
@@ -246,11 +400,13 @@
                 </div>
             </div>
             <div class="group relative rounded-3xl overflow-hidden h-80 shadow-lg cursor-pointer">
-                <img src="{{ url_for('static', filename='frontend/image/s3.jpg') }}" alt="Library" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <img src="{{ url_for('static', filename='frontend/image/s3.jpg') }}" alt="Library"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
                     <div>
                         <h3 class="text-white text-2xl font-bold">Digital Archive</h3>
-                        <p class="text-gray-200 mt-2">Access thousands of journals and papers from our cloud library.</p>
+                        <p class="text-gray-200 mt-2">Access thousands of journals and papers from our cloud library.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -259,7 +415,7 @@
 </section>
 
 <!-- University Location -->
-    <section class="py-2 bg-apple-gray scroll-animate">
+<section class="py-10 bg-apple-gray scroll-animate">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
         <!-- Section Title -->
@@ -272,47 +428,70 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
 
             <!-- Left Side: Contact Information (5 Columns Wide) -->
-            <div class="lg:col-span-5 flex flex-col justify-between bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-gray-100">
+            <div
+                class="lg:col-span-5 flex flex-col justify-between bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-gray-100">
                 <div>
                     <h3 class="text-2xl font-bold text-slate-900 mb-2">University Information</h3>
-                    <p class="text-gray-500 text-sm mb-8">Feel free to contact us during office hours (9:00 AM - 4:00 PM).</p>
+                    <p class="text-gray-500 text-sm mb-8">Feel free to contact us during office hours (9:00 AM - 4:00
+                        PM).</p>
 
                     <!-- Contact List -->
                     <div class="space-y-6">
                         <!-- Address -->
                         <div class="flex items-start gap-4">
-                            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <div
+                                class="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
                             </div>
                             <div>
                                 <h4 class="text-sm font-semibold text-slate-900">Our Location</h4>
-                                <p class="text-sm text-gray-600 mt-1">University of Computer Studies, Taungoo, Bago Region, Myanmar.</p>
+                                <p class="text-sm text-gray-600 mt-1">University of Computer Studies, Taungoo, Bago
+                                    Region, Myanmar.</p>
                             </div>
                         </div>
 
                         <!-- Phone -->
                         <div class="flex items-start gap-4">
-                            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            <div
+                                class="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                    </path>
+                                </svg>
                             </div>
                             <div>
                                 <h4 class="text-sm font-semibold text-slate-900">Phone Numbers</h4>
                                 <p class="text-sm text-gray-600 mt-1">
-                                    <a href="tel:+955424933" class="hover:text-blue-600 transition-colors">+95 54 24933</a>,
-                                    <a href="tel:+955424934" class="hover:text-blue-600 transition-colors"> +95 54 24934</a>
+                                    <a href="tel:+955424933" class="hover:text-blue-600 transition-colors">+95 54
+                                        24933</a>,
+                                    <a href="tel:+955424934" class="hover:text-blue-600 transition-colors"> +95 54
+                                        24934</a>
                                 </p>
                             </div>
                         </div>
 
                         <!-- Email -->
                         <div class="flex items-start gap-4">
-                            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <div
+                                class="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                    </path>
+                                </svg>
                             </div>
                             <div>
                                 <h4 class="text-sm font-semibold text-slate-900">Email Address</h4>
                                 <p class="text-sm text-gray-600 mt-1">
-                                    <a href="mailto:info@ucstgo.edu.mm" class="hover:text-blue-600 transition-colors">info@ucstgo.edu.mm</a>
+                                    <a href="mailto:info@ucstgo.edu.mm"
+                                        class="hover:text-blue-600 transition-colors">info@ucstgo.edu.mm</a>
                                 </p>
                             </div>
                         </div>
@@ -326,14 +505,11 @@
             </div>
 
             <!-- Right Side: Google Map (7 Columns Wide) -->
-            <div class="lg:col-span-7 rounded-3xl overflow-hidden shadow-xl border border-gray-200 h-[450px] lg:h-auto min-h-[450px]">
+            <div
+                class="lg:col-span-7 rounded-3xl overflow-hidden shadow-xl border border-gray-200 h-[450px] lg:h-auto min-h-[450px]">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3749.191428073539!2d96.42557437502476!3d18.967169955038475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c3db474813589b%3A0x7d2f9547d73010b!2sUniversity%20of%20Computer%20Studies%2C%20Taungoo!5e0!3m2!1sen!2smm!4v1715535000000!5m2!1sen!2smm"
-                    width="100%"
-                    height="100%"
-                    style="border:0;"
-                    allowfullscreen=""
-                    loading="lazy"
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
@@ -346,10 +522,13 @@
 <div id="imageModal" class="fixed inset-0 z-50 hidden" onclick="closeModal()">
     <div class="absolute inset-0 bg-black/90 backdrop-blur-sm"></div>
     <button class="absolute top-6 right-6 text-white hover:text-gray-300 z-50 p-2">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
     </button>
     <div class="relative z-10 w-full h-full flex items-center justify-center p-8">
-        <img id="modalImage" src="" alt="Full view" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl object-contain">
+        <img id="modalImage" src="" alt="Full view"
+            class="max-w-full max-h-[90vh] rounded-lg shadow-2xl object-contain">
     </div>
 </div>
 
@@ -363,6 +542,7 @@
         transform: translateY(30px);
         transition: opacity 1.2s ease-out, transform 1.2s ease-out;
     }
+
     .scroll-animate.active {
         opacity: 1;
         transform: none;
@@ -370,17 +550,33 @@
 
     /* Hero Entry Animation */
     @keyframes fade-in-up {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .animate-fade-in-up {
         animation: fade-in-up 1s ease-out forwards;
         opacity: 0;
     }
-    .delay-100 { animation-delay: 0.1s; }
-    .delay-200 { animation-delay: 0.2s; }
-    .delay-300 { animation-delay: 0.3s; }
+
+    .delay-100 {
+        animation-delay: 0.1s;
+    }
+
+    .delay-200 {
+        animation-delay: 0.2s;
+    }
+
+    .delay-300 {
+        animation-delay: 0.3s;
+    }
 
     /* 3D Perspective Container */
     .perspective-container {
@@ -389,8 +585,13 @@
 
     /* Horizontal Marquee Animation (For Hero Right Side) */
     @keyframes marquee-horizontal {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
     }
 
     .animate-marquee-horizontal {
@@ -400,18 +601,30 @@
 
     /* Horizontal Scroll Animation (For Gallery Section) */
     @keyframes scroll-slow {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
     }
+
     @keyframes scroll-fast {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
     }
 
     .animate-scroll-slow {
         animation: scroll-slow 60s linear infinite;
         width: max-content;
     }
+
     .animate-scroll-fast {
         animation: scroll-fast 40s linear infinite;
         width: max-content;
@@ -423,50 +636,6 @@
 
 {% block scripts %}
 <script>
-
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.slider-dot');
-    let slideTimer;
-
-    function showSlide(n) {
-        // အကုန်လုံးကို ဖျောက်ထားမယ်
-        slides.forEach(s => s.classList.replace('opacity-100', 'opacity-0'));
-        dots.forEach(d => {
-            d.classList.replace('bg-white', 'bg-white/40');
-            d.style.width = '12px'; // Normal size
-        });
-
-        // Current index ကို တွက်ချက်မယ်
-        currentSlide = (n + slides.length) % slides.length;
-
-        // Slide ကို ပြမယ်
-        slides[currentSlide].classList.replace('opacity-0', 'opacity-100');
-
-        // Dot ကို highlight လုပ်မယ် (Active ဖြစ်ရင် ပိုရှည်သွားအောင် လုပ်ပေးထားပါတယ်)
-        dots[currentSlide].classList.replace('bg-white/40', 'bg-white');
-        dots[currentSlide].style.width = '30px';
-    }
-
-    function nextSlide() {
-        showSlide(currentSlide + 1);
-    }
-
-    function goToSlide(n) {
-        showSlide(n);
-        startAutoSlide(); // Manual နှိပ်ရင် timer ကို reset လုပ်မယ်
-    }
-
-    function startAutoSlide() {
-        clearInterval(slideTimer);
-        slideTimer = setInterval(nextSlide, 5000); // ၅ စက္ကန့်တစ်ခါပြောင်းမယ်
-    }
-
-    // စတင်အလုပ်လုပ်စေဖို့
-    document.addEventListener('DOMContentLoaded', () => {
-        showSlide(0);
-        startAutoSlide();
-    });
 
     // --- 1. Scroll Animation ---
     const initScrollAnimations = () => {
@@ -480,7 +649,7 @@
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
 
-                }else {
+                } else {
                     // အပေါ်ပြန်ဆွဲရင် ပြန်ပျောက်စေချင်ရင် ဒါကို သုံးပါ
                     entry.target.classList.remove('active');
                 }
@@ -496,7 +665,7 @@
     // --- 2. Three.js (Tech Grid & Particles ONLY) ---
     const initThreeJS = () => {
         const container = document.getElementById('canvas-container');
-        if(!container) return;
+        if (!container) return;
 
         const scene = new THREE.Scene();
         scene.fog = new THREE.FogExp2(0xffffff, 0.02);
@@ -504,7 +673,7 @@
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = 35;
         camera.position.y = 10; // Tilted view
-        camera.lookAt(0,0,0);
+        camera.lookAt(0, 0, 0);
 
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -522,7 +691,7 @@
         const particlesGeometry = new THREE.BufferGeometry();
         const particlesCount = 2500;
         const posArray = new Float32Array(particlesCount * 3);
-        for(let i = 0; i < particlesCount * 3; i++) {
+        for (let i = 0; i < particlesCount * 3; i++) {
             posArray[i] = (Math.random() - 0.5) * 150;
         }
         particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
@@ -587,7 +756,7 @@
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if(entry.isIntersecting) {
+                if (entry.isIntersecting) {
                     const counter = entry.target;
                     const updateCount = () => {
                         const target = +counter.getAttribute('data-target');
@@ -619,6 +788,6 @@
 
 
 </script>
-
+<script src="{{ url_for('static', filename='frontend/js/main.min.js') }}"></script>
 <script type="module" src="{{ url_for('static', filename='frontend/js/pages/home.js') }}"></script>
 {% endblock %}

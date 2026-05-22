@@ -1,0 +1,56 @@
+ /*<!--===================================================================
+        MAIN STYLES 
+    =======================================================================-->*/
+.glass-nav {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+ .hero-slide {
+     transition: opacity 0.7s ease-in-out;
+ }
+
+ .masonry-grid {
+     column-count: 1;
+     column-gap: 1rem;
+ }
+
+ @media (min-width: 640px) {
+     .masonry-grid {
+         column-count: 2;
+     }
+ }
+
+ @media (min-width: 1024px) {
+     .masonry-grid {
+         column-count: 3;
+     }
+ }
+
+ .masonry-item {
+     break-inside: avoid;
+     margin-bottom: 1rem;
+ }
+
+ /* Hide scrollbar for tabs */
+ .no-scrollbar::-webkit-scrollbar {
+     display: none;
+ }
+
+ .no-scrollbar {
+     -ms-overflow-style: none;
+     scrollbar-width: none;
+ }
+
+ /* Reveal Animation Classes */
+ .reveal {
+     opacity: 0;
+     transform: translateY(30px);
+     transition: all 0.8s ease-out;
+ }
+
+ .reveal.active {
+     opacity: 1;
+     transform: translateY(0);
+ }

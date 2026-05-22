@@ -37,7 +37,7 @@ const activityUI = {
         activities.forEach(activity => {
             const imagePath = getActivityImage(activity, 1);
             const activityCard = imagePath ? `
-                <a href="${getActivityUrl(activity)}" class="group block bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                <a href="${getActivityUrl(activity)}" class="group block bg-white  overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
                     <div class="relative h-64 overflow-hidden">
                         <img src="/assets/${imagePath}" alt="${activity.activity_name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
@@ -50,7 +50,7 @@ const activityUI = {
                     </div>
                 </a>
             ` : `
-                <a href="${getActivityUrl(activity)}" class="group block bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-100">
+                <a href="${getActivityUrl(activity)}" class="group block bg-white  overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-100">
                     <div class="p-8 min-h-[22rem] flex flex-col">
                         <div class="flex items-center justify-between gap-4 mb-8">
                             <span class="bg-blue-50 text-apple-blue text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">${activity.category}</span>

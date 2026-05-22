@@ -14,9 +14,9 @@ export const semesterUI = {
             const row = `
             <tr>
                 <td class="text-start py-3">${s.id}</td>
+                <td class="text-start py-3">${s.semester_name || 'N/A'}</td>
+                <td class="text-start py-3">${s.semester_term || 'N/A'}</td>
                 <td class="text-start py-3">${s.year?.year_name || 'N/A'}</td>
-                <td class="text-start py-3">${s.semester_term || 'N/A'}</td>
-                <td class="text-start py-3">${s.semester_term || 'N/A'}</td>
                 <td class="py-3 text-start">
                     <div class="action-buttons s-flex justify-content-start ps-0">
                         <button class="btn btn-sm btn-info border rounded-5 show-update-modal-semester"

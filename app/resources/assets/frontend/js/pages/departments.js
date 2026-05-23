@@ -75,8 +75,8 @@ const courseEvent = {
 
     },
     async load(){
-        const department_name = String(document.querySelector("#department_name").value).split("(")[0];
-
+        const department_name = String(document.querySelector("#department_name").value).split("(")[0].trim();
+        console.log("department name is : ", department_name)
         const departmentSubjects = await api.getCourseByFaculty(department_name);
         console.log("this is subjects : ", departmentSubjects);
         UI.renderCourseByFaculty(departmentSubjects);

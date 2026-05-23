@@ -6,6 +6,7 @@ import { yearUI } from "../ui/year.ui.js";
 import { toast } from "../utils/toast.js";
 import { Year } from "../interfaces/academic.js";
 import { navigate } from "../utils/navigate.js";
+import { academicHelper } from "../helpers/academic.helper.js";
 
 export const yearEvent = {
     delete_id: "",

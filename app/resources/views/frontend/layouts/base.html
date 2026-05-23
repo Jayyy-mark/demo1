@@ -5,31 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}UCSTGO{% endblock %}</title>
 
-    
+    <!--==================================
+        FAVICON
+    ===================================-->
+
     <link rel="shortcut icon" href="{{ url_for('static', filename='admin/favicon/favicon.ico') }}" type="image/x-icon">
     
-
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+   
 
 
     <!--==================================
-        VENDOR STYLE CONFIG
-    ===================================-->
-
-    <!-- Google Fonts -->
+        Google Fonts 
+    ====================================-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!--====================
+        Font Awesome 
+    =====================-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='frontend/css/icon/fontawesome.css') }}">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -129,7 +124,7 @@
     {% for script in assets.vendor.scripts %}
     <script src="{{ script }}"></script>
     {% endfor %}
-    
+      <script src="{{ url_for('static', filename='frontend/js/lib/three.min.js') }}"></script>
     <!--===============================
         PAGES SCRIPTS
     ================================-->

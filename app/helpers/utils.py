@@ -22,7 +22,7 @@ class Utils:
         return instances
 
     def get_all(model):
-        return model.query.order_by(model.id.desc()).all()
+        return model.query.all()
 
     def get_by_id(model, id):
         return model.query.get(id)

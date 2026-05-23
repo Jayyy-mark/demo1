@@ -1,61 +1,60 @@
-body {
-    background-color: #ffffff;
-    color: #1d1d1f;
-    overflow-x: hidden;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-/* Ensure 3D Canvas is strictly in background */
-#canvas-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-    /* Behind everything */
-    pointer-events: none;
-    /* Let clicks pass through */
-}
+ /* <!--=================
+        MAIN STYLES 
+    ================--> */
 
 .glass-nav {
-    background-color: rgba(96, 165, 250, 0.8);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    /* ပိုပြီးထူတဲ့အရိပ် */
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.15);
 }
 
-/* Typography Gradient */
-.text-gradient {
-    background: linear-gradient(45deg, #1d1d1f, #434344);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-}
+ .hero-slide {
+     transition: opacity 0.7s ease-in-out;
+ }
 
-/* Custom Scrollbar for cleaner look */
-::-webkit-scrollbar {
-    width: 8px;
-}
+ .masonry-grid {
+     column-count: 1;
+     column-gap: 1rem;
+ }
 
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
+ @media (min-width: 640px) {
+     .masonry-grid {
+         column-count: 2;
+     }
+ }
 
-::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 4px;
-}
+ @media (min-width: 1024px) {
+     .masonry-grid {
+         column-count: 3;
+     }
+ }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #a1a1a1;
-}
+ .masonry-item {
+     break-inside: avoid;
+     margin-bottom: 1rem;
+ }
+
+ /* Hide scrollbar for tabs */
+ .no-scrollbar::-webkit-scrollbar {
+     display: none;
+ }
+
+ .no-scrollbar {
+     -ms-overflow-style: none;
+     scrollbar-width: none;
+ }
+
+ /* Reveal Animation Classes */
+ .reveal {
+     opacity: 0;
+     transform: translateY(30px);
+     transition: all 0.8s ease-out;
+ }
+
+ .reveal.active {
+     opacity: 1;
+     transform: translateY(0);
+ }
 
 #mobile-menu {
     transition: transform 0.3s ease;

@@ -1,0 +1,12 @@
+<div id="imageModal" class="fixed inset-0 z-50 hidden" onclick="closeModal()">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-sm"></div>
+    <button class="absolute top-6 right-6 text-white hover:text-gray-300 z-50 p-2">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+    </button>
+    <div class="relative z-10 w-full h-full flex items-center justify-center p-8">
+        <img id="modalImage" src="" alt="Full view"
+            class="max-w-full max-h-[90vh] rounded-lg shadow-2xl object-contain">
+    </div>
+</div>

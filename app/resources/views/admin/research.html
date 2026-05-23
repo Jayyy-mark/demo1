@@ -17,12 +17,14 @@
 ====================================-->
 {% block content %}
 <div class="pc-content">
-    <!-- [ breadcrumb ] start -->
-    <div class="section-header">
-        <div class="section-block">
+    <!-- =========================
+        PAGE HEADER
+    ========================== -->
+    <div class="page-header">
+        <div class="page-block">
             <div class="row align-items-center">
                 <div class="col">
-                    <div class="section-header-title">
+                    <div class="page-header-title">
                         <h5 class="m-b-10">{{ page }}</h5>
                     </div>
                 </div>
@@ -30,7 +32,7 @@
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="../dashboard/index.html">Home</a></li>
                         <li class="breadcrumb-item"><a href="javascript: void(0)">Admin</a></li>
-                        <li class="breadcrumb-item" aria-current="section">{{ page }}</li>
+                        <li class="breadcrumb-item" aria-current="page">{{ page }}</li>
                     </ul>
                 </div>
             </div>

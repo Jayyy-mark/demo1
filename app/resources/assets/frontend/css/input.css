@@ -1,8 +1,54 @@
 @import "tailwindcss";
 
 @theme {
-    --font-sans: "Roboto", sans-serif;
-    --color-apple-gray: #f5f5f7;
-    --color-apple-blue: #0071e3;
-    --color-apple-dark: #1d1d1f;
+  /* Custom Colors */
+  --color-royal: #1D4ED8;
+  --color-navy: #0F172A;
+  --color-sky: #3B82F6;
+
+  --color-background: #F0F7FF;
+  --color-border: #CBD5E1;
+
+  --color-textPrimary: #0F172A;
+  --color-textSecondary: #475569;
+
+  --color-apple-gray: #f5f5f7;
+  --color-apple-blue: #0071e3;
+  --color-apple-dark: #1d1d1f;
+
+  /* Fonts */
+  --font-sans: "Roboto", sans-serif;
+  --font-heading: "Roboto", sans-serif;
+
+  /* Radius */
+  --radius-3xl: 1.5rem;
+
+  /* Shadows */
+  --shadow-soft: 0 10px 30px rgb(0 0 0 / 0.08);
+
+  /* Animations */
+  --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
+  --animate-float: float 3s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }

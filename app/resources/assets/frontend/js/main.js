@@ -1,4 +1,7 @@
-//<!-- Mobile Menu Script -->
+/*<!--========================
+    MOBLIE MENU SCRIPTS 
+=========================-->*/
+
 const menuBtn = document.getElementById("menu-btn");
 const drawer = document.getElementById("mobile-menu");
 const overlay = document.getElementById("overlay");
@@ -85,3 +88,34 @@ function closeModal() {
     document.getElementById('imageModal').classList.add('hidden');
     document.body.style.overflow = 'auto'; // Enable scrolling
 }
+
+
+
+/*<!--=================================
+    FOR STICKY NAVBAR
+===================================-->*/
+
+const navbar = document.getElementById('navbar');
+const backToTop = document.getElementById('backToTop');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navbar.classList.add('shadow-md', 'glass-nav');
+        navbar.classList.remove('bg-white');
+    } else {
+        navbar.classList.remove('shadow-md', 'glass-nav');
+        navbar.classList.add('bg-white');
+    }
+
+    if (window.scrollY > 500) {
+        backToTop.classList.remove('opacity-0', 'invisible');
+        backToTop.classList.add('opacity-100', 'visible');
+    } else {
+        backToTop.classList.add('opacity-0', 'invisible');
+        backToTop.classList.remove('opacity-100', 'visible');
+    }
+});
+
+backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});

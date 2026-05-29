@@ -9,7 +9,71 @@
 ====================================-->
 {% block style %}
 <link rel="stylesheet" href="{{ assets.features.dataTable.css }}">
+<style>
+    .avatar-wrapper {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10%;
+    }
 
+    .avatar-item {
+        transition: 0.3s ease;
+        display: block;
+        width: 100%;
+    }
+
+    /* Dark overlay */
+    .avatar-overlay {
+        position: absolute;
+        inset: 0;
+
+        background: rgba(0, 0, 0, 0.5);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        opacity: 0;
+        transition: 0.3s ease;
+    }
+
+    /* Hover effect */
+    .avatar-wrapper:hover .avatar-overlay {
+        opacity: 1;
+    }
+
+    .avatar-wrapper:hover .avatar-item {
+        transform: scale(1.05);
+    }
+
+    .add-image-box {
+        height: 160px;
+        border: 2px dashed #ced4da;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.3s ease;
+        background: #f8f9fa;
+    }
+
+    .add-image-box:hover {
+        border-color: #0d6efd;
+        background: #eef5ff;
+        transform: scale(1.03);
+    }
+
+    .add-content {
+        color: #6c757d;
+        font-weight: 500;
+    }
+
+    .add-image-box:hover .add-content {
+        color: #0d6efd;
+    }
+    </style>
 {% endblock %}
 
 <!--===================================
@@ -62,11 +126,9 @@
                         <table id="dataTable" class="table rounded table-hover align-middle">
                             <thead>
                                 <tr class="bg-primary">
-                                    <th class="text-white rounded-start text-start">ID</th>
+                                    <th class="text-white text-start rounded-start">NO</th>
                                     <th class="text-white text-start">Activity Name</th>
                                     <th class="text-white text-start">Category</th>
-                                    <th class="text-white text-start">Description</th>
-                                    <th class="text-white text-start">Photo</th>
                                     <th class="text-white text-start">Year</th>
                                     <th class="text-white text-start ps-0 rounded-end">Actions</th>
                                 </tr>
@@ -154,14 +216,6 @@
                 <form id="dataForm-update" enctype="multipart/form-data">
                     <div class="row g-3">
                         <div class="mb-3">
-                            <label for="" class="form-label">Activity ID:</label>
-                            <input type="text" name="id" id="" class="form-control" disabled>
-                        </div>
-                        <div class="mb-3">
-                            <label for="file" class="form-labl">Upload Photo:</label>
-                            <input type="file" name="file" id="file" class="form-control" multiple>
-                        </div>
-                        <div class="mb-3">
                             <label for=activity_name" class="form-label">Activity Name :</label>
                             <input type="text" name="activity_name" id="activity_name" class="form-control">
                         </div>
@@ -176,7 +230,7 @@
                         <div class="mb-3">
                             <label for="date" class="form-label">Date :</label>
                             <input type="text" name="date" id="date" class="form-control">
-                        </div>                        
+                        </div>
                     </div>
                 </form>
             </div>
@@ -228,6 +282,39 @@
     </div>
 </div>
 
+<!--=========================
+    IMAGE MODAL
+==========================-->
+<div class="modal fade" id="image-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+
+            <!-- Header -->
+            <div class="modal-header">
+                <h5 class="modal-title">Activity images</h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Body -->
+            <div class="modal-body">
+
+                <div class="row g-3" id="image-modal-row">
+
+                </div>
+
+            </div>
+
+            <!-- Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
 <!-- Toast -->
 {% include 'admin/modals/toast.html' %}
 

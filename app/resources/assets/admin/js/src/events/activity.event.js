@@ -42,6 +42,15 @@ export const activityEvent = {
         $(document).on('click', '.show-delete-modal', (e)=>{
             this.showDeleteModal(e);
         });
+
+        $(document).on('click', '.show-image-modal', (e)=>{
+            this.showImageModal(e);
+        });
+
+        $(document).on('click', '.image-modal-delete-btn', (e)=>{
+            Modal.hide('#image-modal');
+            this.deleteImage(e);
+        });
     },
     async loadData(){
         try {
@@ -114,7 +123,6 @@ export const activityEvent = {
     showUpdateModal(e){
         const target = $(e.currentTarget);
         const data = target.data("activity");
-
         activityUI.fillUpdateForm(data);
         Modal.show('#activityModal-update');
     },
@@ -123,5 +131,18 @@ export const activityEvent = {
         const id = target.data("id");
         this.deleteId = id;
         Modal.show('#delete-modal');
+    },
+    showImageModal(e){
+        const target = $(e.currentTarget);
+        const images = target.data("images");
+        activityUI.renderImageModal(images);
+        Modal.show('#image-modal');
+    },
+    deleteImage(e){
+        const target = $(e.currentTarget);
+        const id = target.data("id");
+        console.log("this is the image id : ", id);
+        this.deleteId = id;
+        Modal.show('#delete-modal');     
     }
 }

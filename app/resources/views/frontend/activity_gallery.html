@@ -23,9 +23,9 @@
 </section>
 
 <!-- Description & Gallery -->
-<section class="py-24 bg-apple-gray">
+<section class="py-5 bg-apple-gray">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        
+
         <!-- Description -->
         <div class="max-w-3xl mx-auto mb-20 text-center">
             <p class="text-xl text-gray-600 leading-relaxed" id="description"></p>
@@ -38,6 +38,38 @@
 
     </div>
 </section>
+
+<section class="py-8 border-t border-slate-100 bg-slate-50/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-row justify-between items-center gap-2 w-full">
+
+            <!-- Previous Button -->
+            <a href="#" class="group flex items-center gap-2 sm:gap-4 p-2 rounded-xl hover:bg-slate-200/50 transition-all duration-300 max-w-[48%]">
+                <div class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-slate-200 bg-white group-hover:border-blue-500 transition-colors shrink-0">
+                    <i class="fa-solid fa-arrow-left text-sm sm:text-base text-blue-500 group-hover:text-blue-600 transition-transform group-hover:-translate-x-1"></i>
+                </div>
+                <div class="min-w-0">
+                    <span class="text-xs sm:text-sm font-black text-slate-400 uppercase tracking-widest block mb-0.5">Previous</span>
+                    <h5 class="text-base sm:text-xl font-bold text-slate-700 group-hover:text-blue-600 transition-colors truncate">Tech Fest Winner List</h5>
+                </div>
+            </a>
+
+            <!-- Next Button -->
+            <a href="#" class="group flex items-center justify-end gap-2 sm:gap-4 p-2 rounded-xl hover:bg-slate-200/50 transition-all duration-300 max-w-[48%] text-right">
+                <div class="min-w-0">
+                    <span class="text-xs sm:text-sm font-black text-slate-400 uppercase tracking-widest block mb-0.5">Next</span>
+                    <h5 class="text-base sm:text-xl font-bold text-slate-700 group-hover:text-blue-600 transition-colors truncate">New Semester Notice</h5>
+                </div>
+                <div class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-slate-200 bg-white group-hover:border-blue-500 transition-colors shrink-0">
+                    <i class="fa-solid fa-arrow-right text-sm sm:text-base text-blue-500 group-hover:text-blue-600 transition-transform group-hover:translate-x-1"></i>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+```
 
 
 {% endblock %}

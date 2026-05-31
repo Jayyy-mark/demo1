@@ -1,22 +1,22 @@
 import { activityApi } from "../api/activityApi.js"
 import { activityUI } from "../ui/activity.ui.js";
-import {toast} from '../utils/toast.js';
+import { toast } from '../utils/toast.js';
 import { Activity } from "../interfaces/activity.js";
 import { Utils } from "../utils/utils.js";
 import { Modal } from "../utils/modal.js";
 
 
 export const activityEvent = {
-    deleteId:"",
-
-    init(){
+    deleteId: "",
+    selectedImages: [],
+    init() {
         this.loadData();
 
         //<!--=========================
         //  activity CREATE EVENT 
         //==========================-->
 
-        $("#add_btn").on('click', ()=>{
+        $("#add_btn").on('click', () => {
             this.create();
         });
 
@@ -24,44 +24,36 @@ export const activityEvent = {
           activity UPDATE EVENT 
         ===========================-->*/
 
-        $("#update_btn").on('click', ()=>{
+        $("#update_btn").on('click', () => {
             this.update();
         });
 
         /*<!--=========================
           activity DELETE EVENT 
         ===========================-->*/
-        $("#delete_btn").on('click', ()=>{
+        $("#delete_btn").on('click', () => {
             this.delete();
         });
 
-        $(document).on('click', '.show-update-modal', (e)=>{
+        $(document).on('click', '.show-update-modal', (e) => {
             this.showUpdateModal(e);
         });
 
-        $(document).on('click', '.show-delete-modal', (e)=>{
+        $(document).on('click', '.show-delete-modal', (e) => {
             this.showDeleteModal(e);
         });
 
-        $(document).on('click', '.show-image-modal', (e)=>{
-            this.showImageModal(e);
-        });
-
-        $(document).on('click', '.image-modal-delete-btn', (e)=>{
-            Modal.hide('#image-modal');
-            this.deleteImage(e);
-        });
     },
-    async loadData(){
+    async loadData() {
         try {
-            const activities = await activityApi.all();  
+            const activities = await activityApi.all();
             activityUI.render(activities.data);
 
         } catch (error) {
             toast.error(error?.message || "Error occured!", "Error");
         }
     },
-    async create(){
+    async create() {
         const form = $('#dataForm');
         const activity = new Activity();
         form.find('[name]').each(function () {
@@ -71,7 +63,7 @@ export const activityEvent = {
 
             if ($(this).attr("type") === "file") {
                 value = this.files; // ✔ correct
-                               
+
             } else {
                 value = $(this).val();
             }
@@ -79,22 +71,20 @@ export const activityEvent = {
             activity.set(key, value);
         });
 
-        try
-        {
+        try {
             const data = await activityApi.create(activity);
             await toast.success(data.message, "Success");
             Utils.refresh();
         }
-        catch(error)
-        {
+        catch (error) {
             console.log(error);
             await toast.error(error?.message || "Error occured!", "Error");
         }
     },
-    async update(){
+    async update() {
         const form = $('#dataForm-update');
         const activity = new Activity();
-        form.find('[name]').each(function(){
+        form.find('[name]').each(function () {
             const key = $(this).attr("name");
             const value = $(this).val();
 
@@ -110,7 +100,7 @@ export const activityEvent = {
             await toast.error(error?.message || "Error occured!", "Error");
         }
     },
-    async delete(){
+    async delete() {
         try {
             const data = await activityApi.delete(this.deleteId);
             await toast.success(data.message);
@@ -120,29 +110,16 @@ export const activityEvent = {
             await toast.error(error?.message || "Error occured!");
         }
     },
-    showUpdateModal(e){
+    showUpdateModal(e) {
         const target = $(e.currentTarget);
         const data = target.data("activity");
         activityUI.fillUpdateForm(data);
         Modal.show('#activityModal-update');
     },
-    showDeleteModal(e){
+    showDeleteModal(e) {
         const target = $(e.currentTarget);
         const id = target.data("id");
         this.deleteId = id;
         Modal.show('#delete-modal');
-    },
-    showImageModal(e){
-        const target = $(e.currentTarget);
-        const images = target.data("images");
-        activityUI.renderImageModal(images);
-        Modal.show('#image-modal');
-    },
-    deleteImage(e){
-        const target = $(e.currentTarget);
-        const id = target.data("id");
-        console.log("this is the image id : ", id);
-        this.deleteId = id;
-        Modal.show('#delete-modal');     
     }
 }

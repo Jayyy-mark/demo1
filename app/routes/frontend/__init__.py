@@ -17,3 +17,4 @@ from . import about
 from . import campus_gallery
 from . import syllabus_courses
 from . import publication
+from . import academic_calendar

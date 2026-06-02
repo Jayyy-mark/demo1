@@ -8,44 +8,7 @@ class ActivityController(BaseController):
 
     def __init__(self):
         super().__init__(Activity, ActivitySchema())
-
-    def all(self):
-
-        activities = Activity.query.all()
-
-        # serialize model objects -> dict
-        serialized = self.schema.dump(activities, many=True)
-
-        grouped = {}
-
-        for item in serialized:
-
-            activity_name = item["activity_name"]
-
-            # create unique activity
-            if activity_name not in grouped:
-
-                grouped[activity_name] = {
-                    "activity_name": item["activity_name"],
-                    "category": item["category"],
-                    "date": item["date"],
-                    "description": item["description"],
-                    "images": []
-                }
-
-            # append images
-            grouped[activity_name]["images"].append({
-                "id": item["id"],
-                "filename": item["filename"],
-                "filepath": item["filepath"].replace("\\", "/")
-            })
-
-        result = list(grouped.values())
-
-        return ResponseHelper.success(
-            "Fetched successfully",
-            result
-        )
+   
     def create(self):
 
         raw_data = request.form.to_dict()
@@ -125,6 +88,8 @@ class ActivityController(BaseController):
                 str(e),
                 500
             )            
+
+
 
 
 

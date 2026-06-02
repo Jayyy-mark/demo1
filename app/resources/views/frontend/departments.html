@@ -164,20 +164,20 @@
     </div>
 </section>
 
-<section class="pb-12 bg-blue-50">
+<section class="pb-1 bg-blue-50">
     <div class="max-w-4xl mx-auto px-6 text-center">
-        <div class="flex justify-center mt-10">
-            <div
-                class="inline-flex p-5 bg-blue-600 font-bold backdrop-blur-sm rounded-full border border-gray-200/80 shadow-sm text-white">
-                <h2>Courses by {{ department.name }}</h2>
+            <div class="text-center mb-16">
+                <h2 class="text-2xl md:text-4xl font-bold text-blue-800 mb-6 tracking-tight">Course by {{ department.name }}</h2>
+                <div class="w-20 h-1.5 bg-amber-400 mx-auto rounded-full"></div>
             </div>
-        </div>
     </div>
 </section>
 
 <section id="syllabus-content" class="pb-28 bg-blue-50">
-    <div class="max-w-4xl mx-auto px-6 bg-white shadow-xl rounded-2xl">
-        <div id="tab-faculties" class="block animate-fade-in border-t border-gray-200"></div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="bg-white shadow-xl rounded-2xl px-6">
+            <div id="tab-faculties" class="block animate-fade-in border-t border-gray-200"></div>
+        </div>
     </div>
 </section>
 {% endblock %}

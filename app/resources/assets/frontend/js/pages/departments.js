@@ -20,13 +20,13 @@ const UI = {
             const row = `
                 <div class="border-b border-gray-200">
                     <button onclick="toggleAccordion('${element.department?.id}')" class="w-full py-5 md:py-6 flex items-center justify-between bg-white hover:bg-gray-50/80 transition-colors text-left group">
-                        <span class="font-semibold text-gray-900 text-lg md:text-xl group-hover:text-blue-600 transition-colors pr-4">${element.department?.department_name}</span>
+                        <span class="font-semibold text-gray-900 text-lg md:text-xl group-hover:text-blue-600 transition-colors pr-4">Courses</span>
                         <div class="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center bg-white text-gray-500 group-hover:text-blue-600 group-hover:border-blue-200 transition-all flex-shrink-0">
                             <svg id="${element.department?.id}-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
                         </div>
                     </button>
 
-                    <div id="${element.department?.id}" class="accordion-content">
+                    <div id="${element.department?.id}" class="accordion-content-open">
                         <div class="pb-6 pt-2 pl-2">
                             <!-- The wrapper handles the rounding, border, and background -->
                             <div class="overflow-hidden border border-gray-200 rounded-xl bg-white">
@@ -76,9 +76,7 @@ const courseEvent = {
     },
     async load(){
         const department_name = String(document.querySelector("#department_name").value).split("(")[0].trim();
-        console.log("department name is : ", department_name)
         const departmentSubjects = await api.getCourseByFaculty(department_name);
-        console.log("this is subjects : ", departmentSubjects);
         UI.renderCourseByFaculty(departmentSubjects);
 
     }

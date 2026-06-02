@@ -37,7 +37,7 @@ const activityUI = {
         activities.forEach(activity => {
             const imagePath = getActivityImage(activity, 1);
             const activityCard = imagePath ? `
-                <a href="${getActivityUrl(activity)}" class="group block bg-white  overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+                <a href="${getActivityUrl(activity)}" class="group block bg-white border-2 border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
                     <div class="relative h-64 overflow-hidden">
                         <img src="/assets/${imagePath}" alt="${activity.activity_name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>

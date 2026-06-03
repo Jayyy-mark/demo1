@@ -14,6 +14,8 @@ import os
 from app.https.middleware.auth_middleware import attach_user
 from flask_jwt_extended import JWTManager
 
+from app.helpers.install import check_installation
+
 
 
 def create_app():
@@ -28,7 +30,7 @@ def create_app():
         # INSTALLATION GUARD
         # =========================
 
-        # app.before_request(check_installation)
+        app.before_request(check_installation)
 
         # =========================
         # USER AUTH MIDDLEWARE
@@ -39,10 +41,6 @@ def create_app():
         #  APPLICATION CONFIGURATION (SECURITY+DATABASE) SETUP
         #====================================================== -->
         app.config.from_object(Config)
-
-        # if not installed:
-        #     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:' 
-        #     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
         init_db(app)
 

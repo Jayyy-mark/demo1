@@ -11,7 +11,18 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="{{ assets.admin.dashboard.css }}">
+<style>
+.icon-btn {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+}
 
+.icon-btn:hover {
+    transform: scale(1.15);
+    background: rgba(255, 193, 7, 0.15);
+}
+</style>
 {% endblock %}
 
 
@@ -164,7 +175,8 @@
                             <small class="text-muted">University daily activities</small>
                         </div>
                         <div class="col-auto">
-                            <button class="btn btn-sm btn-primary">
+                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#academicTaskModal" aria-label="Add academic task">
                                 <i class="ti ti-plus"></i>
                             </button>
                         </div>
@@ -175,14 +187,18 @@
                         <div class="px-3 pt-3">
 
                             <div class="row mb-1 align-items-start">
-                                <div class="col">
+                                <div class="col d-flex align-items-center">
                                     <h5 class="text-primary mb-0">Final Exam Preparation</h5>
-                                    <small class="text-muted">Computer Science Department</small>
+                                    <span class="ms-2 avtar avtar-xs bg-light icon-btn">
+                                        <i class="ti ti-edit text-warning"></i>
+                                    </span>
                                 </div>
 
                                 <div class="col-auto">
                                     <h5 class="mb-0">Due Today</h5>
+
                                 </div>
+
                             </div>
 
                         </div>
@@ -198,7 +214,7 @@
                             <div class="row align-items-start">
                                 <div class="col">
                                     <h5 class="mb-0">Submit Assignment</h5>
-                                    <small class="text-muted">Database Systems - Week 10</small>
+
                                 </div>
                                 <div class="col-auto">
                                     <h5 class="mb-0">
@@ -215,7 +231,7 @@
                             <div class="row align-items-start">
                                 <div class="col">
                                     <h5 class="mb-0">Grade Midterm Papers</h5>
-                                    <small class="text-primary">AI & Machine Learning</small>
+
                                 </div>
                                 <div class="col-auto">
                                     <h5 class="mb-0">
@@ -262,16 +278,137 @@
                             </div>
                         </li>
 
+                        <li class="list-group-item px-0 collapse academic-task-extra" id="allAcademicTasks">
+                            <div class="row align-items-start">
+                                <div class="col">
+                                    <h5 class="mb-0">Department Budget Review</h5>
+                                    <small class="text-danger">Academic Office</small>
+                                </div>
+                                <div class="col-auto">
+                                    <h5 class="mb-0">
+                                        Urgent
+                                        <span class="ms-2 avtar avtar-xxs bg-light-danger">
+                                            <i class="ti ti-alert-circle text-danger"></i>
+                                        </span>
+                                    </h5>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item px-0 collapse academic-task-extra">
+                            <div class="row align-items-start">
+                                <div class="col">
+                                    <h5 class="mb-0">Approve Course Materials</h5>
+                                    <small class="text-success">Software Engineering</small>
+                                </div>
+                                <div class="col-auto">
+                                    <h5 class="mb-0">
+                                        Review
+                                        <span class="ms-2 avtar avtar-xxs bg-light-success">
+                                            <i class="ti ti-clipboard-check text-success"></i>
+                                        </span>
+                                    </h5>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item px-0 collapse academic-task-extra">
+                            <div class="row align-items-start">
+                                <div class="col">
+                                    <h5 class="mb-0">Lab Equipment Inventory</h5>
+                                    <small class="text-secondary">Physics Laboratory</small>
+                                </div>
+                                <div class="col-auto">
+                                    <h5 class="mb-0">
+                                        Friday
+                                        <span class="ms-2 avtar avtar-xxs bg-light-secondary">
+                                            <i class="ti ti-tools text-secondary"></i>
+                                        </span>
+                                    </h5>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item px-0 collapse academic-task-extra">
+                            <div class="row align-items-start">
+                                <div class="col">
+                                    <h5 class="mb-0">Scholarship Interview Panel</h5>
+                                    <small class="text-primary">Student Affairs</small>
+                                </div>
+                                <div class="col-auto">
+                                    <h5 class="mb-0">
+                                        Scheduled
+                                        <span class="ms-2 avtar avtar-xxs bg-light-primary">
+                                            <i class="ti ti-users-group text-primary"></i>
+                                        </span>
+                                    </h5>
+                                </div>
+                            </div>
+                        </li>
+
                     </ul>
 
                     <!-- Footer -->
                     <div class="text-center">
-                        <a href="#!" class="b-b-primary text-primary">
-                            View all academic tasks
-                            <i class="ti ti-chevron-right"></i>
+                        <a href="#allAcademicTasks" class="b-b-primary text-primary" id="toggleAcademicTasks"
+                            data-bs-toggle="collapse" data-bs-target=".academic-task-extra" aria-expanded="false"
+                            aria-controls="allAcademicTasks">
+                            <span>View all academic tasks</span>
+                            <i class="ti ti-chevron-down"></i>
                         </a>
                     </div>
 
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="academicTaskModal" tabindex="-1" aria-labelledby="academicTaskModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden academic-task-modal">
+                    <div class="modal-header bg-primary border-0 px-4 py-3">
+                        <div>
+                            <h5 class="modal-title text-white mb-1" id="academicTaskModalLabel">Add Academic Task</h5>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <form>
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Task Title</label>
+                                <input type="text" name="title" class="form-control" placeholder="Enter academic task title">
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label fw-semibold">Date Range</label>
+
+                                    <div class="d-flex gap-2">
+                                        <input type="date" class="form-control" name="start_date">
+                                        <span class="align-self-center">to</span>
+                                        <input type="date" class="form-control" name="end_date">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">Status</label>
+                                    <select class="form-select" name="status">
+                                        <option selected>Pending</option>
+                                        <option>In Progress</option>
+                                        <option>Completed</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer border-0 bg-light px-4 py-3">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="save_academic_task_btn">
+                            <i class="ti ti-check me-1"></i>
+                            Save Task
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -470,4 +607,23 @@
     PAGE'S SCRIPTS
 ====================================-->
 {% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggle = document.getElementById('toggleAcademicTasks');
+
+        if (!toggle) {
+            return;
+        }
+
+        const label = toggle.querySelector('span');
+        const icon = toggle.querySelector('i');
+
+        toggle.addEventListener('click', function () {
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            label.textContent = isExpanded ? 'View all academic tasks' : 'Show less academic tasks';
+            icon.classList.toggle('ti-chevron-down', isExpanded);
+            icon.classList.toggle('ti-chevron-up', !isExpanded);
+        });
+    });
+</script>
 {% endblock %}

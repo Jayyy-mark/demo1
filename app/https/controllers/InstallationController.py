@@ -4,7 +4,7 @@ from app.core.database import db
 from sqlalchemy import create_engine
 from flask_migrate import upgrade
 from app.models.UserModel import User
-
+from app.models.SettingModel import Setting
 from app.helpers.install import (
     checkOsVersion,
     checkPythonVersion,
@@ -53,7 +53,7 @@ class InstallationController:
         #   GET APPLICATION STATUS ( CHECKING IF IT IS INSTALLED OR NOT )
         #================================================================================================-->
         
-        isInstalled = os.getenv("APP_INSTALLED")
+        isInstalled = Setting().isInstalled()
 
         return render_template(
             "installation/system_requirements.html", 
@@ -68,48 +68,6 @@ class InstallationController:
 
         data = request.get_json()
 
-        if os.getenv("APP_INSTALLED", "false") == "true":
-            return jsonify({ "message" : "Application is already installed!" }), 403
-
-        #<!--================================================================
-        #   TEST DB CONNECTION ( IF FAILED RETURN DB CONNECTION ERROR )
-        #=================================================================-->
-        if not test_db_connection(
-            data["DB_HOST"],
-            data["DB_PORT"],
-            data["DB_NAME"],
-            data["DB_USERNAME"],
-            data["DB_PASSWORD"],
-            data['DB_TYPE']
-        ):
-            return jsonify({"error": "Database connection failed"}), 500 
-
-        app = current_app._get_current_object()
-
-        new_uri = get_uri(data)
-
-        app.config['SQLALCHEMY_DATABASE_URI'] = new_uri
-
-        with app.app_context():
-            
-            try:
-
-                InstallationController.connect_new_db_engine(new_uri)
-
-                #<!--======================================================
-                #   UPGRADE(ADD) MIGRATION ON OUR DB
-                #=======================================================-->
-
-                upgrade()#flask db upgrade
-
-
-
-            except Exception as e:
-
-                print("CRITICAL ERROR IN SETUP: ", str(e))
-
-                return jsonify({"error": str(e)}), 500
-            
         #<!--=======================================================
         #   CREATE ADMIN USER ACCOUNT
         #========================================================-->
@@ -126,18 +84,16 @@ class InstallationController:
             return jsonify({"error": "User already exists"}), 400
         
 
-        #<!--=======================================================
-        #   UPDATE ENVIROMENT VARIABLES (.env file)
-        #========================================================-->
-        update_env("DB_HOST", data["DB_HOST"])
-        update_env("DB_PORT", data["DB_PORT"])
-        update_env("DB_NAME", data["DB_NAME"])
-        update_env("DB_USERNAME", data["DB_USERNAME"])
-        update_env("DB_PASSWORD", data["DB_PASSWORD"])
-        update_env("APP_INSTALLED", "true")
+        # Update the setting in the database
+        setting = Setting.query.get(1)
 
-        with open("app/logs/log.py", "a") as f:
-            f.write("\nprint('DB migrated')\n")
+        if not setting:
+            setting = Setting(id=1, app_installed=True)
+            db.session.add(setting)
+        else:
+            setting.app_installed = True
+
+        db.session.commit()
 
         return jsonify({
             "message": "Installation successful",
@@ -165,42 +121,8 @@ class InstallationController:
     @staticmethod
     def restartServer():
 
-        isInstalled = os.getenv("APP_INSTALLED").lower() == "true"
-
-        if isInstalled:
+        if Setting().isInstalled():
             restart_server()
 
         return redirect(url_for('admin.login'))
     
-
-    @staticmethod
-    def connect_new_db_engine(new_uri):
-
-        #<!--============================================================================
-        #   REMOVE OLD DB ENGINE WHICH IS CREATED WITH OLD SQL_ALCHEMY_URI CONFIG
-        #==============================================================================-->
-
-        if hasattr(db, 'engines'):
-            db.engines.clear()
-
-        #<!--============================================================================
-        #   CREATE NEW DB ENGINE
-        #==============================================================================-->        
-
-        new_engine = create_engine(new_uri, pool_pre_ping=True)
-            
-
-        #<!--===================================
-        #   ADD NEW DB ENGINE ON APP CONTEXT
-        #=====================================-->  
-
-        db.engines[None] = new_engine
-
-
-
-        #<!--===================================
-        #   CONNECT OUR ADDED DB ENGINE
-        #=====================================-->          
-
-        connection = db.engine.connect()
-        connection.close()

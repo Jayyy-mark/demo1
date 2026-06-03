@@ -206,92 +206,7 @@
             ===================================-->
             <div id="step-2" class="step-content hidden">
 
-                <div class="mb-4">
-
-                    <h1 class="text-2xl text-gray-900">
-                        Database Setup
-                    </h1>
-
-
-                </div>
-
                 <div class="space-y-6" id="form_container">
-
-                    <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
-
-                        <div>
-
-                            <label class="mb-2 block text-sm font-semibold text-gray-700">
-                                Database Host
-                            </label>
-
-                            <input type="text" placeholder="localhost" name="DB_HOST"
-                                class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-indigo-100">
-
-                        </div>
-
-                        <div>
-
-                            <label class="mb-2 block text-sm font-semibold text-gray-700">
-                                Database Port
-                            </label>
-
-                            <input type="text" placeholder="3306" name="DB_PORT"
-                                class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-indigo-100">
-
-                        </div>
-
-                    </div>
-
-                    <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
-
-                        <div>
-
-                            <label class="mb-2 block text-sm font-semibold text-gray-700">
-                                Database Name
-                            </label>
-
-                            <input type="text" placeholder="my_database" name="DB_NAME"
-                                class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-indigo-100">
-
-                        </div>
-
-                        <div>
-
-                            <label class="mb-2 block text-sm font-semibold text-gray-700">
-                                Database Username
-                            </label>
-
-                            <input type="text" placeholder="root" name="DB_USERNAME"
-                                class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-indigo-100">
-
-                        </div>
-
-                    </div>
-
-                    <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
-
-                        <div>
-                                <label class="mb-2 block text-sm font-semibold text-gray-700">
-                                Database Password
-                            </label>
-
-                            <input type="password" placeholder="********" name="DB_PASSWORD"
-                                class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition focus:border-primary focus:ring-4 focus:ring-indigo-100">
-
-                        </div>
-                        <div>
-                            <label class="mb-2 block text-sm font-semibold text-gray-700">
-                                Database Type
-                            </label>
-
-                            <select name="DB_TYPE" id=""  class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm outline-none transition 
-                                focus:border-primary focus:ring-4 focus:ring-indigo-100">
-                                <option value="mysql">Mysql</option>
-                                <option value="postgres">Postgres</option>
-                            </select>
-                        </div>                        
-                    </div>
 
                     <div class="border-t border-gray-200 pt-6">
 
@@ -407,18 +322,6 @@
                         <div class="grid grid-cols-3 px-3 py-3">
 
                             <dt class="text-sm font-semibold text-gray-900">
-                                Connected DB
-                            </dt>
-
-                            <dd class="col-span-2 text-sm text-gray-600" id="created_database">
-
-                            </dd>
-
-                        </div>
-
-                        <div class="grid grid-cols-3 px-3 py-3">
-
-                            <dt class="text-sm font-semibold text-gray-900">
                                 Username
                             </dt>
 
@@ -529,7 +432,7 @@
 
     const steps = [
         "Requirements",
-        "Database",
+        "Account Setup",
         "Status",
         "Success"
     ];
@@ -704,11 +607,9 @@
     }
 
     createBtn.addEventListener("click", async function () {
-        console.log("this is value : ", document.querySelector("select[name='DB_TYPE']").value);
+ 
         const data = await fetcher();
 
-        console.log("data : ", data);
-        document.querySelector("#created_database").innerText = data.db_name
         document.querySelector("#created_username").innerText = data.username
         document.querySelector("#created_email").innerText = data.email
 
@@ -724,12 +625,6 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                DB_TYPE:document.querySelector("select[name='DB_TYPE']").value,
-                DB_HOST: document.querySelector("input[name='DB_HOST']").value.trim() || "localhost",
-                DB_PORT: document.querySelector("input[name='DB_PORT']").value.trim() || "3306",
-                DB_NAME: document.querySelector("input[name='DB_NAME']").value.trim(),
-                DB_USERNAME: document.querySelector("input[name='DB_USERNAME']").value.trim() || "root",
-                DB_PASSWORD: document.querySelector("input[name='DB_PASSWORD']").value.trim() || "root",
                 email: document.querySelector("input[name='email']").value.trim() || "admin@test.com",
                 password: document.querySelector("input[name='password']").value.trim() || "123456",
                 username: document.querySelector("input[name='username']").value.trim() || "admin"

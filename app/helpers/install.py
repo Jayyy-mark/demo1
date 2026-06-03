@@ -2,11 +2,14 @@ import sys, os, signal, platform
 from flask import request, redirect, url_for
 from sqlalchemy import create_engine
 from sqlalchemy.exc import OperationalError
+from app.models.SettingModel import Setting
 
 
 def check_installation():
+    
+    setting = Setting.query.first()
 
-    installed = os.getenv("APP_INSTALLED", "false").lower() == "true"
+    installed = setting.app_installed if setting else False
 
     allowed_prefixes = [
         "/api/installation",
@@ -19,6 +22,7 @@ def check_installation():
 
     # if NOT installed → block everything except installer
     if not installed:
+        print("Application is not installed. Redirecting to installer...")
         if not any(path.startswith(p) for p in allowed_prefixes):
             return redirect(url_for("install.setup"))
 

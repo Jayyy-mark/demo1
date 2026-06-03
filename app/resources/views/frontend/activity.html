@@ -4,49 +4,14 @@
 
 {% block content %}
 
-<!-- Page Header -->
-<section class="bg-white pt-32 pb-16 hidden">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-        <!-- Title -->
-        <h1 class="text-2xl md:text-4xl font-black tracking-tight text-apple-dark mb-4">
-            Explore UCSTaungoo
-        </h1>
 
-        <!-- အပြာရောင်လိုင်းတိုလေး -->
-        <div class="w-24 h-1 bg-blue-600 mx-auto rounded"></div>
-    </div>
-</section>
-
-<!-- 1. Modern News Section (Alternating Layout) -->
-<section class="py-8 bg-white overflow-hidden hidden">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="flex items-center gap-4 mb-16">
-            <h2 class="text-3xl font-black text-apple-dark italic text-gradient uppercase">Latest News</h2>
-            <div class="h-[2px] flex-grow bg-slate-100"></div>
-        </div>
-
-        <!-- News Container -->
-        <div id="laseted-activity-list-container" class="space-y-32">
-
-        </div>
-
-        <!-- View More News Button -->
-        <div class="mt-24 text-center">
-            <button id="load-more-news" class="group relative px-12 py-4 font-black text-xs tracking-widest text-apple-dark overflow-hidden rounded-full border-2 border-apple-dark transition-all duration-300">
-                <span class="relative z-10 uppercase">View More Stories</span>
-                <div class="absolute inset-0 bg-apple-dark translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-            </button>
-        </div>
-    </div>
-</section>
 
 <!-- 2. Modern Activities Section (Cards with Glassmorphism Overlay) -->
-<section id="campus-activities" class="py-24 bg-blue-50 scroll-animate">
+<section id="campus-activities" class="scroll-animate">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="text-center mb-16">
             <h2 class="text-4xl md:text-5xl font-bold text-blue-800 mb-4">News & Activities</h2>
             <div class="w-24 h-1 bg-amber-400 mx-auto mb-6 rounded"></div>
-            <p class="text-xl text-gray-500">Highlights from our recent events and contests.</p>
         </div>
         <div class="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-8" id="activity-data-section-body">
 

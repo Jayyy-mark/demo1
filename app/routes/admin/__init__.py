@@ -55,6 +55,10 @@ def inject_assets():
                         url_for('static', filename='admin/js/src/core/year.js')
                     ]
                 },
+                'calendar': {
+                    'css': None,
+                    'script': url_for('static', filename='admin/js/src/core/calendar.js')
+                },
             }
         }
         mergedAssets = {**baseAssets, **newAssets}
@@ -72,3 +76,4 @@ from . import login
 from . import research
 from . import subject
 from . import laboratory
+from . import calendar

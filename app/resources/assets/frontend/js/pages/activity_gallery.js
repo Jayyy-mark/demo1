@@ -18,6 +18,7 @@ const activityGalleryAPI = {
 const activityGalleryUI= {
     render(activity){
         const activityName = document.querySelector("#activity_name");
+        const activityCategory = document.querySelector("#activity_category");
         const description = document.querySelector("#description");
         const activityDate = document.querySelector("#activity_date");
         const imageContainer = document.querySelector("#image-container");
@@ -31,6 +32,7 @@ const activityGalleryUI= {
         }
 
         activityName.innerText = activity.activity_name;
+        activityCategory.innerText = activity.category;
         description.innerText = activity.description;
         activityDate.innerText = activity.date;
         imageContainer.innerHTML = "";

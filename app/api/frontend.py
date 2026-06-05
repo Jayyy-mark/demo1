@@ -38,3 +38,7 @@ def getCourseByDepartment():
 @frontend_api.route("/course/semester/subject", methods=['GET'])
 def getCourseBySemester():
     return FrontendController.getCourseBySemester()
+
+@frontend_api.route("/academic/calendar", methods=['GET'])
+def getAcademicCalendar():
+    return FrontendController.getAcademicCalendar()

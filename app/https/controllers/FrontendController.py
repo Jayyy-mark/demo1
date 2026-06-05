@@ -1,6 +1,10 @@
 from collections import defaultdict
+from datetime import date, datetime
 
+from app.helpers.utils import ResponseHelper
 from app.models.ActivityModel import Activity
+from app.models.AcademicCalendarModel import AcademicCalendar
+from app.schemas.academic_calendar import AcademicCalendarSchema
 from app.models.CourseModel import Course
 from app.models.DepartmentModel import Department
 from app.models.ResearchModel import Research
@@ -250,7 +254,41 @@ class FrontendController:
         return jsonify({
             "subjects": list(grouped.values())
         })
-    
+
+
+
+    @staticmethod
+    def getAcademicCalendar():
+
+
+        def _status_for_dates(start_date, end_date):
+
+            today = date.today()
+
+            if today > end_date:
+                return "Completed"
+
+            if today >= start_date:
+                return "On Progress"
+
+            return "Pending"
+        
+        
+        data = AcademicCalendar.query.order_by(AcademicCalendar.start_date.desc()).all()
+
+        if not data:
+            return ResponseHelper.success("Fetched successfully", [])
+
+        calendar_events = AcademicCalendarSchema(many=True).dump(data)
+
+        for event in calendar_events:
+            event["status"] = _status_for_dates(
+                datetime.strptime(event["start_date"], "%Y-%m-%d").date(),
+                datetime.strptime(event["end_date"], "%Y-%m-%d").date()
+            )
+
+        return ResponseHelper.success("Fetched successfully", calendar_events)
+
     @staticmethod
     def getCourseBySemester():
         courses = Course.query.all()

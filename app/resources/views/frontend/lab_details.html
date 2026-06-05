@@ -6,11 +6,24 @@
 
 <input type="hidden" name="" id="laboratory_id" value="{{ laboratory_id }}">
 
-<section class="pt-32 pb-20 bg-white">
+<section class="py-12 pb-20 bg-white">
     <div class="max-w-7xl mx-auto px-6">
 
+        <!-- Breadcrumb & Title Area -->
+        <div class="max-w-5xl mx-auto mb-12">
+            <nav class="flex text-sm font-medium text-slate-400 mb-6">
+                <a href="{{ url_for('frontend.research') }}" class="hover:text-blue-600 transition">Research</a>
+                <span class="mx-2">/</span>
+                <span class="text-slate-900 capitalize"></span>
+            </nav>
+            <h1 class="text-4xl md:text-6xl font-black text-slate-900 mb-4 capitalize"></h1>
+        </div>
+
+        <!-- Main Lab Info -->
+
+
         <!-- IMAGE GALLERY SECTION (ပုံအများကြီးပြမည့်နေရာ) -->
-        <div class="">
+        <div class="mt-10">
             <div class="flex items-end justify-between mb-10">
                 <div>
                     <h2 class="text-3xl font-bold text-slate-900" id="laboratory_name"></h2>

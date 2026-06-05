@@ -1,3 +1,17 @@
+import { api } from "../utils/api.js";
+
+
+const calendarApi = {
+    async all() {
+        const res = await api.get("/frontend/academic/calendar");
+        return res.data;
+    },
+}
+
+
+/*<!--=============================
+    CALENDAR UI HANDLER
+==============================-->*/
 const monthTitle = $("#calendar-title");
 const calendarGrid = $("#calendar-grid");
 const form = $("#calendarForm");
@@ -84,9 +98,9 @@ function getVisibleEventSegments(event, gridStart, todayKey) {
     return segments;
 }
 
-export const calendarUI = {
+const calendarUI = {
     renderMonth(currentDate, events) {
-        
+
         console.log("Rendering month:", currentDate, "with events:", events);
         const title = currentDate.toLocaleDateString("en-US", {
             month: "long",
@@ -156,6 +170,38 @@ export const calendarUI = {
         });
     },
 
+    renderUpcomingList(events) {
+        const listContainer = $("#upcoming-events-list");
+        listContainer.empty();
+
+        if (!events || events.length === 0) {
+            listContainer.append('<div class="calendar-empty">No dynamic schedule configured for this month view.</div>');
+            return;
+        }
+
+        events.forEach(event => {
+            const statusClass = statusClassMap[event.status] || "status-pending";
+
+            // Reformat Year-Month-Day safely to Month Day, Year syntax (e.g. Jun 04, 2026)
+            const options = { month: 'short', day: '2-digit', year: 'numeric' };
+            const startStr = parseDate(event.start_date).toLocaleDateString('en-US', options);
+            const endStr = parseDate(event.end_date).toLocaleDateString('en-US', options);
+            const dateRangeText = (event.start_date === event.end_date) ? startStr : `${startStr} - ${endStr}`;
+
+            const cardHtml = `
+                    <div class="upcoming-card ${statusClass}">
+                        <div class="upcoming-card-meta">
+                            <span class="status-indicator"></span>
+                            <span class="upcoming-date">${dateRangeText}</span>
+                        </div>
+                        <h4 class="upcoming-title">${event.title || 'Untitled Academic Event'}</h4>
+                        <p class="upcoming-desc">${event.description || 'No scheduling context notes declared.'}</p>
+                    </div>
+                `;
+            listContainer.append(cardHtml);
+        });
+    },
+
     openCreateForm(defaultDate) {
         form[0].reset();
         form.find("[name=id]").val("");
@@ -219,3 +265,68 @@ export const calendarUI = {
         return "";
     }
 };
+
+
+
+/*<!--=============================
+    CALENDAR EVENT HANDLER
+==============================-->*/
+function monthOffset(date, offset) {
+    return new Date(date.getFullYear(), date.getMonth() + offset, 1);
+}
+const calendarEvent = {
+    currentDate: new Date(),
+    events: [],
+    selectedId: null,
+
+    init() {
+        this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
+        this.loadData();
+
+        $("#calendar-prev").on("click", () => {
+            this.currentDate = monthOffset(this.currentDate, -1);
+            this.render();
+        });
+
+        $("#calendar-next").on("click", () => {
+            this.currentDate = monthOffset(this.currentDate, 1);
+            this.render();
+        });
+    },
+
+    async loadData() {
+        try {
+            const res = await calendarApi.all();
+            this.events = res.data || [];
+            this.render();
+        } catch (error) {
+            alert("Failed to load calendar events. Please try again later.");
+            console.error("Error loading calendar events:", error);
+        }
+    },
+
+    render() {
+        calendarUI.renderMonth(this.currentDate, this.events);
+
+        const viewYear = this.currentDate.getFullYear();
+        const viewMonth = this.currentDate.getMonth();
+        const startOfViewScope = new Date(viewYear, viewMonth, 1);
+        const endOfViewScope = new Date(viewYear, viewMonth + 1, 0);
+
+        const activeScopedEvents = this.events.filter(event => {
+            const eventStart = parseDate(event.start_date);
+            const eventEnd = parseDate(event.end_date);
+            return (eventStart <= endOfViewScope && eventEnd >= startOfViewScope);
+        });
+
+        calendarUI.renderUpcomingList(activeScopedEvents);
+    },
+
+};
+
+/*<!--=============================
+    CALENDAR SCRIPTS ENTRY POINT
+==============================-->*/
+$(document).ready(() => {
+    calendarEvent.init();
+});

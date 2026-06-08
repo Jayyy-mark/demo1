@@ -33,10 +33,8 @@ def inject_assets():
                 },
                 'dashboard' : {
                     'css' : url_for('static', filename='admin/css/pages/dashboard.css'),
-                    'scripts' : [
-                        url_for('static', filename='admin/js/plugins/apexcharts.min.js'),
-                        url_for('static', filename='admin/js/pages/dashboard.js'),
-                    ]
+                    'scripts' : url_for('static', filename='admin/js/src/core/dashboard.js'),
+
                 },
                 'research' : {
                     'css' : None,

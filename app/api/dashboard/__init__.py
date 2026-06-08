@@ -4,7 +4,7 @@
 
 from flask import Blueprint, request, session, jsonify
 
-dashboard_api = Blueprint('api_dashboard', __name__, url_prefix='/api/dashboard')
+dashboard_api = Blueprint('api_dashboard', __name__, url_prefix='/api')
 
 @dashboard_api.route('/tab', methods=['POST'])
 def tab():

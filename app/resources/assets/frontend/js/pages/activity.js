@@ -45,7 +45,7 @@ const activityUI = {
                     </div>
                     <div class="p-8">
                         <h3 class="text-xl font-bold text-apple-dark mb-2 group-hover:text-apple-blue transition-colors">${activity.activity_name}</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed mb-4">${activity.description}</p>
+                        
                         <div class="flex items-center text-sm font-semibold text-apple-blue"><span>View Gallery</span></div>
                     </div>
                 </a>

@@ -1,7 +1,7 @@
 /*<!--============================
     ACTIVITY API HANDLER
 ==============================-->*/
-import api from "../utils/api.js"
+import api from "../utils/api.js";
 
 export const activityApi = {
     async create(data){

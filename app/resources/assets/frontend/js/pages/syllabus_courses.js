@@ -74,9 +74,9 @@ const UI = {
         subjects.forEach(element => {
             
             const row = `
-            <div class="border-b border-gray-200">
+            <div class="px-6 mb-3 border border-gray-200 rounded-3xl bg-white shadow-sm overflow-hidden">
                 <button class="semester-subject-btn  w-full py-5 md:py-6 flex items-center justify-between bg-white transition-colors text-left group">
-                    <span class="font-semibold text-gray-900 text-lg md:text-xl transition-colors pr-4">${element.year?.year_name}</span>
+                    <span class="font-bold text-blue-800 text-lg md:text-xl transition-colors pr-4">${element.year?.year_name}</span>
                     <div class="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center bg-white text-gray-500 transition-all flex-shrink-0">
                         <svg id="${element.year?.id}-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
                     </div>
@@ -90,7 +90,7 @@ const UI = {
                         ${element.semesters.map(s=>`
                             
                             <div class="space-y-3">
-                                <div class="inline-flex items-center px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-bold tracking-wide uppercase">
+                                <div class="inline-flex items-center px-3 py-2 bg-amber-400 text-white rounded-full text-xs font-bold tracking-wide uppercase">
                                     ${s.semester?.semester_term}
                                 </div>
                                 
@@ -98,11 +98,11 @@ const UI = {
                                 <div class="overflow-hidden border border-gray-200 rounded-xl bg-white shadow-sm">
                                     <table class="w-full text-left border-collapse">
                                         <thead>
-                                            <tr>
-                                                <th class="py-3 px-4 text-base font-medium text-gray-600 border border-gray-300">
+                                            <tr style="background-color: #1E40AF;">
+                                                <th class="py-3 px-4 text-base font-medium text-white">
                                                     Subject Code
                                                 </th>
-                                                <th class="py-3 px-4 text-base font-medium text-gray-600 border border-gray-300">
+                                                <th class="py-3 px-4 text-base font-medium text-white">
                                                     Subject Name
                                                 </th>
                                             </tr>
@@ -111,10 +111,10 @@ const UI = {
   
                                         ${s.courses.map(c=>`
                                             <tr class="hover:bg-gray-50 transition-colors duration-150">
-                                                <td class="py-3 px-4 text-base font-medium text-gray-600 border border-gray-300">
+                                                <td class="py-3 px-4 text-base font-semibold  text-gray-600">
                                                     <span>${c.subject?.subject_code}</span>
                                                 </td>
-                                                <td class="py-3 px-4 text-base font-medium text-gray-600 border border-gray-300">
+                                                <td class="py-3 px-4 text-base font-semibold  text-gray-600">
                                                     <span>${c.subject?.subject_name}</span>
                                                 </td>
                                             </tr>
@@ -145,6 +145,8 @@ const courseEvent = {
         $(document).on('click', '.semester-subject-btn', function(){
             const content = $(this).parent().find(".accordion-content");
             content.toggleClass("open");
+            const icon = $(this).find("svg");
+            icon.toggleClass("rotate-180");
         });
     },
     async load(){

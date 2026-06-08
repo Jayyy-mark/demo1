@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Card UI with Hover Effects</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom background pattern to match the grid in card_ui.webp */
+    body {
+      background-color: #f7f9fa;
+      background-image:
+        linear-gradient(to right, #e5e7eb 1px, transparent 1px),
+        linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    /* Inverse border radius tricks for the category badge */
+    .custom-badge::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -24px;
+      width: 24px;
+      height: 24px;
+      background: transparent;
+      border-top-left-radius: 24px;
+      box-shadow: -12px -12px 0 12px #fff;
+    }
+
+    .custom-badge::after {
+      content: '';
+      position: absolute;
+      right: -24px;
+      top: 0;
+      width: 24px;
+      height: 24px;
+      background: transparent;
+      border-top-left-radius: 24px;
+      box-shadow: -12px -12px 0 12px #fff;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-6">
+
+  <!-- Grid Container -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl w-full">
+
+    <!-- CARD 01 -->
+    <div
+      class="group bg-white p-6 rounded-[32px] shadow-md hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 ease-out flex flex-col justify-between border border-gray-100">
+      <div>
+        <!-- Image Area Container -->
+        <div class="relative bg-gray-200 rounded-[24px] overflow-hidden aspect-[4/3] mb-5">
+          <!-- Placeholder Grayscale Image with Zoom on Hover -->
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+            alt="Product 01"
+            class="w-full h-full object-cover grayscale brightness-90 transform group-hover:scale-105 transition-transform duration-500 ease-out">
+
+          <!-- Floating Category Badge with Inverse Corners -->
+          <div
+            class="uppercase custom-badge absolute top-0 left-0 bg-white pt-4 px-6 rounded-br-[24px] text-xs font-bold text-gray-500 tracking-wide z-10">
+            Academic
+          </div>
+        </div>
+
+        <!-- Title & Price -->
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-2xl font-bold text-gray-800">Product 01</h3>
+          <span class="bg-[#c24b33] text-white font-medium px-4 py-1.5 rounded-full text-sm">¥2,000</span>
+        </div>
+
+        <!-- Description -->
+        <p class="text-gray-500 text-sm leading-relaxed mb-5 line-clamp-3">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna...
+        </p>
+
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-2 mb-6">
+          <span class="bg-[#fde2db] text-[#c24b33] font-medium text-xs px-3 py-1.5 rounded-full">Tag A</span>
+          <span class="bg-[#fde2db] text-[#c24b33] font-medium text-xs px-3 py-1.5 rounded-full">Tag B</span>
+        </div>
+      </div>
+
+      <!-- Add to Cart Button -->
+      <button
+        class="w-full bg-[#c24b33] hover:bg-[#a93b25] transition-colors text-white font-semibold py-4 px-6 rounded-[20px] flex items-center justify-center gap-2 text-sm shadow-md shadow-red-900/10">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+        Add To Cart
+      </button>
+    </div>
+
+
+    <!-- CARD 02 -->
+    <div
+      class="group bg-white p-6 rounded-[32px] shadow-md hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 ease-out flex flex-col justify-between border border-gray-100">
+      <div>
+        <div class="relative bg-gray-200 rounded-[24px] overflow-hidden aspect-[4/3] mb-5">
+          <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?auto=format&fit=crop&w=600&q=80"
+            alt="Product 02"
+            class="w-full h-full object-cover grayscale brightness-90 transform group-hover:scale-105 transition-transform duration-500 ease-out">
+          <!-- Floating Category Badge with Inverse Corners -->
+          <div
+            class="uppercase custom-badge absolute top-0 left-0 bg-white pt-4 px-6 rounded-br-[24px] text-xs font-bold text-gray-500 tracking-wide z-10">
+            Academic
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-2xl font-bold text-gray-800">၀ါဆိုသင်္ကန်းကပ်လှူပူဇော်ပွဲအခမ်းအနား</h3>
+        </div>
+
+        <p class="text-gray-500 text-sm leading-loose mb-5 line-clamp-3">
+          ကွန်ပျူတာ တက္ကသိုလ်တောင်ငူမှ ပါမောက္ခချုပ်ကြီး နှင့်တကွ ၊ဆရာ ၊ဆရာမများ၊ ကျောင်းသား
+          ကျောင်းသူများ ၊ ၀န်ထမ်းများမှ စုပေါင်း၍ ဝါဆို သက်န်း ကပ်လှူ ပူဇော်ခြင်း
+        </p>
+
+
+      </div>
+
+      <button
+        class="w-full bg-blue-800 hover:bg-[#3b6b7d] transition-colors text-white font-semibold py-4 px-6 rounded-[20px] flex items-center justify-center gap-2 text-sm shadow-md shadow-cyan-900/10">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+        </svg>
+        View Gallery
+      </button>
+    </div>
+
+
+    <!-- CARD 03 -->
+    <div
+      class="group bg-white p-6 rounded-[32px] shadow-md hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 ease-out flex flex-col justify-between border border-gray-100">
+      <div>
+        <div class="relative bg-gray-200 rounded-[24px] overflow-hidden aspect-[4/3] mb-5">
+          <img src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=600&q=80"
+            alt="Product 03"
+            class="w-full h-full object-cover grayscale brightness-90 transform group-hover:scale-105 transition-transform duration-500 ease-out">
+          <div
+            class="custom-badge absolute top-0 left-0 bg-white pt-4 px-6 rounded-br-[24px] text-xs font-medium text-gray-500 tracking-wide z-10">
+            Category C
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-2xl font-bold text-gray-800">Product 03</h3>
+          <span class="bg-[#ff8462] text-white font-medium px-4 py-1.5 rounded-full text-sm">¥2,000</span>
+        </div>
+
+        <p class="text-gray-500 text-sm leading-relaxed mb-5 line-clamp-3">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna...
+        </p>
+
+        <div class="flex flex-wrap gap-2 mb-6">
+          <span class="bg-[#ffebe5] text-[#ff8462] font-medium text-xs px-3 py-1.5 rounded-full">Tag A</span>
+          <span class="bg-[#ffebe5] text-[#ff8462] font-medium text-xs px-3 py-1.5 rounded-full">Tag B</span>
+          <span class="bg-[#ffebe5] text-[#ff8462] font-medium text-xs px-3 py-1.5 rounded-full">Tag C</span>
+        </div>
+      </div>
+
+      <button
+        class="w-full bg-[#ff8462] hover:bg-[#e86f4d] transition-colors text-white font-semibold py-4 px-6 rounded-[20px] flex items-center justify-center gap-2 text-sm shadow-md shadow-orange-900/10">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+        Add To Cart
+      </button>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

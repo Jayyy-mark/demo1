@@ -251,9 +251,9 @@ class FrontendController:
 
                 semester_term = course["semester"]["semester_term"]
 
-                if "(1st Sem)" in semester_term:
+                if "1st Sem" in semester_term:
                     sem_group = "1st Sem"
-                elif "(2nd Sem)" in semester_term:
+                elif "2nd Sem" in semester_term:
                     sem_group = "2nd Sem"
                 else:
                     continue

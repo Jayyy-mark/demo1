@@ -9,4 +9,9 @@ class SubjectSchema(ma.SQLAlchemyAutoSchema):
         include_fk = True
 
     department = ma.Nested(DepartmentSchema)
+    courses = ma.Nested(
+        "CourseSchema",
+        many=True,
+        exclude=("subject",)
+    )
     

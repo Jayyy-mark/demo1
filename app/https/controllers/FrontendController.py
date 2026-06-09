@@ -238,21 +238,34 @@ class FrontendController:
         ).all()
         data = SubjectSchema(many=True).dump(subjects)
 
-        grouped = defaultdict(lambda: {
-            "department": None,
-            "subjects": []
-        })
+        result = {
+            "department": department_name,
+            "semesters": {
+                "1st Sem": {"subjects": []},
+                "2nd Sem": {"subjects": []}
+            }
+        }
 
-        for item in data:
-            dept_id = item["department_id"]
+        for subject in data:
+            for course in subject.get("courses", []):
 
-            if grouped[dept_id]["department"] is None:
-                grouped[dept_id]["department"] = item["department"]
+                semester_term = course["semester"]["semester_term"]
 
-            grouped[dept_id]["subjects"].append(item)
+                if "(1st Sem)" in semester_term:
+                    sem_group = "1st Sem"
+                elif "(2nd Sem)" in semester_term:
+                    sem_group = "2nd Sem"
+                else:
+                    continue
+
+                result["semesters"][sem_group]["subjects"].append({
+                    "id": subject["id"],
+                    "subject_code": subject["subject_code"],
+                    "subject_name": subject["subject_name"]
+                })
 
         return jsonify({
-            "subjects": list(grouped.values())
+            "subjects": result
         })
 
 

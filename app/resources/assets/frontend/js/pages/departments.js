@@ -12,62 +12,67 @@ const api = {
 
 
 const UI = {
-    renderCourseByFaculty(subjects){
-        console.log("this is subject data : ", subjects);
+    renderCourseByFaculty(data) {
+
+        console.log("this is subject data : ", data);
+
         const faculty_tab = document.querySelector("#tab-faculties");
 
-        subjects.forEach(element => {
-            
-            const row = `
-                <div class="">
-                    <button onclick="toggleAccordion('${element.department?.id}')" class="w-full py-5 md:py-6 flex items-center justify-between bg-white hover:bg-gray-50/80 transition-colors text-left group">
-                        <span class="font-semibold text-gray-900 text-lg md:text-xl group-hover:text-blue-600 transition-colors pr-4">Courses</span>
-                        <div class="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center bg-white text-gray-500 group-hover:text-blue-600 group-hover:border-blue-200 transition-all flex-shrink-0">
-                            <svg id="${element.department?.id}-icon" class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
-                        </div>
-                    </button>
+        const row = `
 
-                    <div id="${element.department?.id}" class="accordion-content-open">
-                        <div class="pb-6 pt-2 pl-2">
-                            <!-- The wrapper handles the rounding, border, and background -->
-                            <div class="overflow-hidden border border-gray-200 rounded-xl bg-white">
+                <div class="pt-6 pb-4 border-b border-gray-200 mb-6">
+                    <h2 class="text-2xl font-bold text-blue-800">
+                        Courses
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-5">
+
+                    ${Object.entries(data.semesters).map(([semesterName, semesterData]) => `
+                        
+                        <div class="space-y-3">
+                            <div class="inline-flex items-center px-3 py-2 bg-amber-400 text-white rounded-full text-xs font-bold tracking-wide uppercase">
+                                ${semesterName}
+                            </div>
+
+                            <div class="overflow-hidden border border-gray-200 rounded-xl bg-white shadow-sm">
                                 <table class="w-full text-left border-collapse">
                                     <thead>
                                         <tr style="background-color: #1E40AF;">
-                                            <th class="py-3 px-4 text-base font-bold 
-                                            text-white ">
-                                            Subject Code
+                                            <th class="py-3 px-4 text-base font-medium text-white">
+                                                Subject Code
                                             </th>
-                                            <th class="py-3 px-4 text-base font-bold 
-                                            text-white ">
-                                            Subject Name
+                                            <th class="py-3 px-4 text-base font-medium text-white">
+                                                Subject Name
                                             </th>
                                         </tr>
                                     </thead>
+
                                     <tbody class="divide-y divide-gray-200">
-                                        ${element.subjects.map(sub => `
+
+                                        ${semesterData.subjects.map(subject => `
                                             <tr class="hover:bg-gray-50 transition-colors duration-150">
-                                                <td class="py-3 px-4 text-base font-medium text-gray-600">
-                                                    <span>${sub.subject_code}</span>
+                                                <td class="py-3 px-4 text-base font-semibold text-gray-600">
+                                                    ${subject.subject_code}
                                                 </td>
-                                                <td class="py-3 px-4 font-medium text-base text-gray-600">
-                                                    <span>${sub.subject_name}</span>
+                                                <td class="py-3 px-4 text-base font-semibold text-gray-600">
+                                                    ${subject.subject_name}
                                                 </td>
                                             </tr>
                                         `).join('')}
+
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                    </div>
-                </div>            
-            `;
 
-            faculty_tab.insertAdjacentHTML("beforeend", row);
+                    `).join('')}
 
-        });
+                </div>
+        `;
 
-    },
+        faculty_tab.insertAdjacentHTML("beforeend", row);
+    }
 };
 
 const courseEvent = {

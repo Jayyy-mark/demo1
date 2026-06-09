@@ -6,7 +6,7 @@ import { getMonthName, getDay } from "../utils/helper.js";
 =============================-->*/
 
 export const activityApi = {
-    async all(){
+    async all() {
         const res = await api.get("/frontend/activity/all");
         return res.data.activities;
     },
@@ -33,34 +33,96 @@ function getActivityUrl(activity) {
 }
 
 const activityUI = {
-    render(activities){
+    render(activities) {
         activities.forEach(activity => {
             const imagePath = getActivityImage(activity, 1);
             const activityCard = imagePath ? `
-                <a href="${getActivityUrl(activity)}" class="group block bg-white border-2 border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="/assets/${imagePath}" alt="${activity.activity_name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-                        <span class="absolute top-4 left-4 bg-white/90 backdrop-blur text-xs font-bold text-apple-blue uppercase tracking-wider px-3 py-1 rounded-full">${activity.category}</span>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-xl font-bold text-apple-dark mb-2 group-hover:text-apple-blue transition-colors">${activity.activity_name}</h3>
+                <a href="${getActivityUrl(activity)}" class="group block bg-white rounded-[2rem] p-4 shadow-sm hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 border-2 border-gray-200 hover:border-blue-500 hover:-translate-y-2">
+                    <div class="flex items-center justify-between px-2 pb-4 pt-1">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 overflow-hidden">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-[11px] text-gray-400 font-medium tracking-wide">Category</p>
+                                <p class="text-sm font-bold text-gray-900">${activity.category}</p>
+                            </div>
+                        </div>
                         
-                        <div class="flex items-center text-sm font-semibold text-apple-blue"><span>View Gallery</span></div>
+                        <div class="w-px h-8 bg-gray-200"></div>
+
+                        <div class="flex items-center gap-3">
+                            <div class="text-right">
+                                <p class="text-[11px] text-gray-400 font-medium tracking-wide">Date</p>
+                                <p class="text-sm font-bold text-gray-900">${getMonthName(activity.date)} ${getDay(activity.date)}</p>
+                            </div>
+                            <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 overflow-hidden">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative h-64 w-full rounded-2xl overflow-hidden mb-5">
+                        <img src="/assets/${imagePath}" alt="${activity.activity_name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+
+                    <div class="px-2 pb-5 flex items-center">
+                        <span class="text-gray-900 font-extrabold text-base truncate"><span class="text-gray-500 mr-1">Activity:</span>${activity.activity_name}</span>
+                    </div>
+
+                    <div class="flex items-center justify-between px-2 pb-1">
+                        <div class="flex items-center gap-2 text-gray-800 font-bold text-sm hover:text-blue-600 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>
+                            <span>Read Story</span>
+                        </div>
+                        <div class="bg-gray-800 group-hover:bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-colors">
+                            View Gallery
+                        </div>
                     </div>
                 </a>
             ` : `
-                <a href="${getActivityUrl(activity)}" class="group block bg-white  overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-100">
-                    <div class="p-8 min-h-[22rem] flex flex-col">
-                        <div class="flex items-center justify-between gap-4 mb-8">
-                            <span class="bg-blue-50 text-apple-blue text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">${activity.category}</span>
-                            <span class="text-xs font-semibold text-gray-400">${getMonthName(activity.date)} ${getDay(activity.date)}</span>
+                <a href="${getActivityUrl(activity)}" class="group block bg-white rounded-[2rem] p-4 shadow-sm hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 border-2 border-gray-200 hover:border-blue-500 hover:-translate-y-2 flex flex-col h-full">
+                    <div class="flex items-center justify-between px-2 pb-4 pt-1">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 overflow-hidden">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-[11px] text-gray-400 font-medium tracking-wide">Category</p>
+                                <p class="text-sm font-bold text-gray-900">${activity.category}</p>
+                            </div>
                         </div>
-                        <div class="flex-grow">
-                            <h3 class="text-2xl font-black text-apple-dark mb-4 group-hover:text-apple-blue transition-colors">${activity.activity_name}</h3>
-                            <p class="text-gray-500 text-sm leading-relaxed">${activity.description}</p>
+                        
+                        <div class="w-px h-8 bg-gray-200"></div>
+
+                        <div class="flex items-center gap-3">
+                            <div class="text-right">
+                                <p class="text-[11px] text-gray-400 font-medium tracking-wide">Date</p>
+                                <p class="text-sm font-bold text-gray-900">${getMonthName(activity.date)} ${getDay(activity.date)}</p>
+                            </div>
+                            <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 overflow-hidden">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            </div>
                         </div>
-                        <div class="pt-8 flex items-center text-sm font-semibold text-apple-blue"><span>Read Story</span></div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-2xl p-6 mb-5 flex-grow flex flex-col justify-center border border-gray-100 group-hover:bg-blue-50/30 transition-colors h-64">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2">${activity.activity_name}</h3>
+                        <p class="text-sm text-gray-500 line-clamp-3 leading-relaxed">${activity.description}</p>
+                    </div>
+
+                    <div class="px-2 pb-5 flex items-center">
+                        <span class="text-gray-900 font-extrabold text-base truncate"><span class="text-gray-500 mr-1">Activity:</span>${activity.activity_name}</span>
+                    </div>
+
+                    <div class="flex items-center justify-between px-2 pb-1 mt-auto">
+                        <div class="flex items-center gap-2 text-gray-800 font-bold text-sm hover:text-blue-600 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>
+                            <span>Read Story</span>
+                        </div>
+                        <div class="bg-gray-800 group-hover:bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-colors">
+                            View Details
+                        </div>
                     </div>
                 </a>
             `;
@@ -68,17 +130,17 @@ const activityUI = {
             activityContainer.insertAdjacentHTML("beforeend", activityCard);
         });
     },
-    renderLastedActivities(activities){
+    renderLastedActivities(activities) {
 
         activities.forEach((a, index) => {
 
             const flexClass = index % 2 === 0
-            ? "md:flex-row"
-            : "md:flex-row-reverse";
+                ? "md:flex-row"
+                : "md:flex-row-reverse";
 
-            const BadgeClass = index % 2 === 0 
-            ? "-left-6"
-            : "-right-6";
+            const BadgeClass = index % 2 === 0
+                ? "-left-6"
+                : "-right-6";
 
             const imagePath = getActivityImage(a);
             const row = imagePath ? `
@@ -143,13 +205,12 @@ const activityUI = {
 
 
 const activityEvent = {
-    init(){
+    init() {
         this.load();
     },
-    async load(){
+    async load() {
         const activities = await activityApi.all();
         activityUI.render(activities);
-        activityUI.renderLastedActivities(activities);
     }
 }
 
@@ -157,6 +218,6 @@ const activityEvent = {
     MIAN ENTRY
 =============================================*/
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function () {
     activityEvent.init();
 });

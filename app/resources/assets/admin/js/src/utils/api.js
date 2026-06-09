@@ -1,8 +1,8 @@
 import { errorUtils } from "../error/error.utils.js";
 
 const api = axios.create({
-    baseURL: "https://ucstaungoo.up.railway.app/api",
-    //baseURL: "http://127.0.0.1:5000/api",
+    //baseURL: "https://ucstaungoo.up.railway.app/api",
+    baseURL: "http://127.0.0.1:5000/api",
     withCredentials: true
 });
 
@@ -25,9 +25,9 @@ api.interceptors.request.use((config) => {
     INTERCEPTORS FOR HANDELING ERRORS, AUTHENTICATIONS, AUTHORIZATIONS, 
 ========================================================================*/
 api.interceptors.response.use(
-    (response)=>response,
+    (response) => response,
 
-    async (error) =>{
+    async (error) => {
 
         const originalRequest = error.config;
 
@@ -36,23 +36,23 @@ api.interceptors.response.use(
 
         const status = error.response?.status;
 
-        if(status == 401 && originalRequest && !originalRequest._retry && !isAuthRoute && !isRefreshRoute){
+        if (status == 401 && originalRequest && !originalRequest._retry && !isAuthRoute && !isRefreshRoute) {
 
             originalRequest._retry = true;
-            try{
-                
+            try {
+
                 await api.post("/auth/refresh");
 
                 return api(originalRequest);
 
-            }catch(e){
+            } catch (e) {
                 window.location.href = "/admin/auth/login"
                 return Promise.reject(e)
             }
 
         }
 
-        if(status === 500){
+        if (status === 500) {
             errorUtils._500(error.response?.data);
         }
 

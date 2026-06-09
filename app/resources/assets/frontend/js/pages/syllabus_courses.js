@@ -74,7 +74,7 @@ const UI = {
         subjects.forEach(element => {
             
             const row = `
-            <div class="px-6 mb-3 border border-gray-200 rounded-3xl bg-white shadow-sm overflow-hidden">
+            <div class="px-6 mb-3 border border-gray-200 bg-white shadow-sm overflow-hidden">
                 <button class="semester-subject-btn  w-full py-5 md:py-6 flex items-center justify-between bg-white transition-colors text-left group">
                     <span class="font-bold text-blue-800 text-lg md:text-xl transition-colors pr-4">${element.year?.year_name}</span>
                     <div class="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center bg-white text-gray-500 transition-all flex-shrink-0">

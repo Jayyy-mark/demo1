@@ -47,7 +47,7 @@ const UI = {
                                     <tbody class="divide-y divide-gray-200">
                                         ${element.subjects.map(sub => `
                                             <tr class="hover:bg-gray-50 transition-colors duration-150">
-                                                <td class="py-3 px-4 text-base font-medium text-gray-600 border-r border-gray-300">
+                                                <td class="py-3 px-4 text-base font-medium text-gray-600">
                                                     <span>${sub.subject_code}</span>
                                                 </td>
                                                 <td class="py-3 px-4 font-medium text-base text-gray-600">

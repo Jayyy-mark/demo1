@@ -87,7 +87,20 @@
         </div>
     </div>
 
-    <a href="" class="text-textSecondary font-medium hover:text-royal transition">Collaboration</a>
+     <div class="relative group">
+        <button class="text-textSecondary hover:text-royal transition flex items-center font-medium">
+            <a href="{{ url_for('frontend.index') }}">Collaboration <i class="fa-solid fa-chevron-down ml-1 text-xs"></i></a>
+        </button>
+        <div
+            class="absolute top-full left-0 mt-4 w-48 bg-white border border-border rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left scale-95 group-hover:scale-100">
+            <div class="py-2">
+                <a href="{{ url_for('frontend.research') }}"
+                class="block px-4 py-2 text-sm text-textSecondary hover:bg-background hover:text-royal">Corporate Partners</a>
+                <a href="{{ url_for('frontend.publication') }}"
+                    class="block px-4 py-2 text-sm text-textSecondary hover:bg-background hover:text-royal">Corporate University</a>
+           </div>
+        </div>
+    </div>
     <a href="{{ url_for('frontend.library') }}" class="text-textSecondary font-medium hover:text-royal transition">Library</a>
 
 </nav>

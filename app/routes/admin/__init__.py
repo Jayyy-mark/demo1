@@ -57,6 +57,14 @@ def inject_assets():
                     'css': None,
                     'script': url_for('static', filename='admin/js/src/core/calendar.js')
                 },
+                'vision_mission': {
+                    'css': None,
+                    'script': url_for('static', filename='admin/js/src/core/vision_mission.js')
+                },
+                'collaboration': {
+                    'css': None,
+                    'script': url_for('static', filename='admin/js/src/core/collaboration.js')
+                },
             }
         }
         mergedAssets = {**baseAssets, **newAssets}
@@ -75,3 +83,5 @@ from . import research
 from . import subject
 from . import laboratory
 from . import calendar
+from . import vision_mission
+from . import collaboration

@@ -24,6 +24,13 @@ const homeApi = {
     UI HAHNDLER
 =======================================-->*/
 const activityContainer = document.querySelector("#activity-card-container");
+function getActivityImage(activity, preferredIndex = 0) {
+    if (!Array.isArray(activity.images) || activity.images.length === 0) {
+        return null;
+    }
+
+    return activity.images[preferredIndex]?.filepath || activity.images[0]?.filepath || null;
+}
 
 function getActivityUrl(activity) {
     return `/activity/${encodeURIComponent(activity.id)}`;
@@ -32,17 +39,49 @@ function getActivityUrl(activity) {
 const homeUI = {
     renderActivities(activities) {
         activities.forEach(activity => {
+            const imagePath = getActivityImage(activity, 1);
             const activityCard = `
-                <a href="${getActivityUrl(activity)}" class="group block bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="assets/${activity.images[0].filepath}" alt="Race" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-                        <span class="absolute top-4 left-4 bg-white/90 backdrop-blur text-xs font-bold text-apple-blue uppercase tracking-wider px-3 py-1 rounded-full">${activity.category}</span>
+                <a href="${getActivityUrl(activity)}" class="group block bg-white rounded-[2rem] p-4 shadow-sm hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 border-2 border-gray-200 hover:border-blue-500 hover:-translate-y-2">
+                    <div class="flex items-center justify-between px-2 pb-4 pt-1">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 overflow-hidden">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-[11px] text-gray-400 font-medium tracking-wide">Category</p>
+                                <p class="text-sm font-bold text-gray-900">${activity.category}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="w-px h-8 bg-gray-200"></div>
+
+                        <div class="flex items-center gap-3">
+                            <div class="text-right">
+                                <p class="text-[11px] text-gray-400 font-medium tracking-wide">Date</p>
+                                <p class="text-sm font-bold text-gray-900">${getMonthName(activity.date)} ${getDay(activity.date)}</p>
+                            </div>
+                            <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 overflow-hidden">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            </div>
+                        </div>
                     </div>
-                    <div class="p-8">
-                        <h3 class="text-xl font-bold text-apple-dark mb-2 group-hover:text-apple-blue transition-colors">${activity.activity_name}</h3>
-                        <p class="text-gray-500 text-sm leading-relaxed mb-4">${activity.description}</p>
-                        <div class="flex items-center text-sm font-semibold text-apple-blue"><span>View Gallery</span></div>
+
+                    <div class="relative h-64 w-full rounded-2xl overflow-hidden mb-5">
+                        <img src="/assets/${imagePath}" alt="${activity.activity_name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+
+                    <div class="px-2 pb-5 flex items-center">
+                        <span class="text-gray-900 font-extrabold text-base truncate"><span class="text-gray-500 mr-1">Activity:</span>${activity.activity_name}</span>
+                    </div>
+
+                    <div class="flex items-center justify-between px-2 pb-1">
+                        <div class="flex items-center gap-2 text-gray-800 font-bold text-sm hover:text-blue-600 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>
+                            <span>Read Story</span>
+                        </div>
+                        <div class="bg-gray-800 group-hover:bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-colors">
+                            View Gallery
+                        </div>
                     </div>
                 </a>
             `;
@@ -56,7 +95,7 @@ const homeUI = {
         // Double the list to ensure infinite seamless scrolling
         const cards = collaborations.map(c => `
             <div class="logo-item flex items-center justify-center p-8 w-64 h-48 shrink-0">
-                <img src="/assets/media/collaborations/${c.logo}" class="max-h-full max-w-[95%] object-contain hover:grayscale-0 transition-all duration-300">
+                <img src="/assets/media/collaborations/${c.logo}" class="max-h-full max-w-[95%] object-contain grayscale hover:grayscale-0 transition-all duration-300">
             </div>
         `).join('');
 

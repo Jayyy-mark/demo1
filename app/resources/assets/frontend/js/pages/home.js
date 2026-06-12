@@ -95,7 +95,7 @@ const homeUI = {
         // Double the list to ensure infinite seamless scrolling
         const cards = collaborations.map(c => `
             <div class="logo-item flex items-center justify-center p-8 w-64 h-48 shrink-0">
-                <img src="/assets/media/collaborations/${c.logo}" class="max-h-full max-w-[95%] object-contain grayscale hover:grayscale-0 transition-all duration-300">
+                <img src="/assets/media/collaborations/${c.logo}" class="max-h-full max-w-[95%] object-contain hover:grayscale-0 transition-all duration-300">
             </div>
         `).join('');
 

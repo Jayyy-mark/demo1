@@ -19,7 +19,14 @@ export const collaborationUI = {
                     <img src="/assets/media/collaborations/${d.logo}" alt="Logo" class="img-fluid" style="max-height: 50px;">
                 </td>
                 <td class="text-start py-3">${d.company_name}</td>
-                <td class="text-start py-3">${d.description || 'N/A'}</td>
+                <td class="text-start py-3">
+                    <div
+                        class="description-preview show-description-modal"
+                        data-description="${(d.description || '').replace(/"/g, '&quot;')}"
+                    >
+                        ${d.description || 'N/A'}
+                    </div>
+                </td>
                 <td class="text-start py-3">
                     ${d.url ? `<a href="${d.url}" target="_blank">${d.url}</a>` : 'N/A'}
                 </td>

@@ -26,6 +26,18 @@ export const collaborationEvent = {
 
         $("#btn_delete_collaboration").on("click", ()=> this.delete());
 
+        $(document).on('click', '.show-description-modal', function () {
+            const description = $(this).data('description');
+
+            $('#fullDescription').val(description);
+
+            const modal = new bootstrap.Modal(
+                document.getElementById('descriptionModal')
+            );
+
+            modal.show();
+        });
+
         $(document).on("click", ".show-update-modal-collaboration", (event) => this.showUpdateModal(event));
         
         $(document).on("click", ".show-delete-modal-collaboration", (event) => this.showDeleteModal(event));

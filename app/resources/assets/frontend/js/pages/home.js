@@ -13,6 +13,10 @@ const homeApi = {
     async fetchLastedPublications() {
         const res = await api.get("/frontend/home/research");
         return res.data.researches;
+    },
+    async fetchCollaborations(){
+        const res = await api.get("/frontend/collaboration/all");
+        return res.data.collaborations;
     }
 }
 
@@ -25,7 +29,7 @@ function getActivityUrl(activity) {
     return `/activity/${encodeURIComponent(activity.id)}`;
 }
 
-const researchUI = {
+const homeUI = {
     renderActivities(activities) {
         activities.forEach(activity => {
             const activityCard = `
@@ -46,20 +50,75 @@ const researchUI = {
             activityContainer.insertAdjacentHTML("beforeend", activityCard);
         });
     },
+    renderCollaborations(collaborations){
+        const logoContainer = document.querySelector("#logo-track");
+
+        // Double the list to ensure infinite seamless scrolling
+        const cards = collaborations.map(c => `
+            <div class="logo-item flex items-center justify-center p-8 w-64 h-48 shrink-0">
+                <img src="/assets/media/collaborations/${c.logo}" class="max-h-full max-w-[95%] object-contain hover:grayscale-0 transition-all duration-300">
+            </div>
+        `).join('');
+
+        // Append twice for infinite loop effect
+        logoContainer.insertAdjacentHTML("beforeend", cards + cards);
+    }
 }
 
 
 /*<!--====================================
     EVENTS HAHNDLER
 =======================================-->*/
-const researchEvent = {
+const homeEvent = {
     init() {
         this.load();
     },
     async load() {
         const activities = await homeApi.fetchLastedActivities();
-        researchUI.renderActivities(activities);
+        homeUI.renderActivities(activities);
 
+
+        const collaborations = await homeApi.fetchCollaborations();
+        homeUI.renderCollaborations(collaborations);
+
+        requestAnimationFrame(() => {
+            this.initLogoSlider();
+        });
+
+    },
+    initLogoSlider() {
+
+        const track = document.getElementById("logo-track");
+        if (!track) return;
+
+        const items = track.querySelectorAll(".logo-item");
+        if (items.length === 0) return;
+
+        let index = 0;
+
+        function getItemWidth() {
+            return items[0].offsetWidth + 32;
+        }
+
+        function slide() {
+            const itemWidth = getItemWidth();
+
+            index++;
+
+            const maxIndex = items.length - 5; // safer (show 3 visible)
+
+            if (index > maxIndex) {
+                index = 0;
+                track.style.transition = "none";
+                track.style.transform = "translateX(0px)";
+                track.offsetHeight; // reflow
+                track.style.transition = "transform 700ms ease-in-out";
+            } else {
+                track.style.transform = `translateX(-${index * itemWidth}px)`;
+            }
+        }
+
+        return setInterval(slide, 2000);
     }
 }
 
@@ -218,7 +277,7 @@ const initCounters = () => {
 document.addEventListener('DOMContentLoaded', function () {
 
 
-    researchEvent.init();
+    homeEvent.init();
 
 
     /*<!--==========================
@@ -300,5 +359,40 @@ document.addEventListener('DOMContentLoaded', function () {
     if (counterSection) observer.observe(counterSection);
 
 
+    
+
+    const track = document.getElementById("logo-track");
+
+    if (!track) return;
+
+    const items = track.children;
+
+    if (items.length === 0) return;
+
+    const itemWidth = items[0].offsetWidth + 32; // 32 = gap-8
+
+    let index = 0;
+
+    function slide() {
+
+        index++;
+
+        const maxIndex = items.length - 5; 
+        // show 3 items at a time feel (adjust if needed)
+
+        if (index > maxIndex) {
+            index = 0;
+            track.style.transition = "none";
+            track.style.transform = "translateX(0px)";
+
+            track.offsetHeight; // force reflow
+
+            track.style.transition = "transform 700ms ease-in-out";
+        } else {
+            track.style.transform = `translateX(-${index * itemWidth}px)`;
+        }
+    }
+
+    setInterval(slide, 2000);
 
 });

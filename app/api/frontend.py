@@ -42,3 +42,7 @@ def getCourseBySemester():
 @frontend_api.route("/academic/calendar", methods=['GET'])
 def getAcademicCalendar():
     return FrontendController.getAcademicCalendar()
+
+@frontend_api.route("/collaboration/all", methods=['GET'])
+def getCollaborations():
+    return FrontendController.getCollaborations()

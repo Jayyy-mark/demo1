@@ -11,7 +11,7 @@ class Collaboration(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     logo = db.Column(db.String(200), unique=False, nullable=False)
     company_name = db.Column(db.String(200), unique=False, nullable=False)
-    description = db.Column(db.String(200), unique=False, nullable=True)
+    description = db.Column(db.Text(), unique=False, nullable=True)
     url = db.Column(db.String(200), unique=False, nullable=True)
 
     @staticmethod

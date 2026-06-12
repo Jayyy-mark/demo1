@@ -10,9 +10,11 @@ from app.models.DepartmentModel import Department
 from app.models.ResearchModel import Research
 from app.models.LaboratoryModel import Laboratory
 from app.models.SubjectModel import Subject
+from app.models.CollaborationModel import Collaboration
 from app.schemas.academic.course import CourseSchema
 from app.schemas.academic.subject import SubjectSchema
 from app.schemas.research import ResearchSchema
+from app.schemas.collaboration import CollaborationSchema
 from sqlalchemy.orm import selectinload
 from flask import jsonify, request
 
@@ -269,7 +271,6 @@ class FrontendController:
         })
 
 
-
     @staticmethod
     def getAcademicCalendar():
 
@@ -341,4 +342,13 @@ class FrontendController:
 
         return jsonify({
             "subjects": result
+        })
+    
+    @staticmethod
+    def getCollaborations():
+        
+        queried_data = Collaboration.query.all()
+
+        return jsonify({
+            "collaborations" : CollaborationSchema().dump(queried_data, many=True)
         })

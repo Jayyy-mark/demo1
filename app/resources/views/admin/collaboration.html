@@ -2,6 +2,19 @@
 
 {% block style %}
 <link rel="stylesheet" href="{{ assets.features.dataTable.css }}">
+<style>
+    .description-preview {
+        cursor: pointer;
+        max-width: 300px;
+
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -194,6 +207,30 @@
 
 <!-- TOAST -->
 {% include 'admin/modals/toast.html' %}
+
+<div class="modal fade" id="descriptionModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Description</h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <textarea
+                    id="fullDescription"
+                    class="form-control"
+                    rows="10"
+                    readonly>
+                </textarea>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 

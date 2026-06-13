@@ -7,7 +7,11 @@ collaboration_api = Blueprint("collaboration_api", __name__, url_prefix="/api")
 @collaboration_api.route("/collaboration/all", methods=['GET'])
 @jwt_required()
 def allCollaborations():
-    return CollaborationController().all()
+    try:
+        collaborations = CollaborationController().get_all()
+        return {"collaborations": collaborations}, 200
+    except Exception as e:
+        return {"error": str(e)}, 500
 
 @collaboration_api.route("/collaboration/create", methods=['POST'])
 @jwt_required()

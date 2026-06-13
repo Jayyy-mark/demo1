@@ -8,7 +8,7 @@ collaboration_api = Blueprint("collaboration_api", __name__, url_prefix="/api")
 @jwt_required()
 def allCollaborations():
     try:
-        collaborations = CollaborationController().get_all()
+        collaborations = CollaborationController().all()
         return {"collaborations": collaborations}, 200
     except Exception as e:
         return {"error": str(e)}, 500

@@ -70,11 +70,7 @@ const activityUI = {
                         <span class="text-gray-900 font-extrabold text-base truncate"><span class="text-gray-500 mr-1">Activity:</span>${activity.activity_name}</span>
                     </div>
 
-                    <div class="flex items-center justify-between px-2 pb-1">
-                        <div class="flex items-center gap-2 text-gray-800 font-bold text-sm hover:text-blue-600 transition-colors">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>
-                            <span>Read Story</span>
-                        </div>
+                    <div class="flex items-center justify-end px-2 pb-1">
                         <div class="bg-gray-800 group-hover:bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-colors">
                             View Gallery
                         </div>

@@ -2,7 +2,7 @@ import { errorUtils } from "../error/error.utils.js";
 
 const api = axios.create({
     //baseURL: "https://ucstgo.up.railway.app/api",
-    baseURL: "http://127.0.0.1:5000/api",
+    baseURL: "/api",
     withCredentials: true
 });
 
@@ -46,7 +46,7 @@ api.interceptors.response.use(
                 return api(originalRequest);
 
             } catch (e) {
-                window.location.href = "/admin/auth/login"
+                window.location.href = "/admin/auth/login";
                 return Promise.reject(e)
             }
 

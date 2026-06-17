@@ -3,6 +3,10 @@ from app.https.controllers.FrontendController import FrontendController
 
 frontend_api = Blueprint("frontend_api", __name__, url_prefix="/api/frontend")
 
+@frontend_api.route("/home/stats", methods=['GET'])
+def getHomeStats():
+    return FrontendController.getHomeStats()
+
 @frontend_api.route("/activity/all", methods=['GET'])
 def allActivities():
     return FrontendController.allActivities()

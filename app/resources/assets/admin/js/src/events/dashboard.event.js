@@ -2,27 +2,48 @@ import { dashboardApi } from "../api/dashboardApi.js";
 import { toast } from "../utils/toast.js";
 import { dashboardUI } from "../ui/dashboard.ui.js";
 import { Utils } from "../utils/utils.js";
+import { Modal } from "../utils/modal.js";
 
 export const dashboardEvent = {
     init() {
         this.loadData();
-        
-        $("#add-rector-message-btn").on("click", async function(){
+
+        $("#add-rector-message-btn").on("click", async function () {
             const data = {
-                "attr_key" : "Rector's Message",
-                "value" : $("#rector-message-form").find("textarea").val()
+                "attr_key": "Rector's Message",
+                "value": $("#rector-message-form").find("textarea").val()
             }
             console.log("this is value : ", data);
 
-            try{
+            try {
                 const response = await dashboardApi.create(data);
                 toast.success(response.message);
                 Utils.refresh();
-            }catch(error){
+            } catch (error) {
                 console.log("Error");
                 toast.error(response.message);
             }
 
+        });
+
+        $("#save-counts-btn").on("click", async function () {
+            const form = $("#edit-counts-form");
+            const data = {
+                total_staff: parseInt(form.find("input[name='total_staff']").val()) || 0,
+                total_student: parseInt(form.find("input[name='total_student']").val()) || 0,
+                graduated_student: parseInt(form.find("input[name='graduated_student']").val()) || 0,
+                current_student: parseInt(form.find("input[name='current_student']").val()) || 0
+            };
+
+            try {
+                const response = await dashboardApi.updateCounts(data);
+                await toast.success(response.message || "Statistics updated successfully");
+                Modal.hide("#editCountsModal");
+                Utils.refresh();
+            } catch (error) {
+                console.error("Error updating counts:", error);
+                toast.error(error.response?.data?.message || "Failed to update statistics.");
+            }
         });
 
     },

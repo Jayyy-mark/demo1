@@ -18,9 +18,27 @@ from app.schemas.collaboration import CollaborationSchema
 from sqlalchemy.orm import selectinload
 from flask import jsonify, request
 
+from app.models.CountModel import Count
+from app.models.DashboardModel import Dashboard
+
 class FrontendController:
 
     @staticmethod
+    def getHomeStats():
+        counts = Count.query.first()
+        rector_msg = Dashboard.query.filter_by(attr_key="Rector's Message").first()
+
+        count_data = {
+            "total_staff": counts.total_staff if counts else 0,
+            "total_student": counts.total_student if counts else 0,
+            "graduated_student": counts.graduated_student if counts else 0,
+            "current_student": counts.current_student if counts else 0
+        }
+
+        return jsonify({
+            "counts": count_data,
+            "rector_message": rector_msg.value if rector_msg else "No message available."
+        })
     def allActivities():
 
         activities = Activity.query.all()

@@ -14,9 +14,13 @@ const homeApi = {
         const res = await api.get("/frontend/home/research");
         return res.data.researches;
     },
-    async fetchCollaborations(){
+    async fetchCollaborations() {
         const res = await api.get("/frontend/collaboration/all");
         return res.data.collaborations;
+    },
+    async fetchStats() {
+        const res = await api.get("/frontend/home/stats");
+        return res.data;
     }
 }
 
@@ -74,11 +78,7 @@ const homeUI = {
                         <span class="text-gray-900 font-extrabold text-base truncate"><span class="text-gray-500 mr-1">Activity:</span>${activity.activity_name}</span>
                     </div>
 
-                    <div class="flex items-center justify-between px-2 pb-1">
-                        <div class="flex items-center gap-2 text-gray-800 font-bold text-sm hover:text-blue-600 transition-colors">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path></svg>
-                            <span>Read Story</span>
-                        </div>
+                    <div class="flex items-center justify-end px-2 pb-1">
                         <div class="bg-gray-800 group-hover:bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-colors">
                             View Gallery
                         </div>
@@ -89,7 +89,7 @@ const homeUI = {
             activityContainer.insertAdjacentHTML("beforeend", activityCard);
         });
     },
-    renderCollaborations(collaborations){
+    renderCollaborations(collaborations) {
         const logoContainer = document.querySelector("#logo-track");
 
         // Double the list to ensure infinite seamless scrolling
@@ -101,6 +101,20 @@ const homeUI = {
 
         // Append twice for infinite loop effect
         logoContainer.insertAdjacentHTML("beforeend", cards + cards);
+    },
+    renderStats(statsData) {
+        const staffStat = document.getElementById('stat-staff-members');
+        const graduatedStat = document.getElementById('stat-graduated-students');
+        const currentStat = document.getElementById('stat-current-students');
+        const rectorMsg = document.getElementById('rector-message-text');
+
+        if (staffStat) staffStat.setAttribute('data-target', statsData.counts.total_staff || 0);
+        if (graduatedStat) graduatedStat.setAttribute('data-target', statsData.counts.graduated_student || 0);
+        if (currentStat) currentStat.setAttribute('data-target', statsData.counts.current_student || 0);
+        
+        if (rectorMsg && statsData.rector_message) {
+            rectorMsg.innerText = statsData.rector_message;
+        }
     }
 }
 
@@ -119,6 +133,9 @@ const homeEvent = {
 
         const collaborations = await homeApi.fetchCollaborations();
         homeUI.renderCollaborations(collaborations);
+
+        const statsData = await homeApi.fetchStats();
+        homeUI.renderStats(statsData);
 
         requestAnimationFrame(() => {
             this.initLogoSlider();
@@ -321,7 +338,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /*<!--==========================
         INITIALIZE ALL ANIMATIONS
-    =============================-->*/    
+    =============================-->*/
     initThreeJS();
     initCounters();
     initScrollAnimations();
@@ -398,7 +415,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (counterSection) observer.observe(counterSection);
 
 
-    
+
 
     const track = document.getElementById("logo-track");
 
@@ -416,7 +433,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         index++;
 
-        const maxIndex = items.length - 5; 
+        const maxIndex = items.length - 5;
         // show 3 items at a time feel (adjust if needed)
 
         if (index > maxIndex) {

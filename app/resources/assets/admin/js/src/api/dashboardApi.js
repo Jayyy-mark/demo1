@@ -7,6 +7,10 @@ export const dashboardApi = {
         const res = await api.get("/dashboard/all");
         return res.data;
     },
+    async updateCounts(data){
+        const res = await api.put("/dashboard/counts/update", data);
+        return res.data;
+    },
     async create(data){
         const res = await api.post("/dashboard/create",{
             attr_key : data.attr_key,

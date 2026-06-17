@@ -439,24 +439,29 @@
     }
 
 
-@keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
+    @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
 
-.animate-marquee {
-    animation: marquee 30s linear infinite;
-    will-change: transform;
-}
+        100% {
+            transform: translateX(-50%);
+        }
+    }
 
-/* Pause on hover for better UX */
-.animate-marquee:hover {
-    animation-play-state: paused;
-}
+    .animate-marquee {
+        animation: marquee 30s linear infinite;
+        will-change: transform;
+    }
 
-#logo-track {
-    will-change: transform;
-}
+    /* Pause on hover for better UX */
+    .animate-marquee:hover {
+        animation-play-state: paused;
+    }
+
+    #logo-track {
+        will-change: transform;
+    }
 </style>
 {% endblock %}
 
@@ -656,7 +661,7 @@
                 <div class="home-stat-icon text-blue-600 text-4xl mb-4"><i class="fa-solid fa-chalkboard-user"></i>
                 </div>
                 <div class="home-stat-number font-heading text-5xl font-bold text-slate-900 mb-2 counter"
-                    data-target="120">0</div>
+                    data-target="120" id="stat-staff-members">0</div>
                 <div class="home-stat-label text-slate-600 font-medium tracking-wide uppercase text-sm">Staff Members
                 </div>
             </div>
@@ -664,7 +669,7 @@
             <div class="home-stat-card p-4">
                 <div class="home-stat-icon text-blue-600 text-4xl mb-4"><i class="fa-solid fa-user-graduate"></i></div>
                 <div class="home-stat-number font-heading text-5xl font-bold text-slate-900 mb-2 counter"
-                    data-target="3500">0</div>
+                    data-target="3500" id="stat-graduated-students">0</div>
                 <div class="home-stat-label text-slate-600 font-medium tracking-wide uppercase text-sm">Graduated
                     Students</div>
             </div>
@@ -672,7 +677,7 @@
             <div class="home-stat-card p-4">
                 <div class="home-stat-icon text-blue-600 text-4xl mb-4"><i class="fa-solid fa-users"></i></div>
                 <div class="home-stat-number font-heading text-5xl font-bold text-slate-900 mb-2 counter"
-                    data-target="1200">0</div>
+                    data-target="1200" id="stat-current-students">0</div>
                 <div class="home-stat-label text-slate-600 font-medium tracking-wide uppercase text-sm">Current Students
                 </div>
             </div>
@@ -699,7 +704,8 @@
                     class="rector-image w-80 h-80 object-cover rounded-2xl shadow-lg mx-auto md:mx-0  transition-all duration-500">
             </div>
             <div class="md:w-2/3">
-                <blockquote class="rector-message text-lg text-gray-600 leading-loose mb-6  text-justify">
+                <blockquote id="rector-message-text"
+                    class="rector-message text-lg text-gray-600 leading-loose mb-6  text-justify">
                     ယနေ့ခေတ်သည် စတုတ္ထအကြိမ်မြောက် စက်မှုတော်လှန်ရေး (Industry 4.0) ကာလဖြစ်သည်နှင့်အညီ နည်းပညာသည်
                     ကမ္ဘာကြီးကို မောင်းနှင်နေသော အဓိကအင်အားစု ဖြစ်ပါသည်။ ကျွန်ုပ်တို့ ကွန်ပျူတာတက္ကသိုလ်(တောင်ငူ)
                     အနေဖြင့် ကျောင်းသား၊ ကျောင်းသူများကို စာတွေ့သာမက လက်တွေ့နယ်ပယ်တွင်ပါ ထူးချွန်ထက်မြက်ပြီး
@@ -746,9 +752,9 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="gallery-card group relative rounded-3xl overflow-hidden h-80 shadow-lg cursor-pointer"
-                 data-title="Advanced Research Labs"
-                 data-desc="State-of-the-art facilities for AI and Data Science research."
-                 data-related="{{ url_for('static', filename='frontend/image/rector.jpg') }},{{ url_for('static', filename='frontend/image/s1.jpg') }},{{ url_for('static', filename='frontend/image/s2.jpg') }},{{ url_for('static', filename='frontend/image/s3.jpg') }}">
+                data-title="Advanced Research Labs"
+                data-desc="State-of-the-art facilities for AI and Data Science research."
+                data-related="{{ url_for('static', filename='frontend/image/rector.jpg') }},{{ url_for('static', filename='frontend/image/s1.jpg') }},{{ url_for('static', filename='frontend/image/s2.jpg') }},{{ url_for('static', filename='frontend/image/s3.jpg') }}">
                 <img src="{{ url_for('static', filename='frontend/image/rector.jpg') }}" alt="Lab"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
@@ -760,9 +766,8 @@
             </div>
 
             <div class="gallery-card group relative rounded-3xl overflow-hidden h-80 shadow-lg cursor-pointer"
-                 data-title="Global Seminars"
-                 data-desc="Hosting experts from top tech companies worldwide."
-                 data-related="{{ url_for('static', filename='frontend/image/s1.jpg') }},{{ url_for('static', filename='frontend/image/s2.jpg') }},{{ url_for('static', filename='frontend/image/s3.jpg') }}">
+                data-title="Global Seminars" data-desc="Hosting experts from top tech companies worldwide."
+                data-related="{{ url_for('static', filename='frontend/image/s1.jpg') }},{{ url_for('static', filename='frontend/image/s2.jpg') }},{{ url_for('static', filename='frontend/image/s3.jpg') }}">
                 <img src="{{ url_for('static', filename='frontend/image/s1.jpg') }}" alt="Seminar"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
@@ -774,9 +779,9 @@
             </div>
 
             <div class="gallery-card group relative rounded-3xl overflow-hidden h-80 shadow-lg cursor-pointer"
-                 data-title="Student Athletics"
-                 data-desc="Balancing mind and body through comprehensive sports programs."
-                 data-related="{{ url_for('static', filename='frontend/image/s2.jpg') }},{{ url_for('static', filename='frontend/image/rector.jpg') }},{{ url_for('static', filename='frontend/image/s3.jpg') }}">
+                data-title="Student Athletics"
+                data-desc="Balancing mind and body through comprehensive sports programs."
+                data-related="{{ url_for('static', filename='frontend/image/s2.jpg') }},{{ url_for('static', filename='frontend/image/rector.jpg') }},{{ url_for('static', filename='frontend/image/s3.jpg') }}">
                 <img src="{{ url_for('static', filename='frontend/image/s2.jpg') }}" alt="Sports"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
@@ -788,15 +793,15 @@
             </div>
 
             <div class="gallery-card group relative rounded-3xl overflow-hidden h-80 shadow-lg cursor-pointer"
-                 data-title="Digital Archive"
-                 data-desc="Access thousands of journals and papers from our cloud library."
-                 data-related="{{ url_for('static', filename='frontend/image/s3.jpg') }},{{ url_for('static', filename='frontend/image/s1.jpg') }},{{ url_for('static', filename='frontend/image/rector.jpg') }}">
+                data-title="Digital Archive" data-desc="Access thousands of journals and papers from our cloud library."
+                data-related="{{ url_for('static', filename='frontend/image/s3.jpg') }},{{ url_for('static', filename='frontend/image/s1.jpg') }},{{ url_for('static', filename='frontend/image/rector.jpg') }}">
                 <img src="{{ url_for('static', filename='frontend/image/s3.jpg') }}" alt="Library"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
                     <div>
                         <h3 class="text-white text-2xl font-bold">Digital Archive</h3>
-                        <p class="text-gray-200 mt-2">Access thousands of journals and papers from our cloud library.</p>
+                        <p class="text-gray-200 mt-2">Access thousands of journals and papers from our cloud library.
+                        </p>
                     </div>
                 </div>
             </div>

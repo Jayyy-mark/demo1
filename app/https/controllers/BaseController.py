@@ -18,7 +18,7 @@ class BaseController:
             return ResponseHelper.success("Created successfully", {"id": obj.id})
 
         except Exception as e:
-            
+            print("this is error :",e)
             return ResponseHelper.error(str(e), 500)
 
     def all(self):

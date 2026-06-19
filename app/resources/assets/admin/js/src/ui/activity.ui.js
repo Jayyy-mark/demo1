@@ -22,7 +22,7 @@ export const activityUI = {
                 <td class="py-3 text-start">${a.id}</td>
                 <td class="py-3 text-start">${a.activity_name}</td>
                 <td class="py-3 text-start">${a.category}</td>
-                <td class="py-3 text-start">${a.description}</td>
+                <td class="py-3 text-start">${a.description || "N/A"}</td>
                 <td class="py-3 text-start">${year}</td>
                 <td class="py-3 text-start"><a href="/assets/${a.filepath}">${a.filename}</a></td>
                 <td class="py-3 text-start">

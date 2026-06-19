@@ -21,7 +21,28 @@ export const dashboardEvent = {
                 Utils.refresh();
             } catch (error) {
                 console.log("Error");
-                toast.error(response.message);
+                toast.error(error.message);
+            }
+
+        });
+
+
+        $("#add-academic-admission-lists-btn").on("click", async function () {
+            
+            const data = {
+                "file": $("#academic-admission-lists-form").find("input[name='academic_admission_lists']")[0].files[0]
+            }
+
+            console.log("this is value : ", data);
+
+            try {
+                const response = await dashboardApi.addAdmissionList(data);
+                console.log("this is response : ", response)
+                await toast.success(response.message);
+                Utils.refresh();
+            } catch (error) {
+                console.log("Error : ",error);
+                await toast.error(error.message);
             }
 
         });

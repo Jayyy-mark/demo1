@@ -2,39 +2,6 @@
 
 {% block title %}Publications - UCSTGO{% endblock %}
 
-{% block content %}
-
-<!-- Publications Section -->
-<section id="publications" >
-    <div class="max-w-7xl mx-auto px-6 py-12">
-       <!-- Changed justify-between to justify-center to keep the whole block centered -->
-        <div class="flex flex-col md:flex-row md:items-end justify-center mb-12 gap-4">
-            <!-- Added text-center and mx-auto -->
-            <div class="text-center mx-auto">
-                <h2 class="text-3xl md:text-4xl font-black text-blue-800 mb-2">Publications</h2>
-                <div class="w-24 h-1 bg-amber-400 mx-auto mb-6 rounded"></div>
-            </div>
-        </div>
-
-        <!-- Year Filter Area -->
-        <div class="flex justify-center flex-wrap mb-8 gap-3" id="pub-year-filters">
-            <button class="year-filter-btn active px-6 py-2 bg-slate-900 text-white rounded-full font-bold shadow-md hover:bg-blue-600 transition-all" data-year="all">All</button>
-            <!-- Dynamic Year Buttons will be injected here -->
-        </div>
-
-        <!-- Publications Container -->
-        <div id="pub-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-        </div>
-
-        <!-- View More Button Area -->
-        <div class="mt-12 text-center">
-            <button id="view-more-btn" class="px-8 py-3 bg-slate-900 text-white rounded-full font-bold shadow-lg hover:bg-blue-600 transition-all">
-                VIEW MORE
-            </button>
-        </div>
-    </div>
-</section>
 
 {% block styles %}
 <style>
@@ -46,8 +13,88 @@
 .animate-fade-in {
     animation: fadeIn 0.5s ease forwards;
 }
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* smooth animation feel */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* soft hover card lift */
+.card-soft {
+    transition: all 0.25s ease;
+}
+
+.card-soft:hover {
+    transform: translateY(-4px);
+}
+
+/* subtle blur glass feel */
+.glass {
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
 </style>
 {% endblock %}
+
+{% block content %}
+
+<!-- Publications Section -->
+<section id="publications" >
+    <div class="max-w-7xl mx-auto px-6 py-12">
+
+        <!-- Header Card (Soft Glass) -->
+        <div class="bg-white/60 backdrop-blur-md border border-gray-100 shadow-sm rounded-2xl p-6 mb-8">
+
+            <div class="text-center mb-6">
+                <h2 class="text-3xl font-semibold text-blue-800">Publications</h2>
+            </div>
+
+            <!-- Search -->
+            <div class="flex justify-center">
+                <input
+                    id="pub-search"
+                    type="text"
+                    placeholder="Search publications..."
+                    class="w-full md:w-1/2 px-5 py-3 rounded-xl bg-gray-50 border border-gray-200
+                        focus:outline-none focus:ring-2 focus:ring-blue-200 transition"
+                />
+            </div>
+
+            <!-- Year Filter -->
+            <div id="pub-year-filters" class="flex flex-wrap justify-center gap-2 mt-5">
+                <button class="year-filter-btn active px-5 py-2 rounded-full text-sm font-medium
+                            bg-gray-900 text-white shadow-sm"
+                        data-year="all">
+                    All
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Publications Container -->
+        <div id="pub-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-12 flex justify-center items-center gap-2" id="pagination"></div>
+    </div>
+</section>
+
+
 
 {% endblock %}
 

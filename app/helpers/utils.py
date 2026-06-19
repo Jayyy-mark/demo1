@@ -5,9 +5,26 @@ from flask import jsonify
 
 class Utils:
     #--------------- models helpers functions -------------------
+    @staticmethod
     def create(model, **kwargs):
         instance = model(**kwargs)# **kwargs for unpacking
         db.session.add(instance)
+        db.session.commit()
+        return instance
+
+    @staticmethod
+    def create_or_update(model, lookup_fields: dict, update_fields: dict):
+        instance = model.query.filter_by(**lookup_fields).first()
+
+        if instance:
+            # UPDATE
+            for key, value in update_fields.items():
+                setattr(instance, key, value)
+        else:
+            # CREATE
+            instance = model(**{**lookup_fields, **update_fields})
+            db.session.add(instance)
+
         db.session.commit()
         return instance
 
@@ -113,7 +130,7 @@ class ResponseHelper:
         }), status
 
     @staticmethod
-    def error(message, status=500):
+    def error(message, status=400):
         return jsonify({
             "success": False,
             "message": message

@@ -52,9 +52,9 @@
             Faculties
         </button>
 
-        <button type="button" onclick="openSub('admission')"
+        <button type="button" onclick="openSub('collaboration')"
             class="w-full text-left px-6 py-4 text-[15px] text-black active:bg-gray-100">
-            Admission
+            Collaboration
         </button>
 
         <a href="{{ url_for('frontend.activity') }}" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
@@ -65,9 +65,6 @@
             Research Publications
         </a>
 
-        <a href="" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
-            Collaboration
-        </a>
 
         <a href="/library" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
             Library
@@ -168,18 +165,18 @@
     </div>
 
     <!-- ADMISSION SUB VIEW -->
-    <div id="admissionView" class="mobile-drawer-view py-4" aria-hidden="true">
+    <div id="collaborationView" class="mobile-drawer-view py-4" aria-hidden="true">
 
         <p class="px-6 text-xs text-gray-400 uppercase tracking-wider mb-2">
-            Admission
+            Collaboration
         </p>
 
-        <a href="/admission#entrance" class="block px-6 py-4 text-black active:bg-gray-100">
-            Entrance Info
+        <a href="{{ url_for('frontend.partners') }}" class="block px-6 py-4 text-black active:bg-gray-100">
+            Coporate Universities
         </a>
 
-        <a href="/admission#list" class="block px-6 py-4 text-black active:bg-gray-100">
-            Admitted List
+        <a href="{{ url_for('frontend.partners') }}" class="block px-6 py-4 text-black active:bg-gray-100">
+            Coporate Partners
         </a>
     </div>
 </div>

@@ -246,6 +246,41 @@
             </div>
         </div>
 
+        <div class="col-xl-6 col-md-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <!-- Header -->
+                    <div class="row mb-3 align-items-center">
+                        <div class="col">
+                            <h5>Academic Admission Lists : </h5>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#academicAdmissionListsModal" aria-label="Add Academic Admission Lists">
+                                <i class="ti ti-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+
+                        <li class="list-group-item px-0">
+                            <div class="row align-items-start">
+                                <div class="col">
+                                    <div id="academic-admission-lists" style="text-align: justify;"></div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <!--======================================
+            RECOTR'S MESSAGE MODAL
+        ======================================-->
         <div class="modal fade" id="rectorMessageModal" tabindex="-1" aria-labelledby="rectorMessageModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -278,6 +313,9 @@
             </div>
         </div>
 
+        <!--======================================
+            ACADEMIC STATISTICS MODAL
+        ======================================-->
         <div class="modal fade" id="editCountsModal" tabindex="-1" aria-labelledby="editCountsModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -318,6 +356,40 @@
                     <div class="modal-footer border-0 bg-light px-4 py-3">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
                         <button type="button" class="btn btn-secondary" id="save-counts-btn">
+                            <i class="ti ti-check me-1"></i>
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--======================================
+            ACADEMIC ADMISSION LISTS MODAL
+        ======================================-->
+        <div class="modal fade" id="academicAdmissionListsModal" tabindex="-1" aria-labelledby="academicAdmissionListsModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden academic-task-modal">
+                    <div class="modal-header bg-primary border-0 px-4 py-3">
+                        <div>
+                            <h5 class="modal-title text-white mb-1" id="academicAdmissionListsModalLabel">Add Academic Admission Lists
+                            </h5>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <form id="academic-admission-lists-form">
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Academic Admission Lists</label>
+                                <input type="file" name="academic_admission_lists" id="academic-admission-lists-input" class="form-control" accept=".pdf,.doc,.docx">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer border-0 bg-light px-4 py-3">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="add-academic-admission-lists-btn">
                             <i class="ti ti-check me-1"></i>
                             Save
                         </button>

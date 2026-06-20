@@ -34,7 +34,7 @@ class DashboardController(BaseController):
 
         file.save(file_path)
 
-        file_path = os.path.join("/assets/media/admission", filename)
+        file_path = os.path.join("/assets/media/admission/", filename)
 
         return file_path
 

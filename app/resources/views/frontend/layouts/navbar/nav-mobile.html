@@ -61,9 +61,10 @@
             News & Activities
         </a>
 
-        <a href="{{ url_for('frontend.research') }}" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
-            Research Publications
-        </a>
+        <button type="button" onclick="openSub('researchPublication')"
+            class="w-full text-left px-6 py-4 text-[15px] text-black active:bg-gray-100">
+            Research & Publications
+        </button>
 
 
         <a href="/library" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
@@ -171,12 +172,28 @@
             Collaboration
         </p>
 
-        <a href="{{ url_for('frontend.partners') }}" class="block px-6 py-4 text-black active:bg-gray-100">
+        <a href="{{ url_for('frontend.university') }}" class="block px-6 py-4 text-black active:bg-gray-100">
             Coporate Universities
         </a>
 
-        <a href="{{ url_for('frontend.partners') }}" class="block px-6 py-4 text-black active:bg-gray-100">
+        <a href="{{ url_for('frontend.company') }}" class="block px-6 py-4 text-black active:bg-gray-100">
             Coporate Partners
+        </a>
+    </div>
+
+    <!-- RESEARCH & PUBLICATION SUB VIEW -->
+    <div id="researchPublicationView" class="mobile-drawer-view py-4" aria-hidden="true">
+
+        <p class="px-6 text-xs text-gray-400 uppercase tracking-wider mb-2">
+            Research & Publications
+        </p>
+
+        <a href="{{ url_for('frontend.research') }}" class="block px-6 py-4 text-black active:bg-gray-100">
+            Research Labs
+        </a>
+
+        <a href="{{ url_for('frontend.publication') }}" class="block px-6 py-4 text-black active:bg-gray-100">
+            Publications
         </a>
     </div>
 </div>

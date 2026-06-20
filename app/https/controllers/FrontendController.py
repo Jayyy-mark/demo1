@@ -39,6 +39,9 @@ class FrontendController:
             "counts": count_data,
             "rector_message": rector_msg.value if rector_msg else "No message available."
         })
+    
+
+    @staticmethod
     def allActivities():
 
         activities = Activity.query.all()
@@ -363,9 +366,27 @@ class FrontendController:
         })
     
     @staticmethod
+    def getCompanyCollaborations():
+        
+        queried_data = Collaboration.query.filter_by(collaboration_type="company").all()
+
+        return jsonify({
+            "collaborations" : CollaborationSchema().dump(queried_data, many=True)
+        })
+    
+    @staticmethod
     def getCollaborations():
         
         queried_data = Collaboration.query.all()
+
+        return jsonify({
+            "collaborations" : CollaborationSchema().dump(queried_data, many=True)
+        })
+
+    @staticmethod
+    def getUniversityCollaborations():
+        
+        queried_data = Collaboration.query.filter_by(collaboration_type="university").all()
 
         return jsonify({
             "collaborations" : CollaborationSchema().dump(queried_data, many=True)

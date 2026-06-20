@@ -46,7 +46,9 @@ export const courseUI = {
     fill(data, name, element) {
         const options = data.map(item=>({
             value:item.id,
-            label:item[name],
+            label: item.subject_name === "Internship"
+                ? item.subject_name
+                : item[name],
         }));
 
         new SearchableSelect(

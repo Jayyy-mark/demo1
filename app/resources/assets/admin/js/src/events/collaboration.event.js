@@ -94,7 +94,8 @@ export const collaborationEvent = {
         const collaboration = new Collaboration();
 
         collaboration.set("id", data.id);
-        collaboration.set("company_name", data.company_name);
+        collaboration.set("organization_name", data.organization_name);
+        collaboration.set("collaboration_type", data.collaboration_type);
         collaboration.set("description", data.description);
         collaboration.set("url", data.url);
 

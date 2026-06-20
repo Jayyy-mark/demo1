@@ -49,17 +49,26 @@ const UI = {
                                         </thead>
                                         <tbody class="divide-y divide-gray-200">
   
-                                        ${s.courses.map(c=>`
+                                        ${s.courses.map(c => `
                                             <tr class="hover:bg-gray-50 transition-colors duration-150">
-                                                <td class="py-3 px-4 text-base font-semibold  text-gray-600">
-                                                    <span>${c.subject?.subject_code}</span>
-                                                </td>
-                                                <td class="py-3 px-4 text-base font-semibold  text-gray-600">
-                                                    <span>${c.subject?.subject_name}</span>
-                                                </td>
+                                                ${
+                                                    c.subject?.subject_name === "Internship"
+                                                    ? `
+                                                        <td colspan="2" class="py-3 px-4 text-base font-semibold text-center text-gray-600">
+                                                            ${c.subject.subject_name}
+                                                        </td>
+                                                    `
+                                                    : `
+                                                        <td class="py-3 px-4 text-base font-semibold text-gray-600">
+                                                            <span>${c.subject?.subject_code || ''}</span>
+                                                        </td>
+                                                        <td class="py-3 px-4 text-base font-semibold text-gray-600">
+                                                            <span>${c.subject?.subject_name || ''}</span>
+                                                        </td>
+                                                    `
+                                                }
                                             </tr>
-                                            `).join('')
-                                        }
+                                        `).join('')}
   
                                         </tbody>
                                     </table>

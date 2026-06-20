@@ -1,7 +1,8 @@
 export class Collaboration {
     id=0;
     logo="";
-    company_name="";
+    organization_name="";
+    collaboration_type="";
     description="";
     url="";
 

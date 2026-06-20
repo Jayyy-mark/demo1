@@ -21,7 +21,7 @@ const homeApi = {
     async fetchStats() {
         const res = await api.get("/frontend/home/stats");
         return res.data;
-    }
+    },
 }
 
 /*<!--====================================
@@ -107,6 +107,7 @@ const homeUI = {
         const graduatedStat = document.getElementById('stat-graduated-students');
         const currentStat = document.getElementById('stat-current-students');
         const rectorMsg = document.getElementById('rector-message-text');
+        console.log("this is rector message : ",rectorMsg);
 
         if (staffStat) staffStat.setAttribute('data-target', statsData.counts.total_staff || 0);
         if (graduatedStat) graduatedStat.setAttribute('data-target', statsData.counts.graduated_student || 0);

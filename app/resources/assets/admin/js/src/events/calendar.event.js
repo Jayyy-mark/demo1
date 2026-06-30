@@ -3,6 +3,7 @@ import { calendarUI } from "../ui/calendar.ui.js";
 import { toast } from "../utils/toast.js";
 import { Modal } from "../utils/modal.js";
 
+import { FormValidation } from "../validations/form_validations.js";
 function monthOffset(date, offset) {
     return new Date(date.getFullYear(), date.getMonth() + offset, 1);
 }
@@ -13,6 +14,9 @@ export const calendarEvent = {
     selectedId: null,
 
     init() {
+        this.addValidation = new FormValidation("dataForm");
+        this.updateValidation = new FormValidation("dataForm-update");
+
         this.currentDate = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
         this.loadData();
 

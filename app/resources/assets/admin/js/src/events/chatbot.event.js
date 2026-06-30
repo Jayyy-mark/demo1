@@ -7,8 +7,12 @@ import { Utils } from "../utils/utils.js";
 
 
 
+import { FormValidation } from "../validations/form_validations.js";
 export const chatbotEvent = {
     init(){
+        this.addValidation = new FormValidation("dataForm");
+        this.updateValidation = new FormValidation("dataForm-update");
+
 
         /*<!--==============================
             UPDATE KB EVNET

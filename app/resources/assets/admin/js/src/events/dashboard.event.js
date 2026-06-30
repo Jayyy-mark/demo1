@@ -4,8 +4,12 @@ import { dashboardUI } from "../ui/dashboard.ui.js";
 import { Utils } from "../utils/utils.js";
 import { Modal } from "../utils/modal.js";
 
+import { FormValidation } from "../validations/form_validations.js";
 export const dashboardEvent = {
     init() {
+        this.addValidation = new FormValidation("dataForm");
+        this.updateValidation = new FormValidation("dataForm-update");
+
         this.loadData();
 
         $("#add-rector-message-btn").on("click", async function () {

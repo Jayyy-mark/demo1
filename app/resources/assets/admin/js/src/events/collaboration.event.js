@@ -7,10 +7,14 @@ import {toast} from "../utils/toast.js";
 import { Collaboration } from "../interfaces/collaboration.js";
 import { navigate } from "../utils/navigate.js";
 
+import { FormValidation } from "../validations/form_validations.js";
 export const collaborationEvent = {
     delete_id: "",
 
     init(){
+        this.addValidation = new FormValidation("dataForm-collaboration");
+        this.updateValidation = new FormValidation("dataForm-collaboration-update");
+
 
         this.load();
 
@@ -53,6 +57,15 @@ export const collaborationEvent = {
         }
     },
     async create(){
+        if (this.addValidation) {
+            const result = this.addValidation.validateAll();
+            if (!result.valid) {
+                const firstError = Object.values(result.errors)[0];
+                toast.error(firstError);
+                return;
+            }
+        }
+
         const form = document.getElementById("dataForm-collaboration");
         const formData = new FormData(form);
 
@@ -67,6 +80,15 @@ export const collaborationEvent = {
         }
     },
     async update(){
+        if (this.updateValidation) {
+            const result = this.updateValidation.validateAll();
+            if (!result.valid) {
+                const firstError = Object.values(result.errors)[0];
+                toast.error(firstError);
+                return;
+            }
+        }
+
         const form = document.getElementById("dataForm-collaboration-update");
         const formData = new FormData(form);
 

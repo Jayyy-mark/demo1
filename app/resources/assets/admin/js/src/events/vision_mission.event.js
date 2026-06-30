@@ -8,10 +8,14 @@ import { VisionMission } from "../interfaces/vision_mission.js";
 import { navigate } from "../utils/navigate.js";
 import { academicHelper } from "../helpers/academic.helper.js";
 
+import { FormValidation } from "../validations/form_validations.js";
 export const visionMissionEvent = {
     delete_id: "",
 
     init(){
+        this.addValidation = new FormValidation("dataForm-vision_mission");
+        this.updateValidation = new FormValidation("dataForm-vision_mission-update");
+
 
         this.load();
 
@@ -42,6 +46,15 @@ export const visionMissionEvent = {
         }
     },
     async create(){
+        if (this.addValidation) {
+            const result = this.addValidation.validateAll();
+            if (!result.valid) {
+                const firstError = Object.values(result.errors)[0];
+                toast.error(firstError);
+                return;
+            }
+        }
+
         const form = $("#dataForm-vision_mission");
         const visionMission = new VisionMission();
 
@@ -63,6 +76,15 @@ export const visionMissionEvent = {
         }
     },
     async update(){
+        if (this.updateValidation) {
+            const result = this.updateValidation.validateAll();
+            if (!result.valid) {
+                const firstError = Object.values(result.errors)[0];
+                toast.error(firstError);
+                return;
+            }
+        }
+
         const form = $("#dataForm-vision_mission-update");
         const visionMission = new VisionMission();
         form.find("[name]").each(function(){

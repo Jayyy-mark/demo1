@@ -6,3 +6,7 @@ package.json
 test.py
 node_modules
 __pycache__
+services
+media
+test.html
+migrations

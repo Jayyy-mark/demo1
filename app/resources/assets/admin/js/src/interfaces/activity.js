@@ -4,7 +4,7 @@ export class Activity{
     category="";
     description="";
     file=[];
-    data=null;
+    date=null;
 
     set(key, value){
         this[key] = value;

@@ -2,6 +2,17 @@ from app.core.database import db
 import os
 from werkzeug.utils import secure_filename
 from flask import jsonify
+from ipaddress import ip_address, ip_network
+from flask import request
+
+VPN_NETWORK = ip_network("10.254.0.0/24")
+
+def is_vpn_user(ip):
+    try:
+        return ip_address(ip) in VPN_NETWORK
+    except:
+        return False
+
 
 class Utils:
     #--------------- models helpers functions -------------------

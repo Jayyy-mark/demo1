@@ -18,7 +18,6 @@ export const userUI = {
                 <td class="rounded-start text-start py-3">${d.user_id}</td>
                 <td class="text-start py-3">${d.user_name}</td>
                 <td class="text-start py-3">${d.user_email}</td>
-                <td class="text-start py-3">${d.user_role}</td>
                 <td class="rounded-end text-start py-3">
                     <div class="action-buttons d-flex ps-0">
                         <button class="btn btn-sm btn-info show-update-modal rounded-5"

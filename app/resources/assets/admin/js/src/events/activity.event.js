@@ -86,8 +86,12 @@ export const activityEvent = {
         const activity = new Activity();
         form.find('[name]').each(function () {
             const key = $(this).attr("name");
-            const value = $(this).val();
-
+            let value;
+            if (this.type === "file") {
+                value = this.files[0];   // First selected file
+            } else {
+                value = $(this).val();
+            }
             activity.set(key, value);
         });
 

@@ -155,46 +155,16 @@
                                             id="user_password"
                                             class="form-control rounded-3"
                                             placeholder="••••••••"
+                                            required
+                                            minlength="8"
+                                            maxlength="64"
+                                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,64}$"
+                                            title="Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character."
                                         >
 
                                     </div>
 
                                     <!-- Role -->
-                                    <div class="col-md-6">
-
-                                        <label class="form-label">
-                                            User Role
-                                        </label>
-
-                                        <select
-                                            class="form-select rounded-3"
-                                            name="user_role"
-                                            id="user_role"
-                                        >
-                                            <option selected disabled>
-                                                Select Role
-                                            </option>
-
-                                            <option value="super admin">
-                                                Super Admin
-                                            </option>
-
-                                            <option value="admin">
-                                                Admin
-                                            </option>
-
-                                            <option value="teacher">
-                                                Teacher
-                                            </option>
-
-                                            <option value="student">
-                                                Student
-                                            </option>
-
-                                        </select>
-
-                                    </div>
-
                                 </div>
 
                             </div>

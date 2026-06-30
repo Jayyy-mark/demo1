@@ -12,3 +12,5 @@ PyJWT
 flask-jwt-extended
 gunicorn
 psycopg2-binary
+google-genai
+chromadb

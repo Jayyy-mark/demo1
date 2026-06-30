@@ -6,6 +6,7 @@ import { userUI } from "../ui/user.ui.js";
 import { toast } from "../utils/toast.js";
 import { User } from "../interfaces/user.js";
 import { navigate } from "../utils/navigate.js";
+import { AddUserModalValidation, UpdateUserModalValidation } from "../validations/user_validations.js";
 
 let last_triggered_modalId = null;
 
@@ -15,6 +16,9 @@ export const userEvent = {
     init(){
 
         this.load();
+
+        this.addUserModalValidation = new AddUserModalValidation("dataForm");
+        this.updateUserModalValidation = new UpdateUserModalValidation("dataForm-update");
 
         $("#btn_save").on("click", ()=> this.create());
 
@@ -48,6 +52,18 @@ export const userEvent = {
         }
     },
     async create(){
+
+        const result = this.addUserModalValidation.validateAll();
+
+        if (!result.valid) {
+
+            const firstError = Object.values(result.errors)[0];
+
+            toast.error(firstError);
+
+            return;
+        }
+
         const form = $("#dataForm");
         const user = new User();
 
@@ -69,6 +85,18 @@ export const userEvent = {
         }
     },
     async update(){
+
+        const result = this.updateUserModalValidation.validateAll();
+
+        if (!result.valid) {
+
+            const firstError = Object.values(result.errors)[0];
+
+            toast.error(firstError);
+
+            return;
+        }
+
         const form = $("#dataForm-update");
         const user = new User();
         form.find("[name]").each(function(){
@@ -107,5 +135,4 @@ export const userEvent = {
         const modal = new bootstrap.Modal($("#delete-modal"));
         modal.show();
     },
-
 };    

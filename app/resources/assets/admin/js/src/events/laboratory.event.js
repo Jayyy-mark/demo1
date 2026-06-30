@@ -84,7 +84,13 @@ export const laboratoryEvent = {
         const laboratory = new Laboratory();
         form.find('[name]').each(function(){
             const key = $(this).attr("name");
-            const value = $(this).val();
+            let value;
+
+            if(this.type=="file"){
+                value = this.files[0];
+            }else{
+                value = $(this).val();
+            }
 
             laboratory.set(key, value);
         });

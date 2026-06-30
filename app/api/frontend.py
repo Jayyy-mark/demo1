@@ -58,3 +58,7 @@ def getUniversityCollaborations():
 @frontend_api.route("/collaboration/all", methods=['GET'])
 def getCollaborations():
     return FrontendController.getCollaborations()
+
+@frontend_api.route("/chatbot/ask", methods=['POST'])
+def askChatbot():
+    return FrontendController.askChatbot()

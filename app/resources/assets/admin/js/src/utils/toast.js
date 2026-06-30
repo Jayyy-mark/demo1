@@ -42,7 +42,7 @@ export const toast = (() => {
             // restart animation
             progress.style.animation = "none";
             progress.offsetHeight;
-            progress.style.animation = "toast-progress 1.5s linear forwards";
+            progress.style.animation = "toast-progress 2.0s linear forwards";
 
             const bsToast = new bootstrap.Toast(toastEl);
             bsToast.show();

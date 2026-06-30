@@ -84,8 +84,12 @@ export const researchEvent = {
         const research = new Research();
         form.find('[name]').each(function(){
             const key = $(this).attr("name");
-            const value = $(this).val();
-
+            let value;
+            if(this.type=="file"){
+                value = this.files[0];
+            }else{
+                value = $(this).val();
+            }
             research.set(key, value);
         });
 

@@ -265,7 +265,7 @@ def ask(question):
         for language for reply to user use Myanmar Language (Burmese) but for some technical terms or specific words use English.
     """
 
-    response = client.models.generate_content(model="gemma-4-31b-it", contents=prompt)
+    response = client.models.generate_content(model="gemini-3.5-flash", contents=prompt)
 
     answer = response.text.strip()
 

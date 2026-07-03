@@ -156,7 +156,7 @@ function render() {
                 <!-- File type badge (optional but nice UX) -->
                 <span class="text-[10px] px-2 py-1 rounded-full
                             bg-gray-100 text-gray-500 uppercase tracking-wide">
-                    pdf
+                    JITES
                 </span>
 
             </div>

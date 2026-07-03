@@ -103,16 +103,34 @@ const homeUI = {
         logoContainer.insertAdjacentHTML("beforeend", cards + cards);
     },
     renderStats(statsData) {
+
+        console.log("this is stats data : ",statsData);
         const staffStat = document.getElementById('stat-staff-members');
         const graduatedStat = document.getElementById('stat-graduated-students');
         const currentStat = document.getElementById('stat-current-students');
         const rectorMsg = document.getElementById('rector-message-text');
+        console.log("this is staffStat : ",staffStat);
+        console.log("this is graduatedStat : ",graduatedStat);
+        console.log("this is currentStat : ",currentStat);
         console.log("this is rector message : ",rectorMsg);
 
-        if (staffStat) staffStat.setAttribute('data-target', statsData.counts.total_staff || 0);
-        if (graduatedStat) graduatedStat.setAttribute('data-target', statsData.counts.graduated_student || 0);
-        if (currentStat) currentStat.setAttribute('data-target', statsData.counts.current_student || 0);
+        if (staffStat) {
+            const value = statsData.counts.total_staff || 0;
+            staffStat.setAttribute('data-target', value);
+            staffStat.textContent = value; // or innerHTML = value;
+        }
 
+        if (graduatedStat) {
+            const value = statsData.counts.graduated_student || 0;
+            graduatedStat.setAttribute('data-target', value);
+            graduatedStat.textContent = value;
+        }
+
+        if (currentStat) {
+            const value = statsData.counts.current_student || 0;
+            currentStat.setAttribute('data-target', value);
+            currentStat.textContent = value;
+        }
         if (rectorMsg && statsData.rector_message) {
             rectorMsg.innerText = statsData.rector_message;
         }

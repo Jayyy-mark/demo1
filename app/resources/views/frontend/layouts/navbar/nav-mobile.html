@@ -52,10 +52,6 @@
             Faculties
         </button>
 
-        <button type="button" onclick="openSub('admission')"
-            class="w-full text-left px-6 py-4 text-[15px] text-black active:bg-gray-100">
-            Admission
-        </button>
 
         <a href="{{ url_for('frontend.activity') }}" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
             News & Activities
@@ -65,17 +61,15 @@
             Research Publications
         </a>
 
-        <a href="" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
+        <button type="button" onclick="openSub('collaboration')"
+            class="w-full text-left px-6 py-4 text-[15px] text-black active:bg-gray-100">
             Collaboration
-        </a>
+        </button>
 
         <a href="/library" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
             Library
         </a>
 
-        <a href="/" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
-            Alumni Result
-        </a>
     </div>
 
     <!-- HOME SUB VIEW -->
@@ -135,18 +129,18 @@
 
         <a href="{{ url_for('frontend.department', dept_code='fcs') }}"
             class="block px-6 py-4 text-black active:bg-gray-100">
-            Computer Science (CS)
+            Faculty Of Computer Science (FCS)
         </a>
 
         <a href="{{ url_for('frontend.department', dept_code='fcst') }}"
             class="block px-6 py-4 text-black active:bg-gray-100">Faculty Of Computer
-            Systems (FCST)</a>
+            Systems and Technologies (FCST)</a>
         <a href="{{ url_for('frontend.department', dept_code='fis') }}"
             class="block px-6 py-4 text-black active:bg-gray-100">Faculty Of
-            Information Science(FIS)</a>
+            Information Science (FIS)</a>
         <a href="{{ url_for('frontend.department', dept_code='itsm') }}"
             class="block px-6 py-4 text-black active:bg-gray-100">Department Of IT
-            Supporting and Maintenance(ITSM)</a>
+            Supporting and Maintenance (ITSM)</a>
         <a href="{{ url_for('frontend.department', dept_code='fc') }}"
             class="block px-6 py-4 text-black active:bg-gray-100">Faculty Of Computing
             (FC)</a>
@@ -167,19 +161,15 @@
             Student Affairs</a>
     </div>
 
-    <!-- ADMISSION SUB VIEW -->
-    <div id="admissionView" class="mobile-drawer-view py-4" aria-hidden="true">
+    <div id="collaboration" class="mobile-drawer-view py-4" aria-hidden="true">
 
-        <p class="px-6 text-xs text-gray-400 uppercase tracking-wider mb-2">
-            Admission
-        </p>
-
-        <a href="/admission#entrance" class="block px-6 py-4 text-black active:bg-gray-100">
-            Entrance Info
+        <a href="{{ url_for('frontend.partners') }}" class="block px-6 py-4 text-black active:bg-gray-100">
+            Corporate University
         </a>
 
-        <a href="/admission#list" class="block px-6 py-4 text-black active:bg-gray-100">
-            Admitted List
+        <a href="{{ url_for('frontend.partners') }}" class="block px-6 py-4 text-black active:bg-gray-100">
+            Corporate Partners
         </a>
+
     </div>
 </div>

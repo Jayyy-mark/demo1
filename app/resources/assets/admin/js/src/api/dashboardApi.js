@@ -32,4 +32,35 @@ export const dashboardApi = {
         });
         return res.data;    
     },
+    async addAdmissionList(data){
+
+        console.log("function entered")
+        const form = new FormData();
+        console.log("this is file ", data.file);
+        form.append("file", data.file);
+
+        const res = await api.post("/dashboard/admissionList/create",form);
+        console.log("this is response : ",res);
+        return res.data;    
+    },
+    async editAdmssionList(data){
+
+        const form = new FormData();
+
+        form.append("id", data.id);
+        form.append("file", data.file);
+
+        const res = await api.put("/dashboard/admissionList/update", form);
+        return res.data;   
+
+    },
+    async deleteAdmissionList(id){
+
+        const res = await api.delete("/dashboard/admissionList/delete",{
+            data : {id}
+        });
+
+        return res.data;    
+    },
+    
 }

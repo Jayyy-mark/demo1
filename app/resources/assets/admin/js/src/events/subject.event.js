@@ -8,10 +8,14 @@ import { Subject } from "../interfaces/academic.js";
 import { navigate } from "../utils/navigate.js";
 import { academicHelper } from "../helpers/academic.helper.js";
 
+import { FormValidation } from "../validations/form_validations.js";
 export const subjectEvent = {
     delete_id: "",
 
     init(){
+        this.addValidation = new FormValidation("dataForm-subject");
+        this.updateValidation = new FormValidation("dataForm-subject-update");
+
 
         this.load();
 
@@ -47,6 +51,15 @@ export const subjectEvent = {
         }
     },
     async create(){
+        if (this.addValidation) {
+            const result = this.addValidation.validateAll();
+            if (!result.valid) {
+                const firstError = Object.values(result.errors)[0];
+                toast.error(firstError);
+                return;
+            }
+        }
+
         const form = $("#dataForm-subject");
         const subject = new Subject();
 
@@ -68,6 +81,15 @@ export const subjectEvent = {
         }
     },
     async update(){
+        if (this.updateValidation) {
+            const result = this.updateValidation.validateAll();
+            if (!result.valid) {
+                const firstError = Object.values(result.errors)[0];
+                toast.error(firstError);
+                return;
+            }
+        }
+
         const form = $("#dataForm-subject-update");
         const subject = new Subject();
         form.find("[name]").each(function(){

@@ -15,17 +15,20 @@ from app.https.middleware.auth_middleware import attach_user
 from flask_jwt_extended import JWTManager
 
 from app.helpers.install import check_installation
+from app.helpers.bot_services import ingest_documents
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 
 
 def create_app():
     try:
-        # installed = os.getenv("APP_INSTALLED", "false").lower() == "true"
 
         app = Flask(__name__,template_folder="resources/views",static_folder="resources/assets")
 
         CORS(app, supports_credentials=True)
-    
+
+
+        app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)
         # =========================
         # INSTALLATION GUARD
         # =========================
@@ -57,6 +60,7 @@ def create_app():
         register_api(app)
         register_routes(app)
         register_error_handlers(app)
+
 
         return app
     except Exception as e:

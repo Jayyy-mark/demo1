@@ -10,13 +10,15 @@ const mainView = document.getElementById("mainView");
 const homeView = document.getElementById("homeView");
 const academicView = document.getElementById("academicView");
 const facultiesView = document.getElementById("facultiesView");
-const admissionView = document.getElementById("admissionView");
+const collaborationView = document.getElementById("collaborationView");
+const researchPublicationView = document.getElementById("researchPublicationView");
 const backBtn = document.getElementById("backBtn");
 const subViews = {
     home: homeView,
     academic: academicView,
     faculties: facultiesView,
-    admission: admissionView
+    collaboration: collaborationView,
+    researchPublication:researchPublicationView
 };
 
 function openDrawer() {

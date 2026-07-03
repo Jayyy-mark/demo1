@@ -8,10 +8,14 @@ import { Semester } from "../interfaces/academic.js";
 import { navigate } from "../utils/navigate.js";
 import { academicHelper } from "../helpers/academic.helper.js";
 
+import { FormValidation } from "../validations/form_validations.js";
 export const semesterEvent = {
     delete_id: "",
 
     init(){
+        this.addValidation = new FormValidation("dataForm-semester");
+        this.updateValidation = new FormValidation("dataForm-semester-update");
+
 
         this.load();
 
@@ -47,6 +51,15 @@ export const semesterEvent = {
         }
     },
     async create(){
+        if (this.addValidation) {
+            const result = this.addValidation.validateAll();
+            if (!result.valid) {
+                const firstError = Object.values(result.errors)[0];
+                toast.error(firstError);
+                return;
+            }
+        }
+
         const form = $("#dataForm-semester");
         const semester = new Semester();
 
@@ -68,6 +81,15 @@ export const semesterEvent = {
         }
     },
     async update(){
+        if (this.updateValidation) {
+            const result = this.updateValidation.validateAll();
+            if (!result.valid) {
+                const firstError = Object.values(result.errors)[0];
+                toast.error(firstError);
+                return;
+            }
+        }
+
         const form = $("#dataForm-semester-update");
         const semester = new Semester();
         form.find("[name]").each(function(){

@@ -2,12 +2,40 @@ from app.core.database import db
 import os
 from werkzeug.utils import secure_filename
 from flask import jsonify
+from ipaddress import ip_address, ip_network
+from flask import request
+
+VPN_NETWORK = ip_network("10.254.0.0/24")
+
+def is_vpn_user(ip):
+    try:
+        return ip_address(ip) in VPN_NETWORK
+    except:
+        return False
+
 
 class Utils:
     #--------------- models helpers functions -------------------
+    @staticmethod
     def create(model, **kwargs):
         instance = model(**kwargs)# **kwargs for unpacking
         db.session.add(instance)
+        db.session.commit()
+        return instance
+
+    @staticmethod
+    def create_or_update(model, lookup_fields: dict, update_fields: dict):
+        instance = model.query.filter_by(**lookup_fields).first()
+
+        if instance:
+            # UPDATE
+            for key, value in update_fields.items():
+                setattr(instance, key, value)
+        else:
+            # CREATE
+            instance = model(**{**lookup_fields, **update_fields})
+            db.session.add(instance)
+
         db.session.commit()
         return instance
 
@@ -113,7 +141,7 @@ class ResponseHelper:
         }), status
 
     @staticmethod
-    def error(message, status=500):
+    def error(message, status=400):
         return jsonify({
             "success": False,
             "message": message

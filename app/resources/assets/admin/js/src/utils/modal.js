@@ -28,3 +28,23 @@ export class Modal {
         modal.hide();
     }
 }
+
+export function closeAllModals() {
+
+    document.querySelectorAll('.modal.show').forEach((modalEl) => {
+
+        const modal = bootstrap.Modal.getInstance(modalEl);
+
+        if (modal) {
+            modal.hide();
+        }
+
+    });
+
+    document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
+        backdrop.remove();
+    });
+
+    document.body.classList.remove('modal-open');
+    document.body.style.removeProperty('padding-right');
+}

@@ -8,10 +8,14 @@ import { Department } from "../interfaces/department.js";
 import { navigate } from "../utils/navigate.js";
 import { academicHelper } from "../helpers/academic.helper.js";
 
+import { FormValidation } from "../validations/form_validations.js";
 export const departmentEvent = {
     delete_id: "",
 
     init(){
+        this.addValidation = new FormValidation("dataForm-department");
+        this.updateValidation = new FormValidation("dataForm-department-update");
+
 
         this.load();
 
@@ -40,6 +44,15 @@ export const departmentEvent = {
         }
     },
     async create(){
+        if (this.addValidation) {
+            const result = this.addValidation.validateAll();
+            if (!result.valid) {
+                const firstError = Object.values(result.errors)[0];
+                toast.error(firstError);
+                return;
+            }
+        }
+
         const form = $("#dataForm-department");
         const department = new Department();
 
@@ -61,6 +74,15 @@ export const departmentEvent = {
         }
     },
     async update(){
+        if (this.updateValidation) {
+            const result = this.updateValidation.validateAll();
+            if (!result.valid) {
+                const firstError = Object.values(result.errors)[0];
+                toast.error(firstError);
+                return;
+            }
+        }
+
         const form = $("#dataForm-department-update");
         const department = new Department();
         form.find("[name]").each(function(){

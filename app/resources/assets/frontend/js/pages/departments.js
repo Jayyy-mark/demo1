@@ -14,7 +14,13 @@ const api = {
 const UI = {
     renderCourseByFaculty(data) {
 
-        console.log("this is subject data : ", data);
+        const hasSubjects = Object.values(data.semesters).some(
+            semester => semester.subjects.length > 0
+        );
+
+        if (!hasSubjects) {
+            return; // Don't render anything
+        }
 
         const faculty_tab = document.querySelector("#tab-faculties");
 

@@ -14,7 +14,7 @@ export const subjectAPI = {
             subject_code:data.subject_code,
             subject_name:data.subject_name,
             description:data.description,
-            department_id:data.department_id,
+            department_id:data.department_id || null,
         });
         return res.data;
     },

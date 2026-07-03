@@ -5,10 +5,14 @@ import { Research } from "../interfaces/research.js";
 import { Utils } from "../utils/utils.js";
 import { Modal } from "../utils/modal.js";
 
+import { FormValidation } from "../validations/form_validations.js";
 export const researchEvent = {
     deleteId:"",
 
     init(){
+        this.addValidation = new FormValidation("dataForm");
+        this.updateValidation = new FormValidation("dataForm-update");
+
         this.loadData();
 
         //<!--=========================
@@ -52,6 +56,15 @@ export const researchEvent = {
         }
     },
     async create(){
+        if (this.addValidation) {
+            const result = this.addValidation.validateAll();
+            if (!result.valid) {
+                const firstError = Object.values(result.errors)[0];
+                toast.error(firstError);
+                return;
+            }
+        }
+
         const form = $('#dataForm');
         const research = new Research();
         form.find('[name]').each(function(){
@@ -80,12 +93,25 @@ export const researchEvent = {
         }
     },
     async update(){
+        if (this.updateValidation) {
+            const result = this.updateValidation.validateAll();
+            if (!result.valid) {
+                const firstError = Object.values(result.errors)[0];
+                toast.error(firstError);
+                return;
+            }
+        }
+
         const form = $('#dataForm-update');
         const research = new Research();
         form.find('[name]').each(function(){
             const key = $(this).attr("name");
-            const value = $(this).val();
-
+            let value;
+            if(this.type=="file"){
+                value = this.files[0];
+            }else{
+                value = $(this).val();
+            }
             research.set(key, value);
         });
 

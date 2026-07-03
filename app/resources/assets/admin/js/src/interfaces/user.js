@@ -4,7 +4,6 @@ export class User {
     user_name="";
     user_email="";
     user_password="";
-    user_role="";
     user_avatar="";
 
     set(key, value){

@@ -65,6 +65,10 @@ def inject_assets():
                     'css': None,
                     'script': url_for('static', filename='admin/js/src/core/collaboration.js')
                 },
+                'chatbot' : {
+                    'css' : None,
+                    'script' : url_for('static', filename='admin/js/src/core/chatbot.js')
+                }
             }
         }
         mergedAssets = {**baseAssets, **newAssets}
@@ -85,3 +89,4 @@ from . import laboratory
 from . import calendar
 from . import vision_mission
 from . import collaboration
+from . import chatbot

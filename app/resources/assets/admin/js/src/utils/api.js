@@ -1,4 +1,8 @@
 import { errorUtils } from "../error/error.utils.js";
+import { startLoading, stopLoading, isPageLoaded } from "./loading.js";
+import { closeAllModals } from "./modal.js";
+
+
 
 const api = axios.create({
     //baseURL: "https://ucstgo.up.railway.app/api",
@@ -6,7 +10,16 @@ const api = axios.create({
     withCredentials: true
 });
 
+
+
 api.interceptors.request.use((config) => {
+
+    closeAllModals();
+
+    if(isPageLoaded){
+        startLoading();
+    }
+    
 
     const isRefreshRoute = config.url?.includes("/auth/refresh");
 
@@ -25,7 +38,10 @@ api.interceptors.request.use((config) => {
     INTERCEPTORS FOR HANDELING ERRORS, AUTHENTICATIONS, AUTHORIZATIONS, 
 ========================================================================*/
 api.interceptors.response.use(
-    (response) => response,
+    (response) => {
+        stopLoading();
+        return response;
+    },
 
     async (error) => {
 
@@ -42,15 +58,18 @@ api.interceptors.response.use(
             try {
 
                 await api.post("/auth/refresh");
-
+                stopLoading();
                 return api(originalRequest);
 
             } catch (e) {
+                stopLoading();
                 window.location.href = "/admin/auth/login";
                 return Promise.reject(e)
             }
 
         }
+
+        stopLoading();
 
         if (status === 500) {
             errorUtils._500(error.response?.data);

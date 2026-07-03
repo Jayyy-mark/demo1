@@ -1,96 +1,293 @@
 import { api } from "../utils/api.js";
-import { getMonthName, getDay, getYear } from "../utils/helper.js";
+import { getYear } from "../utils/helper.js";
 
-/*<!--===========================
-    GET ACTIVITES
-=============================-->*/
+/*===========================
+    STATE
+=============================*/
+let allData = [];
+let filteredData = [];
 
+let currentPage = 1;
+const pageSize = 4;
+
+let activeYear = "all";
+let searchQuery = "";
+
+/*===========================
+    ELEMENTS
+=============================*/
+const container = document.querySelector("#pub-container");
+const pagination = document.querySelector("#pagination");
+const yearContainer = document.querySelector("#pub-year-filters");
+const searchInput = document.querySelector("#pub-search");
+
+/*===========================
+    API
+=============================*/
 const publicationApi = {
-    async allResearches(){
+    async getAll() {
         const res = await api.get("/frontend/research/all");
         return res.data.researches;
-    },
-}
-
-/*<!--====================================
-    UI HAHNDLER
-=======================================-->*/
-const pubContainer = document.querySelector("#pub-container");
-const viewMoreBtn = document.querySelector("#view-more-btn");
-// const lastedresearchListContainer = document.querySelector("#laseted-research-list-container");
-
-
-const publicationUI = {
-    renderPublications(researches){
-        researches.forEach((research, index)=>{
-
-            const hiddenClass = index > 3 ? "hidden" : "";
-            const descriptionId = `publication-description-${index}`;
-
-            const card = `
-                <div class="pub-card ${hiddenClass} bg-white border border-slate-100 rounded-2xl p-7 shadow-sm hover:shadow-xl transition-all flex flex-col">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="px-3 py-1 bg-blue-50 text-blue-600 text-[10px] font-black rounded-lg uppercase tracking-widest">${research.category}</span>
-                        <span class="text-slate-400 font-bold text-sm">${getYear(research.date)}</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-4 h-14 line-clamp-2">${research.research_name}</h3>
-                    <div class="flex-grow">
-                        <p id="${descriptionId}" class="text-slate-600 text-sm leading-relaxed overflow-hidden max-h-10 transition-all duration-300">
-                            This research paper focuses on optimizing YOLO-based architectures for lower-end hardware, specifically focusing on low-light surveillance imagery.
-                        </p>
-                        <button onclick="togglePub('${descriptionId}', this)" class="text-blue-600 text-xs font-bold mt-2 hover:underline">READ MORE</button>
-                    </div>
-                    <div class="mt-8 pt-5 border-t border-slate-50 flex items-center justify-between">
-                        
-                        <a href="assets/${research.filepath}" download class="flex items-center gap-2 text-xs font-bold bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-                            PDF
-                        </a>
-                    </div>
-                </div>
-            `;
-
-            pubContainer.insertAdjacentHTML("beforeend", card);
-        });
-        this.setupViewMore();
-    },
-    setupViewMore(){
-        if (!viewMoreBtn) return;
-
-        const cards = Array.from(document.querySelectorAll(".pub-card"));
-        viewMoreBtn.style.display = cards.length > 4 ? "inline-block" : "none";
-
-        viewMoreBtn.onclick = () => {
-            const hiddenCards = cards.filter(card => card.classList.contains("hidden"));
-
-            hiddenCards.slice(0, 2).forEach(card => {
-                card.classList.remove("hidden");
-                card.classList.add("animate-fade-in");
-            });
-
-            const hasHiddenCards = cards.some(card => card.classList.contains("hidden"));
-            viewMoreBtn.style.display = hasHiddenCards ? "inline-block" : "none";
-        };
     }
+};
 
-}
+/*===========================
+    INIT
+=============================*/
+document.addEventListener("DOMContentLoaded", async () => {
+    allData = await publicationApi.getAll();
 
+    renderYearButtons();
+    applyFiltersFromURL();
 
-const publicationEvent = {
-    init(){
-        this.load();
-    },
-    async load(){
-
-        const researches = await publicationApi.allResearches();
-        publicationUI.renderPublications(researches);
-
-    }
-}
-
-/*<!--==========================================
-    MIAN ENTRY
-=============================================*/
-
-document.addEventListener('DOMContentLoaded', function(){
-    publicationEvent.init();
+    searchInput.addEventListener("input", (e) => {
+        searchQuery = e.target.value.toLowerCase();
+        currentPage = 1;
+        update();
+    });
 });
+
+/*===========================
+    YEAR FILTERS
+=============================*/
+function updateYearButtons() {
+    document.querySelectorAll(".year-filter-btn").forEach(btn => {
+        const isActive = btn.dataset.year === String(activeYear);
+
+        btn.className = `
+            year-filter-btn px-5 py-2 rounded-full text-sm font-medium
+            transition-all duration-200 border
+            ${isActive 
+                ? "bg-blue-600 text-white border-blue-600 shadow-md"
+                : "bg-white text-gray-600 border-gray-200 hover:bg-gray-50"
+            }
+        `;
+    });
+}
+function renderYearButtons() {
+    const years = [...new Set(allData.map(r => getYear(r.date)))].sort((a, b) => b - a);
+    
+    years.forEach(year => {
+        const btn = document.createElement("button");
+        btn.className = "year-filter-btn px-6 py-2 bg-gray-200 rounded-full font-bold";
+        btn.innerText = year;
+        btn.dataset.year = year;
+        btn.classList.toggle("bg-gray-900", year === activeYear);
+        btn.classList.toggle("text-white", year === activeYear);
+        btn.classList.toggle("bg-gray-100", year !== activeYear);
+        btn.classList.toggle("text-gray-700", year !== activeYear);
+        btn.onclick = () => {
+            activeYear = year;
+            currentPage = 1;
+            updateURL();
+            update();
+        };
+
+        yearContainer.appendChild(btn);
+    });
+
+    document.querySelector('[data-year="all"]').onclick = () => {
+        activeYear = "all";
+        currentPage = 1;
+        updateURL();
+        update();
+    };
+}
+
+/*===========================
+    FILTER LOGIC
+=============================*/
+function applyFilters() {
+    let data = [...allData];
+
+    // year filter
+    if (activeYear !== "all") {
+        data = data.filter(r => getYear(r.date) == activeYear);
+    }
+
+    // search filter
+    if (searchQuery) {
+        data = data.filter(r =>
+            r.research_name.toLowerCase().includes(searchQuery)
+        );
+    }
+
+    filteredData = data;
+}
+
+/*===========================
+    RENDER CARDS
+=============================*/
+function render() {
+    container.innerHTML = "";
+
+    const start = (currentPage - 1) * pageSize;
+    const end = start + pageSize;
+
+    const pageItems = filteredData.slice(start, end);
+
+    if (pageItems.length === 0) {
+        container.innerHTML = `
+            <p class="text-center text-gray-500 col-span-2">No publications found</p>
+        `;
+        pagination.innerHTML = "";
+        return;
+    }
+
+    pageItems.forEach(item => {
+        console.log("this is item", item);
+        container.innerHTML += `
+        <div class="group relative bg-white/70 backdrop-blur-xl
+                    border border-gray-100/60 rounded-3xl p-6
+                    shadow-sm hover:shadow-xl transition-all duration-300
+                    hover:-translate-y-1 overflow-hidden">
+
+            <!-- Soft gradient glow background -->
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-50/40 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
+
+            <!-- Top Row -->
+            <div class="relative flex items-center justify-between mb-4">
+
+                <span class="text-xs font-medium px-3 py-1 rounded-full
+                            bg-blue-100/70 text-blue-700">
+                    ${getYear(item.date)}
+                </span>
+
+                <!-- File type badge (optional but nice UX) -->
+                <span class="text-[10px] px-2 py-1 rounded-full
+                            bg-gray-100 text-gray-500 uppercase tracking-wide">
+                    JITES
+                </span>
+
+            </div>
+
+            <!-- Title -->
+            <h3 class="relative text-lg font-semibold text-gray-900
+                    leading-snug group-hover:text-blue-600 transition">
+                ${item.research_name}
+            </h3>
+
+            <!-- Description -->
+            <p class="relative mt-2 text-sm text-gray-500 leading-relaxed line-clamp-3">
+                ${item.description ?? ""}
+            </p>
+
+            <!-- Bottom Action Row -->
+            <div class="relative mt-6 flex items-center justify-between">
+
+                <!-- subtle metadata (optional future use) -->
+                <div class="text-xs text-gray-400">
+                    Research Paper
+                </div>
+
+                <!-- Download Button -->
+                <a href="/assets/${item.filepath}" download
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full
+                        bg-blue-600 text-white text-sm font-medium
+                        shadow-sm hover:bg-blue-700 active:scale-95
+                        transition-all duration-200">
+
+                    <!-- PDF Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="w-4 h-4"
+                        viewBox="0 0 24 24"
+                        fill="currentColor">
+
+                        <path d="M6 2h9l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/>
+                        <path d="M8 13h8v2H8zm0 4h6v2H8z" fill="white"/>
+                    </svg>
+
+                    PDF
+                </a>
+
+            </div>
+
+        </div>
+        `;
+    });
+
+    renderPagination();
+}
+
+/*===========================
+    PAGINATION UI
+=============================*/
+function renderPagination() {
+    pagination.innerHTML = "";
+
+    const totalPages = Math.ceil(filteredData.length / pageSize);
+    if (totalPages <= 1) return;
+
+    // Prev
+    pagination.innerHTML += `
+        <button ${currentPage === 1 ? "disabled" : ""}
+            onclick="changePage(${currentPage - 1})"
+            class="px-4 py-2 rounded-full text-sm
+                bg-white border border-gray-200 shadow-sm
+                hover:bg-gray-50 transition">
+            ‹ Prev
+        </button>
+    `;
+
+    // Pages
+    for (let i = 1; i <= totalPages; i++) {
+        pagination.innerHTML += `
+            <button onclick="changePage(${i})"
+                class="w-10 h-10 rounded-full text-sm border transition
+                ${i === currentPage
+                    ? "bg-blue-600 text-white border-blue-600 shadow-md"
+                    : "bg-white text-gray-600 border-gray-200 hover:bg-gray-50"
+                }">
+                ${i}
+            </button>
+        `;
+    }
+
+    // Next
+    pagination.innerHTML += `
+        <button ${currentPage === totalPages ? "disabled" : ""}
+            onclick="changePage(${currentPage + 1})"
+            class="px-4 py-2 rounded-full text-sm bg-white border border-gray-200 shadow-sm hover:bg-gray-50">
+            Next
+        </button>
+    `;
+}
+
+/*===========================
+    PAGE CHANGE
+=============================*/
+window.changePage = function (page) {
+    currentPage = page;
+    updateURL();
+    update();
+};
+
+/*===========================
+    UPDATE PIPELINE
+=============================*/
+function update() {
+    applyFilters();
+    render();
+    updateYearButtons();
+}
+
+/*===========================
+    URL SYNC (?page= & ?year=)
+=============================*/
+function updateURL() {
+    const url = new URL(window.location);
+
+    url.searchParams.set("page", currentPage);
+    url.searchParams.set("year", activeYear);
+
+    window.history.pushState({}, "", url);
+}
+
+function applyFiltersFromURL() {
+    const params = new URLSearchParams(window.location.search);
+
+    currentPage = parseInt(params.get("page")) || 1;
+    activeYear = params.get("year") || "all";
+
+    update();
+}

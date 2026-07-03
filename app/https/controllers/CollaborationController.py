@@ -14,7 +14,8 @@ class CollaborationController(BaseController):
         file = request.files.get("file")
         
         data = {
-            "company_name": raw_data.get("company_name"),
+            "organization_name": raw_data.get("organization_name"),
+            "collaboration_type": raw_data.get("collaboration_type"),
             "description": raw_data.get("description"),
             "url": raw_data.get("url"),
         }

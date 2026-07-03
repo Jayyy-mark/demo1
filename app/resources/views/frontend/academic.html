@@ -131,10 +131,10 @@
                             </div>
                             <h4 class="font-bold text-gray-900 text-lg mb-5 leading-relaxed">ပထမနှစ် သင်တန်းသားသစ် ဝင်ခွင့်ရသူများစာရင်း</h4>
                             <div class="flex gap-3">
-                                <a href="#" class="flex-grow bg-blue-600 py-3 rounded-xl text-sm font-semibold text-center text-white hover:bg-blue-700 transition-colors shadow-md shadow-blue-600/10">
+                                <a href="" onclick="viewAdmissionList()" class="flex-grow bg-blue-600 py-3 rounded-xl text-sm font-semibold text-center text-white hover:bg-blue-700 transition-colors shadow-md shadow-blue-600/10">
                                     View Online
                                 </a>
-                                <a href="#" class="w-14 bg-white border border-gray-200 flex items-center justify-center rounded-xl hover:bg-gray-50 transition-colors" title="Download PDF">
+                                <a href="{{ url_for('download.download', filename=admissionLists) }}" class="w-14 bg-white border border-gray-200 flex items-center justify-center rounded-xl hover:bg-gray-50 transition-colors" title="Download PDF">
                                     <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 </a>
                             </div>
@@ -316,6 +316,12 @@
             content.style.display = 'none';
             if (icon) icon.style.transform = 'rotate(0deg)';
         }
+    }
+
+    function viewAdmissionList(){
+        const url = "{{ admissionLists }}";
+
+        window.open(url);
     }
 </script>
 

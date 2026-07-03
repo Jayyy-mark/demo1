@@ -39,6 +39,8 @@ class FrontendController:
             "counts": count_data,
             "rector_message": rector_msg.value if rector_msg else "No message available."
         })
+    
+    @staticmethod
     def allActivities():
 
         activities = Activity.query.all()
@@ -288,7 +290,6 @@ class FrontendController:
             "subjects": result
         })
 
-
     @staticmethod
     def getAcademicCalendar():
 
@@ -363,6 +364,15 @@ class FrontendController:
         })
     
     @staticmethod
+    def getCompanyCollaborations():
+        
+        queried_data = Collaboration.query.filter_by(collaboration_type="company").all()
+
+        return jsonify({
+            "collaborations" : CollaborationSchema().dump(queried_data, many=True)
+        })
+    
+    @staticmethod
     def getCollaborations():
         
         queried_data = Collaboration.query.all()
@@ -370,3 +380,32 @@ class FrontendController:
         return jsonify({
             "collaborations" : CollaborationSchema().dump(queried_data, many=True)
         })
+
+    @staticmethod
+    def getUniversityCollaborations():
+        
+        queried_data = Collaboration.query.filter_by(collaboration_type="university").all()
+
+        return jsonify({
+            "collaborations" : CollaborationSchema().dump(queried_data, many=True)
+        })
+
+    @staticmethod
+    def askChatbot():
+        from app.helpers.bot_services import ask
+        message = request.json.get("message")
+
+        if not message:
+            return jsonify({
+                "response": "Message is required."
+            }), 400
+
+        try:
+            response = ask(message)
+            return jsonify({
+                "response": response
+            })
+        except Exception as e:
+            return jsonify({
+                "response": "An error occurred while processing your request."
+            }), 500

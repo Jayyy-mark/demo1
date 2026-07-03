@@ -32,6 +32,22 @@ def updateAttrKey():
 def deleteAttrKey():
     return DashboardController().delete()
 
+@dashboard_api.route("/dashboard/admissionList/create", methods=['POST'])
+@jwt_required()
+def addAdmissionLists():
+    return DashboardController().addAdmissionLists()
+
+@dashboard_api.route("/dashboard/admissionList/update", methods=['PUT'])
+@jwt_required()
+def editAdmissionLists():
+    return DashboardController().editAdmissionLists()
+
+@dashboard_api.route("/dashboard/admissionList/delete", methods=['DELETE'])
+@jwt_required()
+def deleteAdmissionLists():
+    return DashboardController().deleteAdmissionLists()
+
+
 @dashboard_api.route("/dashboard/counts/update", methods=['PUT'])
 @jwt_required()
 def updateCounts():

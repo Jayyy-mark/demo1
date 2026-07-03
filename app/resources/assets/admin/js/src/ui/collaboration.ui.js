@@ -18,7 +18,7 @@ export const collaborationUI = {
                 <td class="text-start py-3">
                     <img src="/assets/media/collaborations/${d.logo}" alt="Logo" class="img-fluid" style="max-height: 50px;">
                 </td>
-                <td class="text-start py-3">${d.company_name}</td>
+                <td class="text-start py-3">${d.organization_name}</td>
                 <td class="text-start py-3">
                     <div
                         class="description-preview show-description-modal"

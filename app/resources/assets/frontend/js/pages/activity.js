@@ -1,10 +1,7 @@
 import { api } from "../utils/api.js";
 import { getMonthName, getDay } from "../utils/helper.js";
 
-/*<!--===========================
-    GET ACTIVITES
-=============================-->*/
-
+/**/
 export const activityApi = {
     async all() {
         const res = await api.get("/frontend/activity/all");
@@ -12,19 +9,27 @@ export const activityApi = {
     },
 }
 
-/*<!--====================================
-    ACTIVITY UI HAHNDLER
-=======================================-->*/
+/**/
+const DOM = {
+    container: document.querySelector("#activity-data-section-body"),
+    lastedContainer: document.querySelector("#laseted-activity-list-container"), // Assuming this exists elsewhere
+    search: document.querySelector("#activitySearch"),
+    yearFilter: document.querySelector("#activityYearFilter"),
+    pageInfo: document.querySelector("#pageInfo"),
+    paginationControls: document.querySelector("#paginationControls"),
+    limitSelect: document.querySelector("#itemsPerPage")
+};
 
+let state = {
+    allData: [],
+    filteredData: [],
+    currentPage: 1,
+    limit: 9
+};
 
-const activityContainer = document.querySelector("#activity-data-section-body");
-const lastedActivityListContainer = document.querySelector("#laseted-activity-list-container");
-
+/**/
 function getActivityImage(activity, preferredIndex = 0) {
-    if (!Array.isArray(activity.images) || activity.images.length === 0) {
-        return null;
-    }
-
+    if (!Array.isArray(activity.images) || activity.images.length === 0) return null;
     return activity.images[preferredIndex]?.filepath || activity.images[0]?.filepath || null;
 }
 
@@ -32,12 +37,28 @@ function getActivityUrl(activity) {
     return `/activity/${encodeURIComponent(activity.id)}`;
 }
 
+function extractYear(dateString) {
+    if (!dateString) return null;
+    const year = new Date(dateString).getFullYear();
+    return isNaN(year) ? null : year;
+}
+
+/**/
 const activityUI = {
-    render(activities) {
+    renderCards(activities) {
+        DOM.container.innerHTML = ""; // Clear existing cards
+
+        if (activities.length === 0) {
+            DOM.container.innerHTML = `<div class="col-span-full text-center py-12 text-gray-500">No activities found matching your criteria.</div>`;
+            return;
+        }
+
         activities.forEach(activity => {
-            const imagePath = getActivityImage(activity, 1);
+            const imagePath = getActivityImage(activity, 0);
+            
+            // YOUR EXACT ORIGINAL CARD HTML (Unchanged)
             const activityCard = imagePath ? `
-                <a href="${getActivityUrl(activity)}" class="group block bg-white rounded-[2rem] p-4 shadow-sm hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 border-2 border-gray-200 hover:border-blue-500 hover:-translate-y-2">
+                <a href="${getActivityUrl(activity)}" class="group block bg-white rounded-[2rem] p-4 shadow-sm hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 border-2 border-gray-300 hover:border-blue-500 hover:-translate-y-2">
                     <div class="flex items-center justify-between px-2 pb-4 pt-1">
                         <div class="flex items-center gap-3">
                             <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 overflow-hidden">
@@ -84,7 +105,6 @@ const activityUI = {
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
                             </div>
                             <div>
-                                <p class="text-[11px] text-gray-400 font-medium tracking-wide">Category</p>
                                 <p class="text-sm font-bold text-gray-900">${activity.category}</p>
                             </div>
                         </div>
@@ -93,7 +113,6 @@ const activityUI = {
 
                         <div class="flex items-center gap-3">
                             <div class="text-right">
-                                <p class="text-[11px] text-gray-400 font-medium tracking-wide">Date</p>
                                 <p class="text-sm font-bold text-gray-900">${getMonthName(activity.date)} ${getDay(activity.date)}</p>
                             </div>
                             <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 overflow-hidden">
@@ -123,92 +142,145 @@ const activityUI = {
                 </a>
             `;
 
-            activityContainer.insertAdjacentHTML("beforeend", activityCard);
+            DOM.container.insertAdjacentHTML("beforeend", activityCard);
         });
     },
-    renderLastedActivities(activities) {
 
-        activities.forEach((a, index) => {
+    renderPagination() {
+        const totalPages = Math.ceil(state.filteredData.length / state.limit);
+        DOM.paginationControls.innerHTML = "";
+        
+        if (totalPages === 0) {
+            DOM.pageInfo.textContent = "Page 0 of 0";
+            return;
+        }
 
-            const flexClass = index % 2 === 0
-                ? "md:flex-row"
-                : "md:flex-row-reverse";
+        DOM.pageInfo.textContent = `Page ${state.currentPage} of ${totalPages}`;
 
-            const BadgeClass = index % 2 === 0
-                ? "-left-6"
-                : "-right-6";
+        // Previous Button
+        const prevBtn = document.createElement("button");
+        prevBtn.innerHTML = `&laquo;`; // Left double quote/arrow
+        prevBtn.className = `w-8 h-8 flex items-center justify-center rounded transition-colors ${state.currentPage === 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-600 hover:bg-gray-100'}`;
+        prevBtn.onclick = () => { if (state.currentPage > 1) activityEvent.goToPage(state.currentPage - 1); };
+        DOM.paginationControls.appendChild(prevBtn);
 
-            const imagePath = getActivityImage(a);
-            const row = imagePath ? `
-            <div class="news-item group flex flex-col ${flexClass} gap-12 items-center">
+        // Smart Pagination Logic (1 2 3 ... 9 10)
+        let pages = [];
+        if (totalPages <= 7) {
+            for (let i = 1; i <= totalPages; i++) pages.push(i);
+        } else {
+            if (state.currentPage <= 4) {
+                pages = [1, 2, 3, 4, 5, '...', totalPages];
+            } else if (state.currentPage >= totalPages - 3) {
+                pages = [1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+            } else {
+                pages = [1, '...', state.currentPage - 1, state.currentPage, state.currentPage + 1, '...', totalPages];
+            }
+        }
 
-                    <!-- Image Side -->
-                    <div class="w-full md:w-1/2 relative">
-                        <div class="aspect-[16/10] overflow-hidden rounded-[2rem] shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
-                            <img src="/assets/${imagePath}" alt="${a.activity_name}" class="w-full h-full object-cover">
-                        </div>
-                        <!-- Date Badge -->
-                        <div class="absolute -bottom-6 ${BadgeClass} bg-apple-blue text-white p-5 rounded-2xl shadow-xl min-w-[80px] text-center">
-                            <span class="block text-2xl font-black leading-none">${getMonthName(a.date)}</span>
-                            <span class="text-[10px] font-black opacity-80 uppercase tracking-wider">${getDay(a.date)}</span>
-                        </div>
-                    </div>
+        // Render Page Numbers
+        pages.forEach(p => {
+            const btn = document.createElement("button");
+            if (p === '...') {
+                btn.textContent = '...';
+                btn.className = "w-8 h-8 flex items-center justify-center text-gray-400 cursor-default";
+            } else {
+                btn.textContent = p;
+                btn.className = `w-8 h-8 flex items-center justify-center rounded text-sm transition-colors ${p === state.currentPage ? 'bg-gray-800 text-white font-bold' : 'text-gray-600 hover:bg-gray-100'}`;
+                btn.onclick = () => activityEvent.goToPage(p);
+            }
+            DOM.paginationControls.appendChild(btn);
+        });
 
-                    <!-- Text Side -->
-                    <div class="w-full md:w-1/2 space-y-6">
-                        <span class="text-apple-blue font-black text-xs tracking-[0.2em] uppercase">${a.category}</span>
-                        <h3 class="text-3xl md:text-4xl font-bold text-apple-dark leading-tight line-clamp-2">${a.activity_name}</h3>
-                        <p class="text-gray-500 text-lg leading-relaxed line-clamp-3">${a.description}</p>
-                        <a href="${getActivityUrl(a)}" class="inline-flex items-center gap-3 text-apple-dark font-black hover:text-apple-blue transition-colors group/link">
-                            CONTINUE READING
-                            <span class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover/link:bg-apple-blue group-hover/link:text-white transition-all duration-300">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                            </span>
-                        </a>
-                    </div>
-                </div>
-            ` : `
-                <div class="news-item group flex flex-col ${flexClass} gap-12 items-center">
-                    <div class="w-full md:w-1/2 relative">
-                        <div class="aspect-[16/10] rounded-[2rem] shadow-2xl bg-white border border-gray-100 p-8 flex flex-col justify-between transition-transform duration-500 group-hover:scale-[1.02]">
-                            <span class="text-apple-blue font-black text-xs tracking-[0.2em] uppercase">${a.category}</span>
-                            <h3 class="text-2xl md:text-3xl font-black text-apple-dark leading-tight line-clamp-2">${a.activity_name}</h3>
-                        </div>
-                        <div class="absolute -bottom-6 ${BadgeClass} bg-apple-blue text-white p-5 rounded-2xl shadow-xl min-w-[80px] text-center">
-                            <span class="block text-2xl font-black leading-none">${getMonthName(a.date)}</span>
-                            <span class="text-[10px] font-black opacity-80 uppercase tracking-wider">${getDay(a.date)}</span>
-                        </div>
-                    </div>
+        // Next Button
+        const nextBtn = document.createElement("button");
+        nextBtn.innerHTML = `&raquo;`; // Right double quote/arrow
+        nextBtn.className = `w-8 h-8 flex items-center justify-center rounded transition-colors ${state.currentPage === totalPages ? 'text-gray-300 cursor-not-allowed' : 'text-gray-600 hover:bg-gray-100'}`;
+        nextBtn.onclick = () => { if (state.currentPage < totalPages) activityEvent.goToPage(state.currentPage + 1); };
+        DOM.paginationControls.appendChild(nextBtn);
+    },
 
-                    <div class="w-full md:w-1/2 space-y-6">
-                        <span class="text-apple-blue font-black text-xs tracking-[0.2em] uppercase">${a.category}</span>
-                        <h3 class="text-3xl md:text-4xl font-bold text-apple-dark leading-tight line-clamp-2">${a.activity_name}</h3>
-                        <p class="text-gray-500 text-lg leading-relaxed line-clamp-3">${a.description}</p>
-                        <a href="${getActivityUrl(a)}" class="inline-flex items-center gap-3 text-apple-dark font-black hover:text-apple-blue transition-colors group/link">
-                            CONTINUE READING
-                            <span class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover/link:bg-apple-blue group-hover/link:text-white transition-all duration-300">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                            </span>
-                        </a>
-                    </div>
-                </div>
-            `;
+    populateFilters() {
+        const years = new Set();
+        state.allData.forEach(item => {
+            const y = extractYear(item.date);
+            if (y) years.add(y);
+        });
 
-            lastedActivityListContainer.insertAdjacentHTML("beforeend", row);
+        // Sort descending (newest year first)
+        Array.from(years).sort((a, b) => b - a).forEach(year => {
+            const option = document.createElement("option");
+            option.value = year.toString();
+            option.textContent = year;
+            DOM.yearFilter.appendChild(option);
         });
     }
 }
 
-
+/**/
 const activityEvent = {
-    init() {
-        this.load();
+    async init() {
+        if(!DOM.container) return; // Guard clause if elements don't exist
+
+        const data = await activityApi.all();
+        state.allData = data;
+        
+        activityUI.populateFilters();
+        this.applyFilters();
+        this.bindEvents();
     },
-    async load() {
-        const activities = await activityApi.all();
-        activityUI.render(activities);
+
+    bindEvents() {
+        DOM.search.addEventListener('input', () => this.applyFilters());
+        DOM.yearFilter.addEventListener('change', () => this.applyFilters());
+        DOM.limitSelect.addEventListener('change', (e) => {
+            state.limit = parseInt(e.target.value);
+            this.applyFilters();
+        });
+    },
+
+    applyFilters() {
+        const searchTerm = DOM.search.value.toLowerCase().trim();
+        const selectedYear = DOM.yearFilter.value;
+
+        state.filteredData = state.allData.filter(item => {
+            // Search text matches title or category
+            const matchText = item.activity_name?.toLowerCase().includes(searchTerm) || 
+                              item.category?.toLowerCase().includes(searchTerm) ||
+                              item.description?.toLowerCase().includes(searchTerm);
+            
+            // Year match
+            const itemYear = extractYear(item.date)?.toString();
+            const matchYear = selectedYear === 'all' || itemYear === selectedYear;
+
+            return matchText && matchYear;
+        });
+
+        state.currentPage = 1; // Reset to first page when filtering
+        this.updateView();
+    },
+
+    goToPage(pageNumber) {
+        state.currentPage = pageNumber;
+        this.updateView();
+        
+        // Optional: Smooth scroll back to top of activities section
+        document.getElementById('campus-activities').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    },
+
+    updateView() {
+        // Calculate pagination slice
+        const startIndex = (state.currentPage - 1) * state.limit;
+        const endIndex = startIndex + state.limit;
+        const paginatedData = state.filteredData.slice(startIndex, endIndex);
+
+        // Render
+        activityUI.renderCards(paginatedData);
+        activityUI.renderPagination();
     }
 }
+
+/*
 
 /*<!--==========================================
     MIAN ENTRY

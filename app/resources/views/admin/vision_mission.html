@@ -64,11 +64,13 @@
 
 </div>
 
-<!-- =========================
+<!--==========================
     MODALS
-========================= -->
+===========================-->
 
-<!-- CREATE MODAL -->
+<!--=========================
+    CREATE MODAL 
+==========================-->
 <div class="modal fade" id="vision_missionModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg rounded-4">
@@ -120,7 +122,9 @@
     </div>
 </div>
 
-<!-- UPDATE MODAL -->
+<!--======================
+    UPDATE MODAL 
+=======================-->
 <div class="modal fade" id="vision_missionModal-update" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg rounded-4">
@@ -175,7 +179,9 @@
     </div>
 </div>
 
-<!-- DELETE CONFIRMATION MODAL -->
+<!--===========================
+    DELETE CONFIRMATION MODAL 
+============================-->
 <div class="modal fade confirm-modal" id="delete-modal-vision_mission" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content border-0 shadow-lg">
@@ -206,7 +212,9 @@
     </div>
 </div>
 
-<!-- TOAST -->
+<!--=====================
+    TOAST 
+=====================-->
 {% include 'admin/modals/toast.html' %}
 
 {% endblock %}
@@ -214,11 +222,11 @@
 {% block script %}
 
 {% for script in assets.features.dataTable.scripts %}
-<script src="{{ script }}" defer></script>
+    <script src="{{ script }}" defer></script>
 {% endfor %}
 
 {% if assets.admin.vision_mission.script %}
-<script type="module" src="{{ assets.admin.vision_mission.script }}" defer></script>
+    <script type="module" src="{{ assets.admin.vision_mission.script }}" defer></script>
 {% endif %}
 
 {% endblock %}

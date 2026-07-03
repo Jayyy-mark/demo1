@@ -11,7 +11,6 @@ class User(db.Model):
     user_name = db.Column(db.String(50), unique=True, nullable=False)
     user_email = db.Column(db.String(150), unique=True, nullable=False)
     user_password = db.Column(db.Text, nullable=False)
-    user_role = db.Column(db.String(50), nullable=False)
     user_avatar = db.Column(db.String(255), nullable=False, server_default='3d-avatar-1.avif')
     
 

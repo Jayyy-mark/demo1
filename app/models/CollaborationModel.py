@@ -1,5 +1,6 @@
 from app.core.database import db
 from flask import current_app
+from sqlalchemy import text
 from werkzeug.utils import secure_filename
 import os
 
@@ -10,7 +11,8 @@ class Collaboration(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     logo = db.Column(db.String(200), unique=False, nullable=False)
-    company_name = db.Column(db.String(200), unique=False, nullable=False)
+    organization_name = db.Column(db.String(200), unique=False, nullable=False)
+    collaboration_type = db.Column(db.String(200), unique=False, nullable=False, server_default=text("'partner'"))
     description = db.Column(db.Text(), unique=False, nullable=True)
     url = db.Column(db.String(200), unique=False, nullable=True)
 

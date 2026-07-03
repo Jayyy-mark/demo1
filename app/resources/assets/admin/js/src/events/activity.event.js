@@ -6,10 +6,14 @@ import { Utils } from "../utils/utils.js";
 import { Modal } from "../utils/modal.js";
 
 
+import { FormValidation } from "../validations/form_validations.js";
 export const activityEvent = {
     deleteId: "",
     selectedImages: [],
     init() {
+        this.addValidation = new FormValidation("dataForm");
+        this.updateValidation = new FormValidation("dataForm-update");
+
         this.loadData();
 
         //<!--=========================
@@ -54,6 +58,15 @@ export const activityEvent = {
         }
     },
     async create() {
+        if (this.addValidation) {
+            const result = this.addValidation.validateAll();
+            if (!result.valid) {
+                const firstError = Object.values(result.errors)[0];
+                toast.error(firstError);
+                return;
+            }
+        }
+
         const form = $('#dataForm');
         const activity = new Activity();
         form.find('[name]').each(function () {
@@ -82,12 +95,25 @@ export const activityEvent = {
         }
     },
     async update() {
+        if (this.updateValidation) {
+            const result = this.updateValidation.validateAll();
+            if (!result.valid) {
+                const firstError = Object.values(result.errors)[0];
+                toast.error(firstError);
+                return;
+            }
+        }
+
         const form = $('#dataForm-update');
         const activity = new Activity();
         form.find('[name]').each(function () {
             const key = $(this).attr("name");
-            const value = $(this).val();
-
+            let value;
+            if (this.type === "file") {
+                value = this.files[0];   // First selected file
+            } else {
+                value = $(this).val();
+            }
             activity.set(key, value);
         });
 

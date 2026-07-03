@@ -52,24 +52,28 @@
             Faculties
         </button>
 
-
-        <a href="{{ url_for('frontend.activity') }}" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
-            News & Activities
-        </a>
-
-        <a href="{{ url_for('frontend.research') }}" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
-            Research Publications
-        </a>
-
         <button type="button" onclick="openSub('collaboration')"
             class="w-full text-left px-6 py-4 text-[15px] text-black active:bg-gray-100">
             Collaboration
         </button>
 
+        <a href="{{ url_for('frontend.activity') }}" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
+            News & Activities
+        </a>
+
+        <button type="button" onclick="openSub('researchPublication')"
+            class="w-full text-left px-6 py-4 text-[15px] text-black active:bg-gray-100">
+            Research & Publications
+        </button>
+
+
         <a href="/library" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
             Library
         </a>
 
+        <a href="/" class="block px-6 py-4 text-[15px] text-black active:bg-gray-100">
+            Alumni Result
+        </a>
     </div>
 
     <!-- HOME SUB VIEW -->
@@ -129,18 +133,18 @@
 
         <a href="{{ url_for('frontend.department', dept_code='fcs') }}"
             class="block px-6 py-4 text-black active:bg-gray-100">
-            Faculty Of Computer Science (FCS)
+            Computer Science (CS)
         </a>
 
         <a href="{{ url_for('frontend.department', dept_code='fcst') }}"
             class="block px-6 py-4 text-black active:bg-gray-100">Faculty Of Computer
-            Systems and Technologies (FCST)</a>
+            Systems (FCST)</a>
         <a href="{{ url_for('frontend.department', dept_code='fis') }}"
             class="block px-6 py-4 text-black active:bg-gray-100">Faculty Of
-            Information Science (FIS)</a>
+            Information Science(FIS)</a>
         <a href="{{ url_for('frontend.department', dept_code='itsm') }}"
             class="block px-6 py-4 text-black active:bg-gray-100">Department Of IT
-            Supporting and Maintenance (ITSM)</a>
+            Supporting and Maintenance(ITSM)</a>
         <a href="{{ url_for('frontend.department', dept_code='fc') }}"
             class="block px-6 py-4 text-black active:bg-gray-100">Faculty Of Computing
             (FC)</a>
@@ -161,15 +165,35 @@
             Student Affairs</a>
     </div>
 
-    <div id="collaboration" class="mobile-drawer-view py-4" aria-hidden="true">
+    <!-- ADMISSION SUB VIEW -->
+    <div id="collaborationView" class="mobile-drawer-view py-4" aria-hidden="true">
 
-        <a href="{{ url_for('frontend.partners') }}" class="block px-6 py-4 text-black active:bg-gray-100">
-            Corporate University
+        <p class="px-6 text-xs text-gray-400 uppercase tracking-wider mb-2">
+            Collaboration
+        </p>
+
+        <a href="{{ url_for('frontend.university') }}" class="block px-6 py-4 text-black active:bg-gray-100">
+            Coporate Universities
         </a>
 
-        <a href="{{ url_for('frontend.partners') }}" class="block px-6 py-4 text-black active:bg-gray-100">
-            Corporate Partners
+        <a href="{{ url_for('frontend.company') }}" class="block px-6 py-4 text-black active:bg-gray-100">
+            Coporate Partners
+        </a>
+    </div>
+
+    <!-- RESEARCH & PUBLICATION SUB VIEW -->
+    <div id="researchPublicationView" class="mobile-drawer-view py-4" aria-hidden="true">
+
+        <p class="px-6 text-xs text-gray-400 uppercase tracking-wider mb-2">
+            Research & Publications
+        </p>
+
+        <a href="{{ url_for('frontend.research') }}" class="block px-6 py-4 text-black active:bg-gray-100">
+            Research Labs
         </a>
 
+        <a href="{{ url_for('frontend.publication') }}" class="block px-6 py-4 text-black active:bg-gray-100">
+            Publications
+        </a>
     </div>
 </div>

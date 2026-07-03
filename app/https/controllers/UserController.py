@@ -17,9 +17,15 @@ class UserController(BaseController):
     
     def create(self):
         data = request.get_json() or {}
+
+
+        data = UserSchema().load(data)
+        
         data['user_id'] = self.generate_user_id()
         data['user_password'] = generate_password_hash(data['user_password'])
+        
 
+        print("this is data : ",data)
         return super().create(data)
     
     def update(self):

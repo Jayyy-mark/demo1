@@ -87,7 +87,7 @@
 =============================-->
 <!-- Add New Modal -->
 <div class="modal fade" id="researchModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content border-0 shadow-lg rounded-4">
 
             <!-- Header -->
@@ -99,26 +99,26 @@
             <!-- Body -->
             <div class="modal-body pt-2">
                 <form id="dataForm" enctype="multipart/form-data">
-                    <div class="row g-3">
-                        <div class="mb-3">
+                    <div class="row g-4">
+                        <div class="mb-3 col-lg-6">
                             <label for="file" class="form-label">Upload Photo :</label>
                             <input type="file" name="file" id="file" class="form-control" multiple>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 col-lg-6">
                             <label for="research_name" class="form-label">Research Name :</label>
                             <input type="text" name="research_name" id="research_name" class="form-control">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 col-lg-6">
                             <label for="category" class="form-label">Category :</label>
                             <input type="text" name="category" id="category" class="form-control">
                         </div>
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description :</label>
-                            <textarea name="description" id="description" class="form-control"></textarea>
-                        </div>
-                        <div class="mb-3">
+                        <div class="mb-3 col-lg-6">
                             <label for="date" class="form-label">Date :</label>
                             <input type="date" name="date" id="date" class="form-control">
+                        </div>
+                        <div class="mb-3 col-lg-12">
+                            <label for="description" class="form-label">Description :</label>
+                            <textarea name="description" id="description" class="form-control" rows="5"></textarea>
                         </div>
                     </div>
                 </form>
@@ -139,7 +139,7 @@
 
 <!-- Update Modal -->
 <div class="modal fade" id="researchModal-update" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content border-0 shadow-lg rounded-4">
 
             <!-- Header -->
@@ -151,30 +151,30 @@
             <!-- Body -->
             <div class="modal-body pt-2">
                 <form id="dataForm-update" enctype="multipart/form-data">
-                    <div class="row g-3">
-                        <div class="mb-3">
+                    <div class="row g-4">
+                        <div class="mb-3 col-lg-6">
                             <label for="" class="form-label">Research ID:</label>
                             <input type="text" name="id" id="" class="form-control" disabled>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 col-lg-6">
                             <label for="file" class="form-label">Upload Photo :</label>
                             <input type="file" name="file" id="file" class="form-control" multiple>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 col-lg-6">
                             <label for="research_name" class="form-label">Research Name :</label>
                             <input type="text" name="research_name" id="research_name" class="form-control">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 col-lg-6">
                             <label for="category" class="form-label">Category :</label>
                             <input type="text" name="category" id="category" class="form-control">
                         </div>
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description :</label>
-                            <textarea name="description" id="description" class="form-control"></textarea>
+                        <div class="mb-3 col-lg-6">
+                            <label for="date" class="form-label">Date :</label>
+                            <input type="date" name="date" id="date" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label for="date" class="form-label">Date :</label>
-                            <input type="text" name="date" id="date" class="form-control">
+                            <label for="description" class="form-label">Description :</label>
+                            <textarea name="description" id="description" rows="5" class="form-control"></textarea>
                         </div>
                     </div>
                 </form>

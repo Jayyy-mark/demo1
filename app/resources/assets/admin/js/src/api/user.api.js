@@ -14,19 +14,18 @@ export const userAPI = {
             user_name:data.user_name,
             user_email:data.user_email,
             user_password:data.user_password,
-            user_role:data.user_role,
             ...(data.user_avatar ? { user_avatar: data.user_avatar } : {})
         });
         return res.data;
     },
     async update(data){
+        console.log("this is data : ",data);
         const res = await api.put("/admin/user/update", {
             id:data.id,
             user_id:data.user_id,
             user_name:data.user_name,
             user_email:data.user_email,
             ...(data.user_password ? { user_password: data.user_password } : {}),
-            user_role:data.user_role,
             user_avatar:data.user_avatar
         });
         return res.data;

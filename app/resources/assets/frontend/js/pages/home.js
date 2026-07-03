@@ -21,7 +21,7 @@ const homeApi = {
     async fetchStats() {
         const res = await api.get("/frontend/home/stats");
         return res.data;
-    }
+    },
 }
 
 /*<!--====================================
@@ -52,7 +52,7 @@ const homeUI = {
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
                             </div>
                             <div>
-                                <p class="text-[11px] text-gray-400 font-medium tracking-wide">Category</p>
+                                
                                 <p class="text-sm font-bold text-gray-900">${activity.category}</p>
                             </div>
                         </div>
@@ -61,7 +61,7 @@ const homeUI = {
 
                         <div class="flex items-center gap-3">
                             <div class="text-right">
-                                <p class="text-[11px] text-gray-400 font-medium tracking-wide">Date</p>
+                                
                                 <p class="text-sm font-bold text-gray-900">${getMonthName(activity.date)} ${getDay(activity.date)}</p>
                             </div>
                             <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 overflow-hidden">
@@ -103,15 +103,34 @@ const homeUI = {
         logoContainer.insertAdjacentHTML("beforeend", cards + cards);
     },
     renderStats(statsData) {
+
+        console.log("this is stats data : ",statsData);
         const staffStat = document.getElementById('stat-staff-members');
         const graduatedStat = document.getElementById('stat-graduated-students');
         const currentStat = document.getElementById('stat-current-students');
         const rectorMsg = document.getElementById('rector-message-text');
+        console.log("this is staffStat : ",staffStat);
+        console.log("this is graduatedStat : ",graduatedStat);
+        console.log("this is currentStat : ",currentStat);
+        console.log("this is rector message : ",rectorMsg);
 
-        if (staffStat) staffStat.setAttribute('data-target', statsData.counts.total_staff || 0);
-        if (graduatedStat) graduatedStat.setAttribute('data-target', statsData.counts.graduated_student || 0);
-        if (currentStat) currentStat.setAttribute('data-target', statsData.counts.current_student || 0);
-        
+        if (staffStat) {
+            const value = statsData.counts.total_staff || 0;
+            staffStat.setAttribute('data-target', value);
+            staffStat.textContent = value; // or innerHTML = value;
+        }
+
+        if (graduatedStat) {
+            const value = statsData.counts.graduated_student || 0;
+            graduatedStat.setAttribute('data-target', value);
+            graduatedStat.textContent = value;
+        }
+
+        if (currentStat) {
+            const value = statsData.counts.current_student || 0;
+            currentStat.setAttribute('data-target', value);
+            currentStat.textContent = value;
+        }
         if (rectorMsg && statsData.rector_message) {
             rectorMsg.innerText = statsData.rector_message;
         }

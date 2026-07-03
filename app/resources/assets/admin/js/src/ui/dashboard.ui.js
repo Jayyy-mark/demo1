@@ -13,6 +13,12 @@ export const dashboardUI = {
             if(element.attr_key == "Rector's Message"){
                 $("#rector-message").text(element.value);
             }
+            
+            if (element.attr_key == "Admission Lists") {
+                $("#academic-admission-lists").html(
+                    `<a href="${element.value}" target="_blank">View Admission List</a>`
+                );
+            }
 
         });
     },

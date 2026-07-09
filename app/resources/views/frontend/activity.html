@@ -21,6 +21,11 @@
             </div>
             
             <div class="w-full md:w-auto flex items-center gap-4">
+                <div class="flex items-center gap-2" id="activityTypeFilters">
+                    <button class="px-4 py-2 rounded-lg bg-blue-600 text-white font-medium type-filter-btn transition-colors" data-type="all">All</button>
+                    <button class="px-4 py-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 font-medium type-filter-btn transition-colors" data-type="news">News</button>
+                    <button class="px-4 py-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 font-medium type-filter-btn transition-colors" data-type="activity">Activity</button>
+                </div>
                 <div class="flex items-center gap-2">
                     <span class="text-gray-500 font-medium">Year</span>
                     <select id="activityYearFilter" class="border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer bg-white">

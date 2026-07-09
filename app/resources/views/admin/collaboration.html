@@ -6,14 +6,74 @@
     .description-preview {
         cursor: pointer;
         max-width: 300px;
-
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
-
         overflow: hidden;
         text-overflow: ellipsis;
     }
+    /* ── Add-modal shared styles ── */
+    .add-modal-divider {
+        width: 1px;
+        background: #dee2e6;
+        flex-shrink: 0;
+        align-self: stretch;
+    }
+    .img-drop-zone {
+        border: 2px dashed #ced4da;
+        border-radius: 14px;
+        background: #f8f9fa;
+        min-height: 130px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        cursor: pointer;
+        transition: border-color .25s, background .25s, transform .2s;
+        text-align: center;
+        padding: 1rem;
+    }
+    .img-drop-zone:hover,
+    .img-drop-zone.dragover {
+        border-color: #0d6efd;
+        background: #eef5ff;
+        transform: scale(1.02);
+    }
+    .img-drop-zone i { font-size: 2rem; color: #adb5bd; transition: color .25s; }
+    .img-drop-zone:hover i, .img-drop-zone.dragover i { color: #0d6efd; }
+    .img-drop-zone p { margin: 0; font-size: .8rem; color: #6c757d; }
+    .img-drop-zone:hover p, .img-drop-zone.dragover p { color: #0d6efd; }
+    .img-preview-scroll { max-height: 310px; overflow-y: auto; padding-right: 2px; }
+    .img-preview-scroll::-webkit-scrollbar { width: 5px; }
+    .img-preview-scroll::-webkit-scrollbar-thumb { background: #ced4da; border-radius: 10px; }
+    .img-preview-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+    .img-preview-item {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,.12);
+        animation: fadeInScale .25s ease;
+    }
+    @keyframes fadeInScale {
+        from { opacity:0; transform:scale(.85); }
+        to   { opacity:1; transform:scale(1); }
+    }
+    .img-preview-item img { width:100%; height:100px; object-fit:cover; display:block; }
+    .img-preview-remove {
+        position: absolute; top:5px; right:5px;
+        width:24px; height:24px; border-radius:50%; border:none;
+        background: rgba(220,53,69,.9); color:#fff;
+        font-size:.7rem; display:flex; align-items:center; justify-content:center;
+        cursor:pointer; transition: transform .15s, background .15s; padding:0;
+    }
+    .img-preview-remove:hover { background:#c82333; transform:scale(1.15); }
+    .img-preview-name {
+        font-size:.65rem; color:#6c757d; padding:3px 6px;
+        white-space:nowrap; overflow:hidden; text-overflow:ellipsis; background:#f8f9fa;
+    }
+    .img-panel-label { font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.5px; color:#6c757d; margin-bottom:6px; }
+    .img-count-badge { font-size:.72rem; padding:2px 8px; }
 </style>
 {% endblock %}
 
@@ -83,54 +143,164 @@
 
 <!-- CREATE MODAL -->
 <div class="modal fade" id="collaborationModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content border-0 shadow-lg rounded-4">
 
-            <div class="modal-header">
-                <h5 class="modal-title">Add Collaboration</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <div class="modal-header bg-primary border-0 rounded-top-4">
+                <h5 class="modal-title text-white">
+                    <i class="ti ti-handshake me-2"></i>Add Collaboration
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
 
-            <div class="modal-body">
+            <div class="modal-body p-0">
                 <form id="dataForm-collaboration" enctype="multipart/form-data">
                     <input type="hidden" name="id">
-                    <div class="row g-4">
-                        <div class="mb-3 col-lg-6">
-                            <label for="file" class="form-label">Upload Logo :</label>
-                            <input type="file" name="file" id="file" class="form-control">
+                    <!-- Hidden real file input -->
+                    <input type="file" name="file" id="col-file-input" accept="image/*" style="display:none">
+
+                    <div class="d-flex">
+
+                        <!-- LEFT: Form Fields -->
+                        <div class="flex-fill p-4" style="min-width:0">
+                            <p class="text-muted small fw-semibold text-uppercase mb-3" style="letter-spacing:.5px">
+                                <i class="ti ti-forms me-1"></i>Collaboration Details
+                            </p>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label fw-medium">Organization Name</label>
+                                    <input type="text" autocomplete="off" class="form-control"
+                                           name="organization_name" placeholder="e.g. MIT University">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label fw-medium">Collaboration Type</label>
+                                    <select name="collaboration_type" class="form-select">
+                                        <option value="" selected disabled>Select an option</option>
+                                        <option value="internship">Company</option>
+                                        <option value="partner">University</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label fw-medium">URL</label>
+                                    <input type="text" autocomplete="off" class="form-control"
+                                           name="url" placeholder="https://example.com">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-medium">Description</label>
+                                    <textarea class="form-control" name="description" rows="5"
+                                              placeholder="Write a brief description…"></textarea>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3 col-lg-6">
-                            <label class="form-label">Organization Name :</label>
-                            <input type="text" autocomplete="off" class="form-control" name="organization_name">
+
+                        <!-- Vertical divider -->
+                        <div class="add-modal-divider"></div>
+
+                        <!-- RIGHT: Logo Upload & Preview -->
+                        <div class="p-4 d-flex flex-column" style="width:320px;min-width:280px;flex-shrink:0">
+                            <p class="text-muted small fw-semibold text-uppercase mb-3" style="letter-spacing:.5px">
+                                <i class="ti ti-photo me-1"></i>Logo
+                            </p>
+
+                            <!-- Drop zone -->
+                            <div class="img-drop-zone mb-3" id="colDropZone">
+                                <i class="ti ti-cloud-upload"></i>
+                                <p class="fw-semibold mb-0" style="font-size:.85rem">Drag &amp; drop logo here</p>
+                                <p>or <span style="color:#0d6efd;text-decoration:underline">browse file</span></p>
+                                <p class="text-muted" style="font-size:.72rem">PNG, JPG, WEBP · Single image</p>
+                            </div>
+
+                            <!-- Preview header -->
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="img-panel-label">Preview</span>
+                                <span class="badge bg-primary-subtle text-primary img-count-badge" id="colImgCount">0 image(s)</span>
+                            </div>
+
+                            <!-- Scrollable preview grid -->
+                            <div class="img-preview-scroll flex-fill">
+                                <div class="img-preview-grid" id="colPreviewGrid"></div>
+                                <div id="colEmptyHint" class="text-center text-muted py-3" style="font-size:.8rem">
+                                    <i class="ti ti-photo-off d-block mb-1" style="font-size:1.6rem"></i>
+                                    No logo selected yet
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3 col-lg-6">
-                            <label class="form-label">Collaboration Type :</label>
-                            <select name="collaboration_type" id="" class="form-select">
-                                <option value="" selected disabled>Select an option</option>
-                                <option value="internship">Company</option>
-                                <option value="partner">University</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 col-lg-6">
-                            <label class="form-label">URL :</label>
-                            <input type="text" autocomplete="off" class="form-control" name="url">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Description :</label>
-                            <textarea class="form-control" name="description" rows="3"></textarea>
-                        </div>
-                    </div>
+
+                    </div><!-- END d-flex -->
                 </form>
             </div>
 
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button class="btn btn-primary" id="save_collaboration_btn">Save</button>
+            <div class="modal-footer border-top pt-3">
+                <button class="btn btn-light px-4" data-bs-dismiss="modal">Close</button>
+                <button class="btn btn-primary px-4" id="save_collaboration_btn">
+                    <i class="ti ti-device-floppy me-1"></i>Save
+                </button>
             </div>
 
         </div>
     </div>
 </div>
+
+<!-- Image Preview JS (Collaboration) -->
+<script>
+(function () {
+    'use strict';
+    let selectedFiles = [];
+    const fileInput   = document.getElementById('col-file-input');
+    const dropZone    = document.getElementById('colDropZone');
+    const previewGrid = document.getElementById('colPreviewGrid');
+    const countBadge  = document.getElementById('colImgCount');
+    const emptyHint   = document.getElementById('colEmptyHint');
+
+    function syncFileInput() {
+        const dt = new DataTransfer();
+        selectedFiles.forEach(f => dt.items.add(f));
+        fileInput.files = dt.files;
+    }
+    function renderPreviews() {
+        previewGrid.innerHTML = '';
+        countBadge.textContent = `${selectedFiles.length} image(s)`;
+        emptyHint.style.display = selectedFiles.length === 0 ? 'block' : 'none';
+        selectedFiles.forEach((file, index) => {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const item = document.createElement('div');
+                item.className = 'img-preview-item';
+                item.innerHTML = `
+                    <img src="${e.target.result}" alt="preview">
+                    <div class="img-preview-name" title="${file.name}">${file.name}</div>
+                    <button type="button" class="img-preview-remove" data-index="${index}" title="Remove">
+                        <i class="ti ti-x"></i>
+                    </button>`;
+                item.querySelector('.img-preview-remove').addEventListener('click', function () {
+                    removeFile(parseInt(this.dataset.index));
+                });
+                previewGrid.appendChild(item);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+    function addFiles(newFiles) {
+        // Collaboration logo: only keep the last picked file (single image)
+        selectedFiles = [Array.from(newFiles).pop()].filter(Boolean);
+        syncFileInput();
+        renderPreviews();
+    }
+    function removeFile(index) {
+        selectedFiles.splice(index, 1);
+        syncFileInput();
+        renderPreviews();
+    }
+    dropZone.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', function () { addFiles(this.files); this.value = ''; });
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+    dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('dragover'); addFiles(e.dataTransfer.files); });
+    document.getElementById('collaborationModal').addEventListener('hidden.bs.modal', () => {
+        selectedFiles = []; fileInput.value = ''; renderPreviews();
+    });
+})();
+</script>
 
 <!-- UPDATE MODAL -->
 <div class="modal fade" id="collaborationModal-update" tabindex="-1" aria-hidden="true">

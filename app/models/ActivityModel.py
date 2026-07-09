@@ -12,7 +12,7 @@ class Activity(db.Model):
     activity_name = db.Column(db.String(100), unique=False, nullable=False)
     category = db.Column(db.String(100), unique=False, nullable=True)
     description = db.Column(db.Text, unique=False, nullable=True)
-
+    activity_type = db.Column(db.String(100), unique=False, nullable=False, server_default="Activity")
     filename = db.Column(db.String(225), unique=True, nullable=True)
     filepath = db.Column(db.String(225), unique=True, nullable=True)
 
@@ -21,7 +21,9 @@ class Activity(db.Model):
 
     @staticmethod
     def save_file(file):
-
+        if not file or not file.filename:
+            return None, None
+        
         upload_folder = os.path.join(
             current_app.root_path,
             "resources",
@@ -49,6 +51,9 @@ class Activity(db.Model):
 
     @staticmethod
     def delete_file(filename):
+        if not filename:
+            return
+            
         path = os.path.join(
             current_app.root_path,
             "resources",

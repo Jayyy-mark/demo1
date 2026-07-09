@@ -14,6 +14,7 @@ const DOM = {
     container: document.querySelector("#activity-data-section-body"),
     lastedContainer: document.querySelector("#laseted-activity-list-container"), // Assuming this exists elsewhere
     search: document.querySelector("#activitySearch"),
+    typeBtns: document.querySelectorAll(".type-filter-btn"),
     yearFilter: document.querySelector("#activityYearFilter"),
     pageInfo: document.querySelector("#pageInfo"),
     paginationControls: document.querySelector("#paginationControls"),
@@ -24,7 +25,8 @@ let state = {
     allData: [],
     filteredData: [],
     currentPage: 1,
-    limit: 9
+    limit: 9,
+    selectedType: 'all'
 };
 
 /**/
@@ -66,7 +68,7 @@ const activityUI = {
                             </div>
                             <div>
                                 <p class="text-[11px] text-gray-400 font-medium tracking-wide">Category</p>
-                                <p class="text-sm font-bold text-gray-900">${activity.category}</p>
+                                <p class="text-sm font-bold text-gray-900">${activity.category || "General"}</p>
                             </div>
                         </div>
                         
@@ -105,7 +107,8 @@ const activityUI = {
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
                             </div>
                             <div>
-                                <p class="text-sm font-bold text-gray-900">${activity.category}</p>
+                                <p class="text-[11px] text-gray-400 font-medium tracking-wide">Category</p>
+                                <p class="text-sm font-bold text-gray-900">${activity.category || "General"}</p>
                             </div>
                         </div>
                         
@@ -232,6 +235,21 @@ const activityEvent = {
 
     bindEvents() {
         DOM.search.addEventListener('input', () => this.applyFilters());
+        
+        DOM.typeBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                DOM.typeBtns.forEach(b => {
+                    b.classList.remove('bg-blue-600', 'text-white');
+                    b.classList.add('bg-gray-100', 'text-gray-600');
+                });
+                e.target.classList.remove('bg-gray-100', 'text-gray-600');
+                e.target.classList.add('bg-blue-600', 'text-white');
+                
+                state.selectedType = e.target.dataset.type;
+                this.applyFilters();
+            });
+        });
+
         DOM.yearFilter.addEventListener('change', () => this.applyFilters());
         DOM.limitSelect.addEventListener('change', (e) => {
             state.limit = parseInt(e.target.value);
@@ -242,6 +260,7 @@ const activityEvent = {
     applyFilters() {
         const searchTerm = DOM.search.value.toLowerCase().trim();
         const selectedYear = DOM.yearFilter.value;
+        const selectedType = state.selectedType;
 
         state.filteredData = state.allData.filter(item => {
             // Search text matches title or category
@@ -253,7 +272,10 @@ const activityEvent = {
             const itemYear = extractYear(item.date)?.toString();
             const matchYear = selectedYear === 'all' || itemYear === selectedYear;
 
-            return matchText && matchYear;
+            // Type match
+            const matchType = selectedType === 'all' || item.activity_type?.toLowerCase() === selectedType;
+
+            return matchText && matchYear && matchType;
         });
 
         state.currentPage = 1; // Reset to first page when filtering

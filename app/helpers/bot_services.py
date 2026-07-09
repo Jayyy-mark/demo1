@@ -88,7 +88,9 @@ def chunk_text(text, chunk_size=800):
 
 def ingest_documents():
 
-    folder = os.path.join(current_app.root_path, "resources", "assets", "bot", "knowledge")
+    folder = os.path.join(
+        current_app.root_path, "resources", "assets", "bot", "knowledge"
+    )
 
     print("📄 Building Vector Database...")
 
@@ -265,7 +267,7 @@ def ask(question):
         for language for reply to user use Myanmar Language (Burmese) but for some technical terms or specific words use English.
     """
 
-    response = client.models.generate_content(model="gemini-3.5-flash", contents=prompt)
+    response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
 
     answer = response.text.strip()
 

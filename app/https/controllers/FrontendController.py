@@ -57,6 +57,7 @@ class FrontendController:
                 grouped_activities[key] = {
                     "id": activity.id,
                     "activity_name": activity.activity_name,
+                    "activity_type": activity.activity_type,
                     "category": activity.category,
                     "date": str(activity.date),
                     "description": activity.description,
@@ -138,6 +139,7 @@ class FrontendController:
                 grouped_activities[key] = {
                     "id": activity.id,
                     "activity_name": activity.activity_name,
+                    "activity_type": activity.activity_type,
                     "category": activity.category,
                     "date": str(activity.date),
                     "description": activity.description,
@@ -191,6 +193,7 @@ class FrontendController:
                 grouped_activities[key] = {
                     "id": activity.id,
                     "activity_name": activity.activity_name,
+                    "activity_type": activity.activity_type,
                     "category": activity.category,
                     "date": str(activity.date),
                     "description": activity.description,

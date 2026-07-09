@@ -2,118 +2,424 @@
 
 {% block title %}Publications - UCSTGO{% endblock %}
 
-
 {% block styles %}
 <style>
-/* ဖြည်းဖြည်းချင်းပေါ်လာစေမည့် Animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ── Base ── */
+#publications * { font-family: 'Inter', sans-serif; }
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
-.animate-fade-in {
-    animation: fadeIn 0.5s ease forwards;
+.pub-fade { animation: fadeUp 0.45s ease both; }
+
+/* ── Hero Banner ── */
+.pub-hero {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #3b82f6 100%);
+    position: relative;
+    overflow: hidden;
 }
-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+.pub-hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+}
+.pub-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 240px; height: 240px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
 }
 
-.line-clamp-3 {
+/* ── Search ── */
+.pub-search-wrap {
+    position: relative;
+}
+.pub-search-wrap svg {
+    position: absolute;
+    left: 14px; top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+#pub-search {
+    padding-left: 42px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+#pub-search:focus {
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.18);
+    border-color: #3b82f6;
+    outline: none;
+}
+
+/* ── Year Filter Bar ── */
+.year-strip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow: hidden;
+}
+.year-pill {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.18s ease;
+    background: #f1f5f9;
+    color: #475569;
+    border-color: #e2e8f0;
+    user-select: none;
+    flex-shrink: 0;
+}
+.year-pill:hover {
+    background: #e0e7ff;
+    color: #3730a3;
+    border-color: #c7d2fe;
+}
+.year-pill.active {
+    background: #1d4ed8;
+    color: #fff;
+    border-color: #1d4ed8;
+    box-shadow: 0 2px 8px rgba(29,78,216,0.35);
+}
+.year-pill.ellipsis {
+    background: transparent;
+    border: 1.5px dashed #cbd5e1;
+    color: #94a3b8;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    letter-spacing: 1px;
+    cursor: default;
+}
+.year-pill.ellipsis:hover {
+    background: transparent;
+    color: #64748b;
+    border-color: #94a3b8;
+}
+
+/* ── Publication Cards ── */
+.pub-card {
+    background: #fff;
+    border: 1px solid #e8edf5;
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+.pub-card:hover {
+    box-shadow: 0 12px 40px rgba(30,58,138,0.10);
+    transform: translateY(-3px);
+    border-color: #c7d2fe;
+}
+.pub-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #6366f1);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    border-radius: 20px 20px 0 0;
+}
+.pub-card:hover::before { opacity: 1; }
+
+.pub-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.pub-year-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: #eff6ff;
+    color: #2563eb;
+    text-transform: uppercase;
+}
+.pub-type-tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: #f8fafc;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+    text-transform: uppercase;
+}
+.pub-card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.45;
+    transition: color 0.2s;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.pub-card:hover .pub-card-title { color: #1d4ed8; }
+
+.pub-card-desc {
+    font-size: 0.8375rem;
+    color: #64748b;
+    line-height: 1.65;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    flex: 1;
 }
+.pub-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4px;
+    padding-top: 16px;
+    border-top: 1px solid #f1f5f9;
+}
+.pub-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.775rem;
+    color: #94a3b8;
+    font-weight: 500;
+}
+.pdf-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 3px 12px rgba(37,99,235,0.3);
+}
+.pdf-download-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8, #4338ca);
+    box-shadow: 0 5px 16px rgba(37,99,235,0.4);
+    transform: translateY(-1px);
+}
+.pdf-download-btn:active { transform: scale(0.96); }
 
-/* smooth animation feel */
-* {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+/* ── No results ── */
+.pub-empty {
+    text-align: center;
+    padding: 64px 20px;
+    color: #94a3b8;
 }
+.pub-empty svg { margin: 0 auto 16px; }
 
-/* soft hover card lift */
-.card-soft {
-    transition: all 0.25s ease;
+/* ── Pagination ── */
+.page-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    border: 1.5px solid #e2e8f0;
+    background: #fff;
+    color: #475569;
+    cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: all 0.18s ease;
 }
+.page-btn:hover:not(:disabled) { background: #eff6ff; border-color: #93c5fd; color: #1d4ed8; }
+.page-btn.active { background: #1d4ed8; color: #fff; border-color: #1d4ed8; box-shadow: 0 2px 8px rgba(29,78,216,0.3); }
+.page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.page-nav {
+    padding: 0 14px;
+    height: 36px;
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    border: 1.5px solid #e2e8f0;
+    background: #fff;
+    color: #475569;
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 4px;
+    transition: all 0.18s ease;
+}
+.page-nav:hover:not(:disabled) { background: #eff6ff; border-color: #93c5fd; color: #1d4ed8; }
+.page-nav:disabled { opacity: 0.4; cursor: not-allowed; }
 
-.card-soft:hover {
-    transform: translateY(-4px);
-}
-
-/* subtle blur glass feel */
-.glass {
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
+/* ── Download modal cards ── */
+.download-option-card[data-active="true"]  { border-color: #2563eb; background: #eff6ff; }
+.download-option-card[data-active="false"] { border-color: #e2e8f0; background: #fff; }
+.download-option-card[data-active="true"]  .card-icon-bg  { background: #dbeafe; }
+.download-option-card[data-active="false"] .card-icon-bg  { background: #f1f5f9; }
+.download-option-card[data-active="true"]  .card-icon     { color: #2563eb; }
+.download-option-card[data-active="false"] .card-icon     { color: #94a3b8; }
+.download-option-card[data-active="true"]  .card-title    { color: #1d4ed8; }
+.download-option-card[data-active="false"] .card-title    { color: #374151; }
+.download-option-card[data-active="true"]  .card-subtitle { color: #3b82f6; }
+.download-option-card[data-active="false"] .card-subtitle { color: #9ca3af; }
+.download-option-card[data-active="false"]:hover { border-color: #c7d2fe; background: #f5f7ff; }
 </style>
 {% endblock %}
 
 {% block content %}
 
-<!-- Publications Section -->
-<section id="publications" >
-    <div class="max-w-7xl mx-auto px-6 py-12">
+<section id="publications">
 
-        <!-- Header Card (Soft Glass) -->
-        <div class="bg-white/60 backdrop-blur-md border border-gray-100 shadow-sm rounded-2xl p-6 mb-8">
-
-            <div class="text-center mb-6">
-                <h2 class="text-3xl font-semibold text-blue-800">Publications</h2>
-                <div class="h-1.5 w-20 bg-amber-400 mx-auto mt-6 rounded-full"></div>
+    <!-- ── Hero Banner ── -->
+    <div class="pub-hero px-6 py-14">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center">
+                <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm text-white text-xs font-semibold px-4 py-1.5 rounded-full mb-4 border border-white/20 tracking-wider uppercase">
+                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/></svg>
+                    UCSTGO Research Journal
+                </div>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight tracking-tight">Publications</h1>
+                <p class="mt-3 text-blue-200 text-base max-w-xl mx-auto">Browse and download our curated academic research and journal publications.</p>
             </div>
 
             <!-- Search -->
-            <div class="flex justify-center">
+            <div class="mt-8 max-w-lg mx-auto pub-search-wrap">
+                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/></svg>
                 <input
                     id="pub-search"
                     type="text"
-                    placeholder="Search publications..."
-                    class="w-full md:w-1/2 px-5 py-3 rounded-xl bg-gray-50 border border-gray-200
-                        focus:outline-none focus:ring-2 focus:ring-blue-200 transition"
+                    placeholder="Search publications by title…"
+                    class="w-full py-3.5 pr-5 rounded-2xl bg-white text-gray-900 text-sm border border-transparent shadow-lg placeholder-gray-400"
                 />
             </div>
+        </div>
+    </div>
 
-            <!-- Year Filter -->
-            <div id="pub-year-filters" class="flex flex-wrap justify-center gap-2 mt-5">
-                <button class="year-filter-btn active px-5 py-2 rounded-full text-sm font-medium
-                            bg-gray-900 text-white shadow-sm"
-                        data-year="all">
-                    All
-                </button>
+    <!-- ── Filter + Results Area ── -->
+    <div class="max-w-7xl mx-auto px-6 py-10">
+
+        <!-- Year Filter Strip -->
+        <div class="bg-white border border-gray-100 rounded-2xl shadow-sm px-5 py-4 mb-8">
+            <div class="flex items-center gap-4 flex-wrap md:flex-nowrap">
+                <span class="text-xs font-semibold text-gray-400 uppercase tracking-widest whitespace-nowrap shrink-0">Filter by Year</span>
+                <div id="pub-year-filters" class="year-strip flex-1 min-w-0">
+                    <!-- Pills rendered by JS -->
+                    <button class="year-pill active" data-year="all">All Years</button>
+                </div>
             </div>
-
         </div>
 
-        <!-- Publications Container -->
-        <div id="pub-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
+        <!-- Results count -->
+        <div class="flex items-center justify-between mb-5">
+            <p id="pub-count" class="text-sm text-gray-500 font-medium"></p>
         </div>
+
+        <!-- Cards Grid -->
+        <div id="pub-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6"></div>
 
         <!-- Pagination -->
-        <div class="mt-12 flex justify-center items-center gap-2" id="pagination"></div>
+        <div id="pagination" class="mt-10 flex justify-center items-center gap-2"></div>
     </div>
+
 </section>
 
+<!-- ── Download Modal ── -->
+<div id="downloadModal" class="fixed inset-0 z-[200] flex items-center justify-center bg-gray-900/50 backdrop-blur-sm opacity-0 pointer-events-none" style="transition: opacity 0.25s ease;">
+    <div id="downloadModalCard" class="bg-white rounded-3xl shadow-2xl w-full max-w-md mx-4 p-7 opacity-0 scale-95" style="transition: transform 0.25s ease, opacity 0.25s ease;">
 
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-5">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-blue-100 rounded-xl flex items-center justify-center">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900">Download PDF</h3>
+            </div>
+            <button onclick="closeDownloadModal()" class="w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+
+        <p class="text-sm text-gray-500 mb-5">Choose how you'd like to download this document.</p>
+
+        <form id="downloadForm">
+            <input type="hidden" id="downloadFilePath" value="">
+            <input type="radio" id="radio-whole" name="downloadType" value="whole" class="hidden" checked>
+            <input type="radio" id="radio-pages" name="downloadType" value="pages" class="hidden">
+
+            <!-- Option Cards -->
+            <div class="grid grid-cols-2 gap-3 mb-5">
+                <div id="card-whole" data-active="true" class="download-option-card cursor-pointer rounded-2xl border-2 p-4 text-center transition-all duration-200 select-none">
+                    <div class="w-10 h-10 rounded-xl mx-auto mb-2 flex items-center justify-center transition-colors duration-200 card-icon-bg">
+                        <svg class="w-5 h-5 transition-colors duration-200 card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    </div>
+                    <p class="font-semibold text-sm card-title">Whole Book</p>
+                    <p class="text-xs mt-0.5 card-subtitle">Complete PDF file</p>
+                </div>
+
+                <div id="card-pages" data-active="false" class="download-option-card cursor-pointer rounded-2xl border-2 p-4 text-center transition-all duration-200 select-none">
+                    <div class="w-10 h-10 rounded-xl mx-auto mb-2 flex items-center justify-center transition-colors duration-200 card-icon-bg">
+                        <svg class="w-5 h-5 transition-colors duration-200 card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h10M4 18h6"/></svg>
+                    </div>
+                    <p class="font-semibold text-sm card-title">Custom Pages</p>
+                    <p class="text-xs mt-0.5 card-subtitle">Select page range</p>
+                </div>
+            </div>
+
+            <!-- Page Range Inputs -->
+            <div id="pageRangeInputs" class="overflow-hidden" style="max-height:0; opacity:0; transition: max-height 0.3s ease, opacity 0.3s ease;">
+                <div class="bg-gray-50 rounded-2xl p-4 mb-5">
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Page Range</p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1.5 font-medium">Start Page</label>
+                            <input type="number" id="startPage" min="1" placeholder="e.g. 1"
+                                class="w-full px-3 py-2.5 text-sm bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-500 mb-1.5 font-medium">End Page</label>
+                            <input type="number" id="endPage" min="1" placeholder="e.g. 20"
+                                class="w-full px-3 py-2.5 text-sm bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex gap-3">
+                <button type="button" onclick="closeDownloadModal()"
+                    class="flex-1 px-4 py-2.5 text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors">
+                    Cancel
+                </button>
+                <button type="submit" id="downloadSubmitBtn"
+                    class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-colors shadow-sm disabled:opacity-60 disabled:cursor-not-allowed">
+                    <svg id="downloadSpinner" class="w-4 h-4 hidden animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                    </svg>
+                    <span id="downloadBtnLabel">Download Now</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 
 {% endblock %}
 
 {% block scripts %}
-<script>
-// အရင်ရှိပြီးသား toggle function (မပြောင်းလဲပါ)
-function togglePub(id, btn) {
-    const el = document.getElementById(id);
-    if (el.classList.contains('max-h-10')) {
-        el.classList.remove('max-h-10');
-        el.classList.add('max-h-96');
-        btn.innerText = 'SHOW LESS';
-    } else {
-        el.classList.remove('max-h-96');
-        el.classList.add('max-h-10');
-        btn.innerText = 'READ MORE';
-    }
-}
-</script>
 <script type="module" src="{{ url_for('static', filename='frontend/js/pages/publication.js') }}"></script>
 {% endblock %}

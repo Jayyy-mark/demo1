@@ -25,7 +25,7 @@ export class FormValidation {
         
         inputs.forEach(input => {
             if (input.type === 'hidden' || input.disabled || input.readOnly) return;
-            if (input.type === 'file' && formId.includes('update')) return;
+            if (input.type === 'file') return;
             if (input.getAttribute('name') === 'description') return;
 
             let value = input.value;
@@ -124,7 +124,7 @@ export class FormValidation {
                 this.debounce(() => {
                     let value = input.value;
                     if (typeof value === 'string') value = value.trim();
-                    if (!value && !(input.type === 'file' && formId.includes('update'))) {
+                    if (!value && !(input.type === 'file')) {
                         let labelName = input.getAttribute("name").split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
                         this.showError(input, `${labelName} must not be empty`);
                     } else {

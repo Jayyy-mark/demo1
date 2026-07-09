@@ -15,16 +15,19 @@ export const activityUI = {
             tbody.append("<tr><td colspan='4'> No data avaliable </td></tr>");
         }
 
+        const years = new Set();
+
         $(activities).each(function (index, a) {
             let year = a.date.split("-")[0];
+            years.add(year);
             const row = `
             <tr>
                 <td class="py-3 text-start">${a.id}</td>
                 <td class="py-3 text-start">${a.activity_name}</td>
-                <td class="py-3 text-start">${a.category}</td>
+                <td class="py-3 text-start">${a.category || ""}</td>
                 <td class="py-3 text-start">${a.description || "N/A"}</td>
                 <td class="py-3 text-start">${year}</td>
-                <td class="py-3 text-start"><a href="/assets/${a.filepath}">${a.filename}</a></td>
+                <td class="py-3 text-start">${a.filename ? `<a href="/assets/${a.filepath}">${a.filename}</a>` : "N/A"}</td>
                 <td class="py-3 text-start">
                     <div class="action-buttons d-flex justify-content-start ps-0">
                         <button class="btn btn-sm btn-info border rounded-5 show-update-modal"
@@ -44,7 +47,7 @@ export const activityUI = {
             tbody.append(row);
         });
 
-        dataTable.init("#dataTable", {
+        const table = dataTable.init("#dataTable", {
             pageLength: 10
         });
 

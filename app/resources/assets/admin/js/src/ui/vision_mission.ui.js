@@ -18,6 +18,9 @@ export const visionMissionUI = {
             <tr>
                 <td class="text-start py-3">${d.id}</td>
                 <td class="text-start py-3">${departmentName}</td>
+                <td class="text-start py-3">
+                    <span class="badge ${d.language === 'mm' ? 'bg-light-success text-success' : 'bg-light-primary text-primary'} rounded-pill px-2 py-1">${d.language === 'mm' ? 'MM' : 'EN'}</span>
+                </td>
                 <td class="text-start py-3">${d.vision || 'N/A'}</td>
                 <td class="text-start py-3">${d.mission || 'N/A'}</td>
                 <td class="py-3 text-start px-1">

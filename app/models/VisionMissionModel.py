@@ -16,3 +16,7 @@ class VisionMission(db.Model):
         "Department",
         backref=db.backref("vision_missions", cascade="all, delete-orphan"),
     )
+
+    language = db.Column(
+        db.String(20), unique=False, nullable=False, default="en", server_default="en"
+    )

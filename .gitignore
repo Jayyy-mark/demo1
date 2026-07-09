@@ -10,3 +10,4 @@ services
 media
 test.html
 migrations
+./resources/assets/media

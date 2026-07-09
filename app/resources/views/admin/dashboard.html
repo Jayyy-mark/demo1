@@ -12,6 +12,42 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="{{ assets.admin.dashboard.css }}">
 <style>
+    .calendar-day {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 0.85rem;
+        margin: 0 auto;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        color: #495057;
+        transition: all 0.2s;
+    }
+
+    .calendar-day:hover:not(.empty-day) {
+        background: #f1f3f5;
+    }
+
+    .calendar-day.active {
+        background: #0d9488 !important;
+        color: #fff !important;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(13, 148, 136, 0.3);
+    }
+
+    .calendar-event-dot {
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 6px;
+        height: 6px;
+        background: #e07a16;
+        border-radius: 50%;
+    }
+
     .icon-btn {
         cursor: pointer;
         transition: all 0.2s ease;
@@ -22,8 +58,30 @@
         transform: scale(1.15);
         background: rgba(255, 193, 7, 0.15);
     }
+
+    #academic-admission-lists a {
+        color: #0284c7;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s ease;
+    }
+
+    #academic-admission-lists a::before {
+        content: '\eb15';
+        /* Tabler download icon */
+        font-family: 'tabler-icons';
+        font-size: 1.2rem;
+    }
+
+    #academic-admission-lists a:hover {
+        color: #0369a1;
+        transform: scale(1.02);
+    }
 </style>
 {% endblock %}
+
 
 
 <!--===================================
@@ -148,71 +206,7 @@
             </div>
         </div>
 
-        <div class="col-xl-6 col-md-12">
-            <div class="card">
-                <div class="card-body">
-
-                    <!-- Header -->
-                    <div class="row mb-3 align-items-center">
-                        <div class="col">
-                            <h5>Academic Tasks</h5>
-                        </div>
-                    </div>
-
-                    <!-- Task List -->
-                    <ul class="list-group list-group-flush">
-                        {% for task in academic_tasks %}
-                        <li class="list-group-item px-0 {% if loop.index > 4 %}collapse academic-task-extra{% endif %}"
-                            style="transition: all 0.3s ease;">
-                            <div class="row align-items-start">
-                                <div class="col">
-                                    <h5 class="mb-0">{{ task.title }}</h5>
-                                    {% if task.description %}
-                                    <small class="text-muted d-inline-block text-truncate" style="max-width: 200px;">{{
-                                        task.description }}</small>
-                                    {% endif %}
-                                </div>
-                                <div class="col-auto">
-                                    <h5 class="mb-0">
-                                        {{ task.status }}
-                                        <span class="ms-2 avtar avtar-xxs 
-                                            {% if task.status == 'Pending' %}bg-light-warning
-                                            {% elif task.status == 'In Progress' %}bg-light-primary
-                                            {% elif task.status == 'Completed' %}bg-light-success
-                                            {% else %}bg-light-secondary{% endif %}">
-                                            <i class="ti 
-                                            {% if task.status == 'Pending' %}ti-clock text-warning
-                                            {% elif task.status == 'In Progress' %}ti-loader text-primary
-                                            {% elif task.status == 'Completed' %}ti-check text-success
-                                            {% else %}ti-calendar text-secondary{% endif %}"></i>
-                                        </span>
-                                    </h5>
-                                </div>
-                            </div>
-                        </li>
-                        {% else %}
-                        <li class="list-group-item px-0">
-                            <p class="text-muted mb-0">No academic tasks found.</p>
-                        </li>
-                        {% endfor %}
-                    </ul>
-
-                    <!-- Footer -->
-                    {% if academic_tasks|length > 4 %}
-                    <div class="text-center mt-2">
-                        <a href="javascript:void(0)" class="b-b-primary text-primary" id="toggleAcademicTasks"
-                            data-bs-toggle="collapse" data-bs-target=".academic-task-extra" aria-expanded="false">
-                            <span>View all academic tasks</span>
-                            <i class="ti ti-chevron-down d-inline-block" style="transition: transform 0.3s ease;"></i>
-                        </a>
-                    </div>
-                    {% endif %}
-
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-6 col-md-12">
+        <div class="col-xl-8 col-md-12">
             <div class="card">
                 <div class="card-body">
 
@@ -245,38 +239,96 @@
                 </div>
             </div>
         </div>
-
-        <div class="col-xl-6 col-md-12">
-            <div class="card">
-                <div class="card-body">
-
-                    <!-- Header -->
-                    <div class="row mb-3 align-items-center">
-                        <div class="col">
-                            <h5>Academic Admission Lists : </h5>
-                        </div>
-                        <div class="col-auto">
-                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#academicAdmissionListsModal" aria-label="Add Academic Admission Lists">
-                                <i class="ti ti-edit"></i>
-                            </button>
-                        </div>
+        <div class="col-xl-4 col-md-6">
+            <div class="card p-3">
+                <!-- Calendar Header -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center gap-2">
+                        <div style="width: 4px; height: 18px; border-radius: 4px; background: #e07a16;"></div>
+                        <h6 class="mb-0 fw-bold"
+                            style="color: #2c3e50; font-family: 'Pyidaungsu', sans-serif; font-size: 0.95rem;">
+                            Academic Calendar</h6>
                     </div>
+                    <div>
+                        <span class="mb-0 fw-bold" style="color: #e07a16; text-transform: uppercase; font-size: 0.8rem;"
+                            id="calendar-month-year">...</span>
+                    </div>
+                </div>
 
-                    <ul class="list-group list-group-flush">
+                <!-- Calendar Grid -->
+                <div class="calendar-wrapper w-100">
+                    <div class="d-grid text-center fw-bold"
+                        style="grid-template-columns: repeat(7, 1fr); color: #6c757d; font-size: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e9ecef; margin-bottom: 0.75rem;">
+                        <div>SU</div>
+                        <div>MO</div>
+                        <div>TU</div>
+                        <div>WE</div>
+                        <div>TH</div>
+                        <div>FR</div>
+                        <div>SA</div>
+                    </div>
+                    <div id="calendar-days" class="d-grid text-center"
+                        style="grid-template-columns: repeat(7, 1fr); row-gap: 0.5rem; align-items: center;">
+                        <!-- JS generated days will go here -->
+                    </div>
+                </div>
 
-                        <li class="list-group-item px-0">
-                            <div class="row align-items-start">
-                                <div class="col">
-                                    <div id="academic-admission-lists" style="text-align: justify;"></div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
+                <!-- Calendar Event Details Box -->
+                <div class="mt-3 p-2" style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 12px;">
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <i class="ti ti-calendar-event" style="color: #e07a16; font-size: 1.1rem;"></i>
+                        <h6 class="mb-0 fw-bold"
+                            style="color: #e07a16; font-family: 'Pyidaungsu', sans-serif; font-size: 0.9rem;"
+                            id="calendar-event-title">လုပ်ငန်းအစီအစဉ်များ:</h6>
+                    </div>
+                    <p class="mb-0 text-muted"
+                        style="font-size: 0.8rem; font-family: 'Pyidaungsu', sans-serif; line-height: 1.4;"
+                        id="calendar-event-desc">
+                        ပြက္ခဒိန်ရက်စွဲများကို နှိပ်၍ သတ်မှတ်ထားသော အစည်းအဝေးများအား စစ်ဆေးနိုင်ပါသည်။
+                    </p>
                 </div>
             </div>
+            <div class="card p-2 mb-3">
+                <!-- Header -->
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="d-flex align-items-center gap-2 px-1">
+                        <div style="width: 3px; height: 16px; border-radius: 4px; background: #0ea5e9;"></div>
+                        <h6 class="mb-0 fw-bold"
+                            style="color: #2c3e50; font-family: 'Pyidaungsu', sans-serif; font-size: 0.9rem;">
+                            Admission Lists
+                        </h6>
+                    </div>
+                    <div>
+                        <button
+                            class="btn btn-sm btn-light-primary rounded-circle d-flex align-items-center justify-content-center p-1"
+                            style="width: 26px; height: 26px; transition: transform 0.2s ease;"
+                            onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"
+                            data-bs-toggle="modal" data-bs-target="#academicAdmissionListsModal"
+                            aria-label="Edit Admission Lists" title="Edit Admission Lists">
+                            <i class="ti ti-edit" style="font-size: 0.85rem;"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="px-2 py-2"
+                    style="background: #f0f9ff; border: 1px dashed #bae6fd; border-radius: 8px; transition: all 0.3s ease;">
+                    <div id="academic-admission-lists"
+                        class="d-flex align-items-center justify-content-center fw-semibold text-center"
+                        style="font-size: 0.85rem;">
+                        <!-- JS generated link goes here -->
+                    </div>
+                </div>
+
+
+            </div>
         </div>
+
+
+
+
+
+
 
         <!--======================================
             RECOTR'S MESSAGE MODAL
@@ -367,13 +419,14 @@
         <!--======================================
             ACADEMIC ADMISSION LISTS MODAL
         ======================================-->
-        <div class="modal fade" id="academicAdmissionListsModal" tabindex="-1" aria-labelledby="academicAdmissionListsModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="academicAdmissionListsModal" tabindex="-1"
+            aria-labelledby="academicAdmissionListsModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden academic-task-modal">
                     <div class="modal-header bg-primary border-0 px-4 py-3">
                         <div>
-                            <h5 class="modal-title text-white mb-1" id="academicAdmissionListsModalLabel">Add Academic Admission Lists
+                            <h5 class="modal-title text-white mb-1" id="academicAdmissionListsModalLabel">Add Academic
+                                Admission Lists
                             </h5>
                         </div>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
@@ -383,7 +436,8 @@
                         <form id="academic-admission-lists-form">
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Academic Admission Lists</label>
-                                <input type="file" name="academic_admission_lists" id="academic-admission-lists-input" class="form-control" accept=".pdf,.doc,.docx">
+                                <input type="file" name="academic_admission_lists" id="academic-admission-lists-input"
+                                    class="form-control" accept=".pdf,.doc,.docx">
                             </div>
                         </form>
                     </div>

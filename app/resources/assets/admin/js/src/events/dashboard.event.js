@@ -1,4 +1,5 @@
 import { dashboardApi } from "../api/dashboardApi.js";
+import { calendarApi } from "../api/calendar.api.js";
 import { toast } from "../utils/toast.js";
 import { dashboardUI } from "../ui/dashboard.ui.js";
 import { Utils } from "../utils/utils.js";
@@ -76,6 +77,16 @@ export const dashboardEvent = {
         try {
             const res = await dashboardApi.summary();
             dashboardUI.render(res.data);
+            
+            // Load Calendar Events
+            try {
+                const calRes = await calendarApi.all();
+                const events = Array.isArray(calRes) ? calRes : (calRes.data || []);
+                dashboardUI.renderCalendar(events);
+            } catch (calError) {
+                console.error("Error loading calendar data:", calError);
+                dashboardUI.renderCalendar([]);
+            }
         } catch (error) {
             console.error("Error loading dashboard data:", error);
             toast.error("Failed to load dashboard data.");

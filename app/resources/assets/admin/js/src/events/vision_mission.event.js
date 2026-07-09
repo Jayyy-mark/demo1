@@ -120,6 +120,7 @@ export const visionMissionEvent = {
         visionMission.set("vision", data.vision);
         visionMission.set("mission", data.mission);
         visionMission.set("department_id", data.department_id);
+        visionMission.set("language", data.language || "en");
         if (data.department) {
             visionMission.set("department_name", data.department.department_name);
         }

@@ -8,10 +8,12 @@
         max-width: 300px;
         display: -webkit-box;
         -webkit-line-clamp: 2;
+        line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
     /* ── Add-modal shared styles ── */
     .add-modal-divider {
         width: 1px;
@@ -19,6 +21,7 @@
         flex-shrink: 0;
         align-self: stretch;
     }
+
     .img-drop-zone {
         border: 2px dashed #ced4da;
         border-radius: 14px;
@@ -34,46 +37,131 @@
         text-align: center;
         padding: 1rem;
     }
+
     .img-drop-zone:hover,
     .img-drop-zone.dragover {
         border-color: #0d6efd;
         background: #eef5ff;
         transform: scale(1.02);
     }
-    .img-drop-zone i { font-size: 2rem; color: #adb5bd; transition: color .25s; }
-    .img-drop-zone:hover i, .img-drop-zone.dragover i { color: #0d6efd; }
-    .img-drop-zone p { margin: 0; font-size: .8rem; color: #6c757d; }
-    .img-drop-zone:hover p, .img-drop-zone.dragover p { color: #0d6efd; }
-    .img-preview-scroll { max-height: 310px; overflow-y: auto; padding-right: 2px; }
-    .img-preview-scroll::-webkit-scrollbar { width: 5px; }
-    .img-preview-scroll::-webkit-scrollbar-thumb { background: #ced4da; border-radius: 10px; }
-    .img-preview-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+
+    .img-drop-zone i {
+        font-size: 2rem;
+        color: #adb5bd;
+        transition: color .25s;
+    }
+
+    .img-drop-zone:hover i,
+    .img-drop-zone.dragover i {
+        color: #0d6efd;
+    }
+
+    .img-drop-zone p {
+        margin: 0;
+        font-size: .8rem;
+        color: #6c757d;
+    }
+
+    .img-drop-zone:hover p,
+    .img-drop-zone.dragover p {
+        color: #0d6efd;
+    }
+
+    .img-preview-scroll {
+        max-height: 310px;
+        overflow-y: auto;
+        padding-right: 2px;
+    }
+
+    .img-preview-scroll::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .img-preview-scroll::-webkit-scrollbar-thumb {
+        background: #ced4da;
+        border-radius: 10px;
+    }
+
+    .img-preview-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
     .img-preview-item {
         position: relative;
         border-radius: 10px;
         overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0,0,0,.12);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
         animation: fadeInScale .25s ease;
     }
+
     @keyframes fadeInScale {
-        from { opacity:0; transform:scale(.85); }
-        to   { opacity:1; transform:scale(1); }
+        from {
+            opacity: 0;
+            transform: scale(.85);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
     }
-    .img-preview-item img { width:100%; height:100px; object-fit:cover; display:block; }
+
+    .img-preview-item img {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+        display: block;
+    }
+
     .img-preview-remove {
-        position: absolute; top:5px; right:5px;
-        width:24px; height:24px; border-radius:50%; border:none;
-        background: rgba(220,53,69,.9); color:#fff;
-        font-size:.7rem; display:flex; align-items:center; justify-content:center;
-        cursor:pointer; transition: transform .15s, background .15s; padding:0;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(220, 53, 69, .9);
+        color: #fff;
+        font-size: .7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: transform .15s, background .15s;
+        padding: 0;
     }
-    .img-preview-remove:hover { background:#c82333; transform:scale(1.15); }
+
+    .img-preview-remove:hover {
+        background: #c82333;
+        transform: scale(1.15);
+    }
+
     .img-preview-name {
-        font-size:.65rem; color:#6c757d; padding:3px 6px;
-        white-space:nowrap; overflow:hidden; text-overflow:ellipsis; background:#f8f9fa;
+        font-size: .65rem;
+        color: #6c757d;
+        padding: 3px 6px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        background: #f8f9fa;
     }
-    .img-panel-label { font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.5px; color:#6c757d; margin-bottom:6px; }
-    .img-count-badge { font-size:.72rem; padding:2px 8px; }
+
+    .img-panel-label {
+        font-size: .7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+        color: #6c757d;
+        margin-bottom: 6px;
+    }
+
+    .img-count-badge {
+        font-size: .72rem;
+        padding: 2px 8px;
+    }
 </style>
 {% endblock %}
 
@@ -169,8 +257,8 @@
                             <div class="row g-3">
                                 <div class="col-12">
                                     <label class="form-label fw-medium">Organization Name</label>
-                                    <input type="text" autocomplete="off" class="form-control"
-                                           name="organization_name" placeholder="e.g. MIT University">
+                                    <input type="text" autocomplete="off" class="form-control" name="organization_name"
+                                        placeholder="e.g. MIT University">
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="form-label fw-medium">Collaboration Type</label>
@@ -182,13 +270,13 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label class="form-label fw-medium">URL</label>
-                                    <input type="text" autocomplete="off" class="form-control"
-                                           name="url" placeholder="https://example.com">
+                                    <input type="text" autocomplete="off" class="form-control" name="url"
+                                        placeholder="https://example.com">
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label fw-medium">Description</label>
                                     <textarea class="form-control" name="description" rows="5"
-                                              placeholder="Write a brief description…"></textarea>
+                                        placeholder="Write a brief description…"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -213,7 +301,8 @@
                             <!-- Preview header -->
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="img-panel-label">Preview</span>
-                                <span class="badge bg-primary-subtle text-primary img-count-badge" id="colImgCount">0 image(s)</span>
+                                <span class="badge bg-primary-subtle text-primary img-count-badge" id="colImgCount">0
+                                    image(s)</span>
                             </div>
 
                             <!-- Scrollable preview grid -->
@@ -243,63 +332,63 @@
 
 <!-- Image Preview JS (Collaboration) -->
 <script>
-(function () {
-    'use strict';
-    let selectedFiles = [];
-    const fileInput   = document.getElementById('col-file-input');
-    const dropZone    = document.getElementById('colDropZone');
-    const previewGrid = document.getElementById('colPreviewGrid');
-    const countBadge  = document.getElementById('colImgCount');
-    const emptyHint   = document.getElementById('colEmptyHint');
+    (function () {
+        'use strict';
+        let selectedFiles = [];
+        const fileInput = document.getElementById('col-file-input');
+        const dropZone = document.getElementById('colDropZone');
+        const previewGrid = document.getElementById('colPreviewGrid');
+        const countBadge = document.getElementById('colImgCount');
+        const emptyHint = document.getElementById('colEmptyHint');
 
-    function syncFileInput() {
-        const dt = new DataTransfer();
-        selectedFiles.forEach(f => dt.items.add(f));
-        fileInput.files = dt.files;
-    }
-    function renderPreviews() {
-        previewGrid.innerHTML = '';
-        countBadge.textContent = `${selectedFiles.length} image(s)`;
-        emptyHint.style.display = selectedFiles.length === 0 ? 'block' : 'none';
-        selectedFiles.forEach((file, index) => {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const item = document.createElement('div');
-                item.className = 'img-preview-item';
-                item.innerHTML = `
+        function syncFileInput() {
+            const dt = new DataTransfer();
+            selectedFiles.forEach(f => dt.items.add(f));
+            fileInput.files = dt.files;
+        }
+        function renderPreviews() {
+            previewGrid.innerHTML = '';
+            countBadge.textContent = `${selectedFiles.length} image(s)`;
+            emptyHint.style.display = selectedFiles.length === 0 ? 'block' : 'none';
+            selectedFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const item = document.createElement('div');
+                    item.className = 'img-preview-item';
+                    item.innerHTML = `
                     <img src="${e.target.result}" alt="preview">
                     <div class="img-preview-name" title="${file.name}">${file.name}</div>
                     <button type="button" class="img-preview-remove" data-index="${index}" title="Remove">
                         <i class="ti ti-x"></i>
                     </button>`;
-                item.querySelector('.img-preview-remove').addEventListener('click', function () {
-                    removeFile(parseInt(this.dataset.index));
-                });
-                previewGrid.appendChild(item);
-            };
-            reader.readAsDataURL(file);
+                    item.querySelector('.img-preview-remove').addEventListener('click', function () {
+                        removeFile(parseInt(this.dataset.index));
+                    });
+                    previewGrid.appendChild(item);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        function addFiles(newFiles) {
+            // Collaboration logo: only keep the last picked file (single image)
+            selectedFiles = [Array.from(newFiles).pop()].filter(Boolean);
+            syncFileInput();
+            renderPreviews();
+        }
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            syncFileInput();
+            renderPreviews();
+        }
+        dropZone.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', function () { addFiles(this.files); this.value = ''; });
+        dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('dragover'); addFiles(e.dataTransfer.files); });
+        document.getElementById('collaborationModal').addEventListener('hidden.bs.modal', () => {
+            selectedFiles = []; fileInput.value = ''; renderPreviews();
         });
-    }
-    function addFiles(newFiles) {
-        // Collaboration logo: only keep the last picked file (single image)
-        selectedFiles = [Array.from(newFiles).pop()].filter(Boolean);
-        syncFileInput();
-        renderPreviews();
-    }
-    function removeFile(index) {
-        selectedFiles.splice(index, 1);
-        syncFileInput();
-        renderPreviews();
-    }
-    dropZone.addEventListener('click', () => fileInput.click());
-    fileInput.addEventListener('change', function () { addFiles(this.files); this.value = ''; });
-    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
-    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
-    dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('dragover'); addFiles(e.dataTransfer.files); });
-    document.getElementById('collaborationModal').addEventListener('hidden.bs.modal', () => {
-        selectedFiles = []; fileInput.value = ''; renderPreviews();
-    });
-})();
+    })();
 </script>
 
 <!-- UPDATE MODAL -->
@@ -342,7 +431,7 @@
                         <div class="mb-3 col-lg-6">
                             <label class="form-label">URL :</label>
                             <input type="text" autocomplete="off" class="form-control" name="url">
-                        </div>                        
+                        </div>
 
                         <div class="mb-3">
                             <label class="form-label">Description :</label>

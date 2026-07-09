@@ -13,11 +13,11 @@ export const dashboardApi = {
     },
     async create(data) {
         console.log("this is data : ", data);
-        // const res = await api.post("/dashboard/create", {
-        //     attr_key: data.attr_key,
-        //     value: data.value
-        // });
-        // return res.data;
+        const res = await api.post("/dashboard/create", {
+            attr_key: data.attr_key,
+            value: data.value
+        });
+        return res.data;
     },
     async update(data) {
         const res = await api.put("/dashboard/update", {

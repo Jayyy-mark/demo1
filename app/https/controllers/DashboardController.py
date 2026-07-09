@@ -56,7 +56,21 @@ class DashboardController(BaseController):
         return admission
 
     def addRectorMessage(self):
-        pass
+        try:
+            data = request.get_json()
+            print("this is data : ", data)
+            Utils.create_or_update(
+                Dashboard,
+                lookup_fields={"attr_key": "Rector's Message"},
+                update_fields={"value": data["value"]},
+            )
+
+            return ResponseHelper.success(
+                "Rector's Message Added Successfully!",
+            )
+
+        except Exception as e:
+            return ResponseHelper.error(str(e), 400)
 
     def addAdmissionLists(self):
 

@@ -39,29 +39,43 @@
     </div>
 </section>
 
-<section class="py-8 border-t border-slate-100 bg-slate-50/50">
+<!-- Prev / Next Navigation -->
+<section class="py-10 border-t border-slate-200 bg-gradient-to-b from-white to-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-row justify-between items-center gap-2 w-full">
+
+        <!-- Divider label -->
+        <div class="flex items-center gap-4 mb-6">
+            <div class="flex-1 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] shrink-0">Browse Activities</span>
+            <div class="flex-1 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
+        </div>
+
+        <div class="flex flex-row justify-between items-stretch gap-3 w-full">
 
             <!-- Previous Button -->
-            <a href="#" class="group flex items-center gap-2 sm:gap-4 p-2 rounded-xl hover:bg-slate-200/50 transition-all duration-300 max-w-[48%]">
-                <div class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-slate-200 bg-white group-hover:border-blue-500 transition-colors shrink-0">
-                    <i class="fa-solid fa-arrow-left text-sm sm:text-base text-blue-500 group-hover:text-blue-600 transition-transform group-hover:-translate-x-1"></i>
+            <a id="btn_prevActivity" href="#"
+               class="group flex items-center gap-3 sm:gap-5 p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 max-w-[48%] w-full hidden">
+                <div class="flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 rounded-xl bg-blue-50 border border-blue-100 group-hover:bg-blue-500 group-hover:border-blue-500 transition-all duration-300 shrink-0">
+                    <i class="fa-solid fa-arrow-left text-base sm:text-lg text-blue-500 group-hover:text-white transition-all duration-300 group-hover:-translate-x-0.5"></i>
                 </div>
                 <div class="min-w-0">
-                    <span class="text-xs sm:text-sm font-black text-slate-400 uppercase tracking-widest block mb-0.5">Previous</span>
-                    <h5 class="text-base sm:text-xl font-bold text-slate-700 group-hover:text-blue-600 transition-colors truncate">Tech Fest Winner List</h5>
+                    <span class="text-[10px] sm:text-xs font-extrabold text-blue-400 uppercase tracking-[0.18em] block mb-1">← Previous</span>
+                    <h5 id="prev_activity_name" class="text-sm sm:text-base font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">Loading...</h5>
                 </div>
             </a>
 
+            <!-- Spacer when only one side is visible -->
+            <div id="nav_spacer" class="flex-1 hidden"></div>
+
             <!-- Next Button -->
-            <a href="#" class="group flex items-center justify-end gap-2 sm:gap-4 p-2 rounded-xl hover:bg-slate-200/50 transition-all duration-300 max-w-[48%] text-right">
+            <a id="btn_nextActivity" href="#"
+               class="group flex items-center justify-end gap-3 sm:gap-5 p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 max-w-[48%] w-full text-right hidden">
                 <div class="min-w-0">
-                    <span class="text-xs sm:text-sm font-black text-slate-400 uppercase tracking-widest block mb-0.5">Next</span>
-                    <h5 class="text-base sm:text-xl font-bold text-slate-700 group-hover:text-blue-600 transition-colors truncate">New Semester Notice</h5>
+                    <span class="text-[10px] sm:text-xs font-extrabold text-blue-400 uppercase tracking-[0.18em] block mb-1">Next →</span>
+                    <h5 id="next_activity_name" class="text-sm sm:text-base font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">Loading...</h5>
                 </div>
-                <div class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-slate-200 bg-white group-hover:border-blue-500 transition-colors shrink-0">
-                    <i class="fa-solid fa-arrow-right text-sm sm:text-base text-blue-500 group-hover:text-blue-600 transition-transform group-hover:translate-x-1"></i>
+                <div class="flex items-center justify-center w-11 h-11 sm:w-14 sm:h-14 rounded-xl bg-blue-50 border border-blue-100 group-hover:bg-blue-500 group-hover:border-blue-500 transition-all duration-300 shrink-0">
+                    <i class="fa-solid fa-arrow-right text-base sm:text-lg text-blue-500 group-hover:text-white transition-all duration-300 group-hover:translate-x-0.5"></i>
                 </div>
             </a>
 
@@ -69,7 +83,7 @@
     </div>
 </section>
 
-```
+
 
 
 {% endblock %}

@@ -244,8 +244,10 @@
             <div class="modal-body p-0">
                 <form id="dataForm-collaboration" enctype="multipart/form-data">
                     <input type="hidden" name="id">
-                    <!-- Hidden real file input -->
+                    <!-- Named input that holds the file for form submission -->
                     <input type="file" name="file" id="col-file-input" accept="image/*" style="display:none">
+                    <!-- Separate picker input (no name) used only to open the file dialog -->
+                    <input type="file" id="colFilePicker" accept="image/*" style="display:none">
 
                     <div class="d-flex">
 
@@ -335,7 +337,10 @@
     (function () {
         'use strict';
         let selectedFiles = [];
+        // Named input – holds the final FileList submitted with the form.
         const fileInput = document.getElementById('col-file-input');
+        // Picker input – only used to open the OS file dialog (no name → not submitted).
+        const filePicker = document.getElementById('colFilePicker');
         const dropZone = document.getElementById('colDropZone');
         const previewGrid = document.getElementById('colPreviewGrid');
         const countBadge = document.getElementById('colImgCount');
@@ -380,13 +385,22 @@
             syncFileInput();
             renderPreviews();
         }
-        dropZone.addEventListener('click', () => fileInput.click());
-        fileInput.addEventListener('change', function () { addFiles(this.files); this.value = ''; });
+        // Drop-zone click opens the picker (not the named input)
+        dropZone.addEventListener('click', () => filePicker.click());
+        // Picker change: accumulate file, then reset picker only
+        filePicker.addEventListener('change', function () {
+            addFiles(this.files);
+            // Resetting picker does NOT affect fileInput's files
+            this.value = '';
+        });
         dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
         dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
         dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('dragover'); addFiles(e.dataTransfer.files); });
         document.getElementById('collaborationModal').addEventListener('hidden.bs.modal', () => {
-            selectedFiles = []; fileInput.value = ''; renderPreviews();
+            selectedFiles = [];
+            syncFileInput(); // clears fileInput.files
+            filePicker.value = '';
+            renderPreviews();
         });
     })();
 </script>

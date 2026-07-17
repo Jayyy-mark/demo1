@@ -44,4 +44,38 @@ export const activityApi = {
         const res = await api.get("/activity/all");
         return res.data;
     },
-}
+
+    // ─── Group-aware methods ──────────────────────────────────────
+    /**
+     * Update all rows sharing the same activity_name.
+     * @param {object} fields       - { original_name, activity_name, category, activity_type, description, date }
+     * @param {number[]} idsToDelete - IDs of image-rows to permanently delete
+     * @param {File[]} newFiles      - newly selected image files to append
+     */
+    async updateByName(fields, idsToDelete = [], newFiles = []) {
+        const form = new FormData();
+        form.append("original_name",  fields.original_name);
+        form.append("activity_name",  fields.activity_name);
+        form.append("activity_type",  fields.activity_type);
+        form.append("category",       fields.category);
+        form.append("description",    fields.description);
+        form.append("date",           fields.date);
+        form.append("ids_to_delete",  JSON.stringify(idsToDelete));
+        for (const f of newFiles) {
+            form.append("new_files", f);
+        }
+        const res = await api.put("/activity/update-by-name", form);
+        return res.data;
+    },
+
+    /**
+     * Delete ALL rows for a given activity_name.
+     * @param {string} activityName
+     */
+    async deleteByName(activityName) {
+        const res = await api.delete("/activity/delete-by-name", {
+            data: { activity_name: activityName }
+        });
+        return res.data;
+    },
+}

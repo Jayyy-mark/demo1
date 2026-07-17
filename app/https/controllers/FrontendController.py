@@ -21,6 +21,7 @@ from flask import jsonify, request
 from app.models.CountModel import Count
 from app.models.DashboardModel import Dashboard
 
+
 class FrontendController:
 
     @staticmethod
@@ -32,18 +33,24 @@ class FrontendController:
             "total_staff": counts.total_staff if counts else 0,
             "total_student": counts.total_student if counts else 0,
             "graduated_student": counts.graduated_student if counts else 0,
-            "current_student": counts.current_student if counts else 0
+            "current_student": counts.current_student if counts else 0,
         }
 
-        return jsonify({
-            "counts": count_data,
-            "rector_message": rector_msg.value if rector_msg else "No message available."
-        })
-    
+        return jsonify(
+            {
+                "counts": count_data,
+                "rector_message": (
+                    rector_msg.value if rector_msg else "No message available."
+                ),
+            }
+        )
+
     @staticmethod
     def allActivities():
 
         activities = Activity.query.all()
+
+        activities.sort(key=lambda x: x.date, reverse=True)
 
         grouped_activities = {}
 
@@ -61,26 +68,24 @@ class FrontendController:
                     "category": activity.category,
                     "date": str(activity.date),
                     "description": activity.description,
-                    "images": []
+                    "images": [],
                 }
 
             if activity.filepath:
-                grouped_activities[key]["images"].append({
-                    "filename": activity.filename,
-                    "filepath": activity.filepath.replace("\\", "/")
-                })
+                grouped_activities[key]["images"].append(
+                    {
+                        "filename": activity.filename,
+                        "filepath": activity.filepath.replace("\\", "/"),
+                    }
+                )
 
-        return jsonify({
-            "activities": list(grouped_activities.values())
-        })
-    
-    @staticmethod 
+        return jsonify({"activities": list(grouped_activities.values())})
+
+    @staticmethod
     def allResearches():
         researches = Research.query.all()
-        return jsonify({
-            "researches" : ResearchSchema().dump(researches, many=True)
-        })
-    
+        return jsonify({"researches": ResearchSchema().dump(researches, many=True)})
+
     @staticmethod
     def allLaboratories():
 
@@ -101,19 +106,19 @@ class FrontendController:
                     "category": laboratory.category,
                     "date": str(laboratory.date),
                     "description": laboratory.description,
-                    "images": []
+                    "images": [],
                 }
 
             # append image
-            grouped_laboratories[key]["images"].append({
-                "filename": laboratory.filename,
-                "filepath": laboratory.filepath.replace("\\", "/")
-            })
+            grouped_laboratories[key]["images"].append(
+                {
+                    "filename": laboratory.filename,
+                    "filepath": laboratory.filepath.replace("\\", "/"),
+                }
+            )
 
-        return jsonify({
-            "laboratories": list(grouped_laboratories.values())
-        })
-    
+        return jsonify({"laboratories": list(grouped_laboratories.values())})
+
     @staticmethod
     def lastedActivities():
 
@@ -143,28 +148,26 @@ class FrontendController:
                     "category": activity.category,
                     "date": str(activity.date),
                     "description": activity.description,
-                    "images": []
+                    "images": [],
                 }
 
                 limited_count += 1
 
             if activity.filepath:
-                grouped_activities[key]["images"].append({
-                    "filename": activity.filename,
-                    "filepath": activity.filepath.replace("\\", "/")
-                })
+                grouped_activities[key]["images"].append(
+                    {
+                        "filename": activity.filename,
+                        "filepath": activity.filepath.replace("\\", "/"),
+                    }
+                )
 
-        return jsonify({
-            "activities": list(grouped_activities.values())
-        })
+        return jsonify({"activities": list(grouped_activities.values())})
 
     @staticmethod
     def lastedResearches():
         researches = Research.query.order_by(Research.date.desc()).limit(3).all()
 
-        return jsonify({
-            "researches" : ResearchSchema().dump(researches, many=True)
-        })
+        return jsonify({"researches": ResearchSchema().dump(researches, many=True)})
 
     @staticmethod
     def getActivityById():
@@ -172,14 +175,16 @@ class FrontendController:
         id = request.args.get("id", "").strip()
 
         if not id:
-            return jsonify({
-                "activity": [],
-                "message": "Activity name is required."
-            }), 400
+            return (
+                jsonify({"activity": [], "message": "Activity name is required."}),
+                400,
+            )
 
         activity = Activity.query.get(id)
 
-        activities = Activity.query.filter(Activity.activity_name == activity.activity_name).all()
+        activities = Activity.query.filter(
+            Activity.activity_name == activity.activity_name
+        ).all()
 
         grouped_activities = {}
 
@@ -197,18 +202,18 @@ class FrontendController:
                     "category": activity.category,
                     "date": str(activity.date),
                     "description": activity.description,
-                    "images": []
+                    "images": [],
                 }
 
             if activity.filepath:
-                grouped_activities[key]["images"].append({
-                    "filename": activity.filename,
-                    "filepath": activity.filepath.replace("\\", "/")
-                })
+                grouped_activities[key]["images"].append(
+                    {
+                        "filename": activity.filename,
+                        "filepath": activity.filepath.replace("\\", "/"),
+                    }
+                )
 
-        return jsonify({
-            "activity": list(grouped_activities.values())
-        })
+        return jsonify({"activity": list(grouped_activities.values())})
 
     @staticmethod
     def getLaboratoryById():
@@ -216,14 +221,16 @@ class FrontendController:
         id = request.args.get("id", "").strip()
 
         if not id:
-            return jsonify({
-                "laboratory": [],
-                "message": "laboratory name is required."
-            }), 400
+            return (
+                jsonify({"laboratory": [], "message": "laboratory name is required."}),
+                400,
+            )
 
         laboratory = Laboratory.query.get(id)
 
-        activities = Laboratory.query.filter(Laboratory.laboratory_name == laboratory.laboratory_name).all()
+        activities = Laboratory.query.filter(
+            Laboratory.laboratory_name == laboratory.laboratory_name
+        ).all()
 
         grouped_laboratories = {}
 
@@ -240,35 +247,33 @@ class FrontendController:
                     "category": laboratory.category,
                     "date": str(laboratory.date),
                     "description": laboratory.description,
-                    "images": []
+                    "images": [],
                 }
 
             if laboratory.filepath:
-                grouped_laboratories[key]["images"].append({
-                    "filename": laboratory.filename,
-                    "filepath": laboratory.filepath.replace("\\", "/")
-                })
+                grouped_laboratories[key]["images"].append(
+                    {
+                        "filename": laboratory.filename,
+                        "filepath": laboratory.filepath.replace("\\", "/"),
+                    }
+                )
 
-        return jsonify({
-            "laboratory": list(grouped_laboratories.values())
-        })
+        return jsonify({"laboratory": list(grouped_laboratories.values())})
 
     @staticmethod
     def getCourseByDepartment():
         department_name = request.args.get("department_name")
-        subjects = Subject.query.options(
-            selectinload(Subject.department)
-        ).join(Subject.department).filter(
-            Department.department_name == department_name
-        ).all()
+        subjects = (
+            Subject.query.options(selectinload(Subject.department))
+            .join(Subject.department)
+            .filter(Department.department_name == department_name)
+            .all()
+        )
         data = SubjectSchema(many=True).dump(subjects)
 
         result = {
             "department": department_name,
-            "semesters": {
-                "1st Sem": {"subjects": []},
-                "2nd Sem": {"subjects": []}
-            }
+            "semesters": {"1st Sem": {"subjects": []}, "2nd Sem": {"subjects": []}},
         }
 
         for subject in data:
@@ -283,19 +288,18 @@ class FrontendController:
                 else:
                     continue
 
-                result["semesters"][sem_group]["subjects"].append({
-                    "id": subject["id"],
-                    "subject_code": subject["subject_code"],
-                    "subject_name": subject["subject_name"]
-                })
+                result["semesters"][sem_group]["subjects"].append(
+                    {
+                        "id": subject["id"],
+                        "subject_code": subject["subject_code"],
+                        "subject_name": subject["subject_name"],
+                    }
+                )
 
-        return jsonify({
-            "subjects": result
-        })
+        return jsonify({"subjects": result})
 
     @staticmethod
     def getAcademicCalendar():
-
 
         def _status_for_dates(start_date, end_date):
 
@@ -308,8 +312,7 @@ class FrontendController:
                 return "On Progress"
 
             return "Pending"
-        
-        
+
         data = AcademicCalendar.query.order_by(AcademicCalendar.start_date.desc()).all()
 
         if not data:
@@ -320,7 +323,7 @@ class FrontendController:
         for event in calendar_events:
             event["status"] = _status_for_dates(
                 datetime.strptime(event["start_date"], "%Y-%m-%d").date(),
-                datetime.strptime(event["end_date"], "%Y-%m-%d").date()
+                datetime.strptime(event["end_date"], "%Y-%m-%d").date(),
             )
 
         return ResponseHelper.success("Fetched successfully", calendar_events)
@@ -330,10 +333,7 @@ class FrontendController:
         courses = Course.query.all()
         data = CourseSchema(many=True).dump(courses)
 
-        grouped = defaultdict(lambda: {
-            "year": None,
-            "semesters": {}
-        })
+        grouped = defaultdict(lambda: {"year": None, "semesters": {}})
 
         for item in data:
             semester = item["semester"]
@@ -350,7 +350,7 @@ class FrontendController:
             if semester_id not in grouped[year_id]["semesters"]:
                 grouped[year_id]["semesters"][semester_id] = {
                     "semester": semester,
-                    "courses": []
+                    "courses": [],
                 }
 
             # add course
@@ -362,53 +362,53 @@ class FrontendController:
             year_data["semesters"] = list(year_data["semesters"].values())
             result.append(year_data)
 
-        return jsonify({
-            "subjects": result
-        })
-    
+        return jsonify({"subjects": result})
+
     @staticmethod
     def getCompanyCollaborations():
-        
+
         queried_data = Collaboration.query.filter_by(collaboration_type="company").all()
 
-        return jsonify({
-            "collaborations" : CollaborationSchema().dump(queried_data, many=True)
-        })
-    
+        return jsonify(
+            {"collaborations": CollaborationSchema().dump(queried_data, many=True)}
+        )
+
     @staticmethod
     def getCollaborations():
-        
+
         queried_data = Collaboration.query.all()
 
-        return jsonify({
-            "collaborations" : CollaborationSchema().dump(queried_data, many=True)
-        })
+        return jsonify(
+            {"collaborations": CollaborationSchema().dump(queried_data, many=True)}
+        )
 
     @staticmethod
     def getUniversityCollaborations():
-        
-        queried_data = Collaboration.query.filter_by(collaboration_type="university").all()
 
-        return jsonify({
-            "collaborations" : CollaborationSchema().dump(queried_data, many=True)
-        })
+        queried_data = Collaboration.query.filter_by(
+            collaboration_type="university"
+        ).all()
+
+        return jsonify(
+            {"collaborations": CollaborationSchema().dump(queried_data, many=True)}
+        )
 
     @staticmethod
     def askChatbot():
         from app.helpers.bot_services import ask
+
         message = request.json.get("message")
 
         if not message:
-            return jsonify({
-                "response": "Message is required."
-            }), 400
+            return jsonify({"response": "Message is required."}), 400
 
         try:
             response = ask(message)
-            return jsonify({
-                "response": response
-            })
+            return jsonify({"response": response})
         except Exception as e:
-            return jsonify({
-                "response": "An error occurred while processing your request."
-            }), 500
+            return (
+                jsonify(
+                    {"response": "An error occurred while processing your request."}
+                ),
+                500,
+            )

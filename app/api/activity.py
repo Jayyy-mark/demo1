@@ -23,3 +23,14 @@ def updateActivity():
 @jwt_required()
 def deleteActivity():
     return ActivityController().delete()
+
+# ─── Group-aware endpoints ────────────────────────────────────────
+@activity_api.route("/activity/update-by-name", methods=['PUT'])
+@jwt_required()
+def updateActivityByName():
+    return ActivityController().update_by_name()
+
+@activity_api.route("/activity/delete-by-name", methods=['DELETE'])
+@jwt_required()
+def deleteActivityByName():
+    return ActivityController().delete_by_name()

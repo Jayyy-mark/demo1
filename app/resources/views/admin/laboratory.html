@@ -72,6 +72,42 @@
     }
     .img-panel-label { font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.5px; color:#6c757d; margin-bottom:6px; }
     .img-count-badge { font-size:.72rem; padding:2px 8px; }
+
+    /* ── Delete overlay on existing image cards (update modal) ── */
+    .img-delete-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(220, 53, 69, 0.82);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        border-radius: 10px;
+        transition: opacity .2s;
+    }
+    .img-undo-btn {
+        background: rgba(255,255,255,0.22);
+        border: 1px solid rgba(255,255,255,0.55);
+        color: #fff;
+        border-radius: 20px;
+        font-size: .68rem;
+        padding: 2px 10px;
+        cursor: pointer;
+        transition: background .15s, transform .15s;
+        line-height: 1.6;
+    }
+    .img-undo-btn:hover {
+        background: rgba(255,255,255,0.38);
+        transform: scale(1.06);
+    }
+    /* ── Custom wider update modal ── */
+    #laboratoryModal-update .modal-dialog {
+        max-width: min(92vw, 1380px);
+    }
+    #laboratoryModal-update .modal-body .img-preview-item img {
+        height: 120px;
+    }
 </style>
 {% endblock %}
 
@@ -127,7 +163,7 @@
                                     <th class="text-white text-start">Laboratory Name</th>
                                     <th class="text-white text-start">Category</th>
                                     <th class="text-white text-start">Description</th>
-                                    <th class="text-white text-start">File</th>
+                                    <th class="text-white text-start">Photo</th>
                                     <th class="text-white text-start">Year</th>
                                     <th class="text-white text-start ps-0 rounded-end">Actions</th>
                                 </tr>
@@ -163,8 +199,10 @@
             <!-- Body -->
             <div class="modal-body p-0">
                 <form id="dataForm" enctype="multipart/form-data">
-                    <!-- Hidden real file input -->
+                    <!-- Named input that holds the accumulated FileList for form submission -->
                     <input type="file" name="file" id="lab-file-input" multiple accept="image/*" style="display:none">
+                    <!-- Separate picker input (no name) used only to open the file dialog -->
+                    <input type="file" id="labFilePicker" multiple accept="image/*" style="display:none">
 
                     <div class="d-flex">
 
@@ -249,7 +287,10 @@
 (function () {
     'use strict';
     let selectedFiles = [];
+    // Named input – holds the final FileList submitted with the form.
     const fileInput   = document.getElementById('lab-file-input');
+    // Picker input – only used to open the OS file dialog (no name → not submitted).
+    const filePicker  = document.getElementById('labFilePicker');
     const dropZone    = document.getElementById('labDropZone');
     const previewGrid = document.getElementById('labPreviewGrid');
     const countBadge  = document.getElementById('labImgCount');
@@ -296,72 +337,134 @@
         syncFileInput();
         renderPreviews();
     }
-    dropZone.addEventListener('click', () => fileInput.click());
-    fileInput.addEventListener('change', function () { addFiles(this.files); this.value = ''; });
+    // Drop-zone click opens the picker (not the named input)
+    dropZone.addEventListener('click', () => filePicker.click());
+    // Picker change: accumulate files, then reset picker only
+    filePicker.addEventListener('change', function () {
+        addFiles(this.files);
+        // Resetting picker does NOT affect fileInput's files
+        this.value = '';
+    });
     dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
     dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
     dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('dragover'); addFiles(e.dataTransfer.files); });
     document.getElementById('laboratoryModal').addEventListener('hidden.bs.modal', () => {
-        selectedFiles = []; fileInput.value = ''; renderPreviews();
+        selectedFiles = [];
+        syncFileInput(); // clears fileInput.files
+        filePicker.value = '';
+        renderPreviews();
     });
 })();
 </script>
 
 <!-- Update Modal -->
 <div class="modal fade" id="laboratoryModal-update" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content border-0 shadow-lg rounded-4">
 
             <!-- Header -->
-            <div class="modal-header pb-12 bg-primary border-bottom border-info border-0">
-                <h5 class="modal-title text-white">Update laboratory:</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <div class="modal-header bg-primary border-0 rounded-top-4">
+                <h5 class="modal-title text-white">
+                    <i class="ti ti-flask me-2"></i>Update Laboratory
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
 
             <!-- Body -->
-            <div class="modal-body pt-2">
+            <div class="modal-body p-0">
                 <form id="dataForm-update" enctype="multipart/form-data">
-                    <div class="row g-4">
-                        <div class="mb-3 col-lg-6">
-                            <label for="" class="form-label">Laboratory ID:</label>
-                            <input type="text" name="id" id="" class="form-control" disabled>
+                    <!-- Hidden pickers -->
+                    <input type="file" id="labUpdateFilePicker" multiple accept="image/*" style="display:none">
+                    <input type="hidden" name="original_name" id="lab_update_original_name">
+
+                    <div class="d-flex" style="gap:0">
+
+                        <!-- ════ LEFT: Form Fields ════ -->
+                        <div class="flex-fill p-4" style="min-width:0">
+                            <p class="text-muted small fw-semibold text-uppercase mb-3" style="letter-spacing:.5px">
+                                <i class="ti ti-forms me-1"></i>Laboratory Details
+                            </p>
+
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label for="lab_update_name" class="form-label fw-medium">Laboratory Name</label>
+                                    <input type="text" name="laboratory_name" id="lab_update_name" class="form-control">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="lab_update_category" class="form-label fw-medium">Category</label>
+                                    <input type="text" name="category_update" id="lab_update_category" class="form-control">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="lab_update_date" class="form-label fw-medium">Date</label>
+                                    <input type="date" name="date_update" id="lab_update_date" class="form-control">
+                                </div>
+                                <div class="col-12">
+                                    <label for="lab_update_description" class="form-label fw-medium">Description</label>
+                                    <textarea name="description_update" id="lab_update_description" class="form-control" rows="5"
+                                              placeholder="Write a brief description…"></textarea>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3 col-lg-6">
-                            <label for="file" class="form-label">Upload Photo :</label>
-                            <input type="file" name="file" id="file" class="form-control" multiple>
+
+                        <!-- Vertical divider -->
+                        <div class="add-modal-divider"></div>
+
+                        <!-- ════ RIGHT: Existing images + new uploads ════ -->
+                        <div class="p-4 d-flex flex-column" style="width:340px;min-width:300px;flex-shrink:0">
+
+                            <!-- Existing images -->
+                            <p class="text-muted small fw-semibold text-uppercase mb-2" style="letter-spacing:.5px">
+                                <i class="ti ti-photo me-1"></i>Current Photos
+                            </p>
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="img-panel-label">Preview</span>
+                                <span class="badge bg-primary-subtle text-primary img-count-badge" id="updateImgCountBadge">0 image(s)</span>
+                            </div>
+                            <div class="img-preview-scroll mb-3" style="max-height:200px;">
+                                <div class="img-preview-grid" id="updateImgPreviewGrid"></div>
+                                <div id="updateImgEmptyHint" class="text-center text-muted py-3" style="font-size:.8rem;display:none">
+                                    <i class="ti ti-photo-off d-block mb-1" style="font-size:1.6rem"></i>
+                                    No existing photos
+                                </div>
+                            </div>
+
+                            <hr class="my-2">
+
+                            <!-- Add new images -->
+                            <p class="text-muted small fw-semibold text-uppercase mb-2" style="letter-spacing:.5px">
+                                <i class="ti ti-cloud-upload me-1"></i>Add New Photos
+                            </p>
+                            <div class="img-drop-zone mb-2" id="labUpdateImgDropZone">
+                                <i class="ti ti-cloud-upload"></i>
+                                <p class="fw-semibold mb-0" style="font-size:.85rem">Drag &amp; drop images here</p>
+                                <p>or <span style="color:#0d6efd;text-decoration:underline;cursor:pointer">browse files</span></p>
+                                <p class="text-muted" style="font-size:.72rem">PNG, JPG, WEBP · Multiple allowed</p>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="img-panel-label">New Preview</span>
+                                <span class="badge bg-success-subtle text-success img-count-badge" id="labUpdateNewImgCountBadge">0 image(s)</span>
+                            </div>
+                            <div class="img-preview-scroll flex-fill">
+                                <div class="img-preview-grid" id="labUpdateNewImgPreviewGrid"></div>
+                            </div>
                         </div>
-                        <div class="mb-3 col-lg-6">
-                            <label for="laboratory_name" class="form-label">Laboratory Name :</label>
-                            <input type="text" name="laboratory_name" id="laboratory_name" class="form-control">
-                        </div>
-                        <div class="mb-3 col-lg-6">
-                            <label for="category" class="form-label">Category :</label>
-                            <input type="text" name="category" id="category" class="form-control">
-                        </div>
-                        <div class="mb-3 col-lg-6">
-                            <label for="date" class="form-label">Date :</label>
-                            <input type="text" name="date" id="date" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description :</label>
-                            <textarea name="description" rows="5" id="description" class="form-control"></textarea>
-                        </div>
-                    </div>
+                        <!-- END right panel -->
+
+                    </div><!-- END d-flex -->
                 </form>
             </div>
 
             <!-- Footer -->
-            <div class="modal-footer border-0 pt-0">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">
-                    Cancel
-                </button>
-                <button type="submit" id="update_btn" class="btn btn-primary">
-                    <i class="ti ti-device-floppy"></i> Save
+            <div class="modal-footer border-top pt-3">
+                <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" id="update_btn" class="btn btn-primary px-4">
+                    <i class="ti ti-device-floppy me-1"></i>Save Changes
                 </button>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Delete Confirmation Modal -->
 <div class="modal fade confirm-modal" id="delete-modal" tabindex="-1" aria-hidden="true">

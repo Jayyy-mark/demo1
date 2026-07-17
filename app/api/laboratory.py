@@ -23,3 +23,14 @@ def updateLaboratory():
 @jwt_required()
 def deleteLaboratory():
     return LaboratoryController().delete()
+
+# ─── Group-aware endpoints ────────────────────────────────────────
+@laboratory_api.route("/laboratory/update-by-name", methods=['PUT'])
+@jwt_required()
+def updateLaboratoryByName():
+    return LaboratoryController().update_by_name()
+
+@laboratory_api.route("/laboratory/delete-by-name", methods=['DELETE'])
+@jwt_required()
+def deleteLaboratoryByName():
+    return LaboratoryController().delete_by_name()

@@ -7,6 +7,10 @@ frontend_api = Blueprint("frontend_api", __name__, url_prefix="/api/frontend")
 def getHomeStats():
     return FrontendController.getHomeStats()
 
+@frontend_api.route("/topbar/info", methods=['GET'])
+def getTopbarInfo():
+    return FrontendController.getTopbarInfo()
+
 @frontend_api.route("/activity/all", methods=['GET'])
 def allActivities():
     return FrontendController.allActivities()

@@ -77,3 +77,10 @@ def updateCounts():
 
     db.session.commit()
     return jsonify({"message": "Statistics updated successfully"})
+
+
+@dashboard_api.route("/dashboard/topbar/update", methods=["PUT"])
+@jwt_required()
+def updateTopbarInfo():
+    return DashboardController().addTopbarInfo()
+

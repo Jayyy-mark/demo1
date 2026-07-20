@@ -20,6 +20,18 @@ export const dashboardUI = {
                 );
             }
 
+            if (element.attr_key == "School Open Date") {
+                $("#topbar-card-school-open-date").val(element.value);
+            }
+
+            if (element.attr_key == "Phone Number") {
+                $("#topbar-card-phone").val(element.value);
+            }
+
+            if (element.attr_key == "Email") {
+                $("#topbar-card-email").val(element.value);
+            }
+
         });
     },
 

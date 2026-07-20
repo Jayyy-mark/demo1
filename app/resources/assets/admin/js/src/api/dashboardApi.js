@@ -63,5 +63,13 @@ export const dashboardApi = {
 
         return res.data;
     },
+    async updateTopbarInfo(data) {
+        const res = await api.put("/dashboard/topbar/update", {
+            school_open_date: data.school_open_date,
+            phone_number: data.phone_number,
+            email: data.email,
+        });
+        return res.data;
+    },
 
-}
+}

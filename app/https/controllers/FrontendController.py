@@ -46,6 +46,18 @@ class FrontendController:
         )
 
     @staticmethod
+    def getTopbarInfo():
+        school_open_date = Dashboard.query.filter_by(attr_key="School Open Date").first()
+        phone_number = Dashboard.query.filter_by(attr_key="Phone Number").first()
+        email = Dashboard.query.filter_by(attr_key="Email").first()
+
+        return jsonify({
+            "school_open_date": school_open_date.value if school_open_date else "",
+            "phone_number": phone_number.value if phone_number else "",
+            "email": email.value if email else "",
+        })
+
+    @staticmethod
     def allActivities():
 
         activities = Activity.query.all()

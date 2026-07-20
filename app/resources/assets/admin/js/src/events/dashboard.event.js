@@ -72,6 +72,32 @@ export const dashboardEvent = {
             }
         });
 
+        $("#save-topbar-info-btn").on("click", async function () {
+            const form = $("#topbar-info-form");
+            const data = {
+                school_open_date: form.find("input[name='school_open_date']").val().trim(),
+                phone_number: form.find("input[name='phone_number']").val().trim(),
+                email: form.find("input[name='email']").val().trim(),
+            };
+
+            try {
+                const response = await dashboardApi.updateTopbarInfo(data);
+                await toast.success(response.message || "Topbar info updated successfully");
+                Modal.hide("#topbarInfoModal");
+                Utils.refresh();
+            } catch (error) {
+                console.error("Error updating topbar info:", error);
+                toast.error(error.response?.data?.message || "Failed to update topbar info.");
+            }
+        });
+
+        // Pre-populate modal form from display card values when modal opens
+        document.getElementById("topbarInfoModal")?.addEventListener("show.bs.modal", function () {
+            $("input[name='school_open_date']").val($("#topbar-card-school-open-date").val());
+            $("input[name='phone_number']").val($("#topbar-card-phone").val());
+            $("input[name='email']").val($("#topbar-card-email").val());
+        });
+
     },
     async loadData() {
         try {

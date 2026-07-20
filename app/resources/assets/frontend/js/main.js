@@ -1,4 +1,28 @@
 /*<!--========================
+    TOPBAR DYNAMIC DATA
+=========================-->*/
+
+(function loadTopbarInfo() {
+    fetch('/api/frontend/topbar/info')
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+            if (data.school_open_date) {
+                var el = document.getElementById('topbar-school-open-date');
+                if (el) el.textContent = 'ကျောင်းဖွင့်ရက် ' + data.school_open_date;
+            }
+            if (data.phone_number) {
+                var el = document.getElementById('topbar-phone');
+                if (el) el.textContent = data.phone_number;
+            }
+            if (data.email) {
+                var el = document.getElementById('topbar-email');
+                if (el) el.textContent = data.email;
+            }
+        })
+        .catch(function () { /* keep static defaults on error */ });
+})();
+
+/*<!--========================
     MOBLIE MENU SCRIPTS 
 =========================-->*/
 

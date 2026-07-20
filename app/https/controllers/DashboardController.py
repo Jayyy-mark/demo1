@@ -128,6 +128,34 @@ class DashboardController(BaseController):
         except Exception as e:
             return ResponseHelper.error(str(e), 400)
 
+    def addTopbarInfo(self):
+        try:
+            data = request.get_json()
+            school_open_date = data.get("school_open_date", "")
+            phone_number = data.get("phone_number", "")
+            email = data.get("email", "")
+
+            Utils.create_or_update(
+                Dashboard,
+                lookup_fields={"attr_key": "School Open Date"},
+                update_fields={"value": school_open_date},
+            )
+            Utils.create_or_update(
+                Dashboard,
+                lookup_fields={"attr_key": "Phone Number"},
+                update_fields={"value": phone_number},
+            )
+            Utils.create_or_update(
+                Dashboard,
+                lookup_fields={"attr_key": "Email"},
+                update_fields={"value": email},
+            )
+
+            return ResponseHelper.success("Topbar Info Updated Successfully!")
+
+        except Exception as e:
+            return ResponseHelper.error(str(e), 400)
+
     def deleteAdmissionLists(self):
 
         id = request.json.get("id")

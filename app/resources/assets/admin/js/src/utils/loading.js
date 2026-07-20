@@ -25,11 +25,12 @@ export function stopLoading() {
     }
 }
 
-export function isPageLoaded(){
+export function isPageLoaded() {
 
     let pageLoaded = false;
 
     window.addEventListener("load", () => {
+        console.log("Page is loading!");
         pageLoaded = true;
         return pageLoaded;
     });

@@ -1,5 +1,8 @@
 from dotenv import load_dotenv
-load_dotenv(override=True) #important <!--===== loading enviroment variables from .env file ================-->
+
+load_dotenv(
+    override=True
+)  # important <!--===== loading enviroment variables from .env file ================-->
 
 from flask import Flask
 from flask_cors import CORS
@@ -17,18 +20,24 @@ from flask_jwt_extended import JWTManager
 from app.helpers.install import check_installation
 from app.helpers.bot_services import ingest_documents
 from werkzeug.middleware.proxy_fix import ProxyFix
-
+from app.https.middleware.limiter_middleware import limiter
 
 
 def create_app():
     try:
 
-        app = Flask(__name__,template_folder="resources/views",static_folder="resources/assets")
+        app = Flask(
+            __name__,
+            template_folder="resources/views",
+            static_folder="resources/assets",
+        )
 
         CORS(app, supports_credentials=True)
 
-
         app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)
+
+        limiter.init_app(app)
+
         # =========================
         # INSTALLATION GUARD
         # =========================
@@ -40,38 +49,37 @@ def create_app():
         # =========================
         app.before_request(attach_user)
 
-        #<!-- =================================================
+        # <!-- =================================================
         #  APPLICATION CONFIGURATION (SECURITY+DATABASE) SETUP
-        #====================================================== -->
+        # ====================================================== -->
         app.config.from_object(Config)
 
         init_db(app)
 
-        #<!-- =========================
+        # <!-- =========================
         #  JWT (JASON WEB TOKEN) SETUP
-        #========================== -->
+        # ========================== -->
         jwt = JWTManager(app)
 
-        #<!-- =========================
+        # <!-- =========================
         #  APPLICATION INSFASTRUCTURE
-        #========================== -->
+        # ========================== -->
         register_models()
         setup_contexts(app)
         register_api(app)
         register_routes(app)
         register_error_handlers(app)
 
-
         return app
     except Exception as e:
         print("this is error : ", str(e))
-        raise(e)
+        raise (e)
 
 
-#<!-- ========================================
+# <!-- ========================================
 #  HELPER FUNCTION FOR CHECKING ROUTE LIST
-#========================================== -->
-def route_lists(app:Flask):
+# ========================================== -->
+def route_lists(app: Flask):
     for rule in app.url_map.iter_rules():
         print(f"Endpoint: {rule.endpoint}")
         print(f"Methods: {rule.methods}")

@@ -7,14 +7,14 @@ import { authUi } from "../ui/auth.ui.js";
 import { navigate } from "../utils/navigate.js";
 import { toast } from "../utils/toast.js";
 
-const signIn_btn = $('#signIn_btn');
+
 
 export const authEvent = {
     init() {
-        $(signIn_btn).on('click', async function () {
+        $("#signIn_btn").on('click', async function () {
 
             const formData = authUi.getLoginFormData();
-            
+
             try {
 
                 const response = await authAPI.login(formData);
@@ -26,6 +26,18 @@ export const authEvent = {
                 console.log(error);
                 toast.error(error?.message, "Error");
 
+            }
+        });
+
+        $("#logout-btn").on('click', async function (event) {
+            event.preventDefault();
+            try {
+                const response = await authAPI.logout();
+                await toast.success(response.message, "Success");
+                navigate.to("/admin/auth/login");
+            } catch (error) {
+                console.log(error);
+                toast.error(error?.message, "Error");
             }
         });
     },

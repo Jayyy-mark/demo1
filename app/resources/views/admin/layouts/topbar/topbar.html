@@ -14,7 +14,7 @@
             <i class="ti ti-menu-2"></i>
           </a>
         </li>
-        <li class="dropdown pc-h-item d-inline-flex d-md-none">
+        <!-- <li class="dropdown pc-h-item d-inline-flex d-md-none">
           <a class="pc-head-link head-link-secondary dropdown-toggle arrow-none m-0" data-bs-toggle="dropdown" href="#"
             role="button" aria-haspopup="false" aria-expanded="false">
             <i class="ti ti-search"></i>
@@ -34,7 +34,7 @@
             <input type="search" class="form-control" placeholder="Search here. . ." />
             <button class="btn btn-light-secondary btn-search"><i class="ti ti-adjustments-horizontal"></i></button>
           </form>
-        </li>
+        </li> -->
       </ul>
     </div>
     <!-- [Mobile Media Block end] -->
@@ -72,7 +72,8 @@
                 <div class="list-group-item list-group-item-action">
                   <div class="d-flex">
                     <div class="flex-shrink-0">
-                      <img src="{{ url_for('static', filename='admin/images/avatar/3d-avatar-3.avif') }}" alt="user-image" class="user-avtar" />
+                      <img src="{{ url_for('static', filename='admin/images/avatar/3d-avatar-3.avif') }}"
+                        alt="user-image" class="user-avtar" />
                     </div>
                     <div class="flex-grow-1 ms-1">
                       <span class="float-end text-muted">10 min ago</span>
@@ -107,15 +108,7 @@
               <p class="text-muted">Project Admin</p>
               <div class="profile-notification-scroll position-relative" style="max-height: calc(100vh - 280px)">
                 <hr />
-                <a href="../application/account-profile-v1.html" class="dropdown-item">
-                  <i class="ti ti-settings"></i>
-                  <span>Account Settings</span>
-                </a>
-                <a href="../application/social-profile.html" class="dropdown-item">
-                  <i class="ti ti-user"></i>
-                  <span>Social Profile</span>
-                </a>
-                <a href="{{ url_for('admin.login') }}" class="dropdown-item">
+                <a href="" class="dropdown-item" id="logout-btn">
                   <i class="ti ti-logout"></i>
                   <span>Logout</span>
                 </a>

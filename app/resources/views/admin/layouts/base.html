@@ -181,6 +181,9 @@
   <script src="{{ script }}" defer></script>
   {% endfor %}
 
+
+
+
   <!--==========================================
     VENDOR SCRIPTS
   ===========================================-->
@@ -194,6 +197,12 @@
   {% for script in assets.theme.scripts %}
   <script src="{{ script }}"></script>
   {% endfor %}
+
+  <!--==========================================
+    AUTH SCRIPTS
+  ===========================================-->
+
+  <script type="module" src="{{ assets.auth.scripts }}" defer></script>
 
   <!--==========================================
     PAGE SPECIFIC SCRIPTS

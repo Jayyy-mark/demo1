@@ -47,8 +47,7 @@
                 <table id="dataTable-vision_mission" class="table rounded table-hover align-middle">
                     <thead>
                         <tr class="bg-primary">
-                            <th class="text-white rounded-start text-start">ID</th>
-                            <th class="text-white text-start">Department</th>
+                            <th class="text-white text-start rounded-start">Department</th>
                             <th class="text-white text-start">Language</th>
                             <th class="text-white text-start">Vision</th>
                             <th class="text-white text-start">Mission</th>
@@ -89,7 +88,8 @@
                         <label for="department" class="form-label">Department :</label>
                         <div class="position-relative w-100" id="department">
                             <!-- INPUT -->
-                            <input type="text" autocomplete="off" class="form-control" placeholder="Select an option..." name="department_name">
+                            <input type="text" autocomplete="off" class="form-control" placeholder="Select an option..."
+                                name="department_name">
                             <!-- HIDDEN VALUE -->
                             <input type="hidden" name="department_id">
                             <!-- ICONS -->
@@ -154,7 +154,8 @@
                         <label for="department-update" class="form-label">Department :</label>
                         <div class="position-relative w-100" id="department-update">
                             <!-- INPUT -->
-                            <input type="text" autocomplete="off" class="form-control" placeholder="Select an option..." name="department_name">
+                            <input type="text" autocomplete="off" class="form-control" placeholder="Select an option..."
+                                name="department_name">
                             <!-- HIDDEN VALUE -->
                             <input type="hidden" name="department_id">
                             <!-- ICONS -->
@@ -221,7 +222,8 @@
                 <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">
                     Cancel
                 </button>
-                <button type="button" class="btn btn-danger px-4" id="btn_delete_vision_mission" data-bs-dismiss="modal">
+                <button type="button" class="btn btn-danger px-4" id="btn_delete_vision_mission"
+                    data-bs-dismiss="modal">
                     <i class="ti ti-trash"></i> Confirm
                 </button>
             </div>
@@ -239,11 +241,11 @@
 {% block script %}
 
 {% for script in assets.features.dataTable.scripts %}
-    <script src="{{ script }}" defer></script>
+<script src="{{ script }}" defer></script>
 {% endfor %}
 
 {% if assets.admin.vision_mission.script %}
-    <script type="module" src="{{ assets.admin.vision_mission.script }}" defer></script>
+<script type="module" src="{{ assets.admin.vision_mission.script }}" defer></script>
 {% endif %}
 
 {% endblock %}

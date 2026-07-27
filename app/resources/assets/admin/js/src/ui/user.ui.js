@@ -15,7 +15,6 @@ export const userUI = {
         $(users).each(function (index, d) {
             const row = `
             <tr>
-                <td class="rounded-start text-start py-3">${d.user_id}</td>
                 <td class="text-start py-3">${d.user_name}</td>
                 <td class="text-start py-3">${d.user_email}</td>
                 <td class="rounded-end text-start py-3">

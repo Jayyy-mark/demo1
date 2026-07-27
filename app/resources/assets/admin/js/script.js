@@ -554,7 +554,10 @@ class SearchableSelect {
         // CLEAR BUTTON
         this.clearBtn.addEventListener('click', () => {
             this.input.value = '';
-            this.hidden.value = '';
+
+            if (this.hidden) {
+                this.hidden.value = '';
+            }
 
             this.toggleClear();
 
@@ -597,7 +600,9 @@ class SearchableSelect {
 
                 this.input.value = item.label;
 
-                this.hidden.value = item.value;
+                if (this.hidden) {
+                    this.hidden.value = item.value;
+                }
 
                 this.hide();
 

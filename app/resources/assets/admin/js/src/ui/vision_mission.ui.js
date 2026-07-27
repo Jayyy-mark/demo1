@@ -20,8 +20,22 @@ export const visionMissionUI = {
                 <td class="text-start py-3">
                     <span class="badge ${d.language === 'mm' ? 'bg-light-success text-success' : 'bg-light-primary text-primary'} rounded-pill px-2 py-1">${d.language === 'mm' ? 'MM' : 'EN'}</span>
                 </td>
-                <td class="text-start py-3">${d.vision || 'N/A'}</td>
-                <td class="text-start py-3">${d.mission || 'N/A'}</td>
+                <td class="text-start py-3">
+                    <div
+                        class="description-preview show-vision-modal"
+                        data-vision="${(d.vision || '').replace(/"/g, '&quot;')}"
+                    >
+                        ${d.vision || 'N/A'}
+                    </div>
+                </td>
+                <td class="text-start py-3">
+                    <div
+                        class="description-preview show-mission-modal"
+                        data-mission="${(d.mission || '').replace(/"/g, '&quot;')}"
+                    >
+                        ${d.mission || 'N/A'}
+                    </div>
+                </td>
                 <td class="py-3 text-start px-1">
                     <div class="action-buttons d-flex justify-content-start ps-0">
                         <button class="btn btn-sm btn-info border rounded-5 show-update-modal-vision_mission"

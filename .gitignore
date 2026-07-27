@@ -11,3 +11,5 @@ media
 test.html
 migrations
 ./app/resources/assets/media
+k8s
+docker

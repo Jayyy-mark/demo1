@@ -127,4 +127,17 @@ export const laboratoryUI = {
             grid.appendChild(item);
         });
     },
+
+    /**
+     * Populate a SearchableSelect for category on a given wrapper element.
+     * @param {string[]} categories  - list of existing category strings
+     * @param {Element}  element     - the position-relative wrapper div
+     */
+    setCategories(categories, element) {
+        const options = categories.map(cat => ({
+            value: cat,
+            label: cat,
+        }));
+        new SearchableSelect(element, options);
+    },
 }

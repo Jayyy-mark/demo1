@@ -207,7 +207,7 @@
                 <table id="dataTable-collaboration" class="table rounded table-hover align-middle">
                     <thead>
                         <tr class="bg-primary">
-                            <th class="text-white rounded-start text-start">ID</th>
+                            <th class="text-white rounded-start text-start">Sr.</th>
                             <th class="text-white text-start">Logo</th>
                             <th class="text-white text-start">Company Name</th>
                             <th class="text-white text-start">Description</th>
@@ -332,78 +332,7 @@
     </div>
 </div>
 
-<!-- Image Preview JS (Collaboration) -->
-<script>
-    (function () {
-        'use strict';
-        let selectedFiles = [];
-        // Named input – holds the final FileList submitted with the form.
-        const fileInput = document.getElementById('col-file-input');
-        // Picker input – only used to open the OS file dialog (no name → not submitted).
-        const filePicker = document.getElementById('colFilePicker');
-        const dropZone = document.getElementById('colDropZone');
-        const previewGrid = document.getElementById('colPreviewGrid');
-        const countBadge = document.getElementById('colImgCount');
-        const emptyHint = document.getElementById('colEmptyHint');
 
-        function syncFileInput() {
-            const dt = new DataTransfer();
-            selectedFiles.forEach(f => dt.items.add(f));
-            fileInput.files = dt.files;
-        }
-        function renderPreviews() {
-            previewGrid.innerHTML = '';
-            countBadge.textContent = `${selectedFiles.length} image(s)`;
-            emptyHint.style.display = selectedFiles.length === 0 ? 'block' : 'none';
-            selectedFiles.forEach((file, index) => {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const item = document.createElement('div');
-                    item.className = 'img-preview-item';
-                    item.innerHTML = `
-                    <img src="${e.target.result}" alt="preview">
-                    <div class="img-preview-name" title="${file.name}">${file.name}</div>
-                    <button type="button" class="img-preview-remove" data-index="${index}" title="Remove">
-                        <i class="ti ti-x"></i>
-                    </button>`;
-                    item.querySelector('.img-preview-remove').addEventListener('click', function () {
-                        removeFile(parseInt(this.dataset.index));
-                    });
-                    previewGrid.appendChild(item);
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-        function addFiles(newFiles) {
-            // Collaboration logo: only keep the last picked file (single image)
-            selectedFiles = [Array.from(newFiles).pop()].filter(Boolean);
-            syncFileInput();
-            renderPreviews();
-        }
-        function removeFile(index) {
-            selectedFiles.splice(index, 1);
-            syncFileInput();
-            renderPreviews();
-        }
-        // Drop-zone click opens the picker (not the named input)
-        dropZone.addEventListener('click', () => filePicker.click());
-        // Picker change: accumulate file, then reset picker only
-        filePicker.addEventListener('change', function () {
-            addFiles(this.files);
-            // Resetting picker does NOT affect fileInput's files
-            this.value = '';
-        });
-        dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
-        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
-        dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('dragover'); addFiles(e.dataTransfer.files); });
-        document.getElementById('collaborationModal').addEventListener('hidden.bs.modal', () => {
-            selectedFiles = [];
-            syncFileInput(); // clears fileInput.files
-            filePicker.value = '';
-            renderPreviews();
-        });
-    })();
-</script>
 
 <!-- UPDATE MODAL -->
 <div class="modal fade" id="collaborationModal-update" tabindex="-1" aria-hidden="true">
@@ -418,10 +347,7 @@
             <div class="modal-body">
                 <form id="dataForm-collaboration-update" enctype="multipart/form-data">
                     <div class="row g-4">
-                        <div class="mb-3 col-lg-6">
-                            <label class="form-label">ID : </label>
-                            <input type="text" autocomplete="off" name="id" class="form-control" readonly>
-                        </div>
+                        <input type="hidden" autocomplete="off" name="id" class="form-control" readonly>
 
                         <div class="mb-3 col-lg-6">
                             <label for="file-update" class="form-label">Upload New Logo (optional) :</label>
@@ -518,6 +444,79 @@
 {% endblock %}
 
 {% block script %}
+
+<!-- Image Preview JS (Collaboration) -->
+<script>
+    (function () {
+        'use strict';
+        let selectedFiles = [];
+        // Named input – holds the final FileList submitted with the form.
+        const fileInput = document.getElementById('col-file-input');
+        // Picker input – only used to open the OS file dialog (no name → not submitted).
+        const filePicker = document.getElementById('colFilePicker');
+        const dropZone = document.getElementById('colDropZone');
+        const previewGrid = document.getElementById('colPreviewGrid');
+        const countBadge = document.getElementById('colImgCount');
+        const emptyHint = document.getElementById('colEmptyHint');
+
+        function syncFileInput() {
+            const dt = new DataTransfer();
+            selectedFiles.forEach(f => dt.items.add(f));
+            fileInput.files = dt.files;
+        }
+        function renderPreviews() {
+            previewGrid.innerHTML = '';
+            countBadge.textContent = `${selectedFiles.length} image(s)`;
+            emptyHint.style.display = selectedFiles.length === 0 ? 'block' : 'none';
+            selectedFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const item = document.createElement('div');
+                    item.className = 'img-preview-item';
+                    item.innerHTML = `
+                    <img src="${e.target.result}" alt="preview">
+                    <div class="img-preview-name" title="${file.name}">${file.name}</div>
+                    <button type="button" class="img-preview-remove" data-index="${index}" title="Remove">
+                        <i class="ti ti-x"></i>
+                    </button>`;
+                    item.querySelector('.img-preview-remove').addEventListener('click', function () {
+                        removeFile(parseInt(this.dataset.index));
+                    });
+                    previewGrid.appendChild(item);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        function addFiles(newFiles) {
+            // Collaboration logo: only keep the last picked file (single image)
+            selectedFiles = [Array.from(newFiles).pop()].filter(Boolean);
+            syncFileInput();
+            renderPreviews();
+        }
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            syncFileInput();
+            renderPreviews();
+        }
+        // Drop-zone click opens the picker (not the named input)
+        dropZone.addEventListener('click', () => filePicker.click());
+        // Picker change: accumulate file, then reset picker only
+        filePicker.addEventListener('change', function () {
+            addFiles(this.files);
+            // Resetting picker does NOT affect fileInput's files
+            this.value = '';
+        });
+        dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('dragover'); addFiles(e.dataTransfer.files); });
+        document.getElementById('collaborationModal').addEventListener('hidden.bs.modal', () => {
+            selectedFiles = [];
+            syncFileInput(); // clears fileInput.files
+            filePicker.value = '';
+            renderPreviews();
+        });
+    })();
+</script>
 
 {% for script in assets.features.dataTable.scripts %}
 <script src="{{ script }}" defer></script>

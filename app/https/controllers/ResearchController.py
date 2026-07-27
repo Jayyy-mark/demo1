@@ -2,7 +2,21 @@ from app.models.ResearchModel import Research
 from app.schemas.research import ResearchSchema
 from .BaseController import BaseController
 from app.helpers.utils import Utils, ResponseHelper
+from app.core.database import db
 from flask import request
+
+
+def get_categories():
+    """Return a sorted list of distinct, non-empty category values."""
+    rows = (
+        db.session.query(Research.category)
+        .filter(Research.category.isnot(None), Research.category != "")
+        .distinct()
+        .order_by(Research.category)
+        .all()
+    )
+    categories = [r.category for r in rows]
+    return ResponseHelper.success("Categories fetched.", data=categories)
 
 class ResearchController(BaseController):
 

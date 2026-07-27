@@ -53,8 +53,38 @@ export const researchUI = {
     },
     fillUpdateForm(data){
         const form = $("#dataForm-update");
-        $.each(data, function(key, value){
-            form.find(`[name=${key}]`).val(value);
-        });
+        form.find('[name="id"]').val(data.id);
+        form.find('[name="research_name"]').val(data.research_name);
+        form.find('[name="category"]').val(data.category || "");
+        form.find('[name="date"]').val(data.date || "");
+        form.find('[name="description"]').val(data.description || "");
+
+        // Show current file
+        const currentFileContainer = document.getElementById('resUpdateCurrentFile');
+        if (currentFileContainer) {
+            if (data.filename) {
+                currentFileContainer.innerHTML = `
+                    <a href="/assets/${data.filepath}" target="_blank" class="text-decoration-none text-dark d-block">
+                        <i class="ti ti-file-type-pdf text-danger d-block mb-2" style="font-size:3rem;"></i>
+                        <span class="text-break fw-medium" style="font-size:0.9rem;">${data.filename}</span>
+                    </a>
+                `;
+            } else {
+                currentFileContainer.innerHTML = `<span class="text-muted">No file attached</span>`;
+            }
+        }
+    },
+
+    /**
+     * Populate a SearchableSelect for category on a given wrapper element.
+     * @param {string[]} categories  - list of existing category strings
+     * @param {Element}  element     - the position-relative wrapper div
+     */
+    setCategories(categories, element) {
+        const options = categories.map(cat => ({
+            value: cat,
+            label: cat,
+        }));
+        new SearchableSelect(element, options);
     },
 }

@@ -282,7 +282,7 @@
                         <table id="dataTable" class="table rounded table-hover align-middle">
                             <thead>
                                 <tr class="bg-primary">
-                                    <th class="text-white text-start rounded-start">NO</th>
+                                    <th class="text-white text-start rounded-start">Sr.</th>
                                     <th class="text-white text-start">Activity Name</th>
                                     <th class="text-white text-start">Category</th>
                                     <th class="text-white text-start">Year</th>
@@ -341,9 +341,19 @@
                                         placeholder="e.g. Annual Sports Day">
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="category" class="form-label fw-medium">Category</label>
-                                    <input type="text" name="category" id="category" class="form-control"
-                                        placeholder="e.g. Sports">
+                                    <label for="category-select" class="form-label fw-medium">Category</label>
+                                    <div class="position-relative w-100" id="category-select">
+                                        <!-- INPUT -->
+                                        <input type="text" autocomplete="off" class="form-control"
+                                            placeholder="Select or type a category..." name="category">
+                                        <!-- ICONS -->
+                                        <div class="select-icons">
+                                            <i class="ti ti-x select-clear-btn d-none"></i>
+                                            <i class="ti ti-chevron-down arrow-btn"></i>
+                                        </div>
+                                        <!-- DROPDOWN -->
+                                        <div class="dropdown-menu w-100 mt-2"></div>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="activity_type" class="form-label fw-medium">Activity Type</label>
@@ -418,110 +428,7 @@
     </div>
 </div>
 
-<!-- Image Preview JS -->
-<script>
-    (function () {
-        'use strict';
 
-        // We maintain our own File list so we can add/remove individually.
-        let selectedFiles = [];
-
-        // Named input – holds the final FileList that gets submitted with the form.
-        const fileInput = document.getElementById('file');
-        // Picker input – only used to open the OS file dialog (no name → not submitted).
-        const filePicker = document.getElementById('filePicker');
-        const dropZone = document.getElementById('imgDropZone');
-        const previewGrid = document.getElementById('imgPreviewGrid');
-        const countBadge = document.getElementById('imgCountBadge');
-        const emptyHint = document.getElementById('imgEmptyHint');
-
-        // ── Sync our array into the named <input type="file"> ──
-        function syncFileInput() {
-            const dt = new DataTransfer();
-            selectedFiles.forEach(f => dt.items.add(f));
-            fileInput.files = dt.files;
-        }
-
-        // ── Render all thumbnails ──
-        function renderPreviews() {
-            previewGrid.innerHTML = '';
-            countBadge.textContent = `${selectedFiles.length} image(s)`;
-            emptyHint.style.display = selectedFiles.length === 0 ? 'block' : 'none';
-
-            selectedFiles.forEach((file, index) => {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const item = document.createElement('div');
-                    item.className = 'img-preview-item';
-                    item.innerHTML = `
-                    <img src="${e.target.result}" alt="preview">
-                    <div class="img-preview-name" title="${file.name}">${file.name}</div>
-                    <button type="button" class="img-preview-remove" data-index="${index}" title="Remove">
-                        <i class="ti ti-x"></i>
-                    </button>`;
-
-                    item.querySelector('.img-preview-remove').addEventListener('click', function () {
-                        removeFile(parseInt(this.dataset.index));
-                    });
-
-                    previewGrid.appendChild(item);
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-
-        // ── Add files (de-duplicate by name+size) ──
-        function addFiles(newFiles) {
-            Array.from(newFiles).forEach(newFile => {
-                const dup = selectedFiles.some(
-                    f => f.name === newFile.name && f.size === newFile.size
-                );
-                if (!dup) selectedFiles.push(newFile);
-            });
-            syncFileInput();
-            renderPreviews();
-        }
-
-        // ── Remove a file by index ──
-        function removeFile(index) {
-            selectedFiles.splice(index, 1);
-            syncFileInput();
-            renderPreviews();
-        }
-
-        // ── Drop-zone click → open the picker (not the named input) ──
-        dropZone.addEventListener('click', () => filePicker.click());
-
-        // ── Picker change: accumulate into selectedFiles, then reset picker ──
-        filePicker.addEventListener('change', function () {
-            addFiles(this.files);
-            // Reset picker so the same file can be re-selected after removal.
-            // This does NOT affect fileInput because they are separate elements.
-            this.value = '';
-        });
-
-        // ── Drag & Drop ──
-        dropZone.addEventListener('dragover', e => {
-            e.preventDefault();
-            dropZone.classList.add('dragover');
-        });
-        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
-        dropZone.addEventListener('drop', e => {
-            e.preventDefault();
-            dropZone.classList.remove('dragover');
-            addFiles(e.dataTransfer.files);
-        });
-
-        // ── Reset everything when modal is closed ──
-        const modal = document.getElementById('activityModal');
-        modal.addEventListener('hidden.bs.modal', () => {
-            selectedFiles = [];
-            syncFileInput(); // clears fileInput.files
-            filePicker.value = '';
-            renderPreviews();
-        });
-    })();
-</script>
 
 <!-- Update Modal -->
 <div class="modal fade" id="activityModal-update" tabindex="-1" aria-hidden="true">
@@ -559,8 +466,19 @@
                                         class="form-control">
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="update_category" class="form-label fw-medium">Category</label>
-                                    <input type="text" name="category_update" id="update_category" class="form-control">
+                                    <label for="category-select-update" class="form-label fw-medium">Category</label>
+                                    <div class="position-relative w-100" id="category-select-update">
+                                        <!-- INPUT -->
+                                        <input type="text" autocomplete="off" class="form-control"
+                                            placeholder="Select or type a category..." name="category_update">
+                                        <!-- ICONS -->
+                                        <div class="select-icons">
+                                            <i class="ti ti-x select-clear-btn d-none"></i>
+                                            <i class="ti ti-chevron-down arrow-btn"></i>
+                                        </div>
+                                        <!-- DROPDOWN -->
+                                        <div class="dropdown-menu w-100 mt-2"></div>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="update_activity_type" class="form-label fw-medium">Activity Type</label>
@@ -698,6 +616,111 @@
     PAGE'S SCRIPTS
 ====================================-->
 {% block script %}
+
+<!-- Image Preview JS -->
+<script>
+    (function () {
+        'use strict';
+
+        // We maintain our own File list so we can add/remove individually.
+        let selectedFiles = [];
+
+        // Named input – holds the final FileList that gets submitted with the form.
+        const fileInput = document.getElementById('file');
+        // Picker input – only used to open the OS file dialog (no name → not submitted).
+        const filePicker = document.getElementById('filePicker');
+        const dropZone = document.getElementById('imgDropZone');
+        const previewGrid = document.getElementById('imgPreviewGrid');
+        const countBadge = document.getElementById('imgCountBadge');
+        const emptyHint = document.getElementById('imgEmptyHint');
+
+        // ── Sync our array into the named <input type="file"> ──
+        function syncFileInput() {
+            const dt = new DataTransfer();
+            selectedFiles.forEach(f => dt.items.add(f));
+            fileInput.files = dt.files;
+        }
+
+        // ── Render all thumbnails ──
+        function renderPreviews() {
+            previewGrid.innerHTML = '';
+            countBadge.textContent = `${selectedFiles.length} image(s)`;
+            emptyHint.style.display = selectedFiles.length === 0 ? 'block' : 'none';
+
+            selectedFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const item = document.createElement('div');
+                    item.className = 'img-preview-item';
+                    item.innerHTML = `
+                    <img src="${e.target.result}" alt="preview">
+                    <div class="img-preview-name" title="${file.name}">${file.name}</div>
+                    <button type="button" class="img-preview-remove" data-index="${index}" title="Remove">
+                        <i class="ti ti-x"></i>
+                    </button>`;
+
+                    item.querySelector('.img-preview-remove').addEventListener('click', function () {
+                        removeFile(parseInt(this.dataset.index));
+                    });
+
+                    previewGrid.appendChild(item);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // ── Add files (de-duplicate by name+size) ──
+        function addFiles(newFiles) {
+            Array.from(newFiles).forEach(newFile => {
+                const dup = selectedFiles.some(
+                    f => f.name === newFile.name && f.size === newFile.size
+                );
+                if (!dup) selectedFiles.push(newFile);
+            });
+            syncFileInput();
+            renderPreviews();
+        }
+
+        // ── Remove a file by index ──
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            syncFileInput();
+            renderPreviews();
+        }
+
+        // ── Drop-zone click → open the picker (not the named input) ──
+        dropZone.addEventListener('click', () => filePicker.click());
+
+        // ── Picker change: accumulate into selectedFiles, then reset picker ──
+        filePicker.addEventListener('change', function () {
+            addFiles(this.files);
+            // Reset picker so the same file can be re-selected after removal.
+            // This does NOT affect fileInput because they are separate elements.
+            this.value = '';
+        });
+
+        // ── Drag & Drop ──
+        dropZone.addEventListener('dragover', e => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', e => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            addFiles(e.dataTransfer.files);
+        });
+
+        // ── Reset everything when modal is closed ──
+        const modal = document.getElementById('activityModal');
+        modal.addEventListener('hidden.bs.modal', () => {
+            selectedFiles = [];
+            syncFileInput(); // clears fileInput.files
+            filePicker.value = '';
+            renderPreviews();
+        });
+    })();
+</script>
 
 {% for script in assets.features.dataTable.scripts %}
 <script src="{{ script }}" defer></script>

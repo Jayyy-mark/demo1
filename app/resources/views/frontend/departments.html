@@ -65,7 +65,7 @@
                     </div>
                     <div class="flex-grow">
                         <p class="text-gray-600 leading-relaxed text-base md:text-lg text-justify">
-                            {{ department.vision }}
+                            {{ department.vision if department.vision else 'Vision not available.' }}
                         </p>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                     </div>
                     <div class="flex-grow">
                         <p class="text-gray-600 leading-relaxed text-base md:text-lg text-justify font-padauk">
-                            {{ department.vision_mm }}
+                            {{ department.vision_mm if department.vision_mm else 'မျှော်မှန်းချက် မရှိသေးပါ။' }}
                         </p>
                     </div>
                 </div>
@@ -109,8 +109,10 @@
                     </div>
 
                     <div class="flex-grow">
-                        {% if department.mission is string %}
-                        <p class="text-gray-600 leading-relaxed text-base md:text-lg text-justify">{{ department.mission }}</p>
+                        {% if not department.mission %}
+                        <p class="text-gray-400 italic text-base">Mission not available.</p>
+                        {% elif department.mission | length == 1 %}
+                        <p class="text-gray-600 leading-relaxed text-base md:text-lg text-justify">{{ department.mission[0] }}</p>
                         {% else %}
                         <ol class="space-y-5 text-gray-600 list-none">
                             {% for point in department.mission %}
@@ -141,8 +143,10 @@
                     </div>
 
                     <div class="flex-grow">
-                        {% if department.mission_mm is string %}
-                        <p class="text-gray-600 leading-relaxed text-base md:text-lg text-justify font-padauk">{{ department.mission_mm }}</p>
+                        {% if not department.mission_mm %}
+                        <p class="text-gray-400 italic text-base font-padauk">ရည်မှန်းချက် မရှိသေးပါ။</p>
+                        {% elif department.mission_mm | length == 1 %}
+                        <p class="text-gray-600 leading-relaxed text-base md:text-lg text-justify font-padauk">{{ department.mission_mm[0] }}</p>
                         {% else %}
                         <ol class="space-y-5 text-gray-600 list-none">
                             {% for point in department.mission_mm %}

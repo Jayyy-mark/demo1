@@ -25,6 +25,20 @@ export const visionMissionEvent = {
 
         $("#btn_delete_vision_mission").on("click", () => this.delete());
 
+        $(document).on('click', '.show-vision-modal', function () {
+            const vision = $(this).data('vision');
+            $('#fullVision').val(vision);
+            const modal = new bootstrap.Modal(document.getElementById('visionModal'));
+            modal.show();
+        });
+
+        $(document).on('click', '.show-mission-modal', function () {
+            const mission = $(this).data('mission');
+            $('#fullMission').val(mission);
+            const modal = new bootstrap.Modal(document.getElementById('missionModal'));
+            modal.show();
+        });
+
         $(document).on("click", ".show-update-modal-vision_mission", (event) => this.showUpdateModal(event));
 
         $(document).on("click", ".show-delete-modal-vision_mission", (event) => this.showDeleteModal(event));

@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.https.controllers.ResearchController import ResearchController
+from app.https.controllers.ResearchController import ResearchController, get_categories
 from flask_jwt_extended import jwt_required
 
 research_api = Blueprint("research_api", __name__, url_prefix="/api")
@@ -23,3 +23,8 @@ def updateResearch():
 @jwt_required()
 def deleteResearch():
     return ResearchController().delete()
+
+@research_api.route("/research/categories", methods=['GET'])
+@jwt_required()
+def researchCategories():
+    return get_categories()

@@ -59,4 +59,9 @@ export const laboratoryApi = {
         });
         return res.data;
     },
+
+    async categories() {
+        const res = await api.get("/laboratory/categories");
+        return res.data;
+    },
 }

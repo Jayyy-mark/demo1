@@ -17,6 +17,7 @@
         flex-shrink: 0;
         align-self: stretch;
     }
+
     .img-drop-zone {
         border: 2px dashed #ced4da;
         border-radius: 14px;
@@ -32,46 +33,131 @@
         text-align: center;
         padding: 1rem;
     }
+
     .img-drop-zone:hover,
     .img-drop-zone.dragover {
         border-color: #0d6efd;
         background: #eef5ff;
         transform: scale(1.02);
     }
-    .img-drop-zone i { font-size: 2rem; color: #adb5bd; transition: color .25s; }
-    .img-drop-zone:hover i, .img-drop-zone.dragover i { color: #0d6efd; }
-    .img-drop-zone p { margin: 0; font-size: .8rem; color: #6c757d; }
-    .img-drop-zone:hover p, .img-drop-zone.dragover p { color: #0d6efd; }
-    .img-preview-scroll { max-height: 310px; overflow-y: auto; padding-right: 2px; }
-    .img-preview-scroll::-webkit-scrollbar { width: 5px; }
-    .img-preview-scroll::-webkit-scrollbar-thumb { background: #ced4da; border-radius: 10px; }
-    .img-preview-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+
+    .img-drop-zone i {
+        font-size: 2rem;
+        color: #adb5bd;
+        transition: color .25s;
+    }
+
+    .img-drop-zone:hover i,
+    .img-drop-zone.dragover i {
+        color: #0d6efd;
+    }
+
+    .img-drop-zone p {
+        margin: 0;
+        font-size: .8rem;
+        color: #6c757d;
+    }
+
+    .img-drop-zone:hover p,
+    .img-drop-zone.dragover p {
+        color: #0d6efd;
+    }
+
+    .img-preview-scroll {
+        max-height: 310px;
+        overflow-y: auto;
+        padding-right: 2px;
+    }
+
+    .img-preview-scroll::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .img-preview-scroll::-webkit-scrollbar-thumb {
+        background: #ced4da;
+        border-radius: 10px;
+    }
+
+    .img-preview-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
     .img-preview-item {
         position: relative;
         border-radius: 10px;
         overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0,0,0,.12);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
         animation: fadeInScale .25s ease;
     }
+
     @keyframes fadeInScale {
-        from { opacity:0; transform:scale(.85); }
-        to   { opacity:1; transform:scale(1); }
+        from {
+            opacity: 0;
+            transform: scale(.85);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
     }
-    .img-preview-item img { width:100%; height:100px; object-fit:cover; display:block; }
+
+    .img-preview-item img {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+        display: block;
+    }
+
     .img-preview-remove {
-        position: absolute; top:5px; right:5px;
-        width:24px; height:24px; border-radius:50%; border:none;
-        background: rgba(220,53,69,.9); color:#fff;
-        font-size:.7rem; display:flex; align-items:center; justify-content:center;
-        cursor:pointer; transition: transform .15s, background .15s; padding:0;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(220, 53, 69, .9);
+        color: #fff;
+        font-size: .7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: transform .15s, background .15s;
+        padding: 0;
     }
-    .img-preview-remove:hover { background:#c82333; transform:scale(1.15); }
+
+    .img-preview-remove:hover {
+        background: #c82333;
+        transform: scale(1.15);
+    }
+
     .img-preview-name {
-        font-size:.65rem; color:#6c757d; padding:3px 6px;
-        white-space:nowrap; overflow:hidden; text-overflow:ellipsis; background:#f8f9fa;
+        font-size: .65rem;
+        color: #6c757d;
+        padding: 3px 6px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        background: #f8f9fa;
     }
-    .img-panel-label { font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.5px; color:#6c757d; margin-bottom:6px; }
-    .img-count-badge { font-size:.72rem; padding:2px 8px; }
+
+    .img-panel-label {
+        font-size: .7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+        color: #6c757d;
+        margin-bottom: 6px;
+    }
+
+    .img-count-badge {
+        font-size: .72rem;
+        padding: 2px 8px;
+    }
 
     /* ── Delete overlay on existing image cards (update modal) ── */
     .img-delete-overlay {
@@ -86,9 +172,10 @@
         border-radius: 10px;
         transition: opacity .2s;
     }
+
     .img-undo-btn {
-        background: rgba(255,255,255,0.22);
-        border: 1px solid rgba(255,255,255,0.55);
+        background: rgba(255, 255, 255, 0.22);
+        border: 1px solid rgba(255, 255, 255, 0.55);
         color: #fff;
         border-radius: 20px;
         font-size: .68rem;
@@ -97,17 +184,13 @@
         transition: background .15s, transform .15s;
         line-height: 1.6;
     }
+
     .img-undo-btn:hover {
-        background: rgba(255,255,255,0.38);
+        background: rgba(255, 255, 255, 0.38);
         transform: scale(1.06);
     }
+
     /* ── Custom wider update modal ── */
-    #laboratoryModal-update .modal-dialog {
-        max-width: min(92vw, 1380px);
-    }
-    #laboratoryModal-update .modal-body .img-preview-item img {
-        height: 120px;
-    }
 </style>
 {% endblock %}
 
@@ -214,13 +297,23 @@
                             <div class="row g-3">
                                 <div class="col-12">
                                     <label for="laboratory_name" class="form-label fw-medium">Laboratory Name</label>
-                                    <input type="text" name="laboratory_name" id="laboratory_name"
-                                           class="form-control" placeholder="e.g. Physics Lab">
+                                    <input type="text" name="laboratory_name" id="laboratory_name" class="form-control"
+                                        placeholder="e.g. Physics Lab">
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="category" class="form-label fw-medium">Category</label>
-                                    <input type="text" name="category" id="category"
-                                           class="form-control" placeholder="e.g. Science">
+                                    <label for="lab-category-select" class="form-label fw-medium">Category</label>
+                                    <div class="position-relative w-100" id="lab-category-select">
+                                        <!-- INPUT -->
+                                        <input type="text" autocomplete="off" class="form-control"
+                                            placeholder="Select or type a category..." name="category">
+                                        <!-- ICONS -->
+                                        <div class="select-icons">
+                                            <i class="ti ti-x select-clear-btn d-none"></i>
+                                            <i class="ti ti-chevron-down arrow-btn"></i>
+                                        </div>
+                                        <!-- DROPDOWN -->
+                                        <div class="dropdown-menu w-100 mt-2"></div>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="date" class="form-label fw-medium">Date</label>
@@ -228,8 +321,8 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="description" class="form-label fw-medium">Description</label>
-                                    <textarea name="description" rows="5" id="description"
-                                              class="form-control" placeholder="Write a brief description…"></textarea>
+                                    <textarea name="description" rows="5" id="description" class="form-control"
+                                        placeholder="Write a brief description…"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -254,7 +347,8 @@
                             <!-- Preview header -->
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="img-panel-label">Preview</span>
-                                <span class="badge bg-primary-subtle text-primary img-count-badge" id="labImgCount">0 image(s)</span>
+                                <span class="badge bg-primary-subtle text-primary img-count-badge" id="labImgCount">0
+                                    image(s)</span>
                             </div>
 
                             <!-- Scrollable preview grid -->
@@ -282,80 +376,7 @@
     </div>
 </div>
 
-<!-- Image Preview JS (Laboratory) -->
-<script>
-(function () {
-    'use strict';
-    let selectedFiles = [];
-    // Named input – holds the final FileList submitted with the form.
-    const fileInput   = document.getElementById('lab-file-input');
-    // Picker input – only used to open the OS file dialog (no name → not submitted).
-    const filePicker  = document.getElementById('labFilePicker');
-    const dropZone    = document.getElementById('labDropZone');
-    const previewGrid = document.getElementById('labPreviewGrid');
-    const countBadge  = document.getElementById('labImgCount');
-    const emptyHint   = document.getElementById('labEmptyHint');
 
-    function syncFileInput() {
-        const dt = new DataTransfer();
-        selectedFiles.forEach(f => dt.items.add(f));
-        fileInput.files = dt.files;
-    }
-    function renderPreviews() {
-        previewGrid.innerHTML = '';
-        countBadge.textContent = `${selectedFiles.length} image(s)`;
-        emptyHint.style.display = selectedFiles.length === 0 ? 'block' : 'none';
-        selectedFiles.forEach((file, index) => {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const item = document.createElement('div');
-                item.className = 'img-preview-item';
-                item.innerHTML = `
-                    <img src="${e.target.result}" alt="preview">
-                    <div class="img-preview-name" title="${file.name}">${file.name}</div>
-                    <button type="button" class="img-preview-remove" data-index="${index}" title="Remove">
-                        <i class="ti ti-x"></i>
-                    </button>`;
-                item.querySelector('.img-preview-remove').addEventListener('click', function () {
-                    removeFile(parseInt(this.dataset.index));
-                });
-                previewGrid.appendChild(item);
-            };
-            reader.readAsDataURL(file);
-        });
-    }
-    function addFiles(newFiles) {
-        Array.from(newFiles).forEach(newFile => {
-            const dup = selectedFiles.some(f => f.name === newFile.name && f.size === newFile.size);
-            if (!dup) selectedFiles.push(newFile);
-        });
-        syncFileInput();
-        renderPreviews();
-    }
-    function removeFile(index) {
-        selectedFiles.splice(index, 1);
-        syncFileInput();
-        renderPreviews();
-    }
-    // Drop-zone click opens the picker (not the named input)
-    dropZone.addEventListener('click', () => filePicker.click());
-    // Picker change: accumulate files, then reset picker only
-    filePicker.addEventListener('change', function () {
-        addFiles(this.files);
-        // Resetting picker does NOT affect fileInput's files
-        this.value = '';
-    });
-    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
-    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
-    dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('dragover'); addFiles(e.dataTransfer.files); });
-    document.getElementById('laboratoryModal').addEventListener('hidden.bs.modal', () => {
-        selectedFiles = [];
-        syncFileInput(); // clears fileInput.files
-        filePicker.value = '';
-        renderPreviews();
-    });
-})();
-</script>
 
 <!-- Update Modal -->
 <div class="modal fade" id="laboratoryModal-update" tabindex="-1" aria-hidden="true">
@@ -391,8 +412,20 @@
                                     <input type="text" name="laboratory_name" id="lab_update_name" class="form-control">
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lab_update_category" class="form-label fw-medium">Category</label>
-                                    <input type="text" name="category_update" id="lab_update_category" class="form-control">
+                                    <label for="lab-category-select-update"
+                                        class="form-label fw-medium">Category</label>
+                                    <div class="position-relative w-100" id="lab-category-select-update">
+                                        <!-- INPUT -->
+                                        <input type="text" autocomplete="off" class="form-control"
+                                            placeholder="Select or type a category..." name="category_update">
+                                        <!-- ICONS -->
+                                        <div class="select-icons">
+                                            <i class="ti ti-x select-clear-btn d-none"></i>
+                                            <i class="ti ti-chevron-down arrow-btn"></i>
+                                        </div>
+                                        <!-- DROPDOWN -->
+                                        <div class="dropdown-menu w-100 mt-2"></div>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lab_update_date" class="form-label fw-medium">Date</label>
@@ -400,8 +433,8 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="lab_update_description" class="form-label fw-medium">Description</label>
-                                    <textarea name="description_update" id="lab_update_description" class="form-control" rows="5"
-                                              placeholder="Write a brief description…"></textarea>
+                                    <textarea name="description_update" id="lab_update_description" class="form-control"
+                                        rows="5" placeholder="Write a brief description…"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -418,11 +451,13 @@
                             </p>
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="img-panel-label">Preview</span>
-                                <span class="badge bg-primary-subtle text-primary img-count-badge" id="updateImgCountBadge">0 image(s)</span>
+                                <span class="badge bg-primary-subtle text-primary img-count-badge"
+                                    id="updateImgCountBadge">0 image(s)</span>
                             </div>
                             <div class="img-preview-scroll mb-3" style="max-height:200px;">
                                 <div class="img-preview-grid" id="updateImgPreviewGrid"></div>
-                                <div id="updateImgEmptyHint" class="text-center text-muted py-3" style="font-size:.8rem;display:none">
+                                <div id="updateImgEmptyHint" class="text-center text-muted py-3"
+                                    style="font-size:.8rem;display:none">
                                     <i class="ti ti-photo-off d-block mb-1" style="font-size:1.6rem"></i>
                                     No existing photos
                                 </div>
@@ -437,12 +472,14 @@
                             <div class="img-drop-zone mb-2" id="labUpdateImgDropZone">
                                 <i class="ti ti-cloud-upload"></i>
                                 <p class="fw-semibold mb-0" style="font-size:.85rem">Drag &amp; drop images here</p>
-                                <p>or <span style="color:#0d6efd;text-decoration:underline;cursor:pointer">browse files</span></p>
+                                <p>or <span style="color:#0d6efd;text-decoration:underline;cursor:pointer">browse
+                                        files</span></p>
                                 <p class="text-muted" style="font-size:.72rem">PNG, JPG, WEBP · Multiple allowed</p>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="img-panel-label">New Preview</span>
-                                <span class="badge bg-success-subtle text-success img-count-badge" id="labUpdateNewImgCountBadge">0 image(s)</span>
+                                <span class="badge bg-success-subtle text-success img-count-badge"
+                                    id="labUpdateNewImgCountBadge">0 image(s)</span>
                             </div>
                             <div class="img-preview-scroll flex-fill">
                                 <div class="img-preview-grid" id="labUpdateNewImgPreviewGrid"></div>
@@ -542,6 +579,80 @@
     PAGE'S SCRIPTS
 ====================================-->
 {% block script %}
+<!-- Image Preview JS (Laboratory) -->
+<script>
+    (function () {
+        'use strict';
+        let selectedFiles = [];
+        // Named input – holds the final FileList submitted with the form.
+        const fileInput = document.getElementById('lab-file-input');
+        // Picker input – only used to open the OS file dialog (no name → not submitted).
+        const filePicker = document.getElementById('labFilePicker');
+        const dropZone = document.getElementById('labDropZone');
+        const previewGrid = document.getElementById('labPreviewGrid');
+        const countBadge = document.getElementById('labImgCount');
+        const emptyHint = document.getElementById('labEmptyHint');
+
+        function syncFileInput() {
+            const dt = new DataTransfer();
+            selectedFiles.forEach(f => dt.items.add(f));
+            fileInput.files = dt.files;
+        }
+        function renderPreviews() {
+            previewGrid.innerHTML = '';
+            countBadge.textContent = `${selectedFiles.length} image(s)`;
+            emptyHint.style.display = selectedFiles.length === 0 ? 'block' : 'none';
+            selectedFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const item = document.createElement('div');
+                    item.className = 'img-preview-item';
+                    item.innerHTML = `
+                    <img src="${e.target.result}" alt="preview">
+                    <div class="img-preview-name" title="${file.name}">${file.name}</div>
+                    <button type="button" class="img-preview-remove" data-index="${index}" title="Remove">
+                        <i class="ti ti-x"></i>
+                    </button>`;
+                    item.querySelector('.img-preview-remove').addEventListener('click', function () {
+                        removeFile(parseInt(this.dataset.index));
+                    });
+                    previewGrid.appendChild(item);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        function addFiles(newFiles) {
+            Array.from(newFiles).forEach(newFile => {
+                const dup = selectedFiles.some(f => f.name === newFile.name && f.size === newFile.size);
+                if (!dup) selectedFiles.push(newFile);
+            });
+            syncFileInput();
+            renderPreviews();
+        }
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            syncFileInput();
+            renderPreviews();
+        }
+        // Drop-zone click opens the picker (not the named input)
+        dropZone.addEventListener('click', () => filePicker.click());
+        // Picker change: accumulate files, then reset picker only
+        filePicker.addEventListener('change', function () {
+            addFiles(this.files);
+            // Resetting picker does NOT affect fileInput's files
+            this.value = '';
+        });
+        dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('dragover'); addFiles(e.dataTransfer.files); });
+        document.getElementById('laboratoryModal').addEventListener('hidden.bs.modal', () => {
+            selectedFiles = [];
+            syncFileInput(); // clears fileInput.files
+            filePicker.value = '';
+            renderPreviews();
+        });
+    })();
+</script>
 
 {% for script in assets.features.dataTable.scripts %}
 <script src="{{ script }}" defer></script>

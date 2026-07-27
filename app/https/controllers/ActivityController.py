@@ -7,6 +7,19 @@ from flask import request
 import json
 
 
+def get_categories():
+    """Return a sorted list of distinct, non-empty category values."""
+    rows = (
+        db.session.query(Activity.category)
+        .filter(Activity.category.isnot(None), Activity.category != "")
+        .distinct()
+        .order_by(Activity.category)
+        .all()
+    )
+    categories = [r.category for r in rows]
+    return ResponseHelper.success("Categories fetched.", data=categories)
+
+
 class ActivityController(BaseController):
 
     def __init__(self):

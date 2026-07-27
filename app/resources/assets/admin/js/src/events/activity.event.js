@@ -154,6 +154,14 @@ export const activityEvent = {
         try {
             const activities = await activityApi.all();
             activityUI.render(activities.data);
+
+            // ── Load categories for both Add and Update SearchableSelect ──
+            const catResponse = await activityApi.categories();
+            const categories = catResponse.data || [];
+
+            activityUI.setCategories(categories, document.getElementById('category-select'));
+            activityUI.setCategories(categories, document.getElementById('category-select-update'));
+
         } catch (error) {
             toast.error(error?.message || "Error occurred!", "Error");
         }

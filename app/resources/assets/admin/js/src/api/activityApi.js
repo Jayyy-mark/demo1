@@ -45,6 +45,11 @@ export const activityApi = {
         return res.data;
     },
 
+    async categories() {
+        const res = await api.get("/activity/categories");
+        return res.data;
+    },
+
     // ─── Group-aware methods ──────────────────────────────────────
     /**
      * Update all rows sharing the same activity_name.

@@ -51,6 +51,13 @@ export const researchEvent = {
             const researchs = await researchApi.all();  
             researchUI.render(researchs.data);
 
+            // ── Load categories for both Add and Update SearchableSelect ──
+            const catResponse = await researchApi.categories();
+            const categories = catResponse.data || [];
+
+            researchUI.setCategories(categories, document.getElementById('research-category-select'));
+            researchUI.setCategories(categories, document.getElementById('research-category-select-update'));
+
         } catch (error) {
             toast.error(error?.message || "Error occured!", "Error");
         }

@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.https.controllers.ActivityController import ActivityController
+from app.https.controllers.ActivityController import ActivityController, get_categories
 from flask_jwt_extended import jwt_required
 
 activity_api = Blueprint("activity_api", __name__, url_prefix="/api")
@@ -34,3 +34,8 @@ def updateActivityByName():
 @jwt_required()
 def deleteActivityByName():
     return ActivityController().delete_by_name()
+
+@activity_api.route("/activity/categories", methods=['GET'])
+@jwt_required()
+def activityCategories():
+    return get_categories()

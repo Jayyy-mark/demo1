@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.https.controllers.LaboratoryController import LaboratoryController
+from app.https.controllers.LaboratoryController import LaboratoryController, get_categories
 from flask_jwt_extended import jwt_required
 
 laboratory_api = Blueprint("laboratory_api", __name__, url_prefix="/api")
@@ -34,3 +34,8 @@ def updateLaboratoryByName():
 @jwt_required()
 def deleteLaboratoryByName():
     return LaboratoryController().delete_by_name()
+
+@laboratory_api.route("/laboratory/categories", methods=['GET'])
+@jwt_required()
+def laboratoryCategories():
+    return get_categories()

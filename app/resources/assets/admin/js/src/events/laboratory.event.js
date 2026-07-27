@@ -146,6 +146,14 @@ export const laboratoryEvent = {
         try {
             const laboratorys = await laboratoryApi.all();
             laboratoryUI.render(laboratorys.data);
+
+            // ── Load categories for both Add and Update SearchableSelect ──
+            const catResponse = await laboratoryApi.categories();
+            const categories = catResponse.data || [];
+
+            laboratoryUI.setCategories(categories, document.getElementById('lab-category-select'));
+            laboratoryUI.setCategories(categories, document.getElementById('lab-category-select-update'));
+
         } catch (error) {
             toast.error(error?.message || "Error occurred!", "Error");
         }

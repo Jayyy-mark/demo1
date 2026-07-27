@@ -2,6 +2,18 @@
 
 {% block style %}
 <link rel="stylesheet" href="{{ assets.features.dataTable.css }}">
+<style>
+    .description-preview {
+        cursor: pointer;
+        max-width: 250px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -11,7 +23,7 @@
     <!-- =========================
         PAGE HEADER
     ========================== -->
-    <div class="page-header mb-4">
+    <div class="page-header mb-6">
         <div class="page-block">
             <div class="row align-items-center">
                 <div class="col">
@@ -235,6 +247,40 @@
     TOAST 
 =====================-->
 {% include 'admin/modals/toast.html' %}
+
+<!--=====================
+    VISION VIEW MODAL
+=====================-->
+<div class="modal fade" id="visionModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Vision</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <textarea id="fullVision" class="form-control" rows="10" readonly></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--======================
+    MISSION VIEW MODAL
+=======================-->
+<div class="modal fade" id="missionModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Mission</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <textarea id="fullMission" class="form-control" rows="10" readonly></textarea>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 

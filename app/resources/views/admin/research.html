@@ -165,7 +165,7 @@
             <div class="modal-body p-0">
                 <form id="dataForm" enctype="multipart/form-data">
                     <!-- Hidden real file input -->
-                    <input type="file" name="file" id="res-file-input" multiple accept="image/*" style="display:none">
+                    <input type="file" name="file" id="res-file-input" multiple accept=".pdf,application/pdf" style="display:none">
 
                     <div class="d-flex">
 
@@ -181,9 +181,20 @@
                                            class="form-control" placeholder="e.g. AI in Healthcare">
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="category" class="form-label fw-medium">Category</label>
-                                    <input type="text" name="category" id="category"
-                                           class="form-control" placeholder="e.g. Computer Science">
+                                    <label for="research-category-select" class="form-label fw-medium">Category</label>
+                                    <div class="position-relative w-100" id="research-category-select">
+                                        <!-- INPUT -->
+                                        <input type="text" autocomplete="off" class="form-control"
+                                               placeholder="Select or type a category..."
+                                               name="category">
+                                        <!-- ICONS -->
+                                        <div class="select-icons">
+                                            <i class="ti ti-x select-clear-btn d-none"></i>
+                                            <i class="ti ti-chevron-down arrow-btn"></i>
+                                        </div>
+                                        <!-- DROPDOWN -->
+                                        <div class="dropdown-menu w-100 mt-2"></div>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="date" class="form-label fw-medium">Date</label>
@@ -204,15 +215,15 @@
                         <!-- RIGHT: Image Upload & Preview -->
                         <div class="p-4 d-flex flex-column" style="width:320px;min-width:280px;flex-shrink:0">
                             <p class="text-muted small fw-semibold text-uppercase mb-3" style="letter-spacing:.5px">
-                                <i class="ti ti-photo me-1"></i>Photos
+                                <i class="ti ti-file-text me-1"></i>Files
                             </p>
 
                             <!-- Drop zone -->
                             <div class="img-drop-zone mb-3" id="resDropZone">
                                 <i class="ti ti-cloud-upload"></i>
-                                <p class="fw-semibold mb-0" style="font-size:.85rem">Drag &amp; drop images here</p>
+                                <p class="fw-semibold mb-0" style="font-size:.85rem">Drag &amp; drop PDF files here</p>
                                 <p>or <span style="color:#0d6efd;text-decoration:underline">browse files</span></p>
-                                <p class="text-muted" style="font-size:.72rem">PNG, JPG, WEBP · Multiple allowed</p>
+                                <p class="text-muted" style="font-size:.72rem">PDF format · Multiple allowed</p>
                             </div>
 
                             <!-- Preview header -->
@@ -225,8 +236,8 @@
                             <div class="img-preview-scroll flex-fill">
                                 <div class="img-preview-grid" id="resPreviewGrid"></div>
                                 <div id="resEmptyHint" class="text-center text-muted py-3" style="font-size:.8rem">
-                                    <i class="ti ti-photo-off d-block mb-1" style="font-size:1.6rem"></i>
-                                    No images selected yet
+                                    <i class="ti ti-file-off d-block mb-1" style="font-size:1.6rem"></i>
+                                    No files selected yet
                                 </div>
                             </div>
                         </div>
@@ -272,7 +283,9 @@
                 const item = document.createElement('div');
                 item.className = 'img-preview-item';
                 item.innerHTML = `
-                    <img src="${e.target.result}" alt="preview">
+                    <div class="d-flex align-items-center justify-content-center bg-light" style="height:100px;">
+                        <i class="ti ti-file-type-pdf text-danger" style="font-size:3rem;"></i>
+                    </div>
                     <div class="img-preview-name" title="${file.name}">${file.name}</div>
                     <button type="button" class="img-preview-remove" data-index="${index}" title="Remove">
                         <i class="ti ti-x"></i>
@@ -307,55 +320,170 @@
         selectedFiles = []; fileInput.value = ''; renderPreviews();
     });
 })();
+
+// Update Modal File Handling
+(function() {
+    'use strict';
+    const fileInput = document.getElementById('res-update-file-input');
+    const dropZone = document.getElementById('resUpdateDropZone');
+    const previewContainer = document.getElementById('resUpdateNewPreview');
+    const fileNameDisplay = document.getElementById('resUpdateNewFileName');
+    const removeBtn = document.getElementById('resUpdateNewRemove');
+    const modal = document.getElementById('researchModal-update');
+
+    function handleFile(file) {
+        if (!file) return;
+        
+        // Use DataTransfer to set the hidden file input
+        const dt = new DataTransfer();
+        dt.items.add(file);
+        fileInput.files = dt.files;
+        
+        fileNameDisplay.textContent = file.name;
+        previewContainer.style.display = 'block';
+    }
+
+    dropZone.addEventListener('click', () => fileInput.click());
+    
+    fileInput.addEventListener('change', function() {
+        if (this.files && this.files.length > 0) {
+            handleFile(this.files[0]);
+        }
+    });
+
+    dropZone.addEventListener('dragover', e => { 
+        e.preventDefault(); 
+        dropZone.classList.add('dragover'); 
+    });
+    
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragover');
+    });
+    
+    dropZone.addEventListener('drop', e => { 
+        e.preventDefault(); 
+        dropZone.classList.remove('dragover'); 
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            handleFile(e.dataTransfer.files[0]);
+        }
+    });
+
+    removeBtn.addEventListener('click', () => {
+        fileInput.value = '';
+        previewContainer.style.display = 'none';
+    });
+
+    if (modal) {
+        modal.addEventListener('hidden.bs.modal', () => {
+            fileInput.value = '';
+            previewContainer.style.display = 'none';
+        });
+    }
+})();
 </script>
 
 <!-- Update Modal -->
 <div class="modal fade" id="researchModal-update" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content border-0 shadow-lg rounded-4">
 
             <!-- Header -->
-            <div class="modal-header pb-12 bg-primary border-bottom border-info border-0">
-                <h5 class="modal-title text-white">Update Research:</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <div class="modal-header bg-primary border-0 rounded-top-4">
+                <h5 class="modal-title text-white">
+                    <i class="ti ti-microscope me-2"></i>Update Research
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
 
             <!-- Body -->
-            <div class="modal-body pt-2">
+            <div class="modal-body p-0">
                 <form id="dataForm-update" enctype="multipart/form-data">
-                    <div class="row g-4">
-                        <div class="mb-3 col-lg-6">
-                            <label for="" class="form-label">Research ID:</label>
-                            <input type="text" name="id" id="" class="form-control" disabled>
+                    <input type="hidden" name="id">
+                    <!-- Hidden real file input for new PDF upload -->
+                    <input type="file" name="file" id="res-update-file-input" accept=".pdf,application/pdf" style="display:none">
+
+                    <div class="d-flex">
+                        <!-- LEFT: Form Fields -->
+                        <div class="flex-fill p-4" style="min-width:0">
+                            <p class="text-muted small fw-semibold text-uppercase mb-3" style="letter-spacing:.5px">
+                                <i class="ti ti-forms me-1"></i>Research Details
+                            </p>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label for="research_name_update" class="form-label fw-medium">Research Name</label>
+                                    <input type="text" name="research_name" id="research_name_update" class="form-control">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="research-category-select-update" class="form-label fw-medium">Category</label>
+                                    <div class="position-relative w-100" id="research-category-select-update">
+                                        <input type="text" autocomplete="off" class="form-control"
+                                               placeholder="Select or type a category..."
+                                               name="category">
+                                        <div class="select-icons">
+                                            <i class="ti ti-x select-clear-btn d-none"></i>
+                                            <i class="ti ti-chevron-down arrow-btn"></i>
+                                        </div>
+                                        <div class="dropdown-menu w-100 mt-2"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="date_update" class="form-label fw-medium">Date</label>
+                                    <input type="date" name="date" id="date_update" class="form-control">
+                                </div>
+                                <div class="col-12">
+                                    <label for="description_update" class="form-label fw-medium">Description</label>
+                                    <textarea name="description" id="description_update" rows="5" class="form-control"></textarea>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3 col-lg-6">
-                            <label for="file" class="form-label">Upload Photo :</label>
-                            <input type="file" name="file" id="file" class="form-control" multiple>
+
+                        <!-- Vertical divider -->
+                        <div class="add-modal-divider"></div>
+
+                        <!-- RIGHT: File Section -->
+                        <div class="p-4 d-flex flex-column" style="width:320px;min-width:280px;flex-shrink:0">
+                            <p class="text-muted small fw-semibold text-uppercase mb-3" style="letter-spacing:.5px">
+                                <i class="ti ti-file-text me-1"></i>Current File
+                            </p>
+                            
+                            <!-- Current File Preview -->
+                            <div class="mb-3 p-3 border rounded bg-light text-center" id="resUpdateCurrentFile">
+                                <!-- Populated by JS -->
+                            </div>
+
+                            <p class="text-muted small fw-semibold text-uppercase mb-3 mt-2" style="letter-spacing:.5px">
+                                <i class="ti ti-cloud-upload me-1"></i>Upload New File
+                            </p>
+                            
+                            <!-- Drop zone for new file -->
+                            <div class="img-drop-zone mb-3" id="resUpdateDropZone">
+                                <i class="ti ti-cloud-upload"></i>
+                                <p class="fw-semibold mb-0" style="font-size:.85rem">Drag &amp; drop PDF here</p>
+                                <p>or <span style="color:#0d6efd;text-decoration:underline">browse file</span></p>
+                                <p class="text-muted" style="font-size:.72rem">PDF format · Replaces current</p>
+                            </div>
+
+                            <!-- Preview for new uploaded file -->
+                            <div id="resUpdateNewPreview" style="display:none">
+                                <div class="img-preview-item mb-0 w-100">
+                                    <div class="d-flex align-items-center justify-content-center bg-light" style="height:100px;">
+                                        <i class="ti ti-file-type-pdf text-danger" style="font-size:3rem;"></i>
+                                    </div>
+                                    <div class="img-preview-name" id="resUpdateNewFileName"></div>
+                                    <button type="button" class="img-preview-remove" id="resUpdateNewRemove" title="Remove">
+                                        <i class="ti ti-x"></i>
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="mb-3 col-lg-6">
-                            <label for="research_name" class="form-label">Research Name :</label>
-                            <input type="text" name="research_name" id="research_name" class="form-control">
-                        </div>
-                        <div class="mb-3 col-lg-6">
-                            <label for="category" class="form-label">Category :</label>
-                            <input type="text" name="category" id="category" class="form-control">
-                        </div>
-                        <div class="mb-3 col-lg-6">
-                            <label for="date" class="form-label">Date :</label>
-                            <input type="date" name="date" id="date" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description :</label>
-                            <textarea name="description" id="description" rows="5" class="form-control"></textarea>
-                        </div>
-                    </div>
+                    </div><!-- END d-flex -->
                 </form>
             </div>
 
             <!-- Footer -->
-            <div class="modal-footer border-0 pt-0">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">
-                    Cancel
+            <div class="modal-footer border-top pt-3">
+                <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">Cancel</button>
                 </button>
                 <button type="submit" id="update_btn" class="btn btn-primary">
                     <i class="ti ti-device-floppy"></i> Save

@@ -42,4 +42,9 @@ export const researchApi = {
         const res = await api.get("research/all");
         return res.data;
     },
+
+    async categories() {
+        const res = await api.get("/research/categories");
+        return res.data;
+    },
 }

@@ -133,4 +133,18 @@ export const activityUI = {
             grid.appendChild(item);
         });
     },
+
+    /**
+     * Populate a SearchableSelect for category on a given wrapper element.
+     * Accepts both selecting an existing value OR typing a brand-new one.
+     * @param {string[]} categories  - list of existing category strings
+     * @param {Element}  element     - the position-relative wrapper div
+     */
+    setCategories(categories, element) {
+        const options = categories.map(cat => ({
+            value: cat,
+            label: cat,
+        }));
+        new SearchableSelect(element, options);
+    },
 }

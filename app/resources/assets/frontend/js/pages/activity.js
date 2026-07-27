@@ -57,7 +57,7 @@ const activityUI = {
 
         activities.forEach(activity => {
             const imagePath = getActivityImage(activity, 0);
-            
+
             // YOUR EXACT ORIGINAL CARD HTML (Unchanged)
             const activityCard = imagePath ? `
                 <a href="${getActivityUrl(activity)}" class="group block bg-white rounded-[2rem] p-4 shadow-sm hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 border-2 border-gray-300 hover:border-blue-500 hover:-translate-y-2">
@@ -67,7 +67,7 @@ const activityUI = {
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
                             </div>
                             <div>
-                                <p class="text-[11px] text-gray-400 font-medium tracking-wide">Category</p>
+                                
                                 <p class="text-sm font-bold text-gray-900">${activity.category || "General"}</p>
                             </div>
                         </div>
@@ -76,7 +76,7 @@ const activityUI = {
 
                         <div class="flex items-center gap-3">
                             <div class="text-right">
-                                <p class="text-[11px] text-gray-400 font-medium tracking-wide">Date</p>
+                                
                                 <p class="text-sm font-bold text-gray-900">${getMonthName(activity.date)} ${getDay(activity.date)}</p>
                             </div>
                             <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 overflow-hidden">
@@ -90,7 +90,7 @@ const activityUI = {
                     </div>
 
                     <div class="px-2 pb-5 flex items-center">
-                        <span class="text-gray-900 font-extrabold text-base truncate"><span class="text-gray-500 mr-1">Activity:</span>${activity.activity_name}</span>
+                        <span class="text-gray-900 font-extrabold text-base truncate">${activity.activity_name}</span>
                     </div>
 
                     <div class="flex items-center justify-end px-2 pb-1">
@@ -152,7 +152,7 @@ const activityUI = {
     renderPagination() {
         const totalPages = Math.ceil(state.filteredData.length / state.limit);
         DOM.paginationControls.innerHTML = "";
-        
+
         if (totalPages === 0) {
             DOM.pageInfo.textContent = "Page 0 of 0";
             return;
@@ -223,11 +223,11 @@ const activityUI = {
 /**/
 const activityEvent = {
     async init() {
-        if(!DOM.container) return; // Guard clause if elements don't exist
+        if (!DOM.container) return; // Guard clause if elements don't exist
 
         const data = await activityApi.all();
         state.allData = data;
-        
+
         activityUI.populateFilters();
         this.applyFilters();
         this.bindEvents();
@@ -235,7 +235,7 @@ const activityEvent = {
 
     bindEvents() {
         DOM.search.addEventListener('input', () => this.applyFilters());
-        
+
         DOM.typeBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 DOM.typeBtns.forEach(b => {
@@ -244,7 +244,7 @@ const activityEvent = {
                 });
                 e.target.classList.remove('bg-gray-100', 'text-gray-600');
                 e.target.classList.add('bg-blue-600', 'text-white');
-                
+
                 state.selectedType = e.target.dataset.type;
                 this.applyFilters();
             });
@@ -264,10 +264,10 @@ const activityEvent = {
 
         state.filteredData = state.allData.filter(item => {
             // Search text matches title or category
-            const matchText = item.activity_name?.toLowerCase().includes(searchTerm) || 
-                              item.category?.toLowerCase().includes(searchTerm) ||
-                              item.description?.toLowerCase().includes(searchTerm);
-            
+            const matchText = item.activity_name?.toLowerCase().includes(searchTerm) ||
+                item.category?.toLowerCase().includes(searchTerm) ||
+                item.description?.toLowerCase().includes(searchTerm);
+
             // Year match
             const itemYear = extractYear(item.date)?.toString();
             const matchYear = selectedYear === 'all' || itemYear === selectedYear;
@@ -285,7 +285,7 @@ const activityEvent = {
     goToPage(pageNumber) {
         state.currentPage = pageNumber;
         this.updateView();
-        
+
         // Optional: Smooth scroll back to top of activities section
         document.getElementById('campus-activities').scrollIntoView({ behavior: 'smooth', block: 'start' });
     },

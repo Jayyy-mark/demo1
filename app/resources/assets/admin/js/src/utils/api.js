@@ -16,10 +16,10 @@ api.interceptors.request.use((config) => {
 
     closeAllModals();
 
-    if(isPageLoaded){
+    if (isPageLoaded) {
         startLoading();
     }
-    
+
 
     const isRefreshRoute = config.url?.includes("/auth/refresh");
 

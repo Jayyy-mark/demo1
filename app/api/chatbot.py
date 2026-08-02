@@ -14,3 +14,7 @@ def update_kb():
 @chatbot_api.route("memory/search", methods=["GET"])
 def search_kb():
     return BotController.searchDocument()
+
+@chatbot_api.route("/clear-history", methods=["POST"])
+def clear_history():
+    return BotController.clearHistory()

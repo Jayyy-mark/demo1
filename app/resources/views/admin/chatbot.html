@@ -325,6 +325,26 @@
 {% block script %}
 <script>
 
+    // ── SESSION MEMORY (tab-scoped) ──────────────────────────────────────────
+    // sessionStorage is tied to this browser tab only.
+    // When the tab closes sessionStorage is cleared and we tell the server
+    // to free its in-memory history dict entry via sendBeacon.
+    let sessionId = sessionStorage.getItem("ucstgo_admin_bot_session");
+    if (!sessionId) {
+        sessionId = crypto.randomUUID();
+        sessionStorage.setItem("ucstgo_admin_bot_session", sessionId);
+    }
+
+    window.addEventListener("beforeunload", function () {
+        if (sessionId) {
+            var blob = new Blob(
+                [JSON.stringify({ session_id: sessionId })],
+                { type: "application/json" }
+            );
+            navigator.sendBeacon("/api/chatbot/clear-history", blob);
+        }
+    });
+
     const chatMessages = document.getElementById("chatMessages");
     const chatInput = document.getElementById("chatInput");
     const sendBtn = document.getElementById("sendBtn");
@@ -404,7 +424,8 @@
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        message: message
+                        message:    message,
+                        session_id: sessionId
                     })
                 }
             );

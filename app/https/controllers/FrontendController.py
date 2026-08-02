@@ -409,14 +409,16 @@ class FrontendController:
     def askChatbot():
         from app.helpers.bot_services import ask
 
-        message = request.json.get("message")
+        data    = request.get_json(silent=True) or {}
+        message = data.get("message")
+        sid     = data.get("session_id")          # tab-scoped session id
 
         if not message:
             return jsonify({"response": "Message is required."}), 400
 
         try:
-            response = ask(message)
-            return jsonify({"response": response})
+            response = ask(message, session_id=sid)
+            return jsonify({"response": response, "session_id": sid})
         except Exception as e:
             return (
                 jsonify(

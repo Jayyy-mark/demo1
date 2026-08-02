@@ -1,10 +1,10 @@
-from app.helpers.bot_services import ask
 from flask import request, jsonify, current_app
 from app.helpers.bot_services import (
     ask,
     ingest_documents,
     get_knowledge_pdf_path,
     extract_pdf_pages,
+    clear_history,
 )
 
 import os
@@ -14,11 +14,13 @@ class BotController:
 
     def getAnswer():
 
-        message = request.json.get("message")
+        data    = request.get_json(silent=True) or {}
+        message = data.get("message")
+        sid     = data.get("session_id")          # tab-scoped session id
 
-        response = ask(message)
+        response = ask(message, session_id=sid)
 
-        return jsonify({"response": response})
+        return jsonify({"response": response, "session_id": sid})
 
     def updateKnowledgeBase():
 
@@ -97,4 +99,15 @@ class BotController:
 
         return jsonify(results)
 
-        
+    def clearHistory():
+        """
+        Called by navigator.sendBeacon when the browser tab is closed.
+        Removes the session's chat history from server memory.
+        """
+        data = request.get_json(silent=True) or {}
+        sid  = data.get("session_id")
+
+        if sid:
+            clear_history(sid)
+
+        return jsonify({"ok": True}), 200

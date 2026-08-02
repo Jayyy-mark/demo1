@@ -66,3 +66,8 @@ def getCollaborations():
 @frontend_api.route("/chatbot/ask", methods=['POST'])
 def askChatbot():
     return FrontendController.askChatbot()
+
+@frontend_api.route("/chatbot/clear-history", methods=['POST'])
+def clearChatbotHistory():
+    from app.https.controllers.BotController import BotController
+    return BotController.clearHistory()

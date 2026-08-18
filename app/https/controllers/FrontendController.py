@@ -28,6 +28,7 @@ class FrontendController:
     def getHomeStats():
         counts = Count.query.first()
         rector_msg = Dashboard.query.filter_by(attr_key="Rector's Message").first()
+        rector_msg_en = Dashboard.query.filter_by(attr_key="Rector's Message (EN)").first()
 
         count_data = {
             "total_staff": counts.total_staff if counts else 0,
@@ -42,20 +43,27 @@ class FrontendController:
                 "rector_message": (
                     rector_msg.value if rector_msg else "No message available."
                 ),
+                "rector_message_en": (
+                    rector_msg_en.value if rector_msg_en else "No message available."
+                ),
             }
         )
 
     @staticmethod
     def getTopbarInfo():
-        school_open_date = Dashboard.query.filter_by(attr_key="School Open Date").first()
+        school_open_date = Dashboard.query.filter_by(
+            attr_key="School Open Date"
+        ).first()
         phone_number = Dashboard.query.filter_by(attr_key="Phone Number").first()
         email = Dashboard.query.filter_by(attr_key="Email").first()
 
-        return jsonify({
-            "school_open_date": school_open_date.value if school_open_date else "",
-            "phone_number": phone_number.value if phone_number else "",
-            "email": email.value if email else "",
-        })
+        return jsonify(
+            {
+                "school_open_date": school_open_date.value if school_open_date else "",
+                "phone_number": phone_number.value if phone_number else "",
+                "email": email.value if email else "",
+            }
+        )
 
     @staticmethod
     def allActivities():
@@ -368,10 +376,16 @@ class FrontendController:
             # add course
             grouped[year_id]["semesters"][semester_id]["courses"].append(item)
 
-        # convert dict → list
+        # convert dict → list and sort
         result = []
-        for year_data in grouped.values():
-            year_data["semesters"] = list(year_data["semesters"].values())
+
+        for year_data in sorted(grouped.values(), key=lambda x: x["year"]["id"]):
+
+            # sort semesters by semester id
+            year_data["semesters"] = sorted(
+                year_data["semesters"].values(), key=lambda x: x["semester"]["id"]
+            )
+
             result.append(year_data)
 
         return jsonify({"subjects": result})
@@ -409,9 +423,9 @@ class FrontendController:
     def askChatbot():
         from app.helpers.bot_services import ask
 
-        data    = request.get_json(silent=True) or {}
+        data = request.get_json(silent=True) or {}
         message = data.get("message")
-        sid     = data.get("session_id")          # tab-scoped session id
+        sid = data.get("session_id")  # tab-scoped session id
 
         if not message:
             return jsonify({"response": "Message is required."}), 400

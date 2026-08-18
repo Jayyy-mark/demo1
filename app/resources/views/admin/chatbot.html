@@ -329,11 +329,23 @@
     // sessionStorage is tied to this browser tab only.
     // When the tab closes sessionStorage is cleared and we tell the server
     // to free its in-memory history dict entry via sendBeacon.
+    function generateSessionId() {
+        return (
+            Date.now().toString(36) +
+            "-" +
+            Math.random().toString(36).substring(2, 15) +
+            "-" +
+            Math.random().toString(36).substring(2, 15)
+        );
+    }
+
+
     let sessionId = sessionStorage.getItem("ucstgo_admin_bot_session");
     if (!sessionId) {
-        sessionId = crypto.randomUUID();
+        sessionId = generateSessionId();
         sessionStorage.setItem("ucstgo_admin_bot_session", sessionId);
     }
+
 
     window.addEventListener("beforeunload", function () {
         if (sessionId) {
@@ -424,7 +436,7 @@
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        message:    message,
+                        message: message,
                         session_id: sessionId
                     })
                 }

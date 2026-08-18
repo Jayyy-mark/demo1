@@ -12,6 +12,14 @@ export const dashboardUI = {
             console.log("this is element : ", element.attr_key);
             if (element.attr_key == "Rector's Message") {
                 $("#rector-message").text(element.value);
+                // Pre-populate the MM textarea in the modal
+                $("#rector-message-mm").val(element.value);
+            }
+
+            if (element.attr_key == "Rector's Message (EN)") {
+                $("#rector-message-en-display").text(element.value);
+                // Pre-populate the EN textarea in the modal
+                $("#rector-message-en").val(element.value);
             }
 
             if (element.attr_key == "Admission Lists") {

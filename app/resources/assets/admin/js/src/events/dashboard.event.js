@@ -16,7 +16,8 @@ export const dashboardEvent = {
         $("#add-rector-message-btn").on("click", async function () {
             const data = {
                 "attr_key": "Rector's Message",
-                "value": $("#rector-message-form").find("textarea").val()
+                "value": $("#rector-message-mm").val(),
+                "value_en": $("#rector-message-en").val()
             }
             console.log("this is value : ", data);
 

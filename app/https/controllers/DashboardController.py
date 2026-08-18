@@ -59,11 +59,22 @@ class DashboardController(BaseController):
         try:
             data = request.get_json()
             print("this is data : ", data)
-            Utils.create_or_update(
-                Dashboard,
-                lookup_fields={"attr_key": "Rector's Message"},
-                update_fields={"value": data["value"]},
-            )
+
+            # Save Myanmar message
+            if data.get("value"):
+                Utils.create_or_update(
+                    Dashboard,
+                    lookup_fields={"attr_key": "Rector's Message"},
+                    update_fields={"value": data["value"]},
+                )
+
+            # Save English message
+            if data.get("value_en"):
+                Utils.create_or_update(
+                    Dashboard,
+                    lookup_fields={"attr_key": "Rector's Message (EN)"},
+                    update_fields={"value": data["value_en"]},
+                )
 
             return ResponseHelper.success(
                 "Rector's Message Added Successfully!",

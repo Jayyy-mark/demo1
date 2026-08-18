@@ -15,7 +15,8 @@ export const dashboardApi = {
         console.log("this is data : ", data);
         const res = await api.post("/dashboard/create", {
             attr_key: data.attr_key,
-            value: data.value
+            value: data.value,
+            value_en: data.value_en
         });
         return res.data;
     },

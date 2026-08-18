@@ -229,7 +229,16 @@
                         <li class="list-group-item px-0">
                             <div class="row align-items-start">
                                 <div class="col">
+                                    <span class="badge bg-light-primary text-primary mb-2">Myanmar</span>
                                     <div id="rector-message" style="text-align: justify;"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item px-0">
+                            <div class="row align-items-start">
+                                <div class="col">
+                                    <span class="badge bg-light-success text-success mb-2">English</span>
+                                    <div id="rector-message-en-display" style="text-align: justify;"></div>
                                 </div>
                             </div>
                         </li>
@@ -447,22 +456,58 @@
         ======================================-->
         <div class="modal fade" id="rectorMessageModal" tabindex="-1" aria-labelledby="rectorMessageModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden academic-task-modal">
                     <div class="modal-header bg-primary border-0 px-4 py-3">
                         <div>
                             <h5 class="modal-title text-white mb-1" id="rectorMessageModalLabel">Add Rector's Message
                             </h5>
+                            <p class="text-white mb-0 mt-1" style="font-size: 0.75rem; opacity: 0.8;">
+                                Enter the rector's message in both Myanmar and English
+                            </p>
                         </div>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-4">
                         <form id="rector-message-form">
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Rector's Message</label>
-                                <textarea class="form-control" rows="6"
-                                    placeholder="Enter rector's message..."></textarea>
+                            <!-- Language Tabs -->
+                            <ul class="nav nav-tabs mb-3" id="rectorMsgTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active fw-semibold" id="rector-mm-tab"
+                                        data-bs-toggle="tab" data-bs-target="#rector-mm-pane" type="button"
+                                        role="tab" aria-controls="rector-mm-pane" aria-selected="true">
+                                        <i class="ti ti-language me-1"></i> Myanmar
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link fw-semibold" id="rector-en-tab"
+                                        data-bs-toggle="tab" data-bs-target="#rector-en-pane" type="button"
+                                        role="tab" aria-controls="rector-en-pane" aria-selected="false">
+                                        <i class="ti ti-world me-1"></i> English
+                                    </button>
+                                </li>
+                            </ul>
+
+                            <!-- Tab Content -->
+                            <div class="tab-content" id="rectorMsgTabContent">
+                                <div class="tab-pane fade show active" id="rector-mm-pane" role="tabpanel"
+                                    aria-labelledby="rector-mm-tab" tabindex="0">
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">Rector's Message (Myanmar)</label>
+                                        <textarea class="form-control" id="rector-message-mm" rows="8"
+                                            placeholder="ပါမောက္ခချုပ်၏ မှာတမ်းကို ဤနေရာတွင် ရေးပါ..."
+                                            style="font-family: 'Pyidaungsu', sans-serif;"></textarea>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="rector-en-pane" role="tabpanel"
+                                    aria-labelledby="rector-en-tab" tabindex="0">
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">Rector's Message (English)</label>
+                                        <textarea class="form-control" id="rector-message-en" rows="8"
+                                            placeholder="Enter rector's message in English..."></textarea>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>

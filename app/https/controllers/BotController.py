@@ -14,13 +14,17 @@ class BotController:
 
     def getAnswer():
 
-        data    = request.get_json(silent=True) or {}
+        data = request.get_json(silent=True) or {}
         message = data.get("message")
-        sid     = data.get("session_id")          # tab-scoped session id
+        sid = data.get("session_id")  # tab-scoped session id
 
-        response = ask(message, session_id=sid)
+        try:
+            response = ask(message, session_id=sid)
 
-        return jsonify({"response": response, "session_id": sid})
+            return jsonify({"response": response, "session_id": sid})
+        except Exception as e:
+            print(f"[ERROR] : {e}")
+            return jsonify({"error": str(e), "session_id": sid})
 
     def updateKnowledgeBase():
 
@@ -76,10 +80,15 @@ class BotController:
         kb_path = get_knowledge_pdf_path()
 
         if not kb_path:
-            return jsonify({
-                "success" : False,
-                "message" : "Knowledge file has not been uploaded!"
-            }),404
+            return (
+                jsonify(
+                    {
+                        "success": False,
+                        "message": "Knowledge file has not been uploaded!",
+                    }
+                ),
+                404,
+            )
 
         pdf_cache = extract_pdf_pages(kb_path)
         for page in pdf_cache:
@@ -87,15 +96,9 @@ class BotController:
 
                 index = page["text"].lower().find(keyword)
 
-                snippet = page["text"][
-                    max(0, index - 80):
-                    index + 120
-                ]
+                snippet = page["text"][max(0, index - 80) : index + 120]
 
-                results.append({
-                    "page": page["page"],
-                    "snippet": snippet
-                })
+                results.append({"page": page["page"], "snippet": snippet})
 
         return jsonify(results)
 
@@ -105,7 +108,7 @@ class BotController:
         Removes the session's chat history from server memory.
         """
         data = request.get_json(silent=True) or {}
-        sid  = data.get("session_id")
+        sid = data.get("session_id")
 
         if sid:
             clear_history(sid)

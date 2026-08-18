@@ -13,3 +13,4 @@ migrations
 ./app/resources/assets/media
 k8s
 docker
+check_redis.py

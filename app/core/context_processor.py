@@ -117,9 +117,20 @@ def setup_contexts(app: Flask):
                     "static", filename="admin/images/avatar/" + user.user_avatar
                 )
 
+        def get_user_name(user_id):
+            if user_id:
+                name = (
+                    User.query.with_entities(User.user_name)
+                    .filter_by(id=int(user_id))
+                    .scalar()
+                )
+                return name
+            return None
+
         return dict(
             assets=g.assets,
             current_year=current_year,
             title=title,
             get_user_avatar=get_user_avatar,
+            get_user_name=get_user_name,
         )

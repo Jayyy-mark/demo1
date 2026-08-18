@@ -134,6 +134,54 @@ const homeUI = {
         if (rectorMsg && statsData.rector_message) {
             rectorMsg.innerText = statsData.rector_message;
         }
+
+        // Render English rector message
+        const rectorMsgEn = document.getElementById('rector-message-text-en');
+        if (rectorMsgEn && statsData.rector_message_en) {
+            rectorMsgEn.innerText = statsData.rector_message_en;
+        }
+    }
+}
+
+/*<!--====================================
+    RECTOR LANGUAGE SWITCH
+=======================================-->*/
+window.switchRectorLang = function(lang) {
+    const mmContent = document.getElementById('rector-content-mm');
+    const enContent = document.getElementById('rector-content-en');
+    const mmSignature = document.getElementById('rector-signature-mm');
+    const enSignature = document.getElementById('rector-signature-en');
+    const mmBtn = document.getElementById('rector-lang-mm');
+    const enBtn = document.getElementById('rector-lang-en');
+
+    if (lang === 'en') {
+        // Show English, hide Myanmar
+        if (mmContent) mmContent.style.display = 'none';
+        if (enContent) enContent.style.display = 'block';
+        if (mmSignature) mmSignature.style.display = 'none';
+        if (enSignature) enSignature.style.display = 'block';
+
+        // Update button styles
+        if (enBtn) {
+            enBtn.className = 'rector-lang-btn px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 bg-blue-800 text-white shadow-md';
+        }
+        if (mmBtn) {
+            mmBtn.className = 'rector-lang-btn px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 bg-gray-200 text-gray-600 hover:bg-gray-300';
+        }
+    } else {
+        // Show Myanmar, hide English
+        if (mmContent) mmContent.style.display = 'block';
+        if (enContent) enContent.style.display = 'none';
+        if (mmSignature) mmSignature.style.display = 'block';
+        if (enSignature) enSignature.style.display = 'none';
+
+        // Update button styles
+        if (mmBtn) {
+            mmBtn.className = 'rector-lang-btn px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 bg-blue-800 text-white shadow-md';
+        }
+        if (enBtn) {
+            enBtn.className = 'rector-lang-btn px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 bg-gray-200 text-gray-600 hover:bg-gray-300';
+        }
     }
 }
 

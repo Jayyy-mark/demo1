@@ -7,10 +7,8 @@ test.py
 node_modules
 __pycache__
 services
-media
 test.html
 migrations
-./app/resources/assets/media
 k8s
 docker
 check_redis.py

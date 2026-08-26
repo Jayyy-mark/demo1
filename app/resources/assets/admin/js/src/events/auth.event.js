@@ -24,7 +24,7 @@ export const authEvent = {
             } catch (error) {
 
                 console.log(error);
-                toast.error(error?.message, "Error");
+                toast.error(error?.error, "Error");
 
             }
         });
